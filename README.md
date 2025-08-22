@@ -84,47 +84,33 @@ Week 9-12: Innovation
 
 ## 🛠️ Top Frameworks & Tools
 
-### 🦜 **LangChain** 
-*The most popular framework for LLM applications*
-- **Best for**: RAG systems, conversational agents, document analysis
-- **Strengths**: Extensive tool ecosystem, great documentation
-- **Get Started**: [LangChain Framework Guide](./frameworks/langchain/)
+### 🚀 **Production-Ready Frameworks**
 
-### 🤖 **AutoGen**
-*Microsoft's multi-agent conversation framework*
-- **Best for**: Multi-agent collaboration, code generation
-- **Strengths**: Easy agent orchestration, built-in conversation patterns
-- **Get Started**: [AutoGen Framework Guide](./frameworks/autogen/)
+| Framework | Best For | Difficulty | Multi-Agent | Links |
+|-----------|----------|------------|-------------|-------|
+| **🦜 LangChain** | RAG, tool integration | Easy | Limited | [Site](https://langchain.com/) \| [GitHub](https://github.com/langchain-ai/langchain) |
+| **🤖 AutoGen** | Multi-agent conversations | Medium | Excellent | [GitHub](https://github.com/microsoft/autogen) \| [Docs](https://microsoft.github.io/autogen/) |
+| **⚡ CrewAI** | Role-based teams | Easy | Excellent | [Site](https://crewai.com/) \| [GitHub](https://github.com/joaomdmoura/crewAI) |
+| **🦙 LlamaIndex** | Knowledge systems | Medium | Limited | [Site](https://www.llamaindex.ai/) \| [GitHub](https://github.com/run-llama/llama_index) |
+| **🧠 Semantic Kernel** | Enterprise AI | Medium | Basic | [GitHub](https://github.com/microsoft/semantic-kernel) \| [Docs](https://learn.microsoft.com/en-us/semantic-kernel/) |
 
-### ⚡ **CrewAI**
-*Role-playing AI agent framework*
-- **Best for**: Team-based problem solving, specialized workflows
-- **Strengths**: Role definition, hierarchical structures
-- **Get Started**: [CrewAI Framework Guide](./frameworks/crewai/)
+### 🌟 **Emerging Technologies**
 
-### 🤗 **HuggingGPT**
-*Collaborative system connecting LLMs with ML models*
-- **Best for**: Multi-modal AI, complex task planning
-- **Strengths**: Model integration, task decomposition
-- **Get Started**: [HuggingGPT Framework Guide](./frameworks/hugginggpt/)
+- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment for goal-driven tasks
+- **[MetaGPT](https://github.com/geekan/MetaGPT)** - Multi-agent software company simulation
+- **[ChatDev](https://github.com/OpenBMB/ChatDev)** - Communicative agents for software development
+- **[BabyAGI](https://github.com/yoheinakajima/babyagi)** - Simplified AGI implementation
+- **[GPT Engineer](https://github.com/AntonOsika/gpt-engineer)** - AI that codes entire projects
 
-### 🦙 **LlamaIndex**
-*Data framework for LLM applications*
-- **Best for**: Knowledge bases, document indexing, RAG
-- **Strengths**: Data connectors, query engines
-- **Get Started**: [LlamaIndex Framework Guide](./frameworks/llamaindex/)
+### 🏢 **Enterprise Platforms**
 
-### 🧠 **Semantic Kernel**
-*Microsoft's AI orchestration SDK*
-- **Best for**: Enterprise AI, function calling, prompt management
-- **Strengths**: Enterprise integration, .NET/Python support
-- **Get Started**: [Semantic Kernel Framework Guide](./frameworks/semantic-kernel/)
+- **[OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)** - Production-ready AI assistants
+- **[Google Vertex AI Agents](https://cloud.google.com/vertex-ai/docs/agent-builder)** - Enterprise agent platform
+- **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development
+- **[Amazon Bedrock Agents](https://aws.amazon.com/bedrock/agents/)** - AWS-native agent framework
+- **[Anthropic Claude Agents](https://docs.anthropic.com/claude/docs)** - Constitutional AI-powered agents
 
-### 🔍 **Haystack**
-*End-to-end NLP framework*
-- **Best for**: Search systems, question answering
-- **Strengths**: Pipeline architecture, production-ready
-- **Get Started**: [Haystack Framework Guide](./frameworks/haystack/)
+**[Explore All 25+ Frameworks →](./frameworks/README.md)**
 
 ---
 
@@ -192,16 +178,28 @@ Systems where specialized agents work together.
 
 ## 🚀 Quick Start
 
+### 🎯 **One-Command Setup**
+Get started instantly with our automated setup script:
+```bash
+curl -sSL https://raw.githubusercontent.com/yadavanujkumar/awesome-agentic-ai/main/scripts/setup.sh | bash
+```
+This script creates a complete development environment with all frameworks, examples, and tools ready to use!
+
+### 📦 **Manual Installation**
+
 ### 1. **Choose Your Framework**
 ```bash
 # For beginners - start with LangChain
-pip install langchain langchain-community
+pip install langchain langchain-community langchain-openai
 
 # For multi-agent systems - try AutoGen  
 pip install autogen-agentchat
 
 # For role-based agents - use CrewAI
 pip install crewai
+
+# For data-heavy applications - use LlamaIndex
+pip install llamaindex
 ```
 
 ### 2. **Build Your First Agent**
@@ -241,25 +239,54 @@ result = agent.run("What is 25 * 4 + 10?")
 - [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
 - [Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761)
 - [HuggingGPT: Solving AI Tasks with ChatGPT and its Friends](https://arxiv.org/abs/2303.17580)
-- **[More Papers →](./resources/papers/)**
+- [MetaGPT: Meta Programming for Multi-Agent Collaborative Framework](https://arxiv.org/abs/2308.00352)
+- [AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation](https://arxiv.org/abs/2308.08155)
+- **[50+ More Papers →](./resources/README.md#📚-academic-papers)**
 
-### 🎥 **Video Tutorials**
-- Introduction to AI Agents (Coming Soon)
-- Building Multi-Agent Systems (Coming Soon)
-- Production Deployment Guide (Coming Soon)
-- **[More Videos →](./resources/videos/)**
+### 🎥 **Video Tutorials & Channels**
+- **[Two Minute Papers](https://www.youtube.com/@TwoMinutePapers)** - Latest AI research explained
+- **[LangChain Official](https://www.youtube.com/@LangChain)** - Framework tutorials and guides
+- **[Microsoft AutoGen](https://www.youtube.com/@MicrosoftDeveloper)** - Multi-agent system tutorials
+- **[Yannic Kilcher](https://www.youtube.com/@YannicKilcher)** - Deep paper reviews and explanations
+- **[AI Explained](https://www.youtube.com/@aiexplained-official)** - AI concepts simplified
+- **[100+ Channels & Playlists →](./resources/README.md#🎥-video-resources)**
 
-### 📝 **Blog Posts & Articles**
-- Understanding Agent Architectures
-- Best Practices for Agent Development
-- Debugging Multi-Agent Systems
-- **[More Articles →](./resources/articles/)**
+### 📚 **Books & Reading Materials**
+- **[Artificial Intelligence: A Modern Approach (4th Edition)](https://www.amazon.com/Artificial-Intelligence-Modern-Approach-4th/dp/0134610997)** by Russell & Norvig
+- **[Multi-Agent Systems: Algorithmic, Game-Theoretic, and Logical Foundations](https://www.amazon.com/Multi-Agent-Systems-Algorithmic-Game-Theoretic-Foundations/dp/0521899435)** by Shoham & Leyton-Brown
+- **[Building LLM Applications for Production](https://www.amazon.com/Building-LLM-Applications-Production-Huyen/dp/1098150961)** by Chip Huyen
+- **[Hands-On Large Language Models](https://www.amazon.com/Hands-Large-Language-Models-Understanding/dp/1098150952)** by Jay Alammar & Maarten Grootendorst
+- **[15+ More Books with Links →](./resources/README.md#📖-recommended-books)**
 
-### 🛠️ **Tools & Utilities**
-- Agent debugging and visualization tools
-- Performance monitoring dashboards
-- Testing frameworks for agent systems
-- **[Explore Tools →](./tools/)**
+### 🎓 **Courses & Certifications**
+- **[DeepLearning.AI Agent Specialization](https://www.coursera.org/specializations/ai-agents)** - Comprehensive agent development
+- **[Stanford CS224N: NLP with Deep Learning](https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ)** - Advanced NLP concepts
+- **[Berkeley CS285: Deep RL](https://www.youtube.com/playlist?list=PL_iWQOsE6TfXxKgI1GgyV1B_Xa0DxE5eH)** - Reinforcement learning for agents
+- **[AWS ML Specialty Certification](https://aws.amazon.com/certification/certified-machine-learning-specialty/)** - Cloud ML deployment
+- **[10+ More Courses →](./resources/README.md#🎓-certification-programs--learning-paths)**
+
+### 🛠️ **Development Tools & Platforms**
+- **[LangSmith](https://smith.langchain.com/)** - Debug and monitor LangChain applications
+- **[AutoGen Studio](https://github.com/microsoft/autogen/tree/main/samples/apps/autogen-studio)** - Visual multi-agent interface
+- **[Weights & Biases](https://wandb.ai/)** - Experiment tracking for AI agents
+- **[Streamlit](https://streamlit.io/)** - Build interactive agent demos
+- **[Cursor](https://cursor.sh/)** - AI-first code editor
+- **[50+ Tools & Integrations →](./tools/README.md)**
+
+### 🎙️ **Podcasts & Audio Content**
+- **[The TWIML AI Podcast](https://twimlai.com/podcast/)** - Weekly ML and AI discussions
+- **[Lex Fridman Podcast](https://lexfridman.com/podcast/)** - Long-form AI researcher interviews
+- **[AI Chat](https://www.aichat.so/)** - Conversations with AI practitioners
+- **[Machine Learning Street Talk](https://www.youtube.com/@MachineLearningStreetTalk)** - Technical ML discussions
+- **[10+ Podcasts →](./resources/README.md#🎙️-podcasts--audio-content)**
+
+### 🌐 **Communities & Events**
+- **[LangChain Discord](https://discord.gg/langchain)** - Active developer community
+- **[Hugging Face Discord](https://discord.gg/huggingface)** - AI development discussions
+- **[r/MachineLearning](https://reddit.com/r/MachineLearning)** - Reddit ML community
+- **[NeurIPS](https://neurips.cc/)** - Premier ML conference (December)
+- **[ICML](https://icml.cc/)** - International ML conference (July)
+- **[Global Communities →](./resources/README.md#🌍-international-communities--events)**
 
 ---
 
@@ -301,8 +328,35 @@ It helps others discover this resource and motivates us to keep improving it.
 ## 📞 Connect & Stay Updated
 
 - 🐙 **GitHub**: [yadavanujkumar](https://github.com/yadavanujkumar)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yadavanujkumar/Agentic-AI-Resources/discussions)
-- 🐛 **Issues**: [Report bugs or request features](https://github.com/yadavanujkumar/Agentic-AI-Resources/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/yadavanujkumar/awesome-agentic-ai/discussions)
+- 🐛 **Issues**: [Report bugs or request features](https://github.com/yadavanujkumar/awesome-agentic-ai/issues)
+- 📚 **Resources**: [Complete Resource Guide](./resources/README.md)
+- 🛠️ **Tools**: [Development Tools & Utilities](./tools/README.md)
+- 🏗️ **Frameworks**: [Framework Comparison Guide](./frameworks/README.md)
+
+### 🔗 Quick Links
+- **[📊 Cheat Sheets](./resources/cheat-sheets/)** - Agent patterns, prompting, tools, communication
+- **[🎥 Video Tutorials](./resources/README.md#🎥-video-resources)** - 100+ YouTube channels and playlists
+- **[📚 Books & Courses](./resources/README.md#📖-recommended-books)** - Comprehensive learning materials
+- **[🏆 Competitions](./resources/README.md#🏆-competitions-and-challenges)** - Active challenges and events
+- **[🔧 Development Tools](./tools/README.md#🛠️-development-tools)** - Debugging, monitoring, deployment
+- **[🎙️ Podcasts](./resources/README.md#🎙️-podcasts--audio-content)** - AI audio content and discussions
+
+### 📈 Repository Stats
+- **🌟 25+ Frameworks** covered with comprehensive guides
+- **📚 50+ Academic Papers** with direct links and summaries  
+- **🎥 100+ Video Resources** including tutorials and courses
+- **📖 15+ Books** with purchase links and descriptions
+- **🛠️ 50+ Tools** for development, monitoring, and deployment
+- **📋 4 Comprehensive Cheat Sheets** covering all aspects of agent development
+
+### 🤝 Community Contributions Welcome
+We're actively looking for contributions in:
+- **📝 Tutorial Content** - Step-by-step guides and examples
+- **🚀 Framework Guides** - Setup and best practices for new frameworks
+- **🔧 Tool Reviews** - Hands-on experience with development tools
+- **🎯 Use Case Examples** - Real-world applications and implementations
+- **🌍 Translations** - Making content accessible globally
 
 ---
 
