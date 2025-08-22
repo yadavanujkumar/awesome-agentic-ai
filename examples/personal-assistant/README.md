@@ -21,8 +21,8 @@ A comprehensive AI-powered personal assistant that helps manage your daily tasks
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/yadavanujkumar/Agentic-AI-Resources.git
-cd Agentic-AI-Resources/examples/personal-assistant
+git clone https://github.com/yadavanujkumar/awesome-agentic-ai.git
+cd awesome-agentic-ai/examples/personal-assistant
 
 # Install dependencies
 pip install -r requirements.txt
