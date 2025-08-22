@@ -24,7 +24,7 @@ Your complete path to mastering Agentic AI systems, from first concepts to produ
   - [ ] Choose your first framework (recommend LangChain)
 
 **Resources**:
-- [Introduction to AI Agents Tutorial]([../../tutorials/beginner/01-introduction-to-agents/](https://www.ibm.com/think/topics/ai-agents))
+- [Introduction to AI Agents Tutorial](https://www.ibm.com/think/topics/ai-agents)
 - [LangChain Framework Guide](../../frameworks/langchain/)
 
 ### Week 3-4: First Agent
