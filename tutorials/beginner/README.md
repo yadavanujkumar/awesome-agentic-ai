@@ -191,9 +191,7 @@ After completing these tutorials:
 - **Community**: Join our Discord server (link in main README)
 - **Office Hours**: Monthly community Q&A sessions
 
-## 🏆 Completion Certificate
 
-Complete all 6 tutorials and submit your final project to earn a completion certificate! Details in [certification.md](./certification.md).
 
 ---
 

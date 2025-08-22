@@ -115,24 +115,6 @@ Build an enterprise-grade multi-agent system that demonstrates all intermediate 
 
 ---
 
-## 🏆 Intermediate Certification
-
-Upon completion, you'll be eligible for the **Intermediate Agentic AI Certification**.
-
-### Requirements
-- Complete all 6 intermediate tutorials
-- Build and deploy capstone project
-- Pass practical assessment
-- Demonstrate production-ready skills
-
-### Benefits
-- Advanced certification badge
-- Access to expert-level resources
-- Priority support and mentorship
-- Industry recognition
-
----
-
 ## 🤝 Community & Support
 
 - **Study Groups**: Join intermediate-level study sessions
