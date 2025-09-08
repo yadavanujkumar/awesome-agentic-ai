@@ -20,12 +20,14 @@ Your complete path to mastering Agentic AI systems, from first concepts to produ
 
 - **Development Setup**
   - [ ] Python environment setup
-  - [ ] API keys and accounts (OpenAI, etc.)
-  - [ ] Choose your first framework (recommend LangChain)
+  - [ ] API keys and accounts (OpenAI, Anthropic, etc.)
+  - [ ] Choose your first framework: LangChain (recommended) or OpenAI Swarm (lightweight)
+  - [ ] Install development tools (LangSmith, IDE extensions)
 
 **Resources**:
-- [Introduction to AI Agents Tutorial](https://www.ibm.com/think/topics/ai-agents)
+- [Introduction to AI Agents Tutorial](../../tutorials/beginner/01-introduction-to-agents/)
 - [LangChain Framework Guide](../../frameworks/langchain/)
+- [OpenAI Swarm Documentation](https://github.com/openai/swarm)
 
 ### Week 3-4: First Agent
 **Goal**: Build and deploy your first functional AI agent
@@ -52,12 +54,16 @@ Your complete path to mastering Agentic AI systems, from first concepts to produ
 
 - **Advanced Features**
   - [ ] Improve agent reasoning with better prompts
-  - [ ] Add more sophisticated tools
-  - [ ] Implement conversation memory
+  - [ ] Add more sophisticated tools and integrations
+  - [ ] Implement persistent conversation memory
   - [ ] Add safety filters and guardrails
+  - [ ] Experiment with LangGraph for stateful workflows
 
 - **Deployment**
   - [ ] Package your agent application
+  - [ ] Create a simple web interface (Streamlit or Gradio)
+  - [ ] Deploy to cloud platform (Vercel, Heroku, or cloud provider)
+  - [ ] Basic monitoring and logging with LangSmith
   - [ ] Create a simple web interface
   - [ ] Deploy to cloud platform
   - [ ] Basic monitoring and logging
@@ -83,9 +89,11 @@ Your complete path to mastering Agentic AI systems, from first concepts to produ
   - [ ] Conflict resolution strategies
 
 - **Framework Exploration**
-  - [ ] AutoGen for multi-agent conversations
-  - [ ] CrewAI for role-playing agents
-  - [ ] Compare different approaches
+  - [ ] AutoGen 2.0 for multi-agent conversations and AutoGen Studio
+  - [ ] CrewAI for role-playing agents and team workflows
+  - [ ] OpenAI Swarm for lightweight multi-agent coordination
+  - [ ] Compare different approaches and architectural patterns
+  - [ ] Experiment with LangGraph for complex stateful workflows
 
 - **Practical Implementation**
   - [ ] Build a two-agent collaboration system
@@ -97,6 +105,8 @@ Your complete path to mastering Agentic AI systems, from first concepts to produ
 **Resources**:
 - [AutoGen Framework Guide](../../frameworks/autogen/)
 - [CrewAI Framework Guide](../../frameworks/crewai/)
+- [OpenAI Swarm Documentation](https://github.com/openai/swarm)
+- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/)
 - [Multi-Agent Examples](../../examples/multi-agent-collab/)
 
 ### Week 4-5: Advanced Capabilities
@@ -136,10 +146,13 @@ Your complete path to mastering Agentic AI systems, from first concepts to produ
   - [ ] Performance optimization
 
 - **Monitoring & Observability**
-  - [ ] Agent performance metrics
-  - [ ] Conversation analytics
-  - [ ] Error tracking and debugging
-  - [ ] Cost monitoring
+  - [ ] LangSmith for agent performance monitoring and debugging
+  - [ ] LangGraph Studio for visual workflow debugging
+  - [ ] AutoGen Studio for multi-agent conversation analytics
+  - [ ] Weights & Biases for experiment tracking
+  - [ ] OpenTelemetry for distributed tracing
+  - [ ] Custom metrics and alerting systems
+  - [ ] Cost monitoring and optimization
 
 - **Security & Compliance**
   - [ ] Input validation and sanitization
@@ -162,10 +175,13 @@ Your complete path to mastering Agentic AI systems, from first concepts to produ
 **Goal**: Understand and implement latest research developments
 
 - **Research Areas**
-  - [ ] Latest papers in agentic AI
-  - [ ] Emergent capabilities and behaviors
-  - [ ] Novel architectures and patterns
-  - [ ] Evaluation methodologies
+  - [ ] Latest 2024 papers in agentic AI and multi-agent systems
+  - [ ] Computer use and desktop automation (Claude, GPT-4V)
+  - [ ] Constitutional AI and safety alignment
+  - [ ] Emergent capabilities and behaviors in multi-agent systems
+  - [ ] Novel architectures: OpenAI Swarm, DSPy, PydanticAI patterns
+  - [ ] Evaluation methodologies and benchmarking (AgentBench, etc.)
+  - [ ] Multimodal agent capabilities and integration
 
 - **Implementation**
   - [ ] Reproduce recent research papers

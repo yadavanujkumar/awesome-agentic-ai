@@ -17,8 +17,10 @@ Learn the fundamental concepts of AI agents and build your first simple agent.
 **What you'll learn:**
 - What are AI agents and how they work
 - Key components: LLM, memory, tools, and planning
+- Overview of major frameworks (LangChain, AutoGen, CrewAI, OpenAI Swarm)
 - Building a basic conversational agent
 - Testing and debugging your agent
+- 2024 developments in agentic AI
 
 ---
 
@@ -33,11 +35,13 @@ Create a practical AI agent using LangChain framework with real tools.
 - [💻 Code Examples](./02-first-agent-langchain/examples/)
 
 **What you'll learn:**
-- Setting up LangChain development environment
+- Setting up LangChain development environment (2024 version)
+- Introduction to LangGraph for stateful agents
 - Creating agents with tool usage capabilities
 - Integrating web search and calculator tools
-- Adding conversation memory
+- Adding conversation memory with LangSmith monitoring
 - Error handling and safety measures
+- Alternative approaches with OpenAI Swarm
 
 ---
 
