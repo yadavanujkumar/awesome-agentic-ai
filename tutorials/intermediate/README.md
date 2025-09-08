@@ -28,13 +28,21 @@ Learn how to build systems where multiple agents collaborate, coordinate, and sh
 
 ### Tutorial 2: Advanced Framework Patterns
 **Duration**: 5-6 hours  
-**Focus**: AutoGen, CrewAI, and advanced LangChain patterns
+**Focus**: AutoGen, CrewAI, OpenAI Swarm, and advanced LangChain patterns
 
-Master the leading multi-agent frameworks and understand when to use each approach.
+Master the leading multi-agent frameworks and understand when to use each approach, including the latest 2024 releases.
 
 - [📖 Read Tutorial](./02-advanced-frameworks/) *(Coming Soon)*
 - [📓 Jupyter Notebook](./02-advanced-frameworks/tutorial.ipynb) *(Coming Soon)*
 - [💻 Code Examples](./02-advanced-frameworks/examples/) *(Coming Soon)*
+
+**Framework Coverage:**
+- **OpenAI Swarm**: Lightweight multi-agent coordination (new 2024)
+- **AutoGen 2.0**: Enhanced conversation patterns and AutoGen Studio
+- **CrewAI**: Role-based team collaboration with latest features
+- **LangGraph**: Stateful agent workflows and complex state management
+- **DSPy**: Systematic prompt optimization and LM programming
+- **PydanticAI**: Type-safe agent development patterns
 
 ### Tutorial 3: Scalable Agent Architectures
 **Duration**: 6-7 hours  
@@ -58,13 +66,21 @@ Implement sophisticated reasoning systems that can break down complex tasks and 
 
 ### Tutorial 5: Production Monitoring & Debugging
 **Duration**: 4-5 hours  
-**Focus**: Observability, debugging, and performance optimization
+**Focus**: Observability, debugging, and performance optimization with 2024 tools
 
-Build robust monitoring systems and learn advanced debugging techniques for multi-agent systems.
+Build robust monitoring systems and learn advanced debugging techniques for multi-agent systems using the latest observability tools.
 
 - [📖 Read Tutorial](./05-monitoring-debugging/) *(Coming Soon)*
 - [📓 Jupyter Notebook](./05-monitoring-debugging/tutorial.ipynb) *(Coming Soon)*
 - [💻 Code Examples](./05-monitoring-debugging/examples/) *(Coming Soon)*
+
+**Tools Covered:**
+- **LangSmith**: Advanced LangChain application monitoring and debugging
+- **LangGraph Studio**: Visual debugging for stateful agent workflows
+- **AutoGen Studio**: Multi-agent conversation visualization and debugging
+- **Weights & Biases**: Experiment tracking and agent performance monitoring
+- **OpenTelemetry**: Distributed tracing for agent systems
+- **Custom monitoring**: Building agent-specific observability solutions
 
 ### Tutorial 6: Enterprise Integration
 **Duration**: 6-7 hours  

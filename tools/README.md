@@ -5,14 +5,22 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
 ## 🛠️ Development Tools
 
 ### Agent Development Utilities
-- **[LangSmith](https://smith.langchain.com/)** - Debug, test, and monitor LangChain applications
+- **[LangSmith](https://smith.langchain.com/)** - Debug, test, and monitor LangChain applications (2024 enhanced)
   - [Documentation](https://docs.smith.langchain.com/) | [Python SDK](https://github.com/langchain-ai/langsmith-sdk)
-- **[Weights & Biases](https://wandb.ai/)** - Experiment tracking and monitoring for ML/AI agents
-  - [Agent Monitoring Guide](https://docs.wandb.ai/guides/integrations/langchain)
+- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging stateful agent workflows
+  - [Documentation](https://langchain-ai.github.io/langgraph/tutorials/langgraph-studio/) | [Download](https://studio.langchain.com/)
+- **[AutoGen Studio](https://autogen-studio.com/)** - Visual interface for building multi-agent conversations
+  - [GitHub](https://github.com/microsoft/autogen/tree/main/samples/apps/autogen-studio) | [Documentation](https://microsoft.github.io/autogen/docs/autogen-studio/getting-started)
+- **[Weights & Biases](https://wandb.ai/)** - Enhanced experiment tracking and monitoring for AI agents
+  - [Agent Monitoring Guide](https://docs.wandb.ai/guides/integrations/langchain) | [Multi-Agent Tracking](https://docs.wandb.ai/guides/track/log)
 - **[LangFuse](https://langfuse.com/)** - Open-source observability & analytics for LLM applications
   - [GitHub](https://github.com/langfuse/langfuse) | [Documentation](https://langfuse.com/docs)
-- **[Helicone](https://www.helicone.ai/)** - Observability platform for LLM applications
+- **[Helicone](https://www.helicone.ai/)** - Observability platform for LLM applications with agent support
   - [GitHub](https://github.com/Helicone/helicone) | [Documentation](https://docs.helicone.ai/)
+- **[Cursor](https://cursor.sh/)** - AI-first code editor with agent development features
+  - [Agent Development Templates](https://cursor.sh/features) | [Extensions](https://cursor.sh/docs)
+- **[GitHub Copilot](https://github.com/features/copilot)** - AI coding assistant with agent pattern support
+  - [Agent Development Guide](https://docs.github.com/en/copilot) | [Workspace Setup](https://docs.github.com/en/copilot/configuring-github-copilot/configuring-github-copilot-in-your-environment)
 
 ### Testing and Validation
 - **[PromptFoo](https://www.promptfoo.dev/)** - Test and evaluate LLM outputs systematically
@@ -38,15 +46,33 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
 
 ### Agent Development CLIs
 ```bash
-# LangChain CLI
+# LangChain CLI (Enhanced 2024)
 pip install langchain-cli
 langchain serve  # Serve LangChain apps
-langchain new my-agent  # Create new project
+langchain new my-agent  # Create new project with LangGraph templates
+langgraph dev  # Development server for LangGraph apps
 
 # CrewAI CLI  
 pip install crewai-cli
 crewai create crew my_crew  # Create new crew
 crewai run  # Run crew
+crewai install  # Install crew dependencies
+
+# OpenAI Swarm (No CLI yet, direct Python usage)
+pip install git+https://github.com/openai/swarm.git
+# Use directly in Python scripts
+
+# AutoGen CLI tools
+pip install pyautogen[studio]
+autogen-studio ui  # Launch AutoGen Studio interface
+
+# PydanticAI CLI
+pip install pydantic-ai
+# Built-in CLI tools for type-safe agent development
+
+# DSPy CLI
+pip install dspy-ai
+# Python-based optimization framework
 
 # AutoGen Studio
 pip install autogenstudio

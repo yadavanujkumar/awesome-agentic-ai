@@ -96,19 +96,25 @@ Week 9-12: Innovation
 
 ### 🌟 **Emerging Technologies**
 
-- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment for goal-driven tasks
+- **[OpenAI Swarm](https://github.com/openai/swarm)** - OpenAI's experimental multi-agent orchestration framework
+- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment for goal-driven tasks (2024 updates)
 - **[MetaGPT](https://github.com/geekan/MetaGPT)** - Multi-agent software company simulation
 - **[ChatDev](https://github.com/OpenBMB/ChatDev)** - Communicative agents for software development
-- **[BabyAGI](https://github.com/yoheinakajima/babyagi)** - Simplified AGI implementation
-- **[GPT Engineer](https://github.com/AntonOsika/gpt-engineer)** - AI that codes entire projects
+- **[DSPy](https://github.com/stanfordnlp/dspy)** - Programming framework for optimizing LM-based systems
+- **[PydanticAI](https://github.com/pydantic/pydantic-ai)** - Type-safe agent framework built around Pydantic
+- **[Instructor](https://github.com/jxnl/instructor)** - Structured outputs from LLMs using Python type annotations
+- **[Phidata](https://github.com/phidatahq/phidata)** - Framework for building AI agents with memory and tools
+- **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Create collaborative AI agent teams with specialized roles
 
 ### 🏢 **Enterprise Platforms**
 
-- **[OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)** - Production-ready AI assistants
-- **[Google Vertex AI Agents](https://cloud.google.com/vertex-ai/docs/agent-builder)** - Enterprise agent platform
-- **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development
-- **[Amazon Bedrock Agents](https://aws.amazon.com/bedrock/agents/)** - AWS-native agent framework
-- **[Anthropic Claude Agents](https://docs.anthropic.com/claude/docs)** - Constitutional AI-powered agents
+- **[OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)** - Production-ready AI assistants with GPT-4o
+- **[Google Vertex AI Agents](https://cloud.google.com/vertex-ai/docs/agent-builder)** - Enterprise agent platform with Gemini 2.0
+- **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development for Microsoft 365
+- **[Amazon Bedrock Agents](https://aws.amazon.com/bedrock/agents/)** - AWS-native agent framework with multiple foundation models
+- **[Anthropic Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Claude's computer automation capabilities
+- **[GitHub Models](https://github.com/marketplace/models)** - GitHub's AI model platform with agent capabilities
+- **[Azure OpenAI Service](https://docs.microsoft.com/en-us/azure/ai-services/openai/)** - Enterprise-grade OpenAI models in Azure
 
 **[Explore All 25+ Frameworks →](./frameworks/README.md)**
 
@@ -241,7 +247,9 @@ result = agent.run("What is 25 * 4 + 10?")
 - [HuggingGPT: Solving AI Tasks with ChatGPT and its Friends](https://arxiv.org/abs/2303.17580)
 - [MetaGPT: Meta Programming for Multi-Agent Collaborative Framework](https://arxiv.org/abs/2308.00352)
 - [AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation](https://arxiv.org/abs/2308.08155)
-- **[50+ More Papers →](./resources/README.md#📚-academic-papers)**
+- [AgentBench: Evaluating LLMs as Agents](https://arxiv.org/abs/2308.03688) - 2024 agent evaluation framework
+- [The Rise and Potential of Large Language Model Based Agents](https://arxiv.org/abs/2309.07864) - Comprehensive 2024 survey
+- **[80+ More Papers →](./resources/README.md#📚-academic-papers)**
 
 ### 🎥 **Video Tutorials & Channels**
 - **[Two Minute Papers](https://www.youtube.com/@TwoMinutePapers)** - Latest AI research explained
@@ -259,19 +267,26 @@ result = agent.run("What is 25 * 4 + 10?")
 - **[15+ More Books with Links →](./resources/README.md#📖-recommended-books)**
 
 ### 🎓 **Courses & Certifications**
-- **[DeepLearning.AI Agent Specialization](https://www.coursera.org/specializations/ai-agents)** - Comprehensive agent development
+- **[DeepLearning.AI AI Agentic Workflows Specialization](https://www.coursera.org/specializations/ai-agentic-workflows)** - New 2024 specialization focused on agentic AI
+- **[LangChain Academy](https://academy.langchain.com/)** - Official LangChain certification program
 - **[Stanford CS224N: NLP with Deep Learning](https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ)** - Advanced NLP concepts
 - **[Berkeley CS285: Deep RL](https://www.youtube.com/playlist?list=PL_iWQOsE6TfXxKgI1GgyV1B_Xa0DxE5eH)** - Reinforcement learning for agents
-- **[AWS ML Specialty Certification](https://aws.amazon.com/certification/certified-machine-learning-specialty/)** - Cloud ML deployment
-- **[10+ More Courses →](./resources/README.md#🎓-certification-programs--learning-paths)**
+- **[OpenAI API Certification](https://platform.openai.com/docs/overview)** - New certification for GPT-4 and Assistants API
+- **[AWS ML Specialty](https://aws.amazon.com/certification/certified-machine-learning-specialty/)** - Updated with Bedrock Agents
+- **[Anthropic Claude Developer Certification](https://www.anthropic.com/claude)** - Constitutional AI and Computer Use
+- **[15+ More Courses →](./resources/README.md#🎓-certification-programs--learning-paths)**
 
 ### 🛠️ **Development Tools & Platforms**
-- **[LangSmith](https://smith.langchain.com/)** - Debug and monitor LangChain applications
-- **[AutoGen Studio](https://github.com/microsoft/autogen/tree/main/samples/apps/autogen-studio)** - Visual multi-agent interface
-- **[Weights & Biases](https://wandb.ai/)** - Experiment tracking for AI agents
-- **[Streamlit](https://streamlit.io/)** - Build interactive agent demos
-- **[Cursor](https://cursor.sh/)** - AI-first code editor
-- **[50+ Tools & Integrations →](./tools/README.md)**
+- **[LangSmith](https://smith.langchain.com/)** - Debug and monitor LangChain applications with 2024 updates
+- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building stateful agents
+- **[AutoGen Studio](https://autogen-studio.com/)** - Updated visual multi-agent interface
+- **[Weights & Biases](https://wandb.ai/)** - Enhanced experiment tracking for AI agents
+- **[Streamlit](https://streamlit.io/)** - Build interactive agent demos with 2024 features
+- **[Cursor](https://cursor.sh/)** - AI-first code editor with agent integration
+- **[GitHub Copilot](https://github.com/features/copilot)** - Enhanced AI coding assistant
+- **[Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Desktop automation capabilities
+- **[Replit Agent](https://replit.com/ai)** - AI agent for code development
+- **[60+ Tools & Integrations →](./tools/README.md)**
 
 ### 🎙️ **Podcasts & Audio Content**
 - **[The TWIML AI Podcast](https://twimlai.com/podcast/)** - Weekly ML and AI discussions
