@@ -63,6 +63,8 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Prompt Engineering for Agents](cheat-sheets/prompt-engineering.md)
 - [Tool Integration Guide](cheat-sheets/tool-integration.md)
 - [Multi-Agent Communication Protocols](cheat-sheets/communication-protocols.md)
+- [2024 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2024.md) ⭐ **New**
+- [Enterprise Deployment Guide 2024](cheat-sheets/enterprise-deployment-2024.md) ⭐ **New**
 
 ## 🗺️ Learning Roadmaps
 
@@ -501,23 +503,51 @@ Cutting-edge research and production systems (8-12 weeks)
 
 ## 🌍 International Communities & Events
 
-### Global Conferences
-- **[NeurIPS](https://neurips.cc/)** - Premier ML conference (December, annually)
-- **[ICML](https://icml.cc/)** - International Conference on Machine Learning (July)
-- **[ICLR](https://iclr.cc/)** - International Conference on Learning Representations (May)
-- **[AAAI](https://aaai.org/Conferences/AAAI/)** - Association for the Advancement of AI
-- **[IJCAI](https://www.ijcai.org/)** - International Joint Conference on AI
+### 2024/2025 Major Conferences
+- **[NeurIPS 2024](https://neurips.cc/)** - Premier ML conference (December 2024, Vancouver)
+- **[ICML 2025](https://icml.cc/)** - International Conference on Machine Learning (July 2025, Vienna)
+- **[ICLR 2025](https://iclr.cc/)** - International Conference on Learning Representations (May 2025, Singapore)
+- **[AAAI 2025](https://aaai.org/Conferences/AAAI/)** - Association for the Advancement of AI (February 2025, Philadelphia)
+- **[IJCAI 2025](https://www.ijcai.org/)** - International Joint Conference on AI (August 2025, Montreal)
+- **[AAMAS 2025](https://www.aamas2025.org/)** - Autonomous Agents and Multi-Agent Systems (May 2025, Detroit)
+
+### Agent-Specific Events (2024/2025)
+- **[Agent AI Summit 2024](https://agentaisummit.com/)** - Dedicated agent AI conference (December 2024)
+- **[LangChain AI Conference](https://langchain.com/conference)** - Annual LangChain community event (2025)
+- **[AutoGen Symposium](https://microsoft.github.io/autogen/events/)** - Microsoft's multi-agent event (Q1 2025)
+- **[CrewAI DevCon](https://crewai.com/devcon)** - Role-based agent development (Q2 2025)
+- **[OpenAI DevDay 2025](https://openai.com/devday)** - Annual OpenAI developer conference
+
+### Industry Workshops
+- **[Agentic AI in Enterprise](https://enterprise-ai.org/workshops/)** - Business applications focus
+- **[Multi-Agent Systems Workshop](https://multiagent.org/workshops/)** - Research and development
+- **[AI Safety for Agents](https://aisafety.org/workshops/)** - Safety and alignment
+- **[LLM Agents Bootcamp](https://llmagents.bootcamp/)** - Hands-on training events
 
 ### Regional Meetups & Communities
 - **[AI/ML Meetups](https://www.meetup.com/topics/artificial-intelligence/)** - Local AI communities worldwide
+- **[Agent AI Meetups](https://www.meetup.com/topics/agent-ai/)** - Specialized agent development groups
 - **[PyTorch Meetups](https://pytorch.org/community/)** - Framework-specific gatherings
 - **[TensorFlow User Groups](https://www.tensorflow.org/community/groups)** - Google's ML framework community
+- **[LangChain Local](https://langchain.com/community/)** - LangChain developer meetups
+- **[CrewAI Chapters](https://crewai.com/community/)** - Regional CrewAI communities
 
 ### Online Communities
-- **[Hugging Face Discord](https://discord.gg/huggingface)** - Active AI development community
-- **[LangChain Discord](https://discord.gg/langchain)** - Framework-specific discussions
-- **[r/MachineLearning](https://reddit.com/r/MachineLearning)** - Reddit ML community
+- **[Hugging Face Discord](https://discord.gg/huggingface)** - Active AI development community (500K+ members)
+- **[LangChain Discord](https://discord.gg/langchain)** - Framework-specific discussions (100K+ members)
+- **[AutoGen Community](https://discord.gg/autogen)** - Microsoft's multi-agent framework community
+- **[CrewAI Discord](https://discord.gg/crewai)** - Role-based agent development community
+- **[r/MachineLearning](https://reddit.com/r/MachineLearning)** - Reddit ML community (2M+ members)
+- **[r/ArtificialIntelligence](https://reddit.com/r/artificial)** - General AI discussions (1M+ members)
 - **[AI Stack Exchange](https://ai.stackexchange.com/)** - Q&A for AI researchers and practitioners
+- **[Agent AI Forum](https://agentai.forum/)** - Dedicated agent development discussions (New 2024)
+
+### Developer Resources & Hackathons
+- **[LangChain Hackathons](https://langchain.com/hackathons)** - Monthly framework competitions
+- **[OpenAI Hackathons](https://openai.com/hackathons)** - Quarterly innovation challenges
+- **[Anthropic AI Safety Challenges](https://anthropic.com/challenges)** - Safety-focused competitions
+- **[Agent AI Bounties](https://agentai.bounties.com/)** - Open-source contribution rewards
+- **[MLOps World Agent Track](https://mlopsworld.com/agent-track)** - Production deployment focus
 
 ## Contributing
 
