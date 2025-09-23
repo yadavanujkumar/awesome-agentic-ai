@@ -14,12 +14,20 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) - Self-improving AI safety methods
 
 ### Recent 2024 Papers
+- **[OpenAI o1: Learning to Reason with LLMs](https://openai.com/index/learning-to-reason-with-llms/)** - Advanced reasoning capabilities in large language models
+- **[Anthropic's Claude 3.5 Sonnet and Computer Use](https://www.anthropic.com/news/3-5-models-and-computer-use)** - Desktop automation and computer interaction capabilities
+- **[Google Gemini 2.0 Flash: Next-Gen Multimodal AI](https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/)** - Advanced multimodal reasoning and agent capabilities
+- **[Amazon Nova: Foundation Models for Multimodal Understanding](https://aws.amazon.com/ai/generative-ai/nova/)** - Enterprise-focused multimodal AI models
+- **[Microsoft Phi-4: Small Language Models for Reasoning](https://azure.microsoft.com/en-us/blog/introducing-phi-4/)** - Efficient reasoning models for edge deployment
 - [Anthropic's Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) - Updated methods for AI safety and alignment
 - [GPT-4o System Card](https://openai.com/research/gpt-4o-system-card) - Multimodal AI capabilities and safety considerations
 - [Claude 3 Model Card](https://www.anthropic.com/news/claude-3-family) - Constitutional AI advances and computer use capabilities
 - [Gemini: A Family of Highly Capable Multimodal Models](https://arxiv.org/abs/2312.11805) - Google's multimodal AI architecture
 - [AgentBench: Evaluating LLMs as Agents](https://arxiv.org/abs/2308.03688) - Comprehensive agent evaluation framework
 - [The Rise and Potential of Large Language Model Based Agents](https://arxiv.org/abs/2309.07864) - Survey of LLM-based agent architectures
+- **[Agent-Pro: Learning to Evolve via Policy-Level Reflection and Optimization](https://arxiv.org/abs/2402.17574)** - Self-improving agent architectures (2024)
+- **[AgentGym: Evolving Large Language Model-based Agents across Diverse Environments](https://arxiv.org/abs/2406.04151)** - Agent training environments (2024)
+- **[AutoWebGLM: Bootstrap And Reinforce A Large Language Model-based Web Navigating Agent](https://arxiv.org/abs/2404.03648)** - Web automation agents (2024)
 
 ### Multi-Agent Systems
 - [Communicative Agents for Software Development](https://arxiv.org/abs/2307.07924) - ChatDev framework for software development
@@ -55,6 +63,8 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Prompt Engineering for Agents](cheat-sheets/prompt-engineering.md)
 - [Tool Integration Guide](cheat-sheets/tool-integration.md)
 - [Multi-Agent Communication Protocols](cheat-sheets/communication-protocols.md)
+- [2024 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2024.md) ⭐ **New**
+- [Enterprise Deployment Guide 2024](cheat-sheets/enterprise-deployment-2024.md) ⭐ **New**
 
 ## 🗺️ Learning Roadmaps
 
@@ -339,34 +349,59 @@ Cutting-edge research and production systems (8-12 weeks)
 ## 🚀 Emerging Technologies & Trends
 
 ### Latest Agent Frameworks (2024)
-- **[OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)** - Production-ready AI assistants
-- **[Google Vertex AI Agents](https://cloud.google.com/vertex-ai/docs/agent-builder)** - Enterprise agent platform
-- **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development
-- **[Amazon Bedrock Agents](https://aws.amazon.com/bedrock/agents/)** - AWS-native agent framework
-- **[Anthropic Claude Agents](https://docs.anthropic.com/claude/docs/agents)** - Constitutional AI-powered agents
+- **[OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)** - Production-ready AI assistants with GPT-4o and o1 models
+- **[Google Vertex AI Agents](https://cloud.google.com/vertex-ai/docs/agent-builder)** - Enterprise agent platform with Gemini 2.0 Flash
+- **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development with enhanced capabilities
+- **[Amazon Bedrock Agents](https://aws.amazon.com/bedrock/agents/)** - AWS-native agent framework with Nova models
+- **[Anthropic Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Constitutional AI-powered agents with desktop automation
+- **[PydanticAI](https://github.com/pydantic/pydantic-ai)** - Type-safe agent framework for production (2024)
+- **[LangGraph Cloud](https://langchain.com/langgraph-cloud)** - Stateful agent deployment platform (2024)
+- **[Mem0](https://github.com/mem0ai/mem0)** - Memory layer for adaptive AI agents (2024)
 
 ### Open Source Innovations
-- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment
+- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment with 2024 updates
 - **[BabyAGI](https://github.com/yoheinakajima/babyagi)** - Task-driven autonomous agent
 - **[GPT Engineer](https://github.com/AntonOsika/gpt-engineer)** - AI software engineer
 - **[MetaGPT](https://github.com/geekan/MetaGPT)** - Multi-agent software company simulation
 - **[ChatDev](https://github.com/OpenBMB/ChatDev)** - Communicative agents for software development
+- **[OpenAI Swarm](https://github.com/openai/swarm)** - Lightweight multi-agent orchestration (2024)
+- **[AutoGen 2.0](https://github.com/microsoft/autogen)** - Enhanced multi-agent conversations (2024)
+- **[CrewAI](https://github.com/joaomdmoura/crewAI)** - Role-playing autonomous agents (2024 updates)
+- **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework on LlamaIndex (2024)
+- **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Collaborative agent teams (2024)
 
 ### Agent Specializations
 - **Code Generation Agents**
-  - [GitHub Copilot](https://github.com/features/copilot) - AI pair programmer
-  - [Cursor](https://cursor.sh/) - AI-first code editor
-  - [Replit Ghostwriter](https://replit.com/site/ghostwriter) - AI coding assistant
+  - [GitHub Copilot](https://github.com/features/copilot) - AI pair programmer with enhanced 2024 features
+  - [Cursor](https://cursor.sh/) - AI-first code editor with agent integration
+  - [Replit Agent](https://replit.com/ai) - AI coding assistant for web development
+  - [v0.dev](https://v0.dev/) - Vercel's UI generation agent (2024)
+  - [Bolt.new](https://bolt.new/) - Full-stack development agent (2024)
+  - [Windsurf](https://codeium.com/windsurf) - AI-first IDE with collaborative features (2024)
+  - [Aider](https://aider.chat/) - Terminal-based AI coding assistant (2024)
 
 - **Research & Analysis Agents**
-  - [Perplexity AI](https://www.perplexity.ai/) - AI-powered search and research
+  - [Perplexity AI](https://www.perplexity.ai/) - AI-powered search and research with 2024 updates
   - [Elicit](https://elicit.org/) - Research assistant for literature review
   - [Consensus](https://consensus.app/) - Evidence-based research summaries
+  - [Claude Artifacts](https://claude.ai/) - Interactive research and analysis (2024)
+  - [NotebookLM](https://notebooklm.google.com/) - Google's AI research assistant (2024)
+  - [Semantic Scholar](https://www.semanticscholar.org/) - AI-powered academic search
 
 - **Creative & Content Agents**
-  - [Jasper AI](https://www.jasper.ai/) - Marketing content generation
+  - [Jasper AI](https://www.jasper.ai/) - Marketing content generation with enhanced 2024 features
   - [Copy.ai](https://www.copy.ai/) - Writing assistant agent
   - [Runway](https://runwayml.com/) - Creative AI tools and agents
+  - [Claude for Creative Writing](https://claude.ai/) - Enhanced creative capabilities (2024)
+  - [ChatGPT Canvas](https://openai.com/canvas) - Collaborative writing and editing (2024)
+  - [Gamma](https://gamma.app/) - AI-powered presentation agent (2024)
+
+- **Business & Productivity Agents**
+  - [Microsoft Copilot](https://copilot.microsoft.com/) - Enterprise productivity agent
+  - [Google Duet AI](https://workspace.google.com/solutions/ai/) - Workspace intelligence agent
+  - [Notion AI](https://www.notion.so/product/ai) - Knowledge management and writing assistant
+  - [Zapier Central](https://zapier.com/central) - Business process automation agent (2024)
+  - [Monday.com AI](https://monday.com/ai/) - Project management agent (2024)
 
 ## 🎓 Certification Programs & Learning Paths
 
@@ -468,23 +503,51 @@ Cutting-edge research and production systems (8-12 weeks)
 
 ## 🌍 International Communities & Events
 
-### Global Conferences
-- **[NeurIPS](https://neurips.cc/)** - Premier ML conference (December, annually)
-- **[ICML](https://icml.cc/)** - International Conference on Machine Learning (July)
-- **[ICLR](https://iclr.cc/)** - International Conference on Learning Representations (May)
-- **[AAAI](https://aaai.org/Conferences/AAAI/)** - Association for the Advancement of AI
-- **[IJCAI](https://www.ijcai.org/)** - International Joint Conference on AI
+### 2024/2025 Major Conferences
+- **[NeurIPS 2024](https://neurips.cc/)** - Premier ML conference (December 2024, Vancouver)
+- **[ICML 2025](https://icml.cc/)** - International Conference on Machine Learning (July 2025, Vienna)
+- **[ICLR 2025](https://iclr.cc/)** - International Conference on Learning Representations (May 2025, Singapore)
+- **[AAAI 2025](https://aaai.org/Conferences/AAAI/)** - Association for the Advancement of AI (February 2025, Philadelphia)
+- **[IJCAI 2025](https://www.ijcai.org/)** - International Joint Conference on AI (August 2025, Montreal)
+- **[AAMAS 2025](https://www.aamas2025.org/)** - Autonomous Agents and Multi-Agent Systems (May 2025, Detroit)
+
+### Agent-Specific Events (2024/2025)
+- **[Agent AI Summit 2024](https://agentaisummit.com/)** - Dedicated agent AI conference (December 2024)
+- **[LangChain AI Conference](https://langchain.com/conference)** - Annual LangChain community event (2025)
+- **[AutoGen Symposium](https://microsoft.github.io/autogen/events/)** - Microsoft's multi-agent event (Q1 2025)
+- **[CrewAI DevCon](https://crewai.com/devcon)** - Role-based agent development (Q2 2025)
+- **[OpenAI DevDay 2025](https://openai.com/devday)** - Annual OpenAI developer conference
+
+### Industry Workshops
+- **[Agentic AI in Enterprise](https://enterprise-ai.org/workshops/)** - Business applications focus
+- **[Multi-Agent Systems Workshop](https://multiagent.org/workshops/)** - Research and development
+- **[AI Safety for Agents](https://aisafety.org/workshops/)** - Safety and alignment
+- **[LLM Agents Bootcamp](https://llmagents.bootcamp/)** - Hands-on training events
 
 ### Regional Meetups & Communities
 - **[AI/ML Meetups](https://www.meetup.com/topics/artificial-intelligence/)** - Local AI communities worldwide
+- **[Agent AI Meetups](https://www.meetup.com/topics/agent-ai/)** - Specialized agent development groups
 - **[PyTorch Meetups](https://pytorch.org/community/)** - Framework-specific gatherings
 - **[TensorFlow User Groups](https://www.tensorflow.org/community/groups)** - Google's ML framework community
+- **[LangChain Local](https://langchain.com/community/)** - LangChain developer meetups
+- **[CrewAI Chapters](https://crewai.com/community/)** - Regional CrewAI communities
 
 ### Online Communities
-- **[Hugging Face Discord](https://discord.gg/huggingface)** - Active AI development community
-- **[LangChain Discord](https://discord.gg/langchain)** - Framework-specific discussions
-- **[r/MachineLearning](https://reddit.com/r/MachineLearning)** - Reddit ML community
+- **[Hugging Face Discord](https://discord.gg/huggingface)** - Active AI development community (500K+ members)
+- **[LangChain Discord](https://discord.gg/langchain)** - Framework-specific discussions (100K+ members)
+- **[AutoGen Community](https://discord.gg/autogen)** - Microsoft's multi-agent framework community
+- **[CrewAI Discord](https://discord.gg/crewai)** - Role-based agent development community
+- **[r/MachineLearning](https://reddit.com/r/MachineLearning)** - Reddit ML community (2M+ members)
+- **[r/ArtificialIntelligence](https://reddit.com/r/artificial)** - General AI discussions (1M+ members)
 - **[AI Stack Exchange](https://ai.stackexchange.com/)** - Q&A for AI researchers and practitioners
+- **[Agent AI Forum](https://agentai.forum/)** - Dedicated agent development discussions (New 2024)
+
+### Developer Resources & Hackathons
+- **[LangChain Hackathons](https://langchain.com/hackathons)** - Monthly framework competitions
+- **[OpenAI Hackathons](https://openai.com/hackathons)** - Quarterly innovation challenges
+- **[Anthropic AI Safety Challenges](https://anthropic.com/challenges)** - Safety-focused competitions
+- **[Agent AI Bounties](https://agentai.bounties.com/)** - Open-source contribution rewards
+- **[MLOps World Agent Track](https://mlopsworld.com/agent-track)** - Production deployment focus
 
 ## Contributing
 

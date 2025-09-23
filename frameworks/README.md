@@ -48,6 +48,61 @@ Starter templates and guides for popular Agentic AI frameworks.
 - **Description**: OpenAI's experimental framework for building, orchestrating, and deploying multi-agent systems
 - **Use Cases**: Lightweight multi-agent coordination, handoffs, function calling
 - **Links**: [GitHub](https://github.com/openai/swarm) | [Documentation](https://github.com/openai/swarm/blob/main/README.md) | [Examples](https://github.com/openai/swarm/tree/main/examples)
+- **Getting Started**: [Swarm Directory](./swarm/)
+
+#### 🧠 PydanticAI
+- **Description**: Production-ready agent framework built around Pydantic for type-safe agents
+- **Use Cases**: Type-safe agent development, structured outputs, production applications
+- **Links**: [GitHub](https://github.com/pydantic/pydantic-ai) | [Documentation](https://ai.pydantic.dev/) | [Examples](https://github.com/pydantic/pydantic-ai/tree/main/examples)
+- **Getting Started**: [PydanticAI Directory](./pydantic-ai/)
+
+#### 🤖 AutoGen 2.0
+- **Description**: Next-generation multi-agent framework with improved orchestration and visual studio
+- **Use Cases**: Complex multi-agent workflows, visual agent design, enterprise applications
+- **Links**: [GitHub](https://github.com/microsoft/autogen) | [AutoGen Studio 2.0](https://autogen-studio.com/) | [Documentation](https://microsoft.github.io/autogen/)
+- **Getting Started**: [AutoGen 2.0 Directory](./autogen-2/)
+
+#### 🦙 LlamaAgents
+- **Description**: Multi-agent framework built on LlamaIndex for document-centric applications
+- **Use Cases**: Document analysis, knowledge management, RAG-based agents
+- **Links**: [GitHub](https://github.com/run-llama/llama-agents) | [Documentation](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/) | [Examples](https://github.com/run-llama/llama-agents/tree/main/examples)
+- **Getting Started**: [LlamaAgents Directory](./llama-agents/)
+
+#### 🧠 Mem0
+- **Description**: Memory layer for AI agents with adaptive learning and persistent context
+- **Use Cases**: Agents with long-term memory, personalization, adaptive learning
+- **Links**: [GitHub](https://github.com/mem0ai/mem0) | [Documentation](https://docs.mem0.ai/) | [Examples](https://github.com/mem0ai/mem0/tree/main/examples)
+- **Getting Started**: [Mem0 Directory](./mem0/)
+
+#### ⚡ CrewAI Enterprise
+- **Description**: Enterprise-grade role-playing agent framework with advanced orchestration
+- **Use Cases**: Enterprise teams, complex workflows, role-based collaboration
+- **Links**: [Official Site](https://crewai.com/enterprise) | [GitHub](https://github.com/joaomdmoura/crewAI) | [Documentation](https://docs.crewai.com/)
+- **Getting Started**: [CrewAI Enterprise Directory](./crewai-enterprise/)
+
+#### 🎯 Agency Swarm
+- **Description**: Framework for creating collaborative AI agent teams with specialized roles
+- **Use Cases**: Specialized agent teams, hierarchical organizations, complex task distribution
+- **Links**: [GitHub](https://github.com/VRSEN/agency-swarm) | [Documentation](https://github.com/VRSEN/agency-swarm/blob/main/README.md) | [Examples](https://github.com/VRSEN/agency-swarm/tree/main/examples)
+- **Getting Started**: [Agency Swarm Directory](./agency-swarm/)
+
+#### 🔧 LangGraph Cloud
+- **Description**: Production deployment platform for stateful agent workflows
+- **Use Cases**: Production agent deployment, enterprise workflows, stateful applications
+- **Links**: [Official Site](https://langchain.com/langgraph-cloud) | [Documentation](https://langchain-ai.github.io/langgraph/cloud/) | [Examples](https://langchain-ai.github.io/langgraph/tutorials/)
+- **Getting Started**: [LangGraph Cloud Directory](./langgraph-cloud/)
+
+#### 🚀 Phidata 2.0
+- **Description**: Enhanced framework for building AI agents with memory, tools, and knowledge
+- **Use Cases**: RAG agents, tool-calling agents, knowledge-based systems
+- **Links**: [GitHub](https://github.com/phidatahq/phidata) | [Documentation](https://docs.phidata.com/) | [Examples](https://github.com/phidatahq/phidata/tree/main/cookbook)
+- **Getting Started**: [Phidata 2.0 Directory](./phidata-2/)
+
+#### 🎨 Instructor
+- **Description**: Structured outputs from LLMs using Python type annotations
+- **Use Cases**: Type-safe LLM outputs, data validation, structured agent responses
+- **Links**: [GitHub](https://github.com/jxnl/instructor) | [Documentation](https://python.useinstructor.com/) | [Examples](https://python.useinstructor.com/examples/)
+- **Getting Started**: [Instructor Directory](./instructor/)
 
 #### 🧪 DSPy
 - **Description**: Programming framework for building and optimizing LM-based systems
