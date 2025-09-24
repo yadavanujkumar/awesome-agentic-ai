@@ -63,7 +63,7 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Prompt Engineering for Agents](cheat-sheets/prompt-engineering.md)
 - [Tool Integration Guide](cheat-sheets/tool-integration.md)
 - [Multi-Agent Communication Protocols](cheat-sheets/communication-protocols.md)
-- [2024 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2024.md) ⭐ **New**
+- [2025 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2025.md) ⭐ **New**
 - [Enterprise Deployment Guide 2024](cheat-sheets/enterprise-deployment-2024.md) ⭐ **New**
 
 ## 🗺️ Learning Roadmaps
