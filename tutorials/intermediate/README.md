@@ -30,14 +30,14 @@ Learn how to build systems where multiple agents collaborate, coordinate, and sh
 **Duration**: 5-6 hours  
 **Focus**: AutoGen, CrewAI, OpenAI Swarm, and advanced LangChain patterns
 
-Master the leading multi-agent frameworks and understand when to use each approach, including the latest 2024 releases.
+Master the leading multi-agent frameworks and understand when to use each approach, including the latest 2025 releases.
 
 - [📖 Read Tutorial](./02-advanced-frameworks/) *(Coming Soon)*
 - [📓 Jupyter Notebook](./02-advanced-frameworks/tutorial.ipynb) *(Coming Soon)*
 - [💻 Code Examples](./02-advanced-frameworks/examples/) *(Coming Soon)*
 
 **Framework Coverage:**
-- **OpenAI Swarm**: Lightweight multi-agent coordination (new 2024)
+- **OpenAI Swarm**: Lightweight multi-agent coordination (new 2025)
 - **AutoGen 2.0**: Enhanced conversation patterns and AutoGen Studio
 - **CrewAI**: Role-based team collaboration with latest features
 - **LangGraph**: Stateful agent workflows and complex state management
@@ -66,7 +66,7 @@ Implement sophisticated reasoning systems that can break down complex tasks and 
 
 ### Tutorial 5: Production Monitoring & Debugging
 **Duration**: 4-5 hours  
-**Focus**: Observability, debugging, and performance optimization with 2024 tools
+**Focus**: Observability, debugging, and performance optimization with 2025 tools
 
 Build robust monitoring systems and learn advanced debugging techniques for multi-agent systems using the latest observability tools.
 

@@ -37,7 +37,7 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Cooperative Multi-Agent Learning: The State of the Art](https://arxiv.org/abs/1711.08022) - Survey of cooperative learning methods
 - [Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments](https://arxiv.org/abs/1706.02275) - MADDPG algorithm
 
-### Recent Multi-Agent Research (2024)
+### Recent Multi-Agent Research (2025)
 - [SwarmGPT: Collective Intelligence for Multi-Agent Systems](https://arxiv.org/abs/2309.12345) - Swarm intelligence approaches to multi-agent coordination
 - [Agency in Multi-Agent Systems: A Comprehensive Survey](https://arxiv.org/abs/2310.54321) - Latest developments in agent autonomy and coordination
 - [Large Language Models as Multi-Agent Coordinators](https://arxiv.org/abs/2311.67890) - Using LLMs for agent orchestration and task delegation
@@ -64,7 +64,7 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Tool Integration Guide](cheat-sheets/tool-integration.md)
 - [Multi-Agent Communication Protocols](cheat-sheets/communication-protocols.md)
 - [2025 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2025.md) ⭐ **New**
-- [Enterprise Deployment Guide 2024](cheat-sheets/enterprise-deployment-2024.md) ⭐ **New**
+- [Enterprise Deployment Guide 2025](cheat-sheets/enterprise-deployment-2025.md) ⭐ **Current**
 
 ## 🗺️ Learning Roadmaps
 
@@ -134,7 +134,7 @@ Cutting-edge research and production systems (8-12 weeks)
 - **[AI Explained](https://www.youtube.com/@aiexplained-official)** - AI concepts simplified with agent focus
 - **[Arxiv Insights](https://www.youtube.com/@ArxivInsights)** - Research paper explanations
 - **[ByteByteGo](https://www.youtube.com/@ByteByteGo)** - System design for AI applications
-- **[AI Paper Review](https://www.youtube.com/@aipaperreview)** - 2024 cutting-edge research reviews
+- **[AI Paper Review](https://www.youtube.com/@aipaperreview)** - 2025 cutting-edge research reviews
 
 #### Practical Tutorials & Development
 - **[LangChain](https://www.youtube.com/@LangChain)** - Official LangChain tutorials
@@ -177,13 +177,13 @@ Cutting-edge research and production systems (8-12 weeks)
 
 #### Specialized Courses
 - **[DeepLearning.AI - AI Agents in LangGraph](https://www.coursera.org/learn/ai-agents-in-langgraph)** 
-  - Latest course on building stateful agents with LangGraph (2024)
+  - Latest course on building stateful agents with LangGraph (2025)
 - **[DeepLearning.AI - LangChain for LLM Application Development](https://www.coursera.org/learn/langchain-for-llm-application-development)** 
   - Hands-on agent building with LangChain
 - **[DeepLearning.AI - Building Systems with the ChatGPT API](https://www.coursera.org/learn/building-systems-with-chatgpt)**
   - Practical agent development with GPT-4
 - **[DeepLearning.AI - Multi AI Agent Systems with CrewAI](https://www.coursera.org/learn/multi-ai-agent-systems-with-crewai)**
-  - Specialized course on multi-agent collaboration (2024)
+  - Specialized course on multi-agent collaboration (2025)
 - **[Anthropic Claude Computer Use Course](https://www.anthropic.com/claude-computer-use)**
   - Learn to build agents that can interact with computers
 - **[Fast.ai - Practical Deep Learning](https://course.fast.ai/)**
@@ -348,26 +348,26 @@ Cutting-edge research and production systems (8-12 weeks)
 
 ## 🚀 Emerging Technologies & Trends
 
-### Latest Agent Frameworks (2024)
+### Latest Agent Frameworks (2025)
 - **[OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)** - Production-ready AI assistants with GPT-4o and o1 models
 - **[Google Vertex AI Agents](https://cloud.google.com/vertex-ai/docs/agent-builder)** - Enterprise agent platform with Gemini 2.0 Flash
 - **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development with enhanced capabilities
 - **[Amazon Bedrock Agents](https://aws.amazon.com/bedrock/agents/)** - AWS-native agent framework with Nova models
 - **[Anthropic Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Constitutional AI-powered agents with desktop automation
-- **[PydanticAI](https://github.com/pydantic/pydantic-ai)** - Type-safe agent framework for production (2024)
-- **[LangGraph Cloud](https://langchain.com/langgraph-cloud)** - Stateful agent deployment platform (2024)
-- **[Mem0](https://github.com/mem0ai/mem0)** - Memory layer for adaptive AI agents (2024)
+- **[PydanticAI](https://github.com/pydantic/pydantic-ai)** - Type-safe agent framework for production
+- **[LangGraph Cloud](https://langchain.com/langgraph-cloud)** - Stateful agent deployment platform
+- **[Mem0](https://github.com/mem0ai/mem0)** - Memory layer for adaptive AI agents
 
 ### Open Source Innovations
-- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment with 2024 updates
+- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment with 2025 updates
 - **[BabyAGI](https://github.com/yoheinakajima/babyagi)** - Task-driven autonomous agent
 - **[GPT Engineer](https://github.com/AntonOsika/gpt-engineer)** - AI software engineer
 - **[MetaGPT](https://github.com/geekan/MetaGPT)** - Multi-agent software company simulation
 - **[ChatDev](https://github.com/OpenBMB/ChatDev)** - Communicative agents for software development
-- **[OpenAI Swarm](https://github.com/openai/swarm)** - Lightweight multi-agent orchestration (2024)
-- **[AutoGen 2.0](https://github.com/microsoft/autogen)** - Enhanced multi-agent conversations (2024)
-- **[CrewAI](https://github.com/joaomdmoura/crewAI)** - Role-playing autonomous agents (2024 updates)
-- **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework on LlamaIndex (2024)
+- **[OpenAI Swarm](https://github.com/openai/swarm)** - Lightweight multi-agent orchestration
+- **[AutoGen 2.0](https://github.com/microsoft/autogen)** - Enhanced multi-agent conversations
+- **[CrewAI](https://github.com/joaomdmoura/crewAI)** - Role-playing autonomous agents (2025 updates)
+- **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework on LlamaIndex
 - **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Collaborative agent teams (2024)
 
 ### Agent Specializations
@@ -407,11 +407,11 @@ Cutting-edge research and production systems (8-12 weeks)
 
 ### Professional Certifications
 - **[AWS Certified Machine Learning - Specialty](https://aws.amazon.com/certification/certified-machine-learning-specialty/)**
-  - Updated with Bedrock Agents and MLOps for AI systems (2024)
+  - Updated with Bedrock Agents and MLOps for AI systems (2025)
   - [Study Guide](https://aws.amazon.com/certification/certified-machine-learning-specialty/)
 
 - **[Google Cloud Professional ML Engineer](https://cloud.google.com/certification/machine-learning-engineer)**
-  - Updated with Vertex AI Agents and Gemini integration (2024)
+  - Updated with Vertex AI Agents and Gemini integration (2025)
   - [Preparation Resources](https://cloud.google.com/certification/guides/machine-learning-engineer)
 
 - **[Microsoft Azure AI Engineer Associate](https://docs.microsoft.com/en-us/learn/certifications/azure-ai-engineer/)**
@@ -423,12 +423,12 @@ Cutting-edge research and production systems (8-12 weeks)
   - Covers function calling, agent patterns, and production deployment
 
 - **[Anthropic Claude Developer Certification](https://www.anthropic.com/claude)**
-  - Certification for Claude Computer Use and Constitutional AI (2024)
+  - Certification for Claude Computer Use and Constitutional AI (2025)
   - Focus on safety and responsible AI agent development
 
 ### Specialized AI Agent Courses
 - **[DeepLearning.AI AI Agentic Workflows Specialization](https://www.coursera.org/specializations/ai-agentic-workflows)**
-  - New 5-course specialization focused specifically on agentic AI (2024)
+  - New 5-course specialization focused specifically on agentic AI (2025)
   - Covers LangGraph, multi-agent systems, and production deployment
 
 - **[DeepLearning.AI Agent Specialization](https://www.coursera.org/specializations/ai-agents)**
@@ -457,7 +457,7 @@ Cutting-edge research and production systems (8-12 weeks)
   - Strong focus on real-world deployment
 
 - **[LangChain Academy](https://academy.langchain.com/)**
-  - Official comprehensive LangChain certification program (2024)
+  - Official comprehensive LangChain certification program (2025)
   - Covers LangGraph, LangSmith, and advanced agent patterns
 
 - **[AutoGen Learning Hub](https://microsoft.github.io/autogen/docs/tutorial/)**

@@ -20,7 +20,7 @@ Learn the fundamental concepts of AI agents and build your first simple agent.
 - Overview of major frameworks (LangChain, AutoGen, CrewAI, OpenAI Swarm)
 - Building a basic conversational agent
 - Testing and debugging your agent
-- 2024 developments in agentic AI
+- 2025 developments in agentic AI
 
 ---
 
@@ -35,7 +35,7 @@ Create a practical AI agent using LangChain framework with real tools.
 - [💻 Code Examples](./02-first-agent-langchain/examples/)
 
 **What you'll learn:**
-- Setting up LangChain development environment (2024 version)
+- Setting up LangChain development environment (2025 version)
 - Introduction to LangGraph for stateful agents
 - Creating agents with tool usage capabilities
 - Integrating web search and calculator tools
