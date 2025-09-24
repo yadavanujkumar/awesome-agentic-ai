@@ -120,7 +120,7 @@ Starter templates and guides for popular Agentic AI frameworks.
 - **Links**: [GitHub](https://github.com/pydantic/pydantic-ai) | [Documentation](https://ai.pydantic.dev/) | [Examples](https://github.com/pydantic/pydantic-ai/tree/main/examples)
 
 #### 🚀 AutoGPT
-- **Description**: Autonomous GPT-4 experiment for goal-driven tasks (Major 2024 updates)
+- **Description**: Autonomous GPT-4 experiment for goal-driven tasks (Major 2025 updates)
 - **Use Cases**: Autonomous task execution, research automation, content creation
 - **Links**: [GitHub](https://github.com/Significant-Gravitas/AutoGPT) | [Documentation](https://docs.agpt.co/) | [Platform](https://app.agpt.co/)
 

@@ -379,7 +379,7 @@ It helps others discover this resource and motivates us to keep improving it.
 - 🏗️ **Frameworks**: [Framework Comparison Guide](./frameworks/README.md)
 
 ### 🔗 Quick Links
-- **[📊 Cheat Sheets](./resources/cheat-sheets/)** - Agent patterns, prompting, tools, communication, 2024 patterns, enterprise deployment
+- **[📊 Cheat Sheets](./resources/cheat-sheets/)** - Agent patterns, prompting, tools, communication, 2025 patterns, enterprise deployment
 - **[🎥 Video Tutorials](./resources/README.md#🎥-video-resources)** - 150+ YouTube channels and playlists
 - **[📚 Books & Courses](./resources/README.md#📖-recommended-books)** - Comprehensive learning materials
 - **[🏆 Competitions](./resources/README.md#🏆-competitions-and-challenges)** - Active challenges and events
