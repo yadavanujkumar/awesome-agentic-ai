@@ -10,7 +10,7 @@ Our examples demonstrate implementation patterns across multiple frameworks:
 - Personal Assistant with stateful workflows
 - Research Agent with advanced RAG patterns
 - Multi-step reasoning with LangGraph Cloud
-- Type-safe implementations with LangGraph 2024
+- Type-safe implementations with LangGraph 2025
 
 ### 🤖 **AutoGen & AutoGen Studio 2.0**
 - Multi-agent software development teams
@@ -34,7 +34,7 @@ Our examples demonstrate implementation patterns across multiple frameworks:
 - Structured output validation
 - Production-ready agent services
 
-### 🎯 **2024 Emerging Frameworks**
+### 🎯 **2025 Emerging Frameworks**
 - **Mem0**: Adaptive memory agents
 - **LlamaAgents**: Document-centric multi-agents
 - **Agency Swarm**: Complex multi-agent team structures
@@ -77,10 +77,10 @@ Enterprise-focused agent implementations.
 - **Inventory Management Agent** - Stock tracking and optimization
 - **Content Creation Pipeline** - Multi-step content generation
 
-### 🚀 Latest 2024 Patterns
+### 🚀 Latest 2025 Patterns
 Cutting-edge agent architectures and implementation patterns.
 
-- **[2024 Agent Patterns](./agent-patterns-2024/)** - Type-safe agents, adaptive memory, computer use ⭐ **New**
+- **[2025 Agent Patterns](./agent-patterns-2025/)** - Type-safe agents, adaptive memory, computer use ⭐ **New**
 - **PydanticAI Implementation** - Production-ready type-safe agents
 - **Mem0 Memory Agents** - Adaptive learning and personalization
 - **Computer Use Automation** - Desktop and application control

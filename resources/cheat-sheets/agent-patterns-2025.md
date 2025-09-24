@@ -1,4 +1,4 @@
-# 2024 Agent Patterns and Architectures Cheat Sheet
+# 2025 Agent Patterns and Architectures Cheat Sheet
 
 ## 🧠 Latest Reasoning Patterns
 
@@ -118,7 +118,7 @@ response = client.run(
 )
 ```
 
-### 2. CrewAI 2024 Pattern
+### 2. CrewAI 2025 Pattern
 ```python
 from crewai import Agent, Task, Crew, Process
 
@@ -250,7 +250,7 @@ def system_prompt(ctx) -> str:
 async def run_research():
     query = ResearchQuery(
         topic="AI agents",
-        date_range=("2024-01-01", "2024-12-31")
+        date_range=("2025-01-01", "2025-12-31")
     )
     
     result = await research_agent.run(
@@ -503,4 +503,4 @@ export REDIS_URL="redis://localhost:6379"
 export MEM0_API_KEY="your-key"
 ```
 
-This cheat sheet covers the latest 2024 patterns for building production-ready AI agents with enhanced capabilities, observability, and enterprise features.
+This cheat sheet covers the latest 2025 patterns for building production-ready AI agents with enhanced capabilities, observability, and enterprise features.

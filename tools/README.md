@@ -5,7 +5,7 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
 ## 🛠️ Development Tools
 
 ### Agent Development Utilities
-- **[LangSmith](https://smith.langchain.com/)** - Debug, test, and monitor LangChain applications (2024 enhanced)
+- **[LangSmith](https://smith.langchain.com/)** - Debug, test, and monitor LangChain applications (2025 enhanced)
   - [Documentation](https://docs.smith.langchain.com/) | [Python SDK](https://github.com/langchain-ai/langsmith-sdk)
 - **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging stateful agent workflows
   - [Documentation](https://langchain-ai.github.io/langgraph/tutorials/langgraph-studio/) | [Download](https://studio.langchain.com/)
@@ -21,15 +21,15 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
   - [Agent Development Templates](https://cursor.sh/features) | [Extensions](https://cursor.sh/docs)
 - **[GitHub Copilot](https://github.com/features/copilot)** - AI coding assistant with agent pattern support
   - [Agent Development Guide](https://docs.github.com/en/copilot) | [Workspace Setup](https://docs.github.com/en/copilot/configuring-github-copilot/configuring-github-copilot-in-your-environment)
-- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with collaborative agent features (2024)
+- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with collaborative agent features (2025)
   - [Features](https://codeium.com/windsurf/features) | [Documentation](https://codeium.com/windsurf/docs)
-- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for generating UI components (2024)
+- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for generating UI components (2025)
   - [Examples](https://v0.dev/examples) | [Documentation](https://v0.dev/docs)
-- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development agent (2024)
+- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development agent (2025)
   - [Features](https://bolt.new/features) | [Templates](https://bolt.new/templates)
-- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant (2024)
+- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant (2025)
   - [GitHub](https://github.com/continuedev/continue) | [Documentation](https://docs.continue.dev/)
-- **[Aider](https://aider.chat/)** - AI coding assistant for terminal workflows (2024)
+- **[Aider](https://aider.chat/)** - AI coding assistant for terminal workflows (2025)
   - [GitHub](https://github.com/paul-gauthier/aider) | [Documentation](https://aider.chat/docs/)
 
 ### Testing and Validation
@@ -41,11 +41,11 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
   - [Documentation](https://docs.ragas.io/) | [Examples](https://github.com/explodinggradients/ragas/tree/main/docs/howtos)
 - **[TruLens](https://www.trulens.org/)** - Evaluation and tracking for neural nets
   - [GitHub](https://github.com/truera/trulens) | [Documentation](https://trulens.org/trulens_eval/getting_started/)
-- **[AgentOps](https://www.agentops.ai/)** - Observability and analytics platform for AI agents (2024)
+- **[AgentOps](https://www.agentops.ai/)** - Observability and analytics platform for AI agents (2025)
   - [GitHub](https://github.com/AgentOps-AI/agentops) | [Documentation](https://docs.agentops.ai/)
-- **[LangTest](https://github.com/JohnSnowLabs/langtest)** - Comprehensive testing suite for LLM applications (2024)
+- **[LangTest](https://github.com/JohnSnowLabs/langtest)** - Comprehensive testing suite for LLM applications (2025)
   - [Documentation](https://langtest.org/) | [Examples](https://github.com/JohnSnowLabs/langtest/tree/main/examples)
-- **[OpenAI Evals](https://github.com/openai/evals)** - Framework for evaluating AI systems (2024 updates)
+- **[OpenAI Evals](https://github.com/openai/evals)** - Framework for evaluating AI systems (2025 updates)
   - [Documentation](https://github.com/openai/evals/blob/main/docs/eval-templates.md) | [Registry](https://github.com/openai/evals/tree/main/evals/registry)
 
 ### Agent Debugging & Visualization
@@ -57,18 +57,18 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
   - [GitHub](https://github.com/gradio-app/gradio) | [Agent Examples](https://gradio.app/guides/creating-a-chatbot-fast/)
 - **[Panel](https://panel.holoviz.org/)** - Create dashboards and apps for agent monitoring
   - [GitHub](https://github.com/holoviz/panel) | [ChatBot Tutorial](https://panel.holoviz.org/tutorials/basic/pn.chat.html)
-- **[Chainlit](https://chainlit.io/)** - Build conversational AI interfaces (2024)
+- **[Chainlit](https://chainlit.io/)** - Build conversational AI interfaces (2025)
   - [GitHub](https://github.com/Chainlit/chainlit) | [Documentation](https://docs.chainlit.io/)
-- **[LangWatch](https://langwatch.ai/)** - LLM monitoring and analytics platform (2024)
+- **[LangWatch](https://langwatch.ai/)** - LLM monitoring and analytics platform (2025)
   - [GitHub](https://github.com/langwatch/langwatch) | [Documentation](https://docs.langwatch.ai/)
-- **[Humanloop](https://humanloop.com/)** - LLM application development platform (2024)
+- **[Humanloop](https://humanloop.com/)** - LLM application development platform (2025)
   - [Documentation](https://humanloop.com/docs) | [Examples](https://humanloop.com/examples)
 
 ## 🔧 CLI Tools
 
 ### Agent Development CLIs
 ```bash
-# LangChain CLI (Enhanced 2024)
+# LangChain CLI (Enhanced 2025)
 pip install langchain-cli
 langchain serve  # Serve LangChain apps
 langchain new my-agent  # Create new project with LangGraph templates

@@ -13,7 +13,7 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Language Models as Zero-Shot Planners](https://arxiv.org/abs/2201.07207) - Planning capabilities in LLMs
 - [Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) - Self-improving AI safety methods
 
-### Recent 2024 Papers
+### Recent 2025 Papers
 - **[OpenAI o1: Learning to Reason with LLMs](https://openai.com/index/learning-to-reason-with-llms/)** - Advanced reasoning capabilities in large language models
 - **[Anthropic's Claude 3.5 Sonnet and Computer Use](https://www.anthropic.com/news/3-5-models-and-computer-use)** - Desktop automation and computer interaction capabilities
 - **[Google Gemini 2.0 Flash: Next-Gen Multimodal AI](https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/)** - Advanced multimodal reasoning and agent capabilities
@@ -63,7 +63,7 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Prompt Engineering for Agents](cheat-sheets/prompt-engineering.md)
 - [Tool Integration Guide](cheat-sheets/tool-integration.md)
 - [Multi-Agent Communication Protocols](cheat-sheets/communication-protocols.md)
-- [2024 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2024.md) ⭐ **New**
+- [2025 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2025.md) ⭐ **New**
 - [Enterprise Deployment Guide 2024](cheat-sheets/enterprise-deployment-2024.md) ⭐ **New**
 
 ## 🗺️ Learning Roadmaps
@@ -503,16 +503,16 @@ Cutting-edge research and production systems (8-12 weeks)
 
 ## 🌍 International Communities & Events
 
-### 2024/2025 Major Conferences
-- **[NeurIPS 2024](https://neurips.cc/)** - Premier ML conference (December 2024, Vancouver)
+### 2025/2026 Major Conferences
+- **[NeurIPS 2025](https://neurips.cc/)** - Premier ML conference (December 2025, Vancouver)
 - **[ICML 2025](https://icml.cc/)** - International Conference on Machine Learning (July 2025, Vienna)
 - **[ICLR 2025](https://iclr.cc/)** - International Conference on Learning Representations (May 2025, Singapore)
 - **[AAAI 2025](https://aaai.org/Conferences/AAAI/)** - Association for the Advancement of AI (February 2025, Philadelphia)
 - **[IJCAI 2025](https://www.ijcai.org/)** - International Joint Conference on AI (August 2025, Montreal)
 - **[AAMAS 2025](https://www.aamas2025.org/)** - Autonomous Agents and Multi-Agent Systems (May 2025, Detroit)
 
-### Agent-Specific Events (2024/2025)
-- **[Agent AI Summit 2024](https://agentaisummit.com/)** - Dedicated agent AI conference (December 2024)
+### Agent-Specific Events (2025/2026)
+- **[Agent AI Summit 2025](https://agentaisummit.com/)** - Dedicated agent AI conference (December 2025)
 - **[LangChain AI Conference](https://langchain.com/conference)** - Annual LangChain community event (2025)
 - **[AutoGen Symposium](https://microsoft.github.io/autogen/events/)** - Microsoft's multi-agent event (Q1 2025)
 - **[CrewAI DevCon](https://crewai.com/devcon)** - Role-based agent development (Q2 2025)
