@@ -82,7 +82,7 @@ print(report)
 ```
 Research Topic: "Transformer Architecture Evolution"
 Papers Analyzed: 47
-Time Period: 2017-2024
+Time Period: 2017-2025
 
 Key Findings:
 1. Attention mechanisms evolved from basic to multi-head attention
@@ -123,7 +123,7 @@ Key Methodologies:
 # Comprehensive literature review
 agent.conduct_literature_review(
     topic="reinforcement learning for robotics",
-    years=(2020, 2024),
+    years=(2020, 2025),
     max_papers=100,
     include_citations=True
 )
@@ -167,7 +167,7 @@ curriculum = agent.research_for_curriculum(
 config = {
     "search_engines": ["arxiv", "semantic_scholar", "google_scholar"],
     "max_papers_per_query": 50,
-    "date_range": {"start": "2020-01-01", "end": "2024-12-31"},
+    "date_range": {"start": "2020-01-01", "end": "2025-12-31"},
     "quality_threshold": 0.7,
     "language": "en"
 }

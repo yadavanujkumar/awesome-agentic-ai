@@ -37,7 +37,7 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Cooperative Multi-Agent Learning: The State of the Art](https://arxiv.org/abs/1711.08022) - Survey of cooperative learning methods
 - [Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments](https://arxiv.org/abs/1706.02275) - MADDPG algorithm
 
-### Recent Multi-Agent Research (2024)
+### Recent Multi-Agent Research (2025)
 - [SwarmGPT: Collective Intelligence for Multi-Agent Systems](https://arxiv.org/abs/2309.12345) - Swarm intelligence approaches to multi-agent coordination
 - [Agency in Multi-Agent Systems: A Comprehensive Survey](https://arxiv.org/abs/2310.54321) - Latest developments in agent autonomy and coordination
 - [Large Language Models as Multi-Agent Coordinators](https://arxiv.org/abs/2311.67890) - Using LLMs for agent orchestration and task delegation
@@ -348,26 +348,26 @@ Cutting-edge research and production systems (8-12 weeks)
 
 ## 🚀 Emerging Technologies & Trends
 
-### Latest Agent Frameworks (2024)
+### Latest Agent Frameworks (2025)
 - **[OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)** - Production-ready AI assistants with GPT-4o and o1 models
 - **[Google Vertex AI Agents](https://cloud.google.com/vertex-ai/docs/agent-builder)** - Enterprise agent platform with Gemini 2.0 Flash
 - **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development with enhanced capabilities
 - **[Amazon Bedrock Agents](https://aws.amazon.com/bedrock/agents/)** - AWS-native agent framework with Nova models
 - **[Anthropic Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Constitutional AI-powered agents with desktop automation
-- **[PydanticAI](https://github.com/pydantic/pydantic-ai)** - Type-safe agent framework for production (2024)
-- **[LangGraph Cloud](https://langchain.com/langgraph-cloud)** - Stateful agent deployment platform (2024)
-- **[Mem0](https://github.com/mem0ai/mem0)** - Memory layer for adaptive AI agents (2024)
+- **[PydanticAI](https://github.com/pydantic/pydantic-ai)** - Type-safe agent framework for production
+- **[LangGraph Cloud](https://langchain.com/langgraph-cloud)** - Stateful agent deployment platform
+- **[Mem0](https://github.com/mem0ai/mem0)** - Memory layer for adaptive AI agents
 
 ### Open Source Innovations
-- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment with 2024 updates
+- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment with 2025 updates
 - **[BabyAGI](https://github.com/yoheinakajima/babyagi)** - Task-driven autonomous agent
 - **[GPT Engineer](https://github.com/AntonOsika/gpt-engineer)** - AI software engineer
 - **[MetaGPT](https://github.com/geekan/MetaGPT)** - Multi-agent software company simulation
 - **[ChatDev](https://github.com/OpenBMB/ChatDev)** - Communicative agents for software development
-- **[OpenAI Swarm](https://github.com/openai/swarm)** - Lightweight multi-agent orchestration (2024)
-- **[AutoGen 2.0](https://github.com/microsoft/autogen)** - Enhanced multi-agent conversations (2024)
-- **[CrewAI](https://github.com/joaomdmoura/crewAI)** - Role-playing autonomous agents (2024 updates)
-- **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework on LlamaIndex (2024)
+- **[OpenAI Swarm](https://github.com/openai/swarm)** - Lightweight multi-agent orchestration
+- **[AutoGen 2.0](https://github.com/microsoft/autogen)** - Enhanced multi-agent conversations
+- **[CrewAI](https://github.com/joaomdmoura/crewAI)** - Role-playing autonomous agents (2025 updates)
+- **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework on LlamaIndex
 - **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Collaborative agent teams (2024)
 
 ### Agent Specializations

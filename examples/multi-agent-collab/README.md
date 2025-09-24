@@ -227,7 +227,7 @@ task = {
     "type": "academic_research",
     "description": "Analyze trends in federated learning research",
     "scope": [
-        "Papers from 2020-2024",
+        "Papers from 2020-2025",
         "Top-tier venues (NeurIPS, ICML, ICLR)",
         "Citation network analysis",
         "Methodology evolution",
