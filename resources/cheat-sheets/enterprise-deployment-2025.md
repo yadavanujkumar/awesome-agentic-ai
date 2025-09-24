@@ -568,4 +568,4 @@ class MultiTenantAgentService:
         )
 ```
 
-This guide provides comprehensive patterns for deploying AI agents in enterprise environments with security, compliance, monitoring, and scalability considerations for 2024.
+This guide provides comprehensive patterns for deploying AI agents in enterprise environments with security, compliance, monitoring, and scalability considerations for 2025.

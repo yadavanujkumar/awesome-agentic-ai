@@ -175,7 +175,7 @@ Your complete path to mastering Agentic AI systems, from first concepts to produ
 **Goal**: Understand and implement latest research developments
 
 - **Research Areas**
-  - [ ] Latest 2024 papers in agentic AI and multi-agent systems
+  - [ ] Latest 2025 papers in agentic AI and multi-agent systems
   - [ ] Computer use and desktop automation (Claude, GPT-4V)
   - [ ] Constitutional AI and safety alignment
   - [ ] Emergent capabilities and behaviors in multi-agent systems

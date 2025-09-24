@@ -21,7 +21,7 @@ By the end of this roadmap, you will:
 - **Latest Papers** (10-12 hours)
   - Study: [Constitutional AI](https://arxiv.org/abs/2212.08073) and safety research
   - Analyze: [Cognitive Architectures for Language Agents](https://arxiv.org/abs/2309.02427)
-  - Implement: Novel architectures from NeurIPS/ICML 2024
+  - Implement: Novel architectures from NeurIPS/ICML 2025
   - Follow: Leading researchers on Twitter/LinkedIn
 
 - **Advanced Reasoning** (8-10 hours)
@@ -159,10 +159,10 @@ By the end of this roadmap, you will:
 - [Microsoft Research AI](https://www.microsoft.com/en-us/research/research-area/artificial-intelligence/)
 
 ### Conference Proceedings
-- [NeurIPS 2024 Agent Papers](https://neurips.cc/)
-- [ICML 2024 Multi-Agent Track](https://icml.cc/)
-- [ICLR 2024 Agent Architectures](https://iclr.cc/)
-- [AAMAS 2024 Proceedings](https://aamas2024-conference.auckland.ac.nz/)
+- [NeurIPS 2025 Agent Papers](https://neurips.cc/)
+- [ICML 2025 Multi-Agent Track](https://icml.cc/)
+- [ICLR 2025 Agent Architectures](https://iclr.cc/)
+- [AAMAS 2025 Proceedings](https://aamas2025-conference.auckland.ac.nz/)
 
 ### Industry Leaders
 - Follow: Yann LeCun, Andrej Karpathy, Chelsea Finn, Pieter Abbeel
