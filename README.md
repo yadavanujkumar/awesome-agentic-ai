@@ -97,7 +97,7 @@ Week 9-12: Innovation
 ### 🌟 **Emerging Technologies**
 
 - **[OpenAI Swarm](https://github.com/openai/swarm)** - OpenAI's experimental multi-agent orchestration framework
-- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment for goal-driven tasks (2024 updates)
+- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment for goal-driven tasks (2025 updates)
 - **[MetaGPT](https://github.com/geekan/MetaGPT)** - Multi-agent software company simulation
 - **[ChatDev](https://github.com/OpenBMB/ChatDev)** - Communicative agents for software development
 - **[DSPy](https://github.com/stanfordnlp/dspy)** - Programming framework for optimizing LM-based systems
@@ -105,12 +105,12 @@ Week 9-12: Innovation
 - **[Instructor](https://github.com/jxnl/instructor)** - Structured outputs from LLMs using Python type annotations
 - **[Phidata](https://github.com/phidatahq/phidata)** - Framework for building AI agents with memory and tools
 - **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Create collaborative AI agent teams with specialized roles
-- **[LangGraph Cloud](https://langchain.com/langgraph-cloud)** - Production deployment platform for stateful agents (2024)
-- **[Agen-C](https://github.com/agencc/agen-c)** - High-performance agent framework written in C++ (2024)
+- **[LangGraph Cloud](https://langchain.com/langgraph-cloud)** - Production deployment platform for stateful agents (2025)
+- **[Agen-C](https://github.com/agencc/agen-c)** - High-performance agent framework written in C++ (2025)
 - **[AutoGen 2.0](https://microsoft.github.io/autogen/)** - Next-generation multi-agent framework with improved orchestration
-- **[CrewAI Enterprise](https://crewai.com/enterprise)** - Enterprise-grade multi-agent platform (2024)
-- **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework built on LlamaIndex (2024)
-- **[Mem0](https://github.com/mem0ai/mem0)** - Memory layer for AI agents with adaptive learning (2024)
+- **[CrewAI Enterprise](https://crewai.com/enterprise)** - Enterprise-grade multi-agent platform (2025)
+- **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework built on LlamaIndex (2025)
+- **[Mem0](https://github.com/mem0ai/mem0)** - Memory layer for AI agents with adaptive learning (2025)
 
 ### 🏢 **Enterprise Platforms**
 
@@ -121,11 +121,11 @@ Week 9-12: Innovation
 - **[Anthropic Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Claude's computer automation capabilities
 - **[GitHub Models](https://github.com/marketplace/models)** - GitHub's AI model platform with agent capabilities
 - **[Azure OpenAI Service](https://docs.microsoft.com/en-us/azure/ai-services/openai/)** - Enterprise-grade OpenAI models in Azure
-- **[Hugging Face Agents](https://huggingface.co/docs/transformers/transformers_agents)** - Open-source agent framework with local and cloud models (2024)
-- **[Cohere Command R+](https://cohere.com/command)** - Enterprise RAG and agent capabilities (2024)
-- **[Databricks Mosaic AI](https://www.databricks.com/product/machine-learning/mosaic-ai)** - Enterprise AI agent platform (2024)
-- **[Scale AI Agent Studio](https://scale.com/ai-agent-studio)** - Enterprise agent development and deployment (2024)
-- **[Together AI Agents](https://www.together.ai/products/agents)** - Open-source model powered agent platform (2024)
+- **[Hugging Face Agents](https://huggingface.co/docs/transformers/transformers_agents)** - Open-source agent framework with local and cloud models (2025)
+- **[Cohere Command R+](https://cohere.com/command)** - Enterprise RAG and agent capabilities (2025)
+- **[Databricks Mosaic AI](https://www.databricks.com/product/machine-learning/mosaic-ai)** - Enterprise AI agent platform (2025)
+- **[Scale AI Agent Studio](https://scale.com/ai-agent-studio)** - Enterprise agent development and deployment (2025)
+- **[Together AI Agents](https://www.together.ai/products/agents)** - Open-source model powered agent platform (2025)
 
 **[Explore All 25+ Frameworks →](./frameworks/README.md)**
 
@@ -258,13 +258,13 @@ result = agent.run("What is 25 * 4 + 10?")
 - [HuggingGPT: Solving AI Tasks with ChatGPT and its Friends](https://arxiv.org/abs/2303.17580)
 - [MetaGPT: Meta Programming for Multi-Agent Collaborative Framework](https://arxiv.org/abs/2308.00352)
 - [AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation](https://arxiv.org/abs/2308.08155)
-- [AgentBench: Evaluating LLMs as Agents](https://arxiv.org/abs/2308.03688) - 2024 agent evaluation framework
-- [The Rise and Potential of Large Language Model Based Agents](https://arxiv.org/abs/2309.07864) - Comprehensive 2024 survey
-- [OpenAI o1 System Card](https://openai.com/index/learning-to-reason-with-llms/) - Advanced reasoning in AI agents (2024)
-- [Anthropic Claude 3.5 Sonnet and Computer Use](https://www.anthropic.com/news/3-5-models-and-computer-use) - Desktop automation (2024)
-- [Google Gemini 2.0 Flash: Advanced Agentic AI](https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/) - Latest multimodal agent capabilities (2024)
-- [Amazon Nova Models for Agents](https://aws.amazon.com/ai/generative-ai/nova/) - Multimodal foundation models (2024)
-- [Microsoft Phi-4 for Agentic Reasoning](https://azure.microsoft.com/en-us/blog/introducing-phi-4/) - Small language models for agents (2024)
+- [AgentBench: Evaluating LLMs as Agents](https://arxiv.org/abs/2308.03688) - 2025 agent evaluation framework
+- [The Rise and Potential of Large Language Model Based Agents](https://arxiv.org/abs/2309.07864) - Comprehensive 2025 survey
+- [OpenAI o1 System Card](https://openai.com/index/learning-to-reason-with-llms/) - Advanced reasoning in AI agents (2025)
+- [Anthropic Claude 3.5 Sonnet and Computer Use](https://www.anthropic.com/news/3-5-models-and-computer-use) - Desktop automation (2025)
+- [Google Gemini 2.0 Flash: Advanced Agentic AI](https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/) - Latest multimodal agent capabilities (2025)
+- [Amazon Nova Models for Agents](https://aws.amazon.com/ai/generative-ai/nova/) - Multimodal foundation models (2025)
+- [Microsoft Phi-4 for Agentic Reasoning](https://azure.microsoft.com/en-us/blog/introducing-phi-4/) - Small language models for agents (2025)
 - **[100+ More Papers →](./resources/README.md#📚-academic-papers)**
 
 ### 🎥 **Video Tutorials & Channels**
@@ -283,38 +283,38 @@ result = agent.run("What is 25 * 4 + 10?")
 - **[15+ More Books with Links →](./resources/README.md#📖-recommended-books)**
 
 ### 🎓 **Courses & Certifications**
-- **[DeepLearning.AI AI Agentic Workflows Specialization](https://www.coursera.org/specializations/ai-agentic-workflows)** - New 2024 specialization focused on agentic AI
+- **[DeepLearning.AI AI Agentic Workflows Specialization](https://www.coursera.org/specializations/ai-agentic-workflows)** - New 2025 specialization focused on agentic AI
 - **[LangChain Academy](https://academy.langchain.com/)** - Official LangChain certification program
 - **[Stanford CS224N: NLP with Deep Learning](https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ)** - Advanced NLP concepts
 - **[Berkeley CS285: Deep RL](https://www.youtube.com/playlist?list=PL_iWQOsE6TfXxKgI1GgyV1B_Xa0DxE5eH)** - Reinforcement learning for agents
 - **[OpenAI API Certification](https://platform.openai.com/docs/overview)** - New certification for GPT-4o and o1 models
 - **[AWS ML Specialty](https://aws.amazon.com/certification/certified-machine-learning-specialty/)** - Updated with Bedrock Agents and Nova models
 - **[Anthropic Claude Developer Certification](https://www.anthropic.com/claude)** - Constitutional AI and Computer Use
-- **[Google Cloud AI Agent Builder Certification](https://cloud.google.com/certification)** - Vertex AI agents and Gemini 2.0 (2024)
-- **[Microsoft Azure AI Fundamentals](https://learn.microsoft.com/en-us/certifications/azure-ai-fundamentals/)** - Updated with Copilot Studio (2024)
-- **[Hugging Face Agent Development Course](https://huggingface.co/learn)** - Open-source agent development (2024)
-- **[CrewAI Certification Program](https://crewai.com/certification)** - Multi-agent system design (2024)
-- **[AutoGen Professional Certification](https://microsoft.github.io/autogen/docs/ecosystem/certification)** - Microsoft's multi-agent framework (2024)
+- **[Google Cloud AI Agent Builder Certification](https://cloud.google.com/certification)** - Vertex AI agents and Gemini 2.0 (2025)
+- **[Microsoft Azure AI Fundamentals](https://learn.microsoft.com/en-us/certifications/azure-ai-fundamentals/)** - Updated with Copilot Studio (2025)
+- **[Hugging Face Agent Development Course](https://huggingface.co/learn)** - Open-source agent development (2025)
+- **[CrewAI Certification Program](https://crewai.com/certification)** - Multi-agent system design (2025)
+- **[AutoGen Professional Certification](https://microsoft.github.io/autogen/docs/ecosystem/certification)** - Microsoft's multi-agent framework (2025)
 - **[25+ More Courses →](./resources/README.md#🎓-certification-programs--learning-paths)**
 
 ### 🛠️ **Development Tools & Platforms**
-- **[LangSmith](https://smith.langchain.com/)** - Debug and monitor LangChain applications with 2024 updates
+- **[LangSmith](https://smith.langchain.com/)** - Debug and monitor LangChain applications with 2025 updates
 - **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building stateful agents
 - **[AutoGen Studio](https://autogen-studio.com/)** - Updated visual multi-agent interface
 - **[Weights & Biases](https://wandb.ai/)** - Enhanced experiment tracking for AI agents
-- **[Streamlit](https://streamlit.io/)** - Build interactive agent demos with 2024 features
+- **[Streamlit](https://streamlit.io/)** - Build interactive agent demos with 2025 features
 - **[Cursor](https://cursor.sh/)** - AI-first code editor with agent integration
 - **[GitHub Copilot](https://github.com/features/copilot)** - Enhanced AI coding assistant
 - **[Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Desktop automation capabilities
 - **[Replit Agent](https://replit.com/ai)** - AI agent for code development
-- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for UI generation (2024)
-- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development (2024)
-- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with agent capabilities (2024)
-- **[Aider](https://aider.chat/)** - AI coding assistant for terminal workflows (2024)
-- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant (2024)
-- **[LangFuse](https://langfuse.com/)** - Open-source LLM observability platform (2024)
-- **[Helicone](https://www.helicone.ai/)** - LLM observability and monitoring (2024)
-- **[Phoenix Arize](https://phoenix.arize.com/)** - AI observability and evaluation (2024)
+- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for UI generation (2025)
+- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development (2025)
+- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with agent capabilities (2025)
+- **[Aider](https://aider.chat/)** - AI coding assistant for terminal workflows (2025)
+- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant (2025)
+- **[LangFuse](https://langfuse.com/)** - Open-source LLM observability platform (2025)
+- **[Helicone](https://www.helicone.ai/)** - LLM observability and monitoring (2025)
+- **[Phoenix Arize](https://phoenix.arize.com/)** - AI observability and evaluation (2025)
 - **[80+ Tools & Integrations →](./tools/README.md)**
 
 ### 🎙️ **Podcasts & Audio Content**
@@ -385,7 +385,7 @@ It helps others discover this resource and motivates us to keep improving it.
 - **[🏆 Competitions](./resources/README.md#🏆-competitions-and-challenges)** - Active challenges and events
 - **[🔧 Development Tools](./tools/README.md#🛠️-development-tools)** - Debugging, monitoring, deployment
 - **[🎙️ Podcasts](./resources/README.md#🎙️-podcasts--audio-content)** - AI audio content and discussions
-- **[🚀 2024 Agent Patterns](./examples/agent-patterns-2024/)** - Latest implementation patterns and frameworks
+- **[🚀 2025 Agent Patterns](./examples/agent-patterns-2025/)** - Latest implementation patterns and frameworks
 
 ### 📈 Repository Stats
 - **🌟 30+ Frameworks** covered with comprehensive guides

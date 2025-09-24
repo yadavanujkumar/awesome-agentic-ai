@@ -1,6 +1,6 @@
-# 2024 Agent Patterns Example
+# 2025 Agent Patterns Example
 
-This example demonstrates the latest AI agent patterns and architectures introduced in 2024, including type-safe agents, computer use, adaptive memory, and enterprise deployment patterns.
+This example demonstrates the latest AI agent patterns and architectures introduced in 2025, including type-safe agents, computer use, adaptive memory, and enterprise deployment patterns.
 
 ## 🌟 Features
 
@@ -27,7 +27,7 @@ This example demonstrates the latest AI agent patterns and architectures introdu
 ### Prerequisites
 
 ```bash
-# Install 2024 agent frameworks
+# Install 2025 agent frameworks
 pip install pydantic-ai>=1.0.0
 pip install mem0ai>=1.0.0
 pip install anthropic>=0.40.0
@@ -225,4 +225,4 @@ This example is part of the Awesome Agentic AI repository and is licensed under 
 
 ---
 
-**Ready to explore the future of AI agents?** This example showcases cutting-edge patterns that will define agent development in 2024 and beyond.
+**Ready to explore the future of AI agents?** This example showcases cutting-edge patterns that will define agent development in 2025 and beyond.

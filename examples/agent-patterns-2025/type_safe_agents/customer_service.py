@@ -1,6 +1,6 @@
 """
 Type-Safe Customer Service Agent using PydanticAI
-Demonstrates 2024 patterns for production-ready agents
+Demonstrates 2025 patterns for production-ready agents
 """
 
 from pydantic_ai import Agent

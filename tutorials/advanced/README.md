@@ -152,7 +152,7 @@ Conduct original research that advances the field of agentic AI:
 
 Stay ahead of the curve by exploring:
 
-### 2024-2025 Research Frontiers
+### 2025-2026 Research Frontiers
 - **Multimodal Agent Architectures**: Vision + Language + Action
 - **Quantum-Classical Hybrid Agents**: Leveraging quantum computing
 - **Biological-Inspired Agents**: Learning from neuroscience and biology
