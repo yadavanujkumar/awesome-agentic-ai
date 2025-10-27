@@ -135,7 +135,7 @@ Week 9-12: Innovation
 - **[DeepSeek API](https://www.deepseek.com/)** - Cost-effective agent platform with DeepSeek-V3 (2025)
 - **[Perplexity Pro Search API](https://docs.perplexity.ai/)** - Search-powered agent capabilities (2025)
 
-**[Explore All 25+ Frameworks →](./frameworks/README.md)**
+**[Explore All 35+ Frameworks →](./frameworks/README.md)**
 
 ---
 
@@ -215,34 +215,54 @@ This script creates a complete development environment with all frameworks, exam
 ### 1. **Choose Your Framework**
 ```bash
 # For beginners - start with LangChain
-pip install langchain langchain-community langchain-openai
+pip install langchain langchain-community langchain-openai langgraph
 
 # For multi-agent systems - try AutoGen  
-pip install autogen-agentchat
+pip install autogen-agentchat autogen-ext
 
 # For role-based agents - use CrewAI
-pip install crewai
+pip install crewai crewai-tools
 
 # For data-heavy applications - use LlamaIndex
-pip install llamaindex
+pip install llama-index llama-index-core
+
+# For type-safe agents - try PydanticAI
+pip install pydantic-ai
+
+# For lightweight agents - use Smolagents
+pip install smolagents
 ```
 
 ### 2. **Build Your First Agent**
 ```python
-# Simple LangChain agent example
-from langchain.agents import initialize_agent, Tool
-from langchain.llms import OpenAI
+# Modern LangChain + LangGraph agent example
+from langchain_openai import ChatOpenAI
+from langgraph.prebuilt import create_react_agent
+from langchain_core.tools import tool
 
-# Define tools your agent can use
-tools = [
-    Tool(name="Calculator", func=lambda x: eval(x), 
-         description="Useful for math calculations")
-]
+@tool
+def calculator(expression: str) -> str:
+    """Evaluate a mathematical expression."""
+    try:
+        return str(eval(expression))
+    except Exception as e:
+        return f"Error: {str(e)}"
 
 # Create and run agent
-llm = OpenAI(temperature=0)
-agent = initialize_agent(tools, llm, agent="zero-shot-react-description")
-result = agent.run("What is 25 * 4 + 10?")
+llm = ChatOpenAI(model="gpt-4o", temperature=0)
+agent = create_react_agent(llm, [calculator])
+result = agent.invoke({"messages": [("user", "What is 25 * 4 + 10?")]})
+```
+
+**Alternative: PydanticAI (Type-Safe)**
+```python
+from pydantic_ai import Agent
+
+# Type-safe agent with structured outputs
+agent = Agent('openai:gpt-4o', system_prompt='You are a helpful math assistant.')
+result = agent.run_sync('What is 25 * 4 + 10?')
+print(result.data)
+```
 ```
 
 ### 3. **Explore Examples**
@@ -406,14 +426,15 @@ It helps others discover this resource and motivates us to keep improving it.
 - **[🚀 2025 Agent Patterns](./examples/agent-patterns-2025/)** - Latest implementation patterns and frameworks
 
 ### 📈 Repository Stats
-- **🌟 30+ Frameworks** covered with comprehensive guides
-- **📚 100+ Academic Papers** with direct links and summaries  
+- **🌟 35+ Frameworks** covered with comprehensive guides
+- **📚 120+ Academic Papers** with direct links and summaries  
 - **🎥 150+ Video Resources** including tutorials and courses
 - **📖 25+ Books** with purchase links and descriptions
-- **🛠️ 80+ Tools** for development, monitoring, and deployment
+- **🛠️ 90+ Tools** for development, monitoring, and deployment
 - **📋 6 Comprehensive Cheat Sheets** covering all aspects of agent development
 - **🏆 15+ Competitions** and active challenges
 - **🌍 50+ Communities** and international events
+- **🆕 Latest 2025 Updates** - o1-pro, Gemini 2.5, DeepSeek-V3, Grok-3, and more
 
 ### 🤝 Community Contributions Welcome
 We're actively looking for contributions in:
