@@ -242,9 +242,30 @@ from langchain_core.tools import tool
 
 @tool
 def calculator(expression: str) -> str:
-    """Evaluate a mathematical expression."""
+    """Evaluate a mathematical expression safely."""
     try:
-        return str(eval(expression))
+        # Use ast.literal_eval for safer evaluation
+        # Only allow basic arithmetic operations
+        import ast
+        import operator
+        
+        ops = {
+            ast.Add: operator.add,
+            ast.Sub: operator.sub,
+            ast.Mult: operator.mul,
+            ast.Div: operator.truediv,
+        }
+        
+        def eval_expr(node):
+            if isinstance(node, ast.Num):
+                return node.n
+            elif isinstance(node, ast.BinOp):
+                return ops[type(node.op)](eval_expr(node.left), eval_expr(node.right))
+            else:
+                raise ValueError(f"Unsupported operation: {node}")
+        
+        node = ast.parse(expression, mode='eval')
+        return str(eval_expr(node.body))
     except Exception as e:
         return f"Error: {str(e)}"
 
@@ -262,7 +283,6 @@ from pydantic_ai import Agent
 agent = Agent('openai:gpt-4o', system_prompt='You are a helpful math assistant.')
 result = agent.run_sync('What is 25 * 4 + 10?')
 print(result.data)
-```
 ```
 
 ### 3. **Explore Examples**
