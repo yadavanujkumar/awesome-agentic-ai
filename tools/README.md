@@ -5,32 +5,40 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
 ## 🛠️ Development Tools
 
 ### Agent Development Utilities
-- **[LangSmith](https://smith.langchain.com/)** - Debug, test, and monitor LangChain applications (2025 enhanced)
+- **[LangSmith](https://smith.langchain.com/)** - Debug, test, and monitor LangChain applications with production tracing
   - [Documentation](https://docs.smith.langchain.com/) | [Python SDK](https://github.com/langchain-ai/langsmith-sdk)
-- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging stateful agent workflows
+- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging stateful agent workflows (2025)
   - [Documentation](https://langchain-ai.github.io/langgraph/tutorials/langgraph-studio/) | [Download](https://studio.langchain.com/)
-- **[AutoGen Studio](https://autogen-studio.com/)** - Visual interface for building multi-agent conversations
+- **[AutoGen Studio 2.0](https://autogen-studio.com/)** - Next-gen visual interface for multi-agent conversations (2025)
   - [GitHub](https://github.com/microsoft/autogen/tree/main/samples/apps/autogen-studio) | [Documentation](https://microsoft.github.io/autogen/docs/autogen-studio/getting-started)
-- **[Weights & Biases](https://wandb.ai/)** - Enhanced experiment tracking and monitoring for AI agents
+- **[Weights & Biases](https://wandb.ai/)** - Enhanced experiment tracking and monitoring for AI agents (v0.17+)
   - [Agent Monitoring Guide](https://docs.wandb.ai/guides/integrations/langchain) | [Multi-Agent Tracking](https://docs.wandb.ai/guides/track/log)
-- **[LangFuse](https://langfuse.com/)** - Open-source observability & analytics for LLM applications
+- **[LangFuse](https://langfuse.com/)** - Open-source observability & analytics for LLM applications (v3.0+)
   - [GitHub](https://github.com/langfuse/langfuse) | [Documentation](https://langfuse.com/docs)
-- **[Helicone](https://www.helicone.ai/)** - Observability platform for LLM applications with agent support
+- **[Helicone](https://www.helicone.ai/)** - Observability platform for LLM applications with cost tracking (2025)
   - [GitHub](https://github.com/Helicone/helicone) | [Documentation](https://docs.helicone.ai/)
-- **[Cursor](https://cursor.sh/)** - AI-first code editor with agent development features
+- **[Cursor](https://cursor.sh/)** - AI-first code editor with advanced agent integration (v0.42+)
   - [Agent Development Templates](https://cursor.sh/features) | [Extensions](https://cursor.sh/docs)
-- **[GitHub Copilot](https://github.com/features/copilot)** - AI coding assistant with agent pattern support
+- **[GitHub Copilot](https://github.com/features/copilot)** - Multi-model AI coding assistant with workspace context (2025)
   - [Agent Development Guide](https://docs.github.com/en/copilot) | [Workspace Setup](https://docs.github.com/en/copilot/configuring-github-copilot/configuring-github-copilot-in-your-environment)
-- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with collaborative agent features (2025)
+- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with cascade mode and agentic flows (2025)
   - [Features](https://codeium.com/windsurf/features) | [Documentation](https://codeium.com/windsurf/docs)
-- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for generating UI components (2025)
+- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for generating UI components and applications (2025)
   - [Examples](https://v0.dev/examples) | [Documentation](https://v0.dev/docs)
-- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development agent (2025)
+- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development agent by StackBlitz (2025)
   - [Features](https://bolt.new/features) | [Templates](https://bolt.new/templates)
-- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant (2025)
+- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant with custom model support (2025)
   - [GitHub](https://github.com/continuedev/continue) | [Documentation](https://docs.continue.dev/)
-- **[Aider](https://aider.chat/)** - AI coding assistant for terminal workflows (2025)
+- **[Aider](https://aider.chat/)** - AI pair programming in terminal with repository awareness (v0.55+)
   - [GitHub](https://github.com/paul-gauthier/aider) | [Documentation](https://aider.chat/docs/)
+- **[Replit Agent](https://replit.com/ai)** - AI agent for complete application development in browser (2025)
+  - [Features](https://replit.com/ai) | [Documentation](https://docs.replit.com/ai)
+- **[Braintrust](https://www.braintrustdata.com/)** - AI product development platform with evals and logging (2025)
+  - [GitHub](https://github.com/braintrustdata/braintrust) | [Documentation](https://www.braintrustdata.com/docs)
+- **[Agenta](https://agenta.ai/)** - Open-source LLM development platform with prompt management (2025)
+  - [GitHub](https://github.com/Agenta-AI/agenta) | [Documentation](https://docs.agenta.ai/)
+- **[PromptLayer](https://promptlayer.com/)** - Prompt engineering and management platform (2025)
+  - [GitHub](https://github.com/MagnivOrg/prompt-layer-library) | [Documentation](https://docs.promptlayer.com/)
 
 ### Testing and Validation
 - **[PromptFoo](https://www.promptfoo.dev/)** - Test and evaluate LLM outputs systematically

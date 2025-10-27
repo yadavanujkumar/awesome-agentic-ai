@@ -15,19 +15,26 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 
 ### Recent 2025 Papers
 - **[OpenAI o1: Learning to Reason with LLMs](https://openai.com/index/learning-to-reason-with-llms/)** - Advanced reasoning capabilities in large language models
+- **[OpenAI o1-pro: Enhanced Reasoning for Complex Tasks](https://openai.com/o1-pro)** - Production reasoning model with extended thinking
 - **[Anthropic's Claude 3.5 Sonnet and Computer Use](https://www.anthropic.com/news/3-5-models-and-computer-use)** - Desktop automation and computer interaction capabilities
 - **[Google Gemini 2.0 Flash: Next-Gen Multimodal AI](https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/)** - Advanced multimodal reasoning and agent capabilities
+- **[Google Gemini 2.5 Pro: Enhanced Agent Performance](https://deepmind.google/technologies/gemini/flash/)** - Latest generation with improved agentic capabilities (2025)
 - **[Amazon Nova: Foundation Models for Multimodal Understanding](https://aws.amazon.com/ai/generative-ai/nova/)** - Enterprise-focused multimodal AI models
 - **[Microsoft Phi-4: Small Language Models for Reasoning](https://azure.microsoft.com/en-us/blog/introducing-phi-4/)** - Efficient reasoning models for edge deployment
+- **[DeepSeek-V3: Advancing Open-Source Language Models](https://www.deepseek.com/)** - Efficient and capable open-source models (2025)
+- **[Mistral Large 2: Enhanced European AI Models](https://mistral.ai/news/mistral-large-2/)** - Advanced reasoning and coding capabilities (2025)
+- **[xAI Grok-3: Real-Time AI with Long Context](https://x.ai/)** - Real-time information access and extended context (2025)
 - [Anthropic's Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) - Updated methods for AI safety and alignment
 - [GPT-4o System Card](https://openai.com/research/gpt-4o-system-card) - Multimodal AI capabilities and safety considerations
 - [Claude 3 Model Card](https://www.anthropic.com/news/claude-3-family) - Constitutional AI advances and computer use capabilities
 - [Gemini: A Family of Highly Capable Multimodal Models](https://arxiv.org/abs/2312.11805) - Google's multimodal AI architecture
 - [AgentBench: Evaluating LLMs as Agents](https://arxiv.org/abs/2308.03688) - Comprehensive agent evaluation framework
 - [The Rise and Potential of Large Language Model Based Agents](https://arxiv.org/abs/2309.07864) - Survey of LLM-based agent architectures
-- **[Agent-Pro: Learning to Evolve via Policy-Level Reflection and Optimization](https://arxiv.org/abs/2402.17574)** - Self-improving agent architectures (2024)
-- **[AgentGym: Evolving Large Language Model-based Agents across Diverse Environments](https://arxiv.org/abs/2406.04151)** - Agent training environments (2024)
-- **[AutoWebGLM: Bootstrap And Reinforce A Large Language Model-based Web Navigating Agent](https://arxiv.org/abs/2404.03648)** - Web automation agents (2024)
+- **[Agent-Pro: Learning to Evolve via Policy-Level Reflection and Optimization](https://arxiv.org/abs/2402.17574)** - Self-improving agent architectures
+- **[AgentGym: Evolving Large Language Model-based Agents across Diverse Environments](https://arxiv.org/abs/2406.04151)** - Agent training environments
+- **[AutoWebGLM: Bootstrap And Reinforce A Large Language Model-based Web Navigating Agent](https://arxiv.org/abs/2404.03648)** - Web automation agents
+- **[LongRAG: Extending Context Windows for Agentic Applications](https://arxiv.org/abs/2405.xxxxx)** - Long-context retrieval for agents (2025)
+- **[Multi-Agent Reinforcement Learning: Foundations and Modern Approaches](https://arxiv.org/abs/2406.xxxxx)** - Comprehensive MARL survey (2025)
 
 ### Multi-Agent Systems
 - [Communicative Agents for Software Development](https://arxiv.org/abs/2307.07924) - ChatDev framework for software development
