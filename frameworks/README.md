@@ -5,29 +5,31 @@ Starter templates and guides for popular Agentic AI frameworks.
 ## Supported Frameworks
 
 ### 🦜 LangChain
-- **Description**: Popular framework for building applications with LLMs
-- **Use Cases**: Conversational agents, document analysis, RAG systems
+- **Description**: Popular framework for building applications with LLMs (v0.3+)
+- **Use Cases**: Conversational agents, document analysis, RAG systems, stateful workflows
 - **Links**: [Official Site](https://langchain.com/) | [GitHub](https://github.com/langchain-ai/langchain) | [Documentation](https://python.langchain.com/) | [LangSmith](https://smith.langchain.com/)
-- **New Features**: LangGraph for stateful agents, LangSmith for debugging and monitoring
+- **New Features**: LangGraph for stateful agents, LangGraph Studio IDE, production deployment via LangGraph Cloud
 - **Getting Started**: [LangChain Directory](./langchain/)
 
 ### 🤖 AutoGen
-- **Description**: Microsoft's framework for multi-agent conversations (now AutoGen 2.0)
-- **Use Cases**: Multi-agent collaboration, code generation, problem-solving
-- **Links**: [GitHub](https://github.com/microsoft/autogen) | [Documentation](https://microsoft.github.io/autogen/) | [AutoGen Studio](https://autogen-studio.com/) | [Examples](https://github.com/microsoft/autogen/tree/main/notebook)
-- **New Features**: AutoGen Studio UI, improved agent orchestration, better debugging tools
+- **Description**: Microsoft's framework for multi-agent conversations (AutoGen 2.0)
+- **Use Cases**: Multi-agent collaboration, code generation, problem-solving, research automation
+- **Links**: [GitHub](https://github.com/microsoft/autogen) | [Documentation](https://microsoft.github.io/autogen/) | [AutoGen Studio 2.0](https://autogen-studio.com/) | [Examples](https://github.com/microsoft/autogen/tree/main/notebook)
+- **New Features**: AutoGen Studio 2.0 visual interface, enhanced orchestration, team topologies, improved debugging
 - **Getting Started**: [AutoGen Directory](./autogen/)
 
 ### ⚡ CrewAI
-- **Description**: Framework for orchestrating role-playing AI agents
-- **Use Cases**: Team-based AI, collaborative problem solving
-- **Links**: [Official Site](https://crewai.com/) | [GitHub](https://github.com/joaomdmoura/crewAI) | [Documentation](https://docs.crewai.com/)
+- **Description**: Framework for orchestrating role-playing AI agents (v0.70+)
+- **Use Cases**: Team-based AI, collaborative problem solving, role-based workflows
+- **Links**: [Official Site](https://crewai.com/) | [GitHub](https://github.com/joaomdmoura/crewAI) | [Documentation](https://docs.crewai.com/) | [Enterprise](https://crewai.com/enterprise)
+- **New Features**: CrewAI Enterprise for production deployments, enhanced task delegation, better memory management
 - **Getting Started**: [CrewAI Directory](./crewai/)
 
 ### 🦙 LlamaIndex
-- **Description**: Data framework for LLM applications
-- **Use Cases**: RAG, knowledge bases, document indexing
-- **Links**: [Official Site](https://www.llamaindex.ai/) | [GitHub](https://github.com/run-llama/llama_index) | [Documentation](https://docs.llamaindex.ai/)
+- **Description**: Data framework for LLM applications (v0.11+)
+- **Use Cases**: RAG, knowledge bases, document indexing, agentic workflows
+- **Links**: [Official Site](https://www.llamaindex.ai/) | [GitHub](https://github.com/run-llama/llama_index) | [Documentation](https://docs.llamaindex.ai/) | [LlamaCloud](https://cloud.llamaindex.ai/)
+- **New Features**: LlamaIndex Workflows for event-driven orchestration, LlamaAgents for multi-agent systems, LlamaCloud for production
 - **Getting Started**: [LlamaIndex Directory](./llamaindex/)
 
 ### 🧠 Semantic Kernel
@@ -97,6 +99,24 @@ Starter templates and guides for popular Agentic AI frameworks.
 - **Use Cases**: RAG agents, tool-calling agents, knowledge-based systems
 - **Links**: [GitHub](https://github.com/phidatahq/phidata) | [Documentation](https://docs.phidata.com/) | [Examples](https://github.com/phidatahq/phidata/tree/main/cookbook)
 - **Getting Started**: [Phidata 2.0 Directory](./phidata-2/)
+
+#### 🔄 ControlFlow
+- **Description**: Framework for building agentic AI workflows with Prefect-style orchestration
+- **Use Cases**: Complex workflows, task orchestration, multi-step agent processes
+- **Links**: [GitHub](https://github.com/PrefectHQ/ControlFlow) | [Documentation](https://controlflow.ai/) | [Examples](https://controlflow.ai/examples)
+- **Getting Started**: [ControlFlow Directory](./controlflow/)
+
+#### 🪶 Smolagents
+- **Description**: Simple, lightweight agent framework from Hugging Face
+- **Use Cases**: Quick agent prototyping, educational purposes, lightweight deployments
+- **Links**: [GitHub](https://github.com/huggingface/smolagents) | [Documentation](https://huggingface.co/docs/smolagents) | [Examples](https://github.com/huggingface/smolagents/tree/main/examples)
+- **Getting Started**: [Smolagents Directory](./smolagents/)
+
+#### 📊 LlamaIndex Workflows
+- **Description**: Event-driven orchestration system for AI agents built on LlamaIndex
+- **Use Cases**: Complex agent workflows, event-driven systems, RAG pipelines
+- **Links**: [Documentation](https://docs.llamaindex.ai/en/stable/module_guides/workflow/) | [Examples](https://docs.llamaindex.ai/en/stable/examples/workflow/) | [GitHub](https://github.com/run-llama/llama_index)
+- **Getting Started**: [LlamaIndex Workflows Directory](./llamaindex-workflows/)
 
 #### 🎨 Instructor
 - **Description**: Structured outputs from LLMs using Python type annotations
