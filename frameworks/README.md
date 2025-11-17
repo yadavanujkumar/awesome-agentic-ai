@@ -8,21 +8,21 @@ Starter templates and guides for popular Agentic AI frameworks.
 - **Description**: Popular framework for building applications with LLMs (v0.3+)
 - **Use Cases**: Conversational agents, document analysis, RAG systems, stateful workflows
 - **Links**: [Official Site](https://langchain.com/) | [GitHub](https://github.com/langchain-ai/langchain) | [Documentation](https://python.langchain.com/) | [LangSmith](https://smith.langchain.com/)
-- **New Features**: LangGraph for stateful agents, LangGraph Studio IDE, production deployment via LangGraph Cloud
+- **New Features**: LangGraph for stateful agents, LangGraph Studio v2.0, production deployment via LangGraph Cloud (GA November 2025)
 - **Getting Started**: [LangChain Directory](./langchain/)
 
 ### 🤖 AutoGen
-- **Description**: Microsoft's framework for multi-agent conversations (AutoGen 2.0)
+- **Description**: Microsoft's framework for multi-agent conversations (AutoGen v0.4+)
 - **Use Cases**: Multi-agent collaboration, code generation, problem-solving, research automation
 - **Links**: [GitHub](https://github.com/microsoft/autogen) | [Documentation](https://microsoft.github.io/autogen/) | [AutoGen Studio 2.0](https://autogen-studio.com/) | [Examples](https://github.com/microsoft/autogen/tree/main/notebook)
-- **New Features**: AutoGen Studio 2.0 visual interface, enhanced orchestration, team topologies, improved debugging
+- **New Features**: AutoGen Studio 2.0 visual interface (GA November 2025), enhanced orchestration, team topologies, improved debugging
 - **Getting Started**: [AutoGen Directory](./autogen/)
 
 ### ⚡ CrewAI
-- **Description**: Framework for orchestrating role-playing AI agents (v0.70+)
+- **Description**: Framework for orchestrating role-playing AI agents (v0.80+)
 - **Use Cases**: Team-based AI, collaborative problem solving, role-based workflows
 - **Links**: [Official Site](https://crewai.com/) | [GitHub](https://github.com/joaomdmoura/crewAI) | [Documentation](https://docs.crewai.com/) | [Enterprise](https://crewai.com/enterprise)
-- **New Features**: CrewAI Enterprise for production deployments, enhanced task delegation, better memory management
+- **New Features**: CrewAI Enterprise for production deployments, enhanced task delegation, better memory management (November 2025)
 - **Getting Started**: [CrewAI Directory](./crewai/)
 
 ### 🦙 LlamaIndex
