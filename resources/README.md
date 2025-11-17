@@ -13,17 +13,17 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Language Models as Zero-Shot Planners](https://arxiv.org/abs/2201.07207) - Planning capabilities in LLMs
 - [Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) - Self-improving AI safety methods
 
-### Recent 2025 Papers
+### Recent November 2025 Papers
 - **[OpenAI o1: Learning to Reason with LLMs](https://openai.com/index/learning-to-reason-with-llms/)** - Advanced reasoning capabilities in large language models
-- **[OpenAI o1-pro: Enhanced Reasoning for Complex Tasks](https://openai.com/o1-pro)** - Production reasoning model with extended thinking
+- **[OpenAI o1-pro: Enhanced Reasoning for Complex Tasks](https://openai.com/o1-pro)** - Production reasoning model with extended thinking (GA November 2025)
 - **[Anthropic's Claude 3.5 Sonnet and Computer Use](https://www.anthropic.com/news/3-5-models-and-computer-use)** - Desktop automation and computer interaction capabilities
 - **[Google Gemini 2.0 Flash: Next-Gen Multimodal AI](https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/)** - Advanced multimodal reasoning and agent capabilities
-- **[Google Gemini 2.5 Pro: Enhanced Agent Performance](https://deepmind.google/technologies/gemini/flash/)** - Latest generation with improved agentic capabilities (2025)
+- **[Google Gemini 2.5 Pro: Enhanced Agent Performance](https://deepmind.google/technologies/gemini/flash/)** - Latest generation with improved agentic capabilities (November 2025)
 - **[Amazon Nova: Foundation Models for Multimodal Understanding](https://aws.amazon.com/ai/generative-ai/nova/)** - Enterprise-focused multimodal AI models
 - **[Microsoft Phi-4: Small Language Models for Reasoning](https://azure.microsoft.com/en-us/blog/introducing-phi-4/)** - Efficient reasoning models for edge deployment
-- **[DeepSeek-V3: Advancing Open-Source Language Models](https://www.deepseek.com/)** - Efficient and capable open-source models (2025)
-- **[Mistral Large 2: Enhanced European AI Models](https://mistral.ai/news/mistral-large-2/)** - Advanced reasoning and coding capabilities (2025)
-- **[xAI Grok-3: Real-Time AI with Long Context](https://x.ai/)** - Real-time information access and extended context (2025)
+- **[DeepSeek-V3: Advancing Open-Source Language Models](https://www.deepseek.com/)** - Efficient and capable open-source models (November 2025)
+- **[Mistral Large 2: Enhanced European AI Models](https://mistral.ai/news/mistral-large-2/)** - Advanced reasoning and coding capabilities (November 2025)
+- **[xAI Grok-3: Real-Time AI with Long Context](https://x.ai/)** - Real-time information access and extended context (Beta November 2025)
 - [Anthropic's Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) - Updated methods for AI safety and alignment
 - [GPT-4o System Card](https://openai.com/research/gpt-4o-system-card) - Multimodal AI capabilities and safety considerations
 - [Claude 3 Model Card](https://www.anthropic.com/news/claude-3-family) - Constitutional AI advances and computer use capabilities
@@ -33,8 +33,6 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - **[Agent-Pro: Learning to Evolve via Policy-Level Reflection and Optimization](https://arxiv.org/abs/2402.17574)** - Self-improving agent architectures
 - **[AgentGym: Evolving Large Language Model-based Agents across Diverse Environments](https://arxiv.org/abs/2406.04151)** - Agent training environments
 - **[AutoWebGLM: Bootstrap And Reinforce A Large Language Model-based Web Navigating Agent](https://arxiv.org/abs/2404.03648)** - Web automation agents
-- **[LongRAG: Extending Context Windows for Agentic Applications](https://arxiv.org/abs/2405.xxxxx)** - Long-context retrieval for agents (2025)
-- **[Multi-Agent Reinforcement Learning: Foundations and Modern Approaches](https://arxiv.org/abs/2406.xxxxx)** - Comprehensive MARL survey (2025)
 
 ### Multi-Agent Systems
 - [Communicative Agents for Software Development](https://arxiv.org/abs/2307.07924) - ChatDev framework for software development
@@ -414,23 +412,23 @@ Cutting-edge research and production systems (8-12 weeks)
 
 ### Professional Certifications
 - **[AWS Certified Machine Learning - Specialty](https://aws.amazon.com/certification/certified-machine-learning-specialty/)**
-  - Updated with Bedrock Agents and MLOps for AI systems (2025)
+  - Updated with Bedrock Agents, Nova models, and MLOps for AI systems (November 2025)
   - [Study Guide](https://aws.amazon.com/certification/certified-machine-learning-specialty/)
 
 - **[Google Cloud Professional ML Engineer](https://cloud.google.com/certification/machine-learning-engineer)**
-  - Updated with Vertex AI Agents and Gemini integration (2025)
+  - Updated with Vertex AI Agents, Gemini 2.0/2.5 integration (November 2025)
   - [Preparation Resources](https://cloud.google.com/certification/guides/machine-learning-engineer)
 
 - **[Microsoft Azure AI Engineer Associate](https://docs.microsoft.com/en-us/learn/certifications/azure-ai-engineer/)**
-  - Updated with Copilot Studio and Azure OpenAI Service
+  - Updated with Copilot Studio and Azure OpenAI Service (o1 models, November 2025)
   - [Learning Path](https://docs.microsoft.com/en-us/learn/browse/?products=azure&roles=ai-engineer)
 
 - **[OpenAI API Certification](https://platform.openai.com/docs/overview)**
-  - New certification program for GPT-4 and Assistants API
+  - Updated certification program for GPT-4o, o1, and o1-pro models (November 2025)
   - Covers function calling, agent patterns, and production deployment
 
 - **[Anthropic Claude Developer Certification](https://www.anthropic.com/claude)**
-  - Certification for Claude Computer Use and Constitutional AI (2025)
+  - Certification for Claude Computer Use and Constitutional AI (November 2025)
   - Focus on safety and responsible AI agent development
 
 ### Specialized AI Agent Courses

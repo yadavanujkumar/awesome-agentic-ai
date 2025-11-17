@@ -98,42 +98,42 @@ Week 9-12: Innovation
 
 - **[OpenAI Swarm](https://github.com/openai/swarm)** - OpenAI's experimental multi-agent orchestration framework
 - **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment for goal-driven tasks (2025 updates)
-- **[MetaGPT](https://github.com/geekan/MetaGPT)** - Multi-agent software company simulation
+- **[MetaGPT](https://github.com/geekan/MetaGPT)** - Multi-agent software company simulation (v0.8+)
 - **[ChatDev](https://github.com/OpenBMB/ChatDev)** - Communicative agents for software development
-- **[DSPy](https://github.com/stanfordnlp/dspy)** - Programming framework for optimizing LM-based systems
-- **[PydanticAI](https://github.com/pydantic/pydantic-ai)** - Type-safe agent framework built around Pydantic (v0.0.13+)
-- **[Instructor](https://github.com/jxnl/instructor)** - Structured outputs from LLMs using Python type annotations
-- **[Phidata](https://github.com/phidatahq/phidata)** - Framework for building AI agents with memory and tools (v2.5+)
-- **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Create collaborative AI agent teams with specialized roles
-- **[LangGraph Cloud](https://langchain.com/langgraph-cloud)** - Production deployment platform for stateful agents (2025)
-- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging agent workflows (2025)
-- **[Agen-C](https://github.com/agencc/agen-c)** - High-performance agent framework written in C++ (2025)
-- **[AutoGen 2.0](https://microsoft.github.io/autogen/)** - Next-generation multi-agent framework with improved orchestration
-- **[CrewAI Enterprise](https://crewai.com/enterprise)** - Enterprise-grade multi-agent platform (2025)
-- **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework built on LlamaIndex (2025)
-- **[Mem0](https://github.com/mem0ai/mem0)** - Memory layer for AI agents with adaptive learning (v0.1+)
-- **[ControlFlow](https://github.com/PrefectHQ/ControlFlow)** - Framework for agentic AI workflows with orchestration (2025)
-- **[Smolagents](https://github.com/huggingface/smolagents)** - Simple, lightweight agents from Hugging Face (2025)
-- **[LlamaIndex Workflows](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)** - Event-driven orchestration for AI agents (2025)
+- **[DSPy](https://github.com/stanfordnlp/dspy)** - Programming framework for optimizing LM-based systems (v2.5+)
+- **[PydanticAI](https://github.com/pydantic/pydantic-ai)** - Type-safe agent framework built around Pydantic (v0.0.14+)
+- **[Instructor](https://github.com/jxnl/instructor)** - Structured outputs from LLMs using Python type annotations (v1.6+)
+- **[Phidata](https://github.com/phidatahq/phidata)** - Framework for building AI agents with memory and tools (v2.6+)
+- **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Create collaborative AI agent teams with specialized roles (v0.2+)
+- **[LangGraph Cloud](https://langchain.com/langgraph-cloud)** - Production deployment platform for stateful agents (GA)
+- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging agent workflows (v2.0+)
+- **[Agen-C](https://github.com/agencc/agen-c)** - High-performance agent framework written in C++ (Beta)
+- **[AutoGen 2.0](https://microsoft.github.io/autogen/)** - Next-generation multi-agent framework with improved orchestration (v0.4+)
+- **[CrewAI Enterprise](https://crewai.com/enterprise)** - Enterprise-grade multi-agent platform (v0.80+)
+- **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework built on LlamaIndex (v0.1+)
+- **[Mem0](https://github.com/mem0ai/mem0)** - Memory layer for AI agents with adaptive learning (v0.1.10+)
+- **[ControlFlow](https://github.com/PrefectHQ/ControlFlow)** - Framework for agentic AI workflows with orchestration (v0.10+)
+- **[Smolagents](https://github.com/huggingface/smolagents)** - Simple, lightweight agents from Hugging Face (v1.0+)
+- **[LlamaIndex Workflows](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)** - Event-driven orchestration for AI agents (v0.11+)
 
 ### 🏢 **Enterprise Platforms**
 
-- **[OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)** - Production-ready AI assistants with GPT-4o and o1 models (o1-pro available)
+- **[OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)** - Production-ready AI assistants with GPT-4o and o1 models (o1-pro available November 2025)
 - **[Google Vertex AI Agents](https://cloud.google.com/vertex-ai/docs/agent-builder)** - Enterprise agent platform with Gemini 2.0 Flash and Gemini 2.5 Pro
-- **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development for Microsoft 365
+- **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development for Microsoft 365 (November 2025 updates)
 - **[Amazon Bedrock Agents](https://aws.amazon.com/bedrock/agents/)** - AWS-native agent framework with Claude 3.5 Sonnet v2 and Nova models
 - **[Anthropic Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Claude 3.5 Sonnet with advanced computer automation capabilities
-- **[GitHub Models](https://github.com/marketplace/models)** - GitHub's AI model platform with agent capabilities
-- **[Azure OpenAI Service](https://docs.microsoft.com/en-us/azure/ai-services/openai/)** - Enterprise-grade OpenAI models in Azure (GPT-4o, o1-preview)
-- **[Hugging Face Agents](https://huggingface.co/docs/transformers/transformers_agents)** - Open-source agent framework with local and cloud models (2025)
-- **[Cohere Command R+](https://cohere.com/command)** - Enterprise RAG and agent capabilities with Command R7B (2025)
-- **[Databricks Mosaic AI](https://www.databricks.com/product/machine-learning/mosaic-ai)** - Enterprise AI agent platform with DBRX (2025)
-- **[Scale AI Agent Studio](https://scale.com/ai-agent-studio)** - Enterprise agent development and deployment (2025)
-- **[Together AI Agents](https://www.together.ai/products/agents)** - Open-source model powered agent platform (2025)
-- **[Mistral AI Agents](https://mistral.ai/news/agents/)** - European AI agent platform with Mistral Large 2 and Codestral (2025)
-- **[xAI Grok API](https://x.ai/api)** - Real-time agent capabilities with Grok-2 and Grok-3 models (2025)
-- **[DeepSeek API](https://www.deepseek.com/)** - Cost-effective agent platform with DeepSeek-V3 (2025)
-- **[Perplexity Pro Search API](https://docs.perplexity.ai/)** - Search-powered agent capabilities (2025)
+- **[GitHub Models](https://github.com/marketplace/models)** - GitHub's AI model platform with agent capabilities (Copilot integration)
+- **[Azure OpenAI Service](https://docs.microsoft.com/en-us/azure/ai-services/openai/)** - Enterprise-grade OpenAI models in Azure (GPT-4o, o1-preview, o1 GA)
+- **[Hugging Face Agents](https://huggingface.co/docs/transformers/transformers_agents)** - Open-source agent framework with local and cloud models (Transformers 4.45+)
+- **[Cohere Command R+](https://cohere.com/command)** - Enterprise RAG and agent capabilities with Command R7B (November 2025)
+- **[Databricks Mosaic AI](https://www.databricks.com/product/machine-learning/mosaic-ai)** - Enterprise AI agent platform with DBRX and Llama models
+- **[Scale AI Agent Studio](https://scale.com/ai-agent-studio)** - Enterprise agent development and deployment (v2.0)
+- **[Together AI Agents](https://www.together.ai/products/agents)** - Open-source model powered agent platform (November 2025)
+- **[Mistral AI Agents](https://mistral.ai/news/agents/)** - European AI agent platform with Mistral Large 2 and Codestral (Latest updates)
+- **[xAI Grok API](https://x.ai/api)** - Real-time agent capabilities with Grok-2 and Grok-3 models (Beta access)
+- **[DeepSeek API](https://www.deepseek.com/)** - Cost-effective agent platform with DeepSeek-V3 (November 2025)
+- **[Perplexity Pro Search API](https://docs.perplexity.ai/)** - Search-powered agent capabilities (API v2.0)
 
 **[Explore All 35+ Frameworks →](./frameworks/README.md)**
 
@@ -353,26 +353,26 @@ print(result.data)
 - **[25+ More Courses →](./resources/README.md#🎓-certification-programs--learning-paths)**
 
 ### 🛠️ **Development Tools & Platforms**
-- **[LangSmith](https://smith.langchain.com/)** - Debug and monitor LangChain applications with production tracing
-- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging stateful agent workflows
-- **[AutoGen Studio 2.0](https://autogen-studio.com/)** - Next-gen visual interface for multi-agent systems
-- **[Weights & Biases](https://wandb.ai/)** - Enhanced experiment tracking and LLM evaluation
-- **[Streamlit](https://streamlit.io/)** - Build interactive agent demos (v1.35+)
-- **[Cursor](https://cursor.sh/)** - AI-first code editor with advanced agent integration
-- **[GitHub Copilot](https://github.com/features/copilot)** - Multi-model AI coding assistant with workspace context
-- **[Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Desktop automation capabilities via Claude 3.5 Sonnet
-- **[Replit Agent](https://replit.com/ai)** - AI agent for complete application development
-- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for UI/component generation (2025)
-- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development in browser (2025)
-- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with agentic flows and cascade mode (2025)
-- **[Aider](https://aider.chat/)** - AI pair programming in the terminal with repository awareness (2025)
-- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant with custom model support (2025)
-- **[LangFuse](https://langfuse.com/)** - Open-source LLM observability with traces and evals (v3.0+)
-- **[Helicone](https://www.helicone.ai/)** - LLM observability and cost monitoring (2025)
-- **[Phoenix Arize](https://phoenix.arize.com/)** - AI observability and LLM evaluation platform (2025)
-- **[Braintrust](https://www.braintrustdata.com/)** - AI product development platform with evals and logging (2025)
-- **[Agenta](https://agenta.ai/)** - Open-source LLM development platform with prompt management (2025)
-- **[PromptLayer](https://promptlayer.com/)** - Prompt engineering and management platform (2025)
+- **[LangSmith](https://smith.langchain.com/)** - Debug and monitor LangChain applications with production tracing (v2.0)
+- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging stateful agent workflows (v2.0+)
+- **[AutoGen Studio 2.0](https://autogen-studio.com/)** - Next-gen visual interface for multi-agent systems (GA November 2025)
+- **[Weights & Biases](https://wandb.ai/)** - Enhanced experiment tracking and LLM evaluation (v0.18+)
+- **[Streamlit](https://streamlit.io/)** - Build interactive agent demos (v1.39+)
+- **[Cursor](https://cursor.sh/)** - AI-first code editor with advanced agent integration (v0.42+)
+- **[GitHub Copilot](https://github.com/features/copilot)** - Multi-model AI coding assistant with workspace context (November 2025 updates)
+- **[Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Desktop automation capabilities via Claude 3.5 Sonnet (API v2)
+- **[Replit Agent](https://replit.com/ai)** - AI agent for complete application development (v2.0)
+- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for UI/component generation (November 2025)
+- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development in browser (v2.0)
+- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with agentic flows and cascade mode (v1.5+)
+- **[Aider](https://aider.chat/)** - AI pair programming in the terminal with repository awareness (v0.60+)
+- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant with custom model support (v0.9+)
+- **[LangFuse](https://langfuse.com/)** - Open-source LLM observability with traces and evals (v3.5+)
+- **[Helicone](https://www.helicone.ai/)** - LLM observability and cost monitoring (v2.0)
+- **[Phoenix Arize](https://phoenix.arize.com/)** - AI observability and LLM evaluation platform (v4.0+)
+- **[Braintrust](https://www.braintrustdata.com/)** - AI product development platform with evals and logging (v2.0)
+- **[Agenta](https://agenta.ai/)** - Open-source LLM development platform with prompt management (v1.0+)
+- **[PromptLayer](https://promptlayer.com/)** - Prompt engineering and management platform (v3.0)
 - **[80+ Tools & Integrations →](./tools/README.md)**
 
 ### 🎙️ **Podcasts & Audio Content**
@@ -454,7 +454,7 @@ It helps others discover this resource and motivates us to keep improving it.
 - **📋 6 Comprehensive Cheat Sheets** covering all aspects of agent development
 - **🏆 15+ Competitions** and active challenges
 - **🌍 50+ Communities** and international events
-- **🆕 Latest 2025 Updates** - o1-pro, Gemini 2.5, DeepSeek-V3, Grok-3, and more
+- **🆕 Latest November 2025 Updates** - o1-pro GA, Gemini 2.5, DeepSeek-V3, Grok-3, Transformers 4.45+, and more
 
 ### 🤝 Community Contributions Welcome
 We're actively looking for contributions in:
