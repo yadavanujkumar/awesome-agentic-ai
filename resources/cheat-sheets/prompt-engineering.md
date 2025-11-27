@@ -53,7 +53,7 @@ Continue this cycle until you have enough information to provide a final answer.
 
 Example:
 Thought: I need to find recent information about AI agent frameworks.
-Action: Search for "AI agent frameworks 2024 comparison"
+Action: Search for "AI agent frameworks 2025 comparison"
 Observation: Found several articles comparing LangChain, AutoGen, and CrewAI.
 Thought: I should get more specific information about each framework.
 Action: Search for "LangChain vs AutoGen detailed comparison"
