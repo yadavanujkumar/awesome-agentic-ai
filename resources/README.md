@@ -288,13 +288,13 @@ Cutting-edge research and production systems (8-12 weeks)
 ## 🏆 Competitions and Challenges
 
 ### Active Competitions
-- **[NeurIPS 2024: Multi-Agent AI Competition](https://neurips.cc/Conferences/2024/CallForCompetitions)**
+- **[NeurIPS 2025: Multi-Agent AI Competition](https://neurips.cc/Conferences/2025/CallForCompetitions)**
   - Focus on collaborative AI agents and emergent behaviors
   - Registration: [Competition Portal](https://competitions.neurips.cc/)
 
-- **[ICML 2024: Multi-Agent Reinforcement Learning](https://icml.cc/Conferences/2024/CallForPapers)**
+- **[ICML 2025: Multi-Agent Reinforcement Learning](https://icml.cc/Conferences/2025/CallForPapers)**
   - Multi-agent learning and coordination challenges
-  - [Submit Papers](https://icml.cc/Conferences/2024/Dates)
+  - [Submit Papers](https://icml.cc/Conferences/2025/Dates)
 
 - **[AI Agent Hackathon Series](https://aiagentchallenge.dev/)**
   - Monthly hackathons focusing on practical agent applications
@@ -309,14 +309,14 @@ Cutting-edge research and production systems (8-12 weeks)
   - Building beneficial AI assistants
   - [Application Guidelines](https://ai.google/education/)
 
-- **[OpenAI GPT-4 Agent Building Contest](https://openai.com/blog/)**
-  - Showcase innovative uses of GPT-4 for autonomous agents
+- **[OpenAI GPT-4o Agent Building Contest](https://openai.com/blog/)**
+  - Showcase innovative uses of GPT-4o and o1 for autonomous agents
   - [Submission Portal](https://openai.com/competitions)
 
 ### Academic Competitions
 - **[RoboCup Soccer](https://www.robocup.org/)**
   - Multi-agent coordination in robotic soccer
-  - [2024 Championships](https://2024.robocup.org/)
+  - [2025 Championships](https://2025.robocup.org/)
 
 - **[DARPA SubT Challenge](https://www.subtchallenge.com/)**
   - Autonomous agents in underground environments
@@ -373,40 +373,40 @@ Cutting-edge research and production systems (8-12 weeks)
 - **[AutoGen 2.0](https://github.com/microsoft/autogen)** - Enhanced multi-agent conversations
 - **[CrewAI](https://github.com/joaomdmoura/crewAI)** - Role-playing autonomous agents (2025 updates)
 - **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework on LlamaIndex
-- **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Collaborative agent teams (2024)
+- **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Collaborative agent teams (v0.3+)
 
 ### Agent Specializations
 - **Code Generation Agents**
-  - [GitHub Copilot](https://github.com/features/copilot) - AI pair programmer with enhanced 2024 features
-  - [Cursor](https://cursor.sh/) - AI-first code editor with agent integration
-  - [Replit Agent](https://replit.com/ai) - AI coding assistant for web development
-  - [v0.dev](https://v0.dev/) - Vercel's UI generation agent (2024)
-  - [Bolt.new](https://bolt.new/) - Full-stack development agent (2024)
-  - [Windsurf](https://codeium.com/windsurf) - AI-first IDE with collaborative features (2024)
-  - [Aider](https://aider.chat/) - Terminal-based AI coding assistant (2024)
+  - [GitHub Copilot](https://github.com/features/copilot) - AI pair programmer with enhanced 2025 features and workspace context
+  - [Cursor](https://cursor.sh/) - AI-first code editor with agent integration (v0.45+)
+  - [Replit Agent](https://replit.com/ai) - AI coding assistant for web development (v2.0)
+  - [v0.dev](https://v0.dev/) - Vercel's UI generation agent (November 2025)
+  - [Bolt.new](https://bolt.new/) - Full-stack development agent (v2.5+)
+  - [Windsurf](https://codeium.com/windsurf) - AI-first IDE with cascade mode and agentic flows (v1.5+)
+  - [Aider](https://aider.chat/) - Terminal-based AI coding assistant with repository awareness (v0.65+)
 
 - **Research & Analysis Agents**
-  - [Perplexity AI](https://www.perplexity.ai/) - AI-powered search and research with 2024 updates
-  - [Elicit](https://elicit.org/) - Research assistant for literature review
+  - [Perplexity AI](https://www.perplexity.ai/) - AI-powered search and research with Pro Search API (November 2025)
+  - [Elicit](https://elicit.org/) - Research assistant for literature review (v2.0)
   - [Consensus](https://consensus.app/) - Evidence-based research summaries
-  - [Claude Artifacts](https://claude.ai/) - Interactive research and analysis (2024)
-  - [NotebookLM](https://notebooklm.google.com/) - Google's AI research assistant (2024)
+  - [Claude Artifacts](https://claude.ai/) - Interactive research and analysis (Claude 3.5)
+  - [NotebookLM](https://notebooklm.google.com/) - Google's AI research assistant with Audio Overview (November 2025)
   - [Semantic Scholar](https://www.semanticscholar.org/) - AI-powered academic search
 
 - **Creative & Content Agents**
-  - [Jasper AI](https://www.jasper.ai/) - Marketing content generation with enhanced 2024 features
-  - [Copy.ai](https://www.copy.ai/) - Writing assistant agent
-  - [Runway](https://runwayml.com/) - Creative AI tools and agents
-  - [Claude for Creative Writing](https://claude.ai/) - Enhanced creative capabilities (2024)
-  - [ChatGPT Canvas](https://openai.com/canvas) - Collaborative writing and editing (2024)
-  - [Gamma](https://gamma.app/) - AI-powered presentation agent (2024)
+  - [Jasper AI](https://www.jasper.ai/) - Marketing content generation with enhanced 2025 features
+  - [Copy.ai](https://www.copy.ai/) - Writing assistant agent with workflow automation
+  - [Runway](https://runwayml.com/) - Creative AI tools with Gen-3 Alpha video generation
+  - [Claude for Creative Writing](https://claude.ai/) - Enhanced creative capabilities (Claude 3.5 Sonnet)
+  - [ChatGPT Canvas](https://openai.com/canvas) - Collaborative writing and editing (GPT-4o)
+  - [Gamma](https://gamma.app/) - AI-powered presentation agent (v2.0)
 
 - **Business & Productivity Agents**
-  - [Microsoft Copilot](https://copilot.microsoft.com/) - Enterprise productivity agent
-  - [Google Duet AI](https://workspace.google.com/solutions/ai/) - Workspace intelligence agent
-  - [Notion AI](https://www.notion.so/product/ai) - Knowledge management and writing assistant
-  - [Zapier Central](https://zapier.com/central) - Business process automation agent (2024)
-  - [Monday.com AI](https://monday.com/ai/) - Project management agent (2024)
+  - [Microsoft Copilot](https://copilot.microsoft.com/) - Enterprise productivity agent with Microsoft 365 integration
+  - [Google Gemini for Workspace](https://workspace.google.com/solutions/ai/) - Workspace intelligence agent with Gemini 2.5
+  - [Notion AI](https://www.notion.so/product/ai) - Knowledge management and writing assistant (Q&A and autofill)
+  - [Zapier Central](https://zapier.com/central) - Business process automation agent (GA 2025)
+  - [Monday.com AI](https://monday.com/ai/) - Project management agent with automation blocks
 
 ## 🎓 Certification Programs & Learning Paths
 
@@ -454,11 +454,11 @@ Cutting-edge research and production systems (8-12 weeks)
   - Free hands-on tutorials
 
 - **[Hugging Face Course](https://huggingface.co/course/chapter1/1)**
-  - Transformers and agent development with 2024 updates
+  - Transformers and agent development with 2025 updates (Transformers 4.45+)
   - Interactive notebooks and exercises
 
 - **[Fast.ai Practical Deep Learning](https://course.fast.ai/)**
-  - Updated for 2024 with practical AI agent development
+  - Updated for 2025 with practical AI agent development
   - Strong focus on real-world deployment
 
 - **[LangChain Academy](https://academy.langchain.com/)**
@@ -545,7 +545,7 @@ Cutting-edge research and production systems (8-12 weeks)
 - **[r/MachineLearning](https://reddit.com/r/MachineLearning)** - Reddit ML community (2M+ members)
 - **[r/ArtificialIntelligence](https://reddit.com/r/artificial)** - General AI discussions (1M+ members)
 - **[AI Stack Exchange](https://ai.stackexchange.com/)** - Q&A for AI researchers and practitioners
-- **[Agent AI Forum](https://agentai.forum/)** - Dedicated agent development discussions (New 2024)
+- **[Agent AI Forum](https://agentai.forum/)** - Dedicated agent development discussions (2025)
 
 ### Developer Resources & Hackathons
 - **[LangChain Hackathons](https://langchain.com/hackathons)** - Monthly framework competitions
