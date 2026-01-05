@@ -2,6 +2,16 @@
 
 A comprehensive example demonstrating how multiple AI agents work together to solve complex problems through coordination, communication, and specialization.
 
+## 🌟 Real-World Applications
+
+This agent pattern is used by:
+- **Devin AI** - Autonomous software engineer with specialized agents for frontend, backend, testing, and DevOps (completing real Upwork jobs)
+- **ChatDev** - Virtual software company simulating CEO, CTO, designers, and developers (created 100+ apps)
+- **MetaGPT** - Multi-agent framework creating software companies (generates requirements, designs, code, tests)
+- **AutoGen** - Microsoft's framework powering multi-agent systems (used in enterprise for complex workflows)
+- **CrewAI** - Multi-agent orchestration (used by content teams, marketing agencies, research groups)
+- **LangGraph** - Used by Replit Agent and other production systems for agent coordination
+
 ## 🎯 Overview
 
 This example showcases:
