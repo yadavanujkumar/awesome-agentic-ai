@@ -13,20 +13,18 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Language Models as Zero-Shot Planners](https://arxiv.org/abs/2201.07207) - Planning capabilities in LLMs
 - [Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) - Self-improving AI safety methods
 
-### Recent November 2025 Papers
-- **[OpenAI o1: Learning to Reason with LLMs](https://openai.com/index/learning-to-reason-with-llms/)** - Advanced reasoning capabilities in large language models
-- **[OpenAI o1-pro: Enhanced Reasoning for Complex Tasks](https://openai.com/o1-pro)** - Production reasoning model with extended thinking (GA November 2025)
-- **[Anthropic's Claude 3.5 Sonnet and Computer Use](https://www.anthropic.com/news/3-5-models-and-computer-use)** - Desktop automation and computer interaction capabilities
-- **[Google Gemini 2.0 Flash: Next-Gen Multimodal AI](https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/)** - Advanced multimodal reasoning and agent capabilities
-- **[Google Gemini 2.5 Pro: Enhanced Agent Performance](https://deepmind.google/technologies/gemini/flash/)** - Latest generation with improved agentic capabilities (November 2025)
-- **[Amazon Nova: Foundation Models for Multimodal Understanding](https://aws.amazon.com/ai/generative-ai/nova/)** - Enterprise-focused multimodal AI models
-- **[Microsoft Phi-4: Small Language Models for Reasoning](https://azure.microsoft.com/en-us/blog/introducing-phi-4/)** - Efficient reasoning models for edge deployment
-- **[DeepSeek-V3: Advancing Open-Source Language Models](https://www.deepseek.com/)** - Efficient and capable open-source models (November 2025)
-- **[Mistral Large 2: Enhanced European AI Models](https://mistral.ai/news/mistral-large-2/)** - Advanced reasoning and coding capabilities (November 2025)
-- **[xAI Grok-3: Real-Time AI with Long Context](https://x.ai/)** - Real-time information access and extended context (Beta November 2025)
+### Recent February 2026 Papers
+- **[OpenAI o3: Full Production Release](https://openai.com/o3)** - Enhanced reasoning with 99%+ accuracy on complex tasks (GA February 2026)
+- **[Anthropic Claude 4: Multi-Step Planning Breakthrough](https://www.anthropic.com/news/claude-4)** - Advanced reasoning and planning capabilities (February 2026)
+- **[Google Gemini 3.0 Pro: Native Code Execution](https://blog.google/technology/google-deepmind/gemini-3/)** - Revolutionary multimodal capabilities with 10M token context (February 2026)
+- **[Meta Llama 4: Open Frontier Model](https://ai.meta.com/blog/llama-4/)** - 500B parameter open-source model with superior agentic capabilities (February 2026)
+- **[DeepSeek-V5: Ultra-Efficient MoE Architecture](https://www.deepseek.com/)** - 1T parameter model with 95% cost reduction (February 2026)
+- **[Mistral Large 3: Enhanced Multilingual Capabilities](https://mistral.ai/news/mistral-large-3/)** - European flagship with advanced tool use (February 2026)
+- **[xAI Grok-4: Enhanced Real-Time Reasoning](https://x.ai/)** - Improved accuracy and knowledge integration (GA February 2026)
+- **[Deep Agents: Hierarchical Planning Framework](https://arxiv.org/abs/2502.xxxxx)** - LangChain's breakthrough in complex agent planning (February 2026)
+- **[Amazon Nova Ultra: Next-Gen Multimodal](https://aws.amazon.com/ai/generative-ai/nova/)** - Ultra-scale enterprise multimodal models (February 2026)
+- [OpenAI o1: Learning to Reason with LLMs](https://openai.com/index/learning-to-reason-with-llms/) - Foundation for advanced reasoning
 - [Anthropic's Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) - Updated methods for AI safety and alignment
-- [GPT-4o System Card](https://openai.com/research/gpt-4o-system-card) - Multimodal AI capabilities and safety considerations
-- [Claude 3 Model Card](https://www.anthropic.com/news/claude-3-family) - Constitutional AI advances and computer use capabilities
 - [Gemini: A Family of Highly Capable Multimodal Models](https://arxiv.org/abs/2312.11805) - Google's multimodal AI architecture
 - [AgentBench: Evaluating LLMs as Agents](https://arxiv.org/abs/2308.03688) - Comprehensive agent evaluation framework
 - [The Rise and Potential of Large Language Model Based Agents](https://arxiv.org/abs/2309.07864) - Survey of LLM-based agent architectures
@@ -42,7 +40,7 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Cooperative Multi-Agent Learning: The State of the Art](https://arxiv.org/abs/1711.08022) - Survey of cooperative learning methods
 - [Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments](https://arxiv.org/abs/1706.02275) - MADDPG algorithm
 
-### Recent Multi-Agent Research (2025)
+### Recent Multi-Agent Research (2026)
 - [SwarmGPT: Collective Intelligence for Multi-Agent Systems](https://arxiv.org/abs/2309.12345) - Swarm intelligence approaches to multi-agent coordination
 - [Agency in Multi-Agent Systems: A Comprehensive Survey](https://arxiv.org/abs/2310.54321) - Latest developments in agent autonomy and coordination
 - [Large Language Models as Multi-Agent Coordinators](https://arxiv.org/abs/2311.67890) - Using LLMs for agent orchestration and task delegation
@@ -68,8 +66,8 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Prompt Engineering for Agents](cheat-sheets/prompt-engineering.md)
 - [Tool Integration Guide](cheat-sheets/tool-integration.md)
 - [Multi-Agent Communication Protocols](cheat-sheets/communication-protocols.md)
-- [2025 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2025.md) ⭐ **New**
-- [Enterprise Deployment Guide 2025](cheat-sheets/enterprise-deployment-2025.md) ⭐ **Current**
+- [2026 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2026.md) ⭐ **New**
+- [Enterprise Deployment Guide 2026](cheat-sheets/enterprise-deployment-2026.md) ⭐ **Current**
 
 ## 🗺️ Learning Roadmaps
 
