@@ -655,7 +655,7 @@ It helps others discover this resource and motivates us to keep improving it.
 - **[🏆 Competitions](./resources/README.md#🏆-competitions-and-challenges)** - Active challenges and events
 - **[🔧 Development Tools](./tools/README.md#🛠️-development-tools)** - Debugging, monitoring, deployment
 - **[🎙️ Podcasts](./resources/README.md#🎙️-podcasts--audio-content)** - AI audio content and discussions
-- **[🚀 2025 Agent Patterns](./examples/agent-patterns-2025/)** - Latest implementation patterns and frameworks
+- **[🚀 2026 Agent Patterns](./examples/agent-patterns-2026/)** - Latest implementation patterns and frameworks
 
 ### 📈 Repository Stats
 - **🌟 40+ Frameworks** covered with comprehensive guides (Jan 2025 update)
