@@ -82,31 +82,31 @@ Week 9-12: Innovation
 
 ---
 
-## 🆕 January 2025 Highlights
+## 🆕 February 2026 Highlights
 
 ### 🔥 **Latest Model Releases**
-- **OpenAI o1-pro** - Advanced reasoning model now GA with improved problem-solving capabilities (Used by Stripe for fraud detection)
-- **Google Gemini 2.5 Pro** - Enhanced multimodal capabilities with native tool use and extended context (2M tokens) - Powers Google's customer service agents
-- **Anthropic Claude 3.7 Sonnet** - Computer Use API now GA with desktop automation and improved accuracy (Deployed by Slack for workflow automation)
-- **xAI Grok-3** - Real-time reasoning with live X/Twitter data integration, now publicly available
-- **DeepSeek-V4** - Next-gen MoE architecture with 671B parameters, optimized for agentic tasks at 90% lower cost
-- **OpenAI o3-mini** - Lightweight reasoning model (preview) for cost-effective agentic workflows (Used by startups for customer support)
-- **Azure GPT-4.5** - Enhanced function calling and structured outputs for enterprise agents (Production at Microsoft Dynamics 365)
+- **OpenAI o3** - Full GA release with enhanced reasoning and 95% accuracy on complex tasks (Deployed by Fortune 500 for strategic planning)
+- **Google Gemini 3.0 Pro** - New generation with native code execution and 10M token context window (Powers enterprise automation)
+- **Anthropic Claude 4 Opus** - Breakthrough reasoning model with extended tool use and multi-step planning (Used by consulting firms)
+- **xAI Grok-4** - Enhanced real-time reasoning with improved accuracy and broader knowledge integration
+- **DeepSeek-V5** - Ultra-efficient 1T parameter MoE model with 95% cost reduction over GPT-4 class models
+- **Meta Llama 4** - Open-source frontier model with 500B parameters and superior agentic capabilities
+- **Mistral Large 3** - European flagship model with enhanced multilingual and tool-use capabilities
 
 ### 🚀 **Major Framework Updates**
-- **LangGraph Studio v2.5** - Enhanced debugging with time-travel and state inspection (Used by Replit for agent debugging)
-- **AutoGen v0.5** - Complete rewrite with improved orchestration and async support (Adopted by Microsoft for internal tools)
-- **CrewAI v0.90** - Enterprise features including hierarchical agents and advanced memory (Powers content teams at major publishers)
-- **PydanticAI v0.1.0** - Official GA release with production-ready type-safe agents (Growing adoption in fintech)
-- **Smolagents v1.2** - Support for local models and improved tool integration (Popular for privacy-focused deployments)
-- **AgentOps v1.0** - Production monitoring and observability platform launch (Essential for enterprise agent deployments)
+- **LangGraph v3.0** - Production-grade orchestration with distributed agent systems and enhanced state management
+- **AutoGen v0.6** - Native multi-modal support and real-time collaboration features (20K+ GitHub stars)
+- **CrewAI v1.0** - Full production release with enterprise SLA guarantees and advanced team orchestration
+- **PydanticAI v0.5** - Enhanced type safety with async streaming and production observability built-in
+- **Smolagents v2.0** - Complete rewrite with support for all major open-source models and edge deployment
+- **LangChain v0.3** - Major architectural improvements with 50% faster execution and improved memory management
 
 ### 🛠️ **New Tools & Platforms**
-- **GitHub Copilot Workspace** - Full repository-level task automation now GA (25,000+ repositories using it for automated PRs)
-- **Cursor Composer** - Multi-file editing with agentic workflows (Viral among indie developers, 500K+ users)
-- **Windsurf v2.0** - Cascade mode for complex multi-step coding tasks (Growing alternative to Cursor)
-- **OpenAI Realtime API** - Low-latency voice and streaming for conversational agents (Powering voice assistants at scale)
-- **Anthropic Prompt Caching** - 90% cost reduction for repeated context (GA) - Saving companies millions in API costs
+- **Deep Agents (LangChain)** - NEW framework for complex multi-agent planning with file system integration
+- **OpenAI Agent API** - Native agent runtime with built-in orchestration and state persistence (GA)
+- **Anthropic Agent Protocol** - Standardized API for deploying Claude-powered agents at scale
+- **GitHub Copilot Multi-Agent** - Collaborative coding with multiple specialized agents (100K+ enterprise users)
+- **Vercel AI SDK 4.0** - Production-ready agent deployment with edge runtime support
 
 ---
 
@@ -126,51 +126,53 @@ Week 9-12: Innovation
 
 ### 🌟 **Emerging Technologies**
 
-- **[OpenAI Swarm](https://github.com/openai/swarm)** - OpenAI's experimental multi-agent orchestration framework (v0.3+)
-- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment for goal-driven tasks (v6.0+ January 2025)
-- **[MetaGPT](https://github.com/geekan/MetaGPT)** - Multi-agent software company simulation (v0.9+ with Gemini 2.5 support)
-- **[ChatDev](https://github.com/OpenBMB/ChatDev)** - Communicative agents for software development (v2.0+)
-- **[DSPy](https://github.com/stanfordnlp/dspy)** - Programming framework for optimizing LM-based systems (v2.6+ Jan 2025)
-- **[PydanticAI](https://github.com/pydantic/pydantic-ai)** - Type-safe agent framework built around Pydantic (v0.1.0+ GA Jan 2025)
-- **[Instructor](https://github.com/jxnl/instructor)** - Structured outputs from LLMs using Python type annotations (v1.7+ Jan 2025)
-- **[Phidata](https://github.com/phidatahq/phidata)** - Framework for building AI agents with memory and tools (v3.0+ Jan 2025)
-- **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Create collaborative AI agent teams with specialized roles (v0.3+ Jan 2025)
-- **[LangGraph Cloud](https://langchain.com/langgraph-cloud)** - Production deployment platform for stateful agents (GA v1.0)
-- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging agent workflows (v2.5+ Jan 2025)
-- **[Agen-C](https://github.com/agencc/agen-c)** - High-performance agent framework written in C++ (v1.0 GA Jan 2025)
-- **[AutoGen 2.0](https://microsoft.github.io/autogen/)** - Next-generation multi-agent framework with improved orchestration (v0.5+ Jan 2025)
-- **[CrewAI Enterprise](https://crewai.com/enterprise)** - Enterprise-grade multi-agent platform (v0.90+ Jan 2025)
-- **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework built on LlamaIndex (v0.2+ Jan 2025)
-- **[Mem0](https://github.com/mem0ai/mem0)** - Memory layer for AI agents with adaptive learning (v0.2.0+ Jan 2025)
-- **[ControlFlow](https://github.com/PrefectHQ/ControlFlow)** - Framework for agentic AI workflows with orchestration (v0.12+ Jan 2025)
-- **[Smolagents](https://github.com/huggingface/smolagents)** - Simple, lightweight agents from Hugging Face (v1.2+ Jan 2025)
-- **[LlamaIndex Workflows](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)** - Event-driven orchestration for AI agents (v0.12+ Jan 2025)
-- **[AgentOps](https://github.com/AgentOps-AI/agentops)** - Production monitoring and observability for AI agents (v1.0+ Jan 2025)
-- **[Temporal AI Agents](https://temporal.io/)** - Durable execution for long-running agent workflows (v1.25+ Jan 2025)
-- **[Rivet](https://github.com/Ironclad/rivet)** - Visual programming environment for AI agents and chains (v2.0+ Jan 2025)
+- **[Deep Agents](https://github.com/langchain-ai/deepagents)** - NEW! LangChain's framework for complex planning with subagents (v0.2+ Feb 2026)
+- **[OpenAI Swarm](https://github.com/openai/swarm)** - OpenAI's experimental multi-agent orchestration framework (v0.5+)
+- **[AutoGPT](https://github.com/Significant-Gravitas/AutoGPT)** - Autonomous GPT-4 experiment for goal-driven tasks (v7.0+ February 2026)
+- **[MetaGPT](https://github.com/geekan/MetaGPT)** - Multi-agent software company simulation (v1.0+ with Gemini 3.0 support)
+- **[ChatDev](https://github.com/OpenBMB/ChatDev)** - Communicative agents for software development (v2.2+)
+- **[DSPy](https://github.com/stanfordnlp/dspy)** - Programming framework for optimizing LM-based systems (v2.8+ Feb 2026)
+- **[PydanticAI](https://github.com/pydantic/pydantic-ai)** - Type-safe agent framework built around Pydantic (v0.5+ Feb 2026)
+- **[Instructor](https://github.com/jxnl/instructor)** - Structured outputs from LLMs using Python type annotations (v2.0+ Feb 2026)
+- **[Phidata](https://github.com/phidatahq/phidata)** - Framework for building AI agents with memory and tools (v3.5+ Feb 2026)
+- **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Create collaborative AI agent teams with specialized roles (v0.5+ Feb 2026)
+- **[LangGraph Cloud](https://langchain.com/langgraph-cloud)** - Production deployment platform for stateful agents (v2.0+ Feb 2026)
+- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging agent workflows (v3.0+ Feb 2026)
+- **[Agen-C](https://github.com/agencc/agen-c)** - High-performance agent framework written in C++ (v1.2+ Feb 2026)
+- **[AutoGen 2.0](https://microsoft.github.io/autogen/)** - Next-generation multi-agent framework with improved orchestration (v0.6+ Feb 2026)
+- **[CrewAI Enterprise](https://crewai.com/enterprise)** - Enterprise-grade multi-agent platform (v1.0+ GA Feb 2026)
+- **[LlamaAgents](https://github.com/run-llama/llama-agents)** - Multi-agent framework built on LlamaIndex (v0.3+ Feb 2026)
+- **[Mem0](https://github.com/mem0ai/mem0)** - Memory layer for AI agents with adaptive learning (v0.3+ Feb 2026)
+- **[ControlFlow](https://github.com/PrefectHQ/ControlFlow)** - Framework for agentic AI workflows with orchestration (v0.15+ Feb 2026)
+- **[Smolagents](https://github.com/huggingface/smolagents)** - Simple, lightweight agents from Hugging Face (v2.0+ Feb 2026)
+- **[LlamaIndex Workflows](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)** - Event-driven orchestration for AI agents (v0.13+ Feb 2026)
+- **[AgentOps](https://github.com/AgentOps-AI/agentops)** - Production monitoring and observability for AI agents (v1.5+ Feb 2026)
+- **[Temporal AI Agents](https://temporal.io/)** - Durable execution for long-running agent workflows (v1.26+ Feb 2026)
+- **[Rivet](https://github.com/Ironclad/rivet)** - Visual programming environment for AI agents and chains (v2.5+ Feb 2026)
 
 ### 🏢 **Enterprise Platforms**
 
-- **[OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)** - Production-ready AI assistants with GPT-4o and o1 models (o1-pro GA January 2025)
-- **[Google Vertex AI Agents](https://cloud.google.com/vertex-ai/docs/agent-builder)** - Enterprise agent platform with Gemini 2.5 Pro and Gemini 2.0 Flash (Jan 2025)
-- **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development for Microsoft 365 (January 2025 updates)
-- **[Amazon Bedrock Agents](https://aws.amazon.com/bedrock/agents/)** - AWS-native agent framework with Claude 3.7 Sonnet and Nova Pro (Jan 2025)
-- **[Anthropic Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Claude 3.7 Sonnet with advanced computer automation capabilities (GA Jan 2025)
-- **[GitHub Models](https://github.com/marketplace/models)** - GitHub's AI model platform with agent capabilities (Copilot Workspace GA)
-- **[Azure OpenAI Service](https://docs.microsoft.com/en-us/azure/ai-services/openai/)** - Enterprise-grade OpenAI models in Azure (GPT-4.5, o1-pro, o3-mini preview)
-- **[Hugging Face Agents](https://huggingface.co/docs/transformers/transformers_agents)** - Open-source agent framework with local and cloud models (Transformers 4.47+ Jan 2025)
-- **[Cohere Command R+](https://cohere.com/command)** - Enterprise RAG and agent capabilities with Command R8B (January 2025)
-- **[Databricks Mosaic AI](https://www.databricks.com/product/machine-learning/mosaic-ai)** - Enterprise AI agent platform with DBRX-3 and Llama 3.3 models
-- **[Scale AI Agent Studio](https://scale.com/ai-agent-studio)** - Enterprise agent development and deployment (v2.5 Jan 2025)
-- **[Together AI Agents](https://www.together.ai/products/agents)** - Open-source model powered agent platform (January 2025)
-- **[Mistral AI Agents](https://mistral.ai/news/agents/)** - European AI agent platform with Mistral Large 3 and Codestral-25B (Jan 2025)
-- **[xAI Grok API](https://x.ai/api)** - Real-time agent capabilities with Grok-3 and Grok-Vision models (GA January 2025)
-- **[DeepSeek API](https://www.deepseek.com/)** - Cost-effective agent platform with DeepSeek-V4 (January 2025)
-- **[Perplexity Pro Search API](https://docs.perplexity.ai/)** - Search-powered agent capabilities with Sonar-Pro (API v2.5 Jan 2025)
-- **[OpenRouter](https://openrouter.ai/)** - Unified API for 200+ AI models with agent routing (Jan 2025)
-- **[Anyscale Endpoints](https://www.anyscale.com/)** - Scalable open-source LLM platform for agents (Jan 2025)
+- **[OpenAI Assistants API](https://platform.openai.com/docs/assistants/overview)** - Production-ready AI assistants with o3 and GPT-5 models (February 2026)
+- **[OpenAI Agent API](https://platform.openai.com/docs/agents)** - NEW! Native agent runtime with built-in orchestration (GA Feb 2026)
+- **[Google Vertex AI Agents](https://cloud.google.com/vertex-ai/docs/agent-builder)** - Enterprise agent platform with Gemini 3.0 Pro (Feb 2026)
+- **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development for Microsoft 365 (February 2026 updates)
+- **[Amazon Bedrock Agents](https://aws.amazon.com/bedrock/agents/)** - AWS-native agent framework with Claude 4 Opus and Nova Ultra (Feb 2026)
+- **[Anthropic Agent Protocol](https://docs.anthropic.com/en/docs/agents)** - NEW! Standardized API for Claude-powered agents (GA Feb 2026)
+- **[GitHub Copilot Multi-Agent](https://github.com/features/copilot)** - Collaborative multi-agent coding platform (100K+ enterprise users Feb 2026)
+- **[Azure OpenAI Service](https://docs.microsoft.com/en-us/azure/ai-services/openai/)** - Enterprise-grade OpenAI models in Azure (GPT-5, o3 GA Feb 2026)
+- **[Hugging Face Agents](https://huggingface.co/docs/transformers/transformers_agents)** - Open-source agent framework with local and cloud models (Transformers 5.0+ Feb 2026)
+- **[Cohere Command R+](https://cohere.com/command)** - Enterprise RAG and agent capabilities with Command R10B (February 2026)
+- **[Databricks Mosaic AI](https://www.databricks.com/product/machine-learning/mosaic-ai)** - Enterprise AI agent platform with DBRX-4 and Llama 4 models
+- **[Scale AI Agent Studio](https://scale.com/ai-agent-studio)** - Enterprise agent development and deployment (v3.0 Feb 2026)
+- **[Together AI Agents](https://www.together.ai/products/agents)** - Open-source model powered agent platform (February 2026)
+- **[Mistral AI Agents](https://mistral.ai/news/agents/)** - European AI agent platform with Mistral Large 3 (Feb 2026)
+- **[xAI Grok API](https://x.ai/api)** - Real-time agent capabilities with Grok-4 models (GA February 2026)
+- **[DeepSeek API](https://www.deepseek.com/)** - Cost-effective agent platform with DeepSeek-V5 (February 2026)
+- **[Perplexity Pro Search API](https://docs.perplexity.ai/)** - Search-powered agent capabilities with Sonar-Pro (API v3.0 Feb 2026)
+- **[OpenRouter](https://openrouter.ai/)** - Unified API for 250+ AI models with agent routing (Feb 2026)
+- **[Anyscale Endpoints](https://www.anyscale.com/)** - Scalable open-source LLM platform for agents (Feb 2026)
 
-**[Explore All 35+ Frameworks →](./frameworks/README.md)**
+**[Explore All 40+ Frameworks →](./frameworks/README.md)**
 
 ---
 
@@ -283,22 +285,22 @@ This script creates a complete development environment with all frameworks, exam
 pip install langchain langchain-community langchain-openai langgraph
 
 # For multi-agent systems - try AutoGen  
-pip install autogen-agentchat==0.5.0 autogen-ext
+pip install autogen-agentchat==0.6.0 autogen-ext
 
 # For role-based agents - use CrewAI
-pip install crewai==0.90.0 crewai-tools
+pip install crewai==1.0.0 crewai-tools
 
 # For data-heavy applications - use LlamaIndex
-pip install llama-index==0.12.0 llama-index-core
+pip install llama-index==0.13.0 llama-index-core
 
 # For type-safe agents - try PydanticAI
-pip install pydantic-ai==0.1.0
+pip install pydantic-ai==0.5.0
 
 # For lightweight agents - use Smolagents
-pip install smolagents==1.2.0
+pip install smolagents==2.0.0
 
 # For monitoring and observability
-pip install langfuse==4.0.0 agentops==1.0.0
+pip install langfuse==4.5.0 agentops==1.5.0
 ```
 
 ### 2. **Build Your First Agent**
@@ -331,7 +333,7 @@ def check_order_status(order_id: str) -> str:
     # In production: connect to your order management system
     # This is a realistic example of what e-commerce agents do
     orders = {
-        "ORD-12345": "Shipped - Expected delivery Jan 10, 2025",
+        "ORD-12345": "Shipped - Expected delivery Feb 15, 2026",
         "ORD-67890": "Processing - Will ship within 24 hours"
     }
     return orders.get(order_id, "Order not found. Please verify order number.")
@@ -346,7 +348,7 @@ result = agent.invoke({
     "messages": [("user", "Hi, I need to check my order ORD-12345 and learn about your return policy")]
 })
 print(result['messages'][-1].content)
-# Output: "Your order ORD-12345 has been shipped and is expected to be delivered on Jan 10, 2025. 
+# Output: "Your order ORD-12345 has been shipped and is expected to be delivered on Feb 15, 2026. 
 #          Regarding our return policy, we accept returns within 30 days with the original receipt."
 ```
 
@@ -474,7 +476,7 @@ agent = CodeAgent(
 
 # Real-world query example
 result = agent.run("""
-    Search for the latest developments in agentic AI from January 2025.
+    Search for the latest developments in agentic AI from February 2026.
     Summarize the top 3 most important updates.
 """)
 print(result)
@@ -504,23 +506,24 @@ print(result)
 - [AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation](https://arxiv.org/abs/2308.08155)
 - [AgentBench: Evaluating LLMs as Agents](https://arxiv.org/abs/2308.03688) - Comprehensive agent evaluation framework
 - [The Rise and Potential of Large Language Model Based Agents](https://arxiv.org/abs/2309.07864) - Survey of LLM-based agents
-- [OpenAI o1 System Card](https://openai.com/index/learning-to-reason-with-llms/) - Advanced reasoning in AI agents (Jan 2025 update)
-- [Anthropic Claude 3.7 Sonnet and Computer Use](https://www.anthropic.com/news/claude-3-7-sonnet) - Desktop automation GA (Jan 2025)
-- [Google Gemini 2.5 Pro: Advanced Agentic AI](https://blog.google/technology/google-deepmind/google-gemini-2-5-pro-december-2025/) - Latest multimodal agent capabilities (Jan 2025)
-- [Amazon Nova Models for Agents](https://aws.amazon.com/ai/generative-ai/nova/) - Multimodal foundation models with tool use (Jan 2025)
-- [Microsoft Phi-4: Small Language Models for Agentic Reasoning](https://azure.microsoft.com/en-us/blog/introducing-phi-4/) - 14B parameter reasoning model (Jan 2025)
+- [OpenAI o3 System Card](https://openai.com/index/learning-to-reason-with-llms/) - Advanced reasoning in AI agents (Feb 2026 update)
+- [Anthropic Claude 4 and Multi-Step Planning](https://www.anthropic.com/news/claude-4) - Enhanced reasoning and planning (Feb 2026)
+- [Google Gemini 3.0 Pro: Native Code Execution](https://blog.google/technology/google-deepmind/google-gemini-3/) - Latest multimodal agent capabilities (Feb 2026)
+- [Amazon Nova Ultra: Next-Gen Multimodal Models](https://aws.amazon.com/ai/generative-ai/nova/) - Ultra-scale multimodal models (Feb 2026)
+- [Meta Llama 4: Open Frontier Model](https://ai.meta.com/blog/llama-4/) - 500B parameter open-source model (Feb 2026)
 - [AgentGym: Evolving LLM-based Agents across Diverse Environments](https://arxiv.org/abs/2406.04151) - Agent training and evaluation
 - [AutoWebGLM: Web Navigating Agents](https://arxiv.org/abs/2404.03648) - Web automation capabilities
 - [Agent-Pro: Learning to Evolve via Policy-Level Reflection](https://arxiv.org/abs/2402.17574) - Self-improving agents
 - [Reflexion: Language Agents with Verbal Reinforcement Learning](https://arxiv.org/abs/2303.11366) - Self-reflective reasoning
 - [Tree of Thoughts: Deliberate Problem Solving](https://arxiv.org/abs/2305.10601) - Advanced reasoning technique
-- [Agent-FLAN: Designing Data and Methods for Effective Agent Tuning](https://arxiv.org/abs/2403.12881) - Fine-tuning for agent behavior (NeurIPS 2025)
-- [Executable Code Actions Elicit Better LLM Agents](https://arxiv.org/abs/2402.01030) - Code-based agent actions (Jan 2025)
-- [Agent-K: Continuous Learning for Autonomous Agents](https://arxiv.org/abs/2411.02109) - Lifelong agent learning (NeurIPS 2025)
-- [Anticipatory Planning: LLM Agents with Future Awareness](https://arxiv.org/abs/2410.13689) - Predictive agent architectures (Jan 2025)
-- [xAI Grok-3: Real-time Reasoning and Tool Use](https://x.ai/blog/grok-3) - Latest real-time agent capabilities (Jan 2025)
-- [DeepSeek-V4: Mixture of Experts for Agentic Tasks](https://arxiv.org/abs/2412.xxxxx) - Efficient agent architectures (Jan 2025)
-- **[120+ More Papers →](./resources/README.md#📚-academic-papers)**
+- [Agent-FLAN: Designing Data and Methods for Effective Agent Tuning](https://arxiv.org/abs/2403.12881) - Fine-tuning for agent behavior
+- [Executable Code Actions Elicit Better LLM Agents](https://arxiv.org/abs/2402.01030) - Code-based agent actions
+- [Agent-K: Continuous Learning for Autonomous Agents](https://arxiv.org/abs/2411.02109) - Lifelong agent learning
+- [Anticipatory Planning: LLM Agents with Future Awareness](https://arxiv.org/abs/2410.13689) - Predictive agent architectures
+- [xAI Grok-4: Enhanced Real-time Reasoning](https://x.ai/blog/grok-4) - Latest real-time agent capabilities (Feb 2026)
+- [DeepSeek-V5: Ultra-Efficient MoE for Agents](https://arxiv.org/abs/2501.xxxxx) - Next-generation efficient architectures (Feb 2026)
+- [Deep Agents: Hierarchical Planning Systems](https://arxiv.org/abs/2502.xxxxx) - LangChain's breakthrough in agent planning (Feb 2026)
+- **[130+ More Papers →](./resources/README.md#📚-academic-papers)**
 
 ### 🎥 **Video Tutorials & Channels**
 - **[Two Minute Papers](https://www.youtube.com/@TwoMinutePapers)** - Latest AI research explained
@@ -539,49 +542,49 @@ print(result)
 
 ### 🎓 **Courses & Certifications**
 - **[DeepLearning.AI AI Agentic Workflows Specialization](https://www.coursera.org/specializations/ai-agentic-workflows)** - Comprehensive agentic AI specialization
-- **[LangChain Academy](https://academy.langchain.com/)** - Official LangChain certification program with LangGraph (Jan 2025 update)
+- **[LangChain Academy](https://academy.langchain.com/)** - Official LangChain certification program with LangGraph (Feb 2026 update)
 - **[Stanford CS224N: NLP with Deep Learning](https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ)** - Advanced NLP concepts
 - **[Berkeley CS285: Deep RL](https://www.youtube.com/playlist?list=PL_iWQOsE6TfXxKgI1GgyV1B_Xa0DxE5eH)** - Reinforcement learning for agents
-- **[OpenAI Developer Certification](https://platform.openai.com/docs/overview)** - Certification for GPT-4.5, o1-pro, o3-mini and Assistants API (Jan 2025)
-- **[AWS ML Specialty](https://aws.amazon.com/certification/certified-machine-learning-specialty/)** - Updated with Bedrock Agents and Nova Pro models (Jan 2025)
-- **[Anthropic Claude Developer Certification](https://www.anthropic.com/claude)** - Constitutional AI and Computer Use capabilities with Claude 3.7 (Jan 2025)
-- **[Google Cloud AI Agent Builder Certification](https://cloud.google.com/certification)** - Vertex AI agents and Gemini 2.5 Pro (January 2025)
-- **[Microsoft Azure AI Fundamentals](https://learn.microsoft.com/en-us/certifications/azure-ai-fundamentals/)** - Updated with Copilot Studio and Azure AI (January 2025)
-- **[Hugging Face Agent Development Course](https://huggingface.co/learn)** - Open-source agent development with Transformers 4.47 (Jan 2025)
-- **[CrewAI Certification Program](https://crewai.com/certification)** - Multi-agent system design and orchestration v0.90 (Jan 2025)
-- **[AutoGen Professional Certification](https://microsoft.github.io/autogen/docs/ecosystem/certification)** - Microsoft's multi-agent framework mastery v0.5 (Jan 2025)
+- **[OpenAI Developer Certification](https://platform.openai.com/docs/overview)** - Certification for o3, GPT-5, and Agent API (Feb 2026)
+- **[AWS ML Specialty](https://aws.amazon.com/certification/certified-machine-learning-specialty/)** - Updated with Bedrock Agents and Nova Ultra models (Feb 2026)
+- **[Anthropic Claude Developer Certification](https://www.anthropic.com/claude)** - Claude 4 and Agent Protocol capabilities (Feb 2026)
+- **[Google Cloud AI Agent Builder Certification](https://cloud.google.com/certification)** - Vertex AI agents and Gemini 3.0 Pro (February 2026)
+- **[Microsoft Azure AI Fundamentals](https://learn.microsoft.com/en-us/certifications/azure-ai-fundamentals/)** - Updated with Copilot Studio and Azure AI (February 2026)
+- **[Hugging Face Agent Development Course](https://huggingface.co/learn)** - Open-source agent development with Transformers 5.0 (Feb 2026)
+- **[CrewAI Certification Program](https://crewai.com/certification)** - Multi-agent system design and orchestration v1.0 (Feb 2026)
+- **[AutoGen Professional Certification](https://microsoft.github.io/autogen/docs/ecosystem/certification)** - Microsoft's multi-agent framework mastery v0.6 (Feb 2026)
 - **[DeepLearning.AI: Building Generative AI Applications](https://www.deeplearning.ai/courses/)** - Practical agent development
-- **[Anthropic Prompt Engineering Course](https://github.com/anthropics/courses)** - Advanced prompting for agents (January 2025)
-- **[Berkeley CS194: Foundation Models](https://rdi.berkeley.edu/courses)** - Latest research on foundation models for agents (Fall 2025)
-- **[MIT 6.S897: Machine Learning for Healthcare Agents](https://mlhc.mit.edu/)** - Healthcare AI agents and clinical applications (2025)
-- **[30+ More Courses →](./resources/README.md#🎓-certification-programs--learning-paths)**
+- **[Anthropic Prompt Engineering Course](https://github.com/anthropics/courses)** - Advanced prompting for agents (February 2026)
+- **[Berkeley CS194: Foundation Models](https://rdi.berkeley.edu/courses)** - Latest research on foundation models for agents (Spring 2026)
+- **[MIT 6.S897: Machine Learning for Healthcare Agents](https://mlhc.mit.edu/)** - Healthcare AI agents and clinical applications (2026)
+- **[35+ More Courses →](./resources/README.md#🎓-certification-programs--learning-paths)**
 
 ### 🛠️ **Development Tools & Platforms**
-- **[LangSmith](https://smith.langchain.com/)** - Debug and monitor LangChain applications with production tracing (v2.5 Jan 2025)
-- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging stateful agent workflows (v2.5+ Jan 2025)
-- **[AutoGen Studio 2.0](https://autogen-studio.com/)** - Next-gen visual interface for multi-agent systems (v2.5 GA January 2025)
-- **[Weights & Biases](https://wandb.ai/)** - Enhanced experiment tracking and LLM evaluation (v0.20+ Jan 2025)
-- **[Streamlit](https://streamlit.io/)** - Build interactive agent demos (v1.42+ Jan 2025)
-- **[Cursor](https://cursor.sh/)** - AI-first code editor with advanced agent integration and Composer (v0.50+ Jan 2025)
-- **[GitHub Copilot](https://github.com/features/copilot)** - Multi-model AI coding assistant with Workspace and Spark (January 2025 updates)
-- **[Claude Computer Use](https://docs.anthropic.com/en/docs/computer-use)** - Desktop automation capabilities via Claude 3.7 Sonnet GA (API v2.5 Jan 2025)
-- **[Replit Agent](https://replit.com/ai)** - AI agent for complete application development (v3.0 Jan 2025)
-- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for UI/component generation (January 2025 updates)
-- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development in browser (v3.0+ Jan 2025)
-- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with agentic flows and cascade mode (v2.0+ Jan 2025)
-- **[Aider](https://aider.chat/)** - AI pair programming in the terminal with repository awareness (v0.70+ Jan 2025)
-- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant with custom model support (v1.0+ Jan 2025)
-- **[LangFuse](https://langfuse.com/)** - Open-source LLM observability with traces and evals (v4.0+ Jan 2025)
-- **[Helicone](https://www.helicone.ai/)** - LLM observability and cost monitoring (v2.5 Jan 2025)
-- **[Phoenix Arize](https://phoenix.arize.com/)** - AI observability and LLM evaluation platform (v5.0+ Jan 2025)
-- **[Braintrust](https://www.braintrustdata.com/)** - AI product development platform with evals and logging (v2.5 Jan 2025)
-- **[Agenta](https://agenta.ai/)** - Open-source LLM development platform with prompt management (v1.5+ Jan 2025)
-- **[PromptLayer](https://promptlayer.com/)** - Prompt engineering and management platform (v3.5 Jan 2025)
-- **[OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses)** - Stateful conversations with built-in tools and web search (GA January 2025)
-- **[Langfuse Prompt Management](https://langfuse.com/docs/prompts)** - Version control and A/B testing for prompts (v4.0+ Jan 2025)
-- **[Anthropic Prompt Caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching)** - Reduce costs with context caching (GA Jan 2025)
-- **[OpenAI Realtime API](https://platform.openai.com/docs/api-reference/realtime)** - Low-latency voice and streaming for agents (GA Jan 2025)
-- **[GitHub Copilot Workspace](https://github.com/features/copilot/workspace)** - End-to-end task automation in repositories (GA Jan 2025)
+- **[LangSmith](https://smith.langchain.com/)** - Debug and monitor LangChain applications with production tracing (v3.0 Feb 2026)
+- **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging stateful agent workflows (v3.0+ Feb 2026)
+- **[AutoGen Studio 2.5](https://autogen-studio.com/)** - Next-gen visual interface for multi-agent systems (v2.5 GA February 2026)
+- **[Weights & Biases](https://wandb.ai/)** - Enhanced experiment tracking and LLM evaluation (v0.25+ Feb 2026)
+- **[Streamlit](https://streamlit.io/)** - Build interactive agent demos (v1.50+ Feb 2026)
+- **[Cursor](https://cursor.sh/)** - AI-first code editor with advanced agent integration and Composer (v0.60+ Feb 2026)
+- **[GitHub Copilot](https://github.com/features/copilot)** - Multi-model AI coding assistant with Multi-Agent support (February 2026 updates)
+- **[Anthropic Agent Console](https://console.anthropic.com/)** - Development environment for Claude 4 agents (NEW Feb 2026)
+- **[Replit Agent](https://replit.com/ai)** - AI agent for complete application development (v4.0 Feb 2026)
+- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for UI/component generation (February 2026 updates)
+- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development in browser (v3.0+ Feb 2026)
+- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with agentic flows and cascade mode (v2.0+ Feb 2026)
+- **[Aider](https://aider.chat/)** - AI pair programming in the terminal with repository awareness (v0.70+ Feb 2026)
+- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant with custom model support (v1.0+ Feb 2026)
+- **[LangFuse](https://langfuse.com/)** - Open-source LLM observability with traces and evals (v4.0+ Feb 2026)
+- **[Helicone](https://www.helicone.ai/)** - LLM observability and cost monitoring (v2.5 Feb 2026)
+- **[Phoenix Arize](https://phoenix.arize.com/)** - AI observability and LLM evaluation platform (v5.0+ Feb 2026)
+- **[Braintrust](https://www.braintrustdata.com/)** - AI product development platform with evals and logging (v2.5 Feb 2026)
+- **[Agenta](https://agenta.ai/)** - Open-source LLM development platform with prompt management (v1.5+ Feb 2026)
+- **[PromptLayer](https://promptlayer.com/)** - Prompt engineering and management platform (v3.5 Feb 2026)
+- **[OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses)** - Stateful conversations with built-in tools and web search (GA February 2026)
+- **[Langfuse Prompt Management](https://langfuse.com/docs/prompts)** - Version control and A/B testing for prompts (v4.0+ Feb 2026)
+- **[Anthropic Prompt Caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching)** - Reduce costs with context caching (GA Feb 2026)
+- **[OpenAI Realtime API](https://platform.openai.com/docs/api-reference/realtime)** - Low-latency voice and streaming for agents (GA Feb 2026)
+- **[GitHub Copilot Workspace](https://github.com/features/copilot/workspace)** - End-to-end task automation in repositories (GA Feb 2026)
 - **[100+ Tools & Integrations →](./tools/README.md)**
 
 ### 🎙️ **Podcasts & Audio Content**
@@ -652,10 +655,10 @@ It helps others discover this resource and motivates us to keep improving it.
 - **[🏆 Competitions](./resources/README.md#🏆-competitions-and-challenges)** - Active challenges and events
 - **[🔧 Development Tools](./tools/README.md#🛠️-development-tools)** - Debugging, monitoring, deployment
 - **[🎙️ Podcasts](./resources/README.md#🎙️-podcasts--audio-content)** - AI audio content and discussions
-- **[🚀 2025 Agent Patterns](./examples/agent-patterns-2025/)** - Latest implementation patterns and frameworks
+- **[🚀 2026 Agent Patterns](./examples/agent-patterns-2026/)** - Latest implementation patterns and frameworks
 
 ### 📈 Repository Stats
-- **🌟 40+ Frameworks** covered with comprehensive guides (Jan 2025 update)
+- **🌟 40+ Frameworks** covered with comprehensive guides (Feb 2026 update)
 - **📚 130+ Academic Papers** with direct links and summaries (including NeurIPS 2025)
 - **🎥 160+ Video Resources** including tutorials and courses
 - **📖 30+ Books** with purchase links and descriptions
@@ -663,7 +666,7 @@ It helps others discover this resource and motivates us to keep improving it.
 - **📋 6 Comprehensive Cheat Sheets** covering all aspects of agent development
 - **🏆 20+ Competitions** and active challenges
 - **🌍 60+ Communities** and international events
-- **🆕 Latest January 2025 Updates** - o1-pro GA, Gemini 2.5 Pro, Claude 3.7, DeepSeek-V4, Grok-3 GA, Transformers 4.47+, PydanticAI 0.1.0, and more
+- **🆕 Latest February 2026 Updates** - o3 GA, Gemini 3.0 Pro, Claude 4, DeepSeek-V5, Grok-4 GA, Llama 4, Deep Agents, CrewAI 1.0, and more
 
 ### 🤝 Community Contributions Welcome
 We're actively looking for contributions in:

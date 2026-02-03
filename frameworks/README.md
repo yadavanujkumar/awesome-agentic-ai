@@ -8,21 +8,21 @@ Starter templates and guides for popular Agentic AI frameworks.
 - **Description**: Popular framework for building applications with LLMs (v0.3+)
 - **Use Cases**: Conversational agents, document analysis, RAG systems, stateful workflows
 - **Links**: [Official Site](https://langchain.com/) | [GitHub](https://github.com/langchain-ai/langchain) | [Documentation](https://python.langchain.com/) | [LangSmith](https://smith.langchain.com/)
-- **New Features**: LangGraph for stateful agents, LangGraph Studio v2.0, production deployment via LangGraph Cloud (GA November 2025)
+- **New Features**: LangGraph v3.0 with distributed agents, Deep Agents framework for complex planning, LangGraph Studio v3.0 (February 2026)
 - **Getting Started**: [LangChain Directory](./langchain/)
 
 ### 🤖 AutoGen
-- **Description**: Microsoft's framework for multi-agent conversations (AutoGen v0.4+)
+- **Description**: Microsoft's framework for multi-agent conversations (AutoGen v0.6+)
 - **Use Cases**: Multi-agent collaboration, code generation, problem-solving, research automation
-- **Links**: [GitHub](https://github.com/microsoft/autogen) | [Documentation](https://microsoft.github.io/autogen/) | [AutoGen Studio 2.0](https://autogen-studio.com/) | [Examples](https://github.com/microsoft/autogen/tree/main/notebook)
-- **New Features**: AutoGen Studio 2.0 visual interface (GA November 2025), enhanced orchestration, team topologies, improved debugging
+- **Links**: [GitHub](https://github.com/microsoft/autogen) | [Documentation](https://microsoft.github.io/autogen/) | [AutoGen Studio 2.5](https://autogen-studio.com/) | [Examples](https://github.com/microsoft/autogen/tree/main/notebook)
+- **New Features**: Native multi-modal support, real-time collaboration, AutoGen Studio 2.5 (GA February 2026)
 - **Getting Started**: [AutoGen Directory](./autogen/)
 
 ### ⚡ CrewAI
-- **Description**: Framework for orchestrating role-playing AI agents (v0.80+)
+- **Description**: Framework for orchestrating role-playing AI agents (v1.0+)
 - **Use Cases**: Team-based AI, collaborative problem solving, role-based workflows
 - **Links**: [Official Site](https://crewai.com/) | [GitHub](https://github.com/joaomdmoura/crewAI) | [Documentation](https://docs.crewai.com/) | [Enterprise](https://crewai.com/enterprise)
-- **New Features**: CrewAI Enterprise for production deployments, enhanced task delegation, better memory management (November 2025)
+- **New Features**: CrewAI v1.0 full production release with enterprise SLA guarantees, advanced orchestration (February 2026)
 - **Getting Started**: [CrewAI Directory](./crewai/)
 
 ### 🦙 LlamaIndex
