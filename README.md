@@ -476,7 +476,7 @@ agent = CodeAgent(
 
 # Real-world query example
 result = agent.run("""
-    Search for the latest developments in agentic AI from January 2025.
+    Search for the latest developments in agentic AI from February 2026.
     Summarize the top 3 most important updates.
 """)
 print(result)
@@ -569,22 +569,22 @@ print(result)
 - **[GitHub Copilot](https://github.com/features/copilot)** - Multi-model AI coding assistant with Multi-Agent support (February 2026 updates)
 - **[Anthropic Agent Console](https://console.anthropic.com/)** - Development environment for Claude 4 agents (NEW Feb 2026)
 - **[Replit Agent](https://replit.com/ai)** - AI agent for complete application development (v4.0 Feb 2026)
-- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for UI/component generation (January 2025 updates)
-- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development in browser (v3.0+ Jan 2025)
-- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with agentic flows and cascade mode (v2.0+ Jan 2025)
-- **[Aider](https://aider.chat/)** - AI pair programming in the terminal with repository awareness (v0.70+ Jan 2025)
-- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant with custom model support (v1.0+ Jan 2025)
-- **[LangFuse](https://langfuse.com/)** - Open-source LLM observability with traces and evals (v4.0+ Jan 2025)
-- **[Helicone](https://www.helicone.ai/)** - LLM observability and cost monitoring (v2.5 Jan 2025)
-- **[Phoenix Arize](https://phoenix.arize.com/)** - AI observability and LLM evaluation platform (v5.0+ Jan 2025)
-- **[Braintrust](https://www.braintrustdata.com/)** - AI product development platform with evals and logging (v2.5 Jan 2025)
-- **[Agenta](https://agenta.ai/)** - Open-source LLM development platform with prompt management (v1.5+ Jan 2025)
-- **[PromptLayer](https://promptlayer.com/)** - Prompt engineering and management platform (v3.5 Jan 2025)
-- **[OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses)** - Stateful conversations with built-in tools and web search (GA January 2025)
-- **[Langfuse Prompt Management](https://langfuse.com/docs/prompts)** - Version control and A/B testing for prompts (v4.0+ Jan 2025)
-- **[Anthropic Prompt Caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching)** - Reduce costs with context caching (GA Jan 2025)
-- **[OpenAI Realtime API](https://platform.openai.com/docs/api-reference/realtime)** - Low-latency voice and streaming for agents (GA Jan 2025)
-- **[GitHub Copilot Workspace](https://github.com/features/copilot/workspace)** - End-to-end task automation in repositories (GA Jan 2025)
+- **[v0.dev](https://v0.dev/)** - Vercel's AI agent for UI/component generation (February 2026 updates)
+- **[Bolt.new](https://bolt.new/)** - AI-powered full-stack web development in browser (v3.0+ Feb 2026)
+- **[Windsurf](https://codeium.com/windsurf)** - AI-first IDE with agentic flows and cascade mode (v2.0+ Feb 2026)
+- **[Aider](https://aider.chat/)** - AI pair programming in the terminal with repository awareness (v0.70+ Feb 2026)
+- **[Continue.dev](https://continue.dev/)** - Open-source AI coding assistant with custom model support (v1.0+ Feb 2026)
+- **[LangFuse](https://langfuse.com/)** - Open-source LLM observability with traces and evals (v4.0+ Feb 2026)
+- **[Helicone](https://www.helicone.ai/)** - LLM observability and cost monitoring (v2.5 Feb 2026)
+- **[Phoenix Arize](https://phoenix.arize.com/)** - AI observability and LLM evaluation platform (v5.0+ Feb 2026)
+- **[Braintrust](https://www.braintrustdata.com/)** - AI product development platform with evals and logging (v2.5 Feb 2026)
+- **[Agenta](https://agenta.ai/)** - Open-source LLM development platform with prompt management (v1.5+ Feb 2026)
+- **[PromptLayer](https://promptlayer.com/)** - Prompt engineering and management platform (v3.5 Feb 2026)
+- **[OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses)** - Stateful conversations with built-in tools and web search (GA February 2026)
+- **[Langfuse Prompt Management](https://langfuse.com/docs/prompts)** - Version control and A/B testing for prompts (v4.0+ Feb 2026)
+- **[Anthropic Prompt Caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching)** - Reduce costs with context caching (GA Feb 2026)
+- **[OpenAI Realtime API](https://platform.openai.com/docs/api-reference/realtime)** - Low-latency voice and streaming for agents (GA Feb 2026)
+- **[GitHub Copilot Workspace](https://github.com/features/copilot/workspace)** - End-to-end task automation in repositories (GA Feb 2026)
 - **[100+ Tools & Integrations →](./tools/README.md)**
 
 ### 🎙️ **Podcasts & Audio Content**
@@ -658,7 +658,7 @@ It helps others discover this resource and motivates us to keep improving it.
 - **[🚀 2026 Agent Patterns](./examples/agent-patterns-2026/)** - Latest implementation patterns and frameworks
 
 ### 📈 Repository Stats
-- **🌟 40+ Frameworks** covered with comprehensive guides (Jan 2025 update)
+- **🌟 40+ Frameworks** covered with comprehensive guides (Feb 2026 update)
 - **📚 130+ Academic Papers** with direct links and summaries (including NeurIPS 2025)
 - **🎥 160+ Video Resources** including tutorials and courses
 - **📖 30+ Books** with purchase links and descriptions
@@ -666,7 +666,7 @@ It helps others discover this resource and motivates us to keep improving it.
 - **📋 6 Comprehensive Cheat Sheets** covering all aspects of agent development
 - **🏆 20+ Competitions** and active challenges
 - **🌍 60+ Communities** and international events
-- **🆕 Latest January 2025 Updates** - o1-pro GA, Gemini 2.5 Pro, Claude 3.7, DeepSeek-V4, Grok-3 GA, Transformers 4.47+, PydanticAI 0.1.0, and more
+- **🆕 Latest February 2026 Updates** - o3 GA, Gemini 3.0 Pro, Claude 4, DeepSeek-V5, Grok-4 GA, Llama 4, Deep Agents, CrewAI 1.0, and more
 
 ### 🤝 Community Contributions Welcome
 We're actively looking for contributions in:

@@ -507,7 +507,7 @@ Cutting-edge research and production systems (8-12 weeks)
 ## 🌍 International Communities & Events
 
 ### 2025/2026 Major Conferences
-- **[NeurIPS 2025](https://neurips.cc/)** - Premier ML conference (December 2025, Vancouver)
+- **[NeurIPS 2025](https://neurips.cc/)** - Premier ML conference (February 2026, Vancouver)
 - **[ICML 2025](https://icml.cc/)** - International Conference on Machine Learning (July 2025, Vienna)
 - **[ICLR 2025](https://iclr.cc/)** - International Conference on Learning Representations (May 2025, Singapore)
 - **[AAAI 2025](https://aaai.org/Conferences/AAAI/)** - Association for the Advancement of AI (February 2025, Philadelphia)
@@ -515,7 +515,7 @@ Cutting-edge research and production systems (8-12 weeks)
 - **[AAMAS 2025](https://www.aamas2025.org/)** - Autonomous Agents and Multi-Agent Systems (May 2025, Detroit)
 
 ### Agent-Specific Events (2025/2026)
-- **[Agent AI Summit 2025](https://agentaisummit.com/)** - Dedicated agent AI conference (December 2025)
+- **[Agent AI Summit 2025](https://agentaisummit.com/)** - Dedicated agent AI conference (February 2026)
 - **[LangChain AI Conference](https://langchain.com/conference)** - Annual LangChain community event (2025)
 - **[AutoGen Symposium](https://microsoft.github.io/autogen/events/)** - Microsoft's multi-agent event (Q1 2025)
 - **[CrewAI DevCon](https://crewai.com/devcon)** - Role-based agent development (Q2 2025)
