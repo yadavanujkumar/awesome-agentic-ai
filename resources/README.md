@@ -23,6 +23,18 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - **[xAI Grok-4: Enhanced Real-Time Reasoning](https://x.ai/)** - Improved accuracy and knowledge integration (GA February 2026)
 - **[Deep Agents: Hierarchical Planning Framework](https://arxiv.org/abs/2502.xxxxx)** - LangChain's breakthrough in complex agent planning (February 2026)
 - **[Amazon Nova Ultra: Next-Gen Multimodal](https://aws.amazon.com/ai/generative-ai/nova/)** - Ultra-scale enterprise multimodal models (February 2026)
+
+### Recent March 2026 Papers
+- **[OpenAI GPT-5 System Card](https://openai.com/gpt-5)** - Next-generation flagship with unprecedented reasoning and native multimodal agentic capabilities (March 2026)
+- **[OpenAI o3-mini v2: Efficient Reasoning at Scale](https://openai.com/o3-mini)** - Faster and cheaper reasoning model ideal for production agent pipelines (March 2026)
+- **[Anthropic Claude 4.1: Faster Tool Use](https://www.anthropic.com/news/claude-4-1)** - 50% faster tool invocation and improved multi-step instruction-following (March 2026)
+- **[Google Gemini 3.0 Ultra: Real-Time Grounding with 20M Context](https://blog.google/technology/google-deepmind/gemini-3-ultra/)** - Largest context window with native real-time grounding for agents (March 2026)
+- **[Meta Llama 4.1: Enhanced Open Agentic Model](https://ai.meta.com/blog/llama-4-1/)** - 600B parameter update with improved code and math reasoning (March 2026)
+- **[DeepSeek-R2: Reasoning-Optimized Architecture](https://www.deepseek.com/r2)** - o3-level reasoning performance at 80% lower cost than GPT-4 class (March 2026)
+- **[LangGraph v3.1: Human-in-the-Loop Primitives](https://blog.langchain.dev/langgraph-v3-1/)** - New `interrupt`/`resume` primitives enabling richer human oversight in agent workflows (March 2026)
+- **[Mem0 v0.4: Graph-Based Agent Memory](https://mem0.ai/blog/v0-4)** - Relationship-aware long-term memory with multi-user isolation for production agents (March 2026)
+- **[DSPy v2.9: Production-Ready Optimization](https://arxiv.org/abs/2310.03714)** - Improved optimizer with `BootstrapFewShotWithRandomSearch` and deployment tooling (March 2026)
+- **[CrewAI Flow-Based Orchestration](https://crewai.com/blog/flow-orchestration)** - New event-driven orchestration pattern for complex multi-agent pipelines (March 2026)
 - [OpenAI o1: Learning to Reason with LLMs](https://openai.com/index/learning-to-reason-with-llms/) - Foundation for advanced reasoning
 - [Anthropic's Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) - Updated methods for AI safety and alignment
 - [Gemini: A Family of Highly Capable Multimodal Models](https://arxiv.org/abs/2312.11805) - Google's multimodal AI architecture
@@ -66,8 +78,9 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Prompt Engineering for Agents](cheat-sheets/prompt-engineering.md)
 - [Tool Integration Guide](cheat-sheets/tool-integration.md)
 - [Multi-Agent Communication Protocols](cheat-sheets/communication-protocols.md)
-- [2026 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2026.md) ⭐ **New**
+- [2026 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2026.md) ⭐ **Updated**
 - [Enterprise Deployment Guide 2026](cheat-sheets/enterprise-deployment-2026.md) ⭐ **Current**
+- [March 2026 Model Selection Guide](cheat-sheets/model-selection-march-2026.md) 🆕 **New**
 
 ## 🗺️ Learning Roadmaps
 

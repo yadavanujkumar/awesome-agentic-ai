@@ -80,11 +80,12 @@ Enterprise-focused agent implementations.
 ### 🚀 Latest 2026 Patterns
 Cutting-edge agent architectures and implementation patterns.
 
-- **[2026 Agent Patterns](./agent-patterns-2026/)** - Type-safe agents, adaptive memory, computer use ⭐ **New**
-- **PydanticAI Implementation** - Production-ready type-safe agents
-- **Mem0 Memory Agents** - Adaptive learning and personalization
-- **Computer Use Automation** - Desktop and application control
-- **Enterprise Deployment** - Scalable production patterns
+- **[February 2026 Agent Patterns](./agent-patterns-2026/)** - Type-safe agents, adaptive memory, computer use, Deep Agents
+- **[March 2026 Agent Patterns](./agent-patterns-march-2026/)** - GPT-5 orchestrators, human-in-the-loop, graph memory, mixed-model pipelines 🆕 **New**
+- **PydanticAI Implementation** - Production-ready type-safe agents with graph control flow (v0.6+)
+- **Mem0 Graph Memory Agents** - Relationship-aware long-term memory (v0.4+)
+- **Computer Use Automation** - Desktop and application control with Claude 4.1
+- **Enterprise Deployment** - Scalable production patterns with LangGraph Cloud v2.1
 
 ## Project Structure
 
