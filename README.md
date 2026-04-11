@@ -2,8 +2,8 @@
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![GitHub stars](https://img.shields.io/github/stars/yadavanujkumar/Agentic-AI-Resources?style=social)](https://github.com/yadavanujkumar/Agentic-AI-Resources/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/yadavanujkumar/Agentic-AI-Resources?style=social)](https://github.com/yadavanujkumar/Agentic-AI-Resources/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/yadavanujkumar/awesome-agentic-ai?style=social)](https://github.com/yadavanujkumar/awesome-agentic-ai/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/yadavanujkumar/awesome-agentic-ai?style=social)](https://github.com/yadavanujkumar/awesome-agentic-ai/network/members)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 > **Your complete hub for learning, building, and mastering Agentic AI systems** 🚀
@@ -82,33 +82,33 @@ Week 9-12: Innovation
 
 ---
 
-## 🆕 March 2026 Highlights
+## 🆕 April 2026 Highlights
 
 ### 🔥 **Latest Model Releases**
-- **OpenAI GPT-5** - Next-generation flagship model with unprecedented reasoning, 200K context, and native multimodal agent capabilities (GA March 2026)
-- **OpenAI o3-mini v2** - Faster, cheaper reasoning model with 99%+ accuracy on AIME 2025 — ideal for cost-sensitive production agents
-- **Google Gemini 3.0 Ultra** - Upgraded flagship with 20M token context and real-time grounding (Replacing Pro in enterprise pipelines)
-- **Anthropic Claude 4.1** - Incremental update with improved instruction-following, 50% faster tool use, and extended context caching
-- **Meta Llama 4.1** - Open-source update with 600B parameters and improved code and math reasoning for agentic tasks
-- **DeepSeek-R2** - New reasoning-optimized model offering o3-level performance at 80% lower cost (Strong community adoption)
-- **Mistral Medium 3** - New mid-tier European model with best-in-class multilingual tool use at competitive pricing
-- **Cohere Command R10B** - Production-focused model with improved RAG accuracy and enterprise-grade reliability
+- **OpenAI GPT-5** - Flagship frontier model for advanced reasoning and multimodal agent workflows (widely adopted in production stacks)
+- **OpenAI o3-mini v2** - Cost-efficient reasoning model for latency-sensitive and budget-sensitive agent pipelines
+- **Google Gemini 3.0 Ultra** - Long-context multimodal model for enterprise-scale orchestration and grounded tool use
+- **Anthropic Claude 4.1** - Strong instruction-following and reliable tool invocation for production assistants
+- **Meta Llama 4.1** - Open-weight option for self-hosted and compliance-focused agent deployments
+- **DeepSeek-R2** - High-efficiency reasoning model with strong cost/performance characteristics
+- **Mistral Medium 3** - Competitive multilingual model for EU-centric and privacy-conscious deployments
+- **Cohere Command R10B** - Enterprise-oriented model optimized for retrieval and workflow reliability
 
 ### 🚀 **Major Framework Updates**
-- **LangGraph v3.1** - New `interrupt` and `resume` primitives for human-in-the-loop workflows, plus improved streaming checkpointing
-- **AutoGen v0.7** - Declarative agent definitions with YAML-based configuration, improved group-chat routing (25K+ GitHub stars)
-- **CrewAI v1.1** - New Flow-based orchestration, enhanced memory backends (Redis/Postgres), and built-in eval tooling
-- **LlamaIndex v0.14** - Revamped query pipelines, new Agentic RAG patterns, and Property Graph Index for structured knowledge
-- **PydanticAI v0.6** - Graph-based control flow for multi-agent pipelines and expanded model provider support
-- **Smolagents v2.1** - Tool-calling improvements, new `MultiStepAgent` class, and expanded model provider compatibility
-- **DSPy v2.9** - Improved optimizer performance with new `BootstrapFewShotWithRandomSearch` and production-ready deployment tools
+- **LangGraph (latest stable)** - Human-in-the-loop controls (`interrupt`/`resume`) and stronger checkpoint-driven orchestration
+- **AutoGen (latest stable)** - Declarative agent definitions, richer routing, and improved collaboration patterns
+- **CrewAI (latest stable)** - Flow-based orchestration with stronger memory and built-in evaluation workflows
+- **LlamaIndex (latest stable)** - Improved agentic RAG, workflow composition, and structured knowledge retrieval
+- **PydanticAI (latest stable)** - Type-safe graph orchestration and broader provider interoperability
+- **Smolagents (latest stable)** - Better tool-calling ergonomics and multi-step execution patterns
+- **DSPy (latest stable)** - Faster optimization loops and improved production deployment support
 
 ### 🛠️ **New Tools & Platforms**
-- **OpenAI Responses API v2** - Stateful tool-calling improvements, built-in web search upgrades, and file-upload support (March 2026)
-- **LangGraph Studio v3.1** - Collaborative agent debugging, shareable traces, and one-click cloud deployment
-- **Mem0 v0.4** - Graph-based long-term memory with relationship-aware retrieval and multi-user isolation
-- **AgentOps v2.0** - Full rewrite with real-time dashboards, alerting, cost attribution per agent node, and SOC 2 compliance
-- **Weights & Biases Weave v1.0** - GA release of LLM tracing, evaluation pipelines, and agent replay for debugging
+- **OpenAI Responses API** - Stateful tool-calling, built-in web/search capabilities, and improved file/tool workflows
+- **LangGraph Studio** - Collaborative graph debugging, trace sharing, and faster deployment handoff
+- **Mem0** - Graph-aware long-term memory for personalization and multi-user agent contexts
+- **AgentOps** - Production observability with run-level dashboards, alerting, and cost attribution
+- **Weights & Biases Weave** - Mature tracing/evaluation workflows for iterative agent quality improvements
 
 ---
 
