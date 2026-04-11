@@ -85,8 +85,8 @@ resources/
 
 ### 1. Fork and Clone
 ```bash
-git clone https://github.com/YOUR-USERNAME/Agentic-AI-Resources.git
-cd Agentic-AI-Resources
+git clone https://github.com/YOUR-USERNAME/awesome-agentic-ai.git
+cd awesome-agentic-ai
 ```
 
 ### 2. Create a Branch
