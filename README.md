@@ -155,7 +155,7 @@ Week 9-12: Innovation
 ### 🏢 **Enterprise Platforms**
 
 - **[OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses)** - OpenAI's primary API for tool-calling, built-in tools, and agentic interactions.
-- **[OpenAI Agents SDK](https://developers.openai.com/api/docs/guides/agents)** - Higher-level agent runtime for handoffs, tracing, and guardrails.
+- **[OpenAI Agents SDK](https://developers.openai.com/docs/agents)** - Higher-level agent runtime for handoffs, tracing, and guardrails.
 - **[Google Vertex AI Agent Builder / Gemini Enterprise Agent Platform](https://cloud.google.com/vertex-ai/docs/agent-builder)** - Google Cloud platform for enterprise conversational and workflow agents.
 - **[Microsoft Copilot Studio](https://www.microsoft.com/en-us/microsoft-copilot/copilot-studio)** - Low-code agent development for Microsoft 365 and enterprise processes.
 - **[Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/)** - Code-first production orchestration for Microsoft-aligned .NET/Python agent systems.
