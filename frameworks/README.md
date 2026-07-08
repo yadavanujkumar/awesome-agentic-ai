@@ -4,33 +4,59 @@ Starter templates and guides for popular Agentic AI frameworks.
 
 ## Supported Frameworks
 
+> **July 2026 guidance:** start new production evaluations with LangGraph, CrewAI, LlamaIndex, Google ADK, OpenAI Agents SDK, or Microsoft Agent Framework depending on your deployment target. AutoGen and Semantic Kernel remain useful, but Microsoft now positions Microsoft Agent Framework as the successor path for new .NET/Python agent work. Avoid hard-coding speculative model/version claims; verify current package releases before pinning dependencies.
+
+### 🧭 Quick Selection Matrix
+
+| Need | Best starting points | Why |
+|------|----------------------|-----|
+| Durable multi-step workflows | LangGraph, Microsoft Agent Framework, Temporal | Explicit state, retries, checkpoints, interrupts, and observability. |
+| Role-based business teams | CrewAI, Microsoft Agent Framework | Crews/flows or enterprise multi-agent orchestration with governance. |
+| Document/RAG-heavy agents | LlamaIndex, LangChain/LangGraph, Haystack | Parsing, indexing, retrieval, and evaluation integrations. |
+| Google Cloud / Gemini | Google ADK, Vertex/Gemini Enterprise Agent Platform | Native Google tooling with multi-language ADK support. |
+| OpenAI-first agents | OpenAI Agents SDK, Responses API, LangGraph | Built-in tools, tracing, handoffs, and direct OpenAI API ergonomics. |
+| Type-safe Python apps | PydanticAI, Instructor, Microsoft Agent Framework | Validation, structured outputs, and maintainable contracts. |
+| Lightweight/local prototypes | Smolagents, PydanticAI, LlamaIndex | Low ceremony and good support for local/open models. |
+
 ### 🦜 LangChain
-- **Description**: Popular framework for building applications with LLMs (v0.3+)
+- **Description**: Popular framework for building LLM applications; pair with LangGraph for durable agent orchestration.
 - **Use Cases**: Conversational agents, document analysis, RAG systems, stateful workflows
 - **Links**: [Official Site](https://langchain.com/) | [GitHub](https://github.com/langchain-ai/langchain) | [Documentation](https://python.langchain.com/) | [LangSmith](https://smith.langchain.com/)
-- **New Features**: LangGraph v3.0 with distributed agents, Deep Agents framework for complex planning, LangGraph Studio v3.0 (February 2026)
+- **2026 Notes**: LangGraph is the recommended LangChain ecosystem layer for stateful, multi-actor workflows, checkpoints, interrupts, streaming, and human-in-the-loop agent control.
 - **Getting Started**: [LangChain Directory](./langchain/)
 
 ### 🤖 AutoGen
-- **Description**: Microsoft's framework for multi-agent conversations (AutoGen v0.6+)
+- **Description**: Microsoft's framework for multi-agent conversations; valuable for existing apps and research examples.
 - **Use Cases**: Multi-agent collaboration, code generation, problem-solving, research automation
-- **Links**: [GitHub](https://github.com/microsoft/autogen) | [Documentation](https://microsoft.github.io/autogen/) | [AutoGen Studio 2.5](https://autogen-studio.com/) | [Examples](https://github.com/microsoft/autogen/tree/main/notebook)
-- **New Features**: Native multi-modal support, real-time collaboration, AutoGen Studio 2.5 (GA February 2026)
+- **Links**: [GitHub](https://github.com/microsoft/autogen) | [Documentation](https://microsoft.github.io/autogen/) | [Examples](https://github.com/microsoft/autogen/tree/main/notebook)
+- **2026 Notes**: Microsoft Agent Framework is the recommended successor path for new Microsoft production agents; keep AutoGen in mind for migration and compatibility work.
 - **Getting Started**: [AutoGen Directory](./autogen/)
 
 ### ⚡ CrewAI
-- **Description**: Framework for orchestrating role-playing AI agents (v1.0+)
+- **Description**: Framework for orchestrating role-playing AI agents, crews, and flows.
 - **Use Cases**: Team-based AI, collaborative problem solving, role-based workflows
-- **Links**: [Official Site](https://crewai.com/) | [GitHub](https://github.com/joaomdmoura/crewAI) | [Documentation](https://docs.crewai.com/) | [Enterprise](https://crewai.com/enterprise)
-- **New Features**: CrewAI v1.0 full production release with enterprise SLA guarantees, advanced orchestration (February 2026)
+- **Links**: [Official Site](https://crewai.com/) | [GitHub](https://github.com/crewAIInc/crewAI) | [Documentation](https://docs.crewai.com/) | [Enterprise](https://crewai.com/enterprise)
+- **2026 Notes**: Current docs emphasize production crews, flows, memory, knowledge, guardrails, and observability for business automation.
 - **Getting Started**: [CrewAI Directory](./crewai/)
 
 ### 🦙 LlamaIndex
-- **Description**: Data framework for LLM applications (v0.11+)
+- **Description**: Data framework for LLM applications, document agents, RAG, parsing, and workflows.
 - **Use Cases**: RAG, knowledge bases, document indexing, agentic workflows
 - **Links**: [Official Site](https://www.llamaindex.ai/) | [GitHub](https://github.com/run-llama/llama_index) | [Documentation](https://docs.llamaindex.ai/) | [LlamaCloud](https://cloud.llamaindex.ai/)
-- **New Features**: LlamaIndex Workflows for event-driven orchestration, LlamaAgents for multi-agent systems, LlamaCloud for production
+- **2026 Notes**: Evaluate LlamaIndex when the core problem is document intelligence, retrieval, structured extraction, or event-driven RAG workflows.
 - **Getting Started**: [LlamaIndex Directory](./llamaindex/)
+
+### 🧩 Microsoft Agent Framework
+- **Description**: Microsoft's production framework for building single-agent and multi-agent workflows in .NET and Python.
+- **Use Cases**: Enterprise orchestration, multi-agent workflows, cross-provider model support, telemetry, type-safe workflows, migration from AutoGen/Semantic Kernel.
+- **Links**: [Documentation](https://learn.microsoft.com/en-us/agent-framework/) | [GitHub](https://github.com/microsoft/agent-framework) | [Migration from AutoGen](https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-autogen/)
+- **2026 Notes**: Direct successor from the AutoGen and Semantic Kernel teams for new Microsoft-aligned agent systems.
+
+### 🔎 Google Agent Development Kit (ADK)
+- **Description**: Google's open-source, code-first framework for building, debugging, evaluating, and deploying reliable agents.
+- **Use Cases**: Gemini and Google Cloud agents, multi-agent systems, enterprise deployments, model-agnostic agent apps.
+- **Links**: [Documentation](https://adk.dev/) | [Google Cloud Docs](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/adk) | [GitHub Docs](https://github.com/google/adk-docs)
+- **2026 Notes**: Available across Python, TypeScript, Go, Java, and Kotlin, making it a practical cross-language choice for Google-oriented teams.
 
 ### 🧠 Semantic Kernel
 - **Description**: Microsoft's SDK for AI orchestration
