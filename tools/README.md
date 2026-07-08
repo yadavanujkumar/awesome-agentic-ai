@@ -18,7 +18,6 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
 - **[Agent-to-Agent (A2A) patterns](https://github.com/a2aproject/A2A)** - Emerging interoperability pattern for cross-agent collaboration and task handoffs.
   - Use alongside MCP when separate agents need to communicate rather than only consume tools.
 
-
 ### Agent Development Utilities
 - **[LangSmith](https://smith.langchain.com/)** - Debug, test, and monitor LangChain applications with production tracing
   - [Documentation](https://docs.smith.langchain.com/) | [Python SDK](https://github.com/langchain-ai/langsmith-sdk)
