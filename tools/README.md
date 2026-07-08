@@ -4,6 +4,21 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
 
 ## 🛠️ Development Tools
 
+### 2026 Agent Protocols & Runtime Building Blocks
+- **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)** - Open protocol for connecting LLM applications to external data sources and tools.
+  - [Specification](https://modelcontextprotocol.io/specification) | [GitHub](https://github.com/modelcontextprotocol)
+- **[OpenAI Agents SDK](https://openai.github.io/openai-agents-python/)** - Higher-level runtime for OpenAI agent loops, handoffs, tracing, guardrails, and tools.
+  - [Python SDK](https://github.com/openai/openai-agents-python) | [Agents Guide](https://developers.openai.com/api/docs/guides/agents)
+- **[OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses)** - Primary OpenAI API for model responses, tool calling, built-in tools, and stateful agent interactions.
+  - [Guide](https://platform.openai.com/docs/guides/responses) | [Built-in Tools](https://platform.openai.com/docs/guides/tools)
+- **[Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/)** - Production .NET/Python SDK for single-agent and multi-agent workflows with enterprise state, telemetry, filters, and model support.
+  - [GitHub](https://github.com/microsoft/agent-framework) | [Migration from AutoGen](https://learn.microsoft.com/en-us/agent-framework/migration-guide/from-autogen/)
+- **[Google Agent Development Kit (ADK)](https://adk.dev/)** - Open-source, code-first framework for building, debugging, evaluating, and deploying agents.
+  - [Cloud Docs](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/adk) | [GitHub Docs](https://github.com/google/adk-docs)
+- **[Agent-to-Agent (A2A) patterns](https://github.com/a2aproject/A2A)** - Emerging interoperability pattern for cross-agent collaboration and task handoffs.
+  - Use alongside MCP when separate agents need to communicate rather than only consume tools.
+
+
 ### Agent Development Utilities
 - **[LangSmith](https://smith.langchain.com/)** - Debug, test, and monitor LangChain applications with production tracing
   - [Documentation](https://docs.smith.langchain.com/) | [Python SDK](https://github.com/langchain-ai/langsmith-sdk)
