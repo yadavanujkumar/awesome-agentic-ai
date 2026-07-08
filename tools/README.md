@@ -8,7 +8,7 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
 - **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)** - Open protocol for connecting LLM applications to external data sources and tools.
   - [Specification](https://modelcontextprotocol.io/specification) | [GitHub](https://github.com/modelcontextprotocol)
 - **[OpenAI Agents SDK](https://openai.github.io/openai-agents-python/)** - Higher-level runtime for OpenAI agent loops, handoffs, tracing, guardrails, and tools.
-  - [Python SDK](https://github.com/openai/openai-agents-python) | [Agents Guide](https://developers.openai.com/api/docs/guides/agents)
+  - [Python SDK](https://github.com/openai/openai-agents-python) | [Agents Guide](https://developers.openai.com/docs/agents)
 - **[OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses)** - Primary OpenAI API for model responses, tool calling, built-in tools, and stateful agent interactions.
   - [Guide](https://platform.openai.com/docs/guides/responses) | [Built-in Tools](https://platform.openai.com/docs/guides/tools)
 - **[Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/)** - Production .NET/Python SDK for single-agent and multi-agent workflows with enterprise state, telemetry, filters, and model support.
