@@ -146,6 +146,7 @@ Week 9-12: Innovation
 - **[Deep Agents](https://github.com/langchain-ai/deepagents)** - LangChain ecosystem framework for complex planning and subagent patterns.
 - **[LlamaIndex Workflows](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)** - Event-driven orchestration for document-heavy and RAG-heavy agent systems.
 - **[Mem0](https://github.com/mem0ai/mem0)** - Long-term memory layer for personalized and multi-session AI agents.
+- **[AgentBoot](https://github.com/Agnuxo1/AgentBoot)** - Apache-licensed deployment toolkit for launching coordinated local agent stacks with Docker, Kubernetes, and MCP integration.
 - **[Instructor](https://github.com/jxnl/instructor)** - Structured outputs from LLMs using Python type annotations.
 - **[Agency Swarm](https://github.com/VRSEN/agency-swarm)** - Framework for collaborative AI agent teams with specialized roles.
 - **[Temporal](https://temporal.io/)** - Durable execution engine for long-running, retryable agent workflows.
