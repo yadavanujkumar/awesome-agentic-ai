@@ -55,6 +55,8 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
   - [GitHub](https://github.com/MagnivOrg/prompt-layer-library) | [Documentation](https://docs.promptlayer.com/)
 
 ### Testing and Validation
+- **[Agent QA](https://github.com/vostride/agent-qa)** - Source-available application QA harness for natural-language web and mobile regression tests with persistent test memory
+  - [npm Package](https://www.npmjs.com/package/@vostride/agent-qa)
 - **[PromptFoo](https://www.promptfoo.dev/)** - Test and evaluate LLM outputs systematically
   - [GitHub](https://github.com/promptfoo/promptfoo) | [CLI Tool](https://www.npmjs.com/package/promptfoo)
 - **[DeepEval](https://github.com/confident-ai/deepeval)** - Unit testing framework for LLMs
