@@ -12,6 +12,8 @@ Welcome to the most comprehensive resource for **Agentic AI** - the cutting-edge
 
 ## 🌟 What is Agentic AI?
 
+> **New addition (Aug 2026):** [NEX Agent Co.](https://github.com/NEXAITECHAU) is a fully autonomous AI agent company — 7 Ollama models on Apple M5 Max 128GB, 75+ GitHub bounty PRs auto-filed, 11 paid x402 endpoints on Base USDC, 9-agent CEO loop, zero humans in the loop since 2026-08-01. Live mission control at [nexaitechau.github.io/live.html](https://nexaitechau.github.io/live.html).
+
 **Agentic AI** refers to artificial intelligence systems that can:
 - 🎯 **Act autonomously** towards specific goals
 - 🧠 **Make decisions** based on their environment and objectives  
