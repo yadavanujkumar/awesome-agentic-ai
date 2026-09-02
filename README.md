@@ -12,8 +12,6 @@ Welcome to the most comprehensive resource for **Agentic AI** - the cutting-edge
 
 ## 🌟 What is Agentic AI?
 
-> **New addition (Aug 2026):** [NEX Agent Co.](https://github.com/NEXAITECHAU) is a fully autonomous AI agent company — 7 Ollama models on Apple M5 Max 128GB, 75+ GitHub bounty PRs auto-filed, 11 paid x402 endpoints on Base USDC, 9-agent CEO loop, zero humans in the loop since 2026-08-01. Live mission control at [nexaitechau.github.io/live.html](https://nexaitechau.github.io/live.html).
-
 **Agentic AI** refers to artificial intelligence systems that can:
 - 🎯 **Act autonomously** towards specific goals
 - 🧠 **Make decisions** based on their environment and objectives  
@@ -170,7 +168,7 @@ Week 9-12: Innovation
 - **[Hugging Face Agents / Smolagents](https://huggingface.co/docs/smolagents)** - Open-source agent tooling with local and hosted model options.
 - **[OpenRouter](https://openrouter.ai/)** - Unified API for routing across many commercial and open model providers.
 
-**[Explore All 40+ Frameworks →](./frameworks/README.md)**
+**[Explore Framework Landscape & Local Guides →](./frameworks/README.md)**
 
 ---
 
@@ -178,30 +176,24 @@ Week 9-12: Innovation
 
 ```
 awesome-agentic-ai/
-├── 📚 tutorials/           # Step-by-step learning materials
-│   ├── beginner/          # Getting started guides
-│   ├── intermediate/      # Advanced concepts
-│   └── advanced/          # Expert-level content
-├── 🛠️ frameworks/          # Framework-specific guides
-│   ├── langchain/         # LangChain resources
-│   ├── autogen/           # AutoGen materials
-│   ├── crewai/            # CrewAI examples
-│   └── [more frameworks]  # Additional frameworks
-├── 🚀 examples/            # Real-world projects
-│   ├── personal-assistant/        # Daily productivity agents
-│   ├── research-agent/            # Academic research automation
-│   ├── coding-agent/              # Development assistance
-│   ├── multi-agent-collab/        # Collaborative systems
-│   ├── agent-patterns-2026/       # February 2026 patterns
-│   └── agent-patterns-march-2026/ # March 2026 patterns 🆕
-├── 📖 resources/           # Learning materials
-│   ├── papers/            # Academic research
-│   ├── cheat-sheets/      # Quick references
-│   ├── roadmaps/          # Learning paths
-│   └── tools/             # Utilities and helpers
-├── 🔧 tools/               # CLI tools and utilities
-├── 📋 CONTRIBUTING.md      # Contribution guidelines
-└── 📝 README.md           # This file
+├── 📚 tutorials/                  # Tutorial tracks
+│   ├── beginner/                 # Fully written beginner lessons
+│   ├── intermediate/             # Intermediate roadmap and upcoming topics
+│   └── advanced/                 # Advanced roadmap and upcoming research topics
+├── 🛠️ frameworks/                 # Framework comparison + local framework guides
+│   ├── README.md                 # Ecosystem map and recommendations
+│   └── langchain/                # In-repo framework deep dive
+├── 🚀 examples/                   # Example agent projects and pattern collections
+│   ├── personal-assistant/
+│   ├── research-agent/
+│   ├── coding-agent/
+│   ├── multi-agent-collab/
+│   ├── agent-patterns-2026/
+│   └── agent-patterns-march-2026/
+├── 📖 resources/                  # Papers, cheat sheets, roadmaps, and references
+├── 🔧 tools/                      # Utility docs and tooling pointers
+├── 📋 CONTRIBUTING.md
+└── 📝 README.md
 ```
 
 ---
@@ -611,7 +603,7 @@ It helps others discover this resource and motivates us to keep improving it.
 - 🏗️ **Frameworks**: [Framework Comparison Guide](./frameworks/README.md)
 
 ### 🔗 Quick Links
-- **[📊 Cheat Sheets](./resources/cheat-sheets/)** - Agent patterns, prompting, tools, communication, 2025 patterns, enterprise deployment
+- **[📊 Cheat Sheets](./resources/cheat-sheets/)** - Agent patterns, prompting, tools, communication, and enterprise deployment
 - **[🎥 Video Tutorials](./resources/README.md#🎥-video-resources)** - 150+ YouTube channels and playlists
 - **[📚 Books & Courses](./resources/README.md#📖-recommended-books)** - Comprehensive learning materials
 - **[🏆 Competitions](./resources/README.md#🏆-competitions-and-challenges)** - Active challenges and events

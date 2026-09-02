@@ -13,16 +13,15 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Language Models as Zero-Shot Planners](https://arxiv.org/abs/2201.07207) - Planning capabilities in LLMs
 - [Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) - Self-improving AI safety methods
 
-### Recent February 2026 Papers
-- **[OpenAI o3: Full Production Release](https://openai.com/o3)** - Enhanced reasoning with 99%+ accuracy on complex tasks (GA February 2026)
-- **[Anthropic Claude 4: Multi-Step Planning Breakthrough](https://www.anthropic.com/news/claude-4)** - Advanced reasoning and planning capabilities (February 2026)
-- **[Google Gemini 3.0 Pro: Native Code Execution](https://blog.google/technology/google-deepmind/gemini-3/)** - Revolutionary multimodal capabilities with 10M token context (February 2026)
-- **[Meta Llama 4: Open Frontier Model](https://ai.meta.com/blog/llama-4/)** - 500B parameter open-source model with superior agentic capabilities (February 2026)
-- **[DeepSeek-V5: Ultra-Efficient MoE Architecture](https://www.deepseek.com/)** - 1T parameter model with 95% cost reduction (February 2026)
-- **[Mistral Large 3: Enhanced Multilingual Capabilities](https://mistral.ai/news/mistral-large-3/)** - European flagship with advanced tool use (February 2026)
-- **[xAI Grok-4: Enhanced Real-Time Reasoning](https://x.ai/)** - Improved accuracy and knowledge integration (GA February 2026)
-- **[Deep Agents: Hierarchical Planning Framework](https://arxiv.org/abs/2502.xxxxx)** - LangChain's breakthrough in complex agent planning (February 2026)
-- **[Amazon Nova Ultra: Next-Gen Multimodal](https://aws.amazon.com/ai/generative-ai/nova/)** - Ultra-scale enterprise multimodal models (February 2026)
+### Recent 2026 Model and Platform Release Sources
+- [OpenAI News](https://openai.com/news/)
+- [Anthropic News](https://www.anthropic.com/news)
+- [Google DeepMind Blog](https://blog.google/technology/google-deepmind/)
+- [Meta AI Blog](https://ai.meta.com/blog/)
+- [Mistral News](https://mistral.ai/news/)
+- [AWS AI & ML Blog](https://aws.amazon.com/blogs/machine-learning/)
+- [LangChain Blog](https://blog.langchain.dev/)
+- [LlamaIndex Blog](https://www.llamaindex.ai/blog)
 
 ### Recent March 2026 Papers
 - **[OpenAI GPT-5 System Card](https://openai.com/gpt-5)** - Next-generation flagship with unprecedented reasoning and native multimodal agentic capabilities (March 2026)
@@ -52,11 +51,12 @@ Curated collection of papers, cheat sheets, roadmaps, and learning materials for
 - [Cooperative Multi-Agent Learning: The State of the Art](https://arxiv.org/abs/1711.08022) - Survey of cooperative learning methods
 - [Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments](https://arxiv.org/abs/1706.02275) - MADDPG algorithm
 
-### Recent Multi-Agent Research (2026)
-- [SwarmGPT: Collective Intelligence for Multi-Agent Systems](https://arxiv.org/abs/2309.12345) - Swarm intelligence approaches to multi-agent coordination
-- [Agency in Multi-Agent Systems: A Comprehensive Survey](https://arxiv.org/abs/2310.54321) - Latest developments in agent autonomy and coordination
-- [Large Language Models as Multi-Agent Coordinators](https://arxiv.org/abs/2311.67890) - Using LLMs for agent orchestration and task delegation
-- [AutoGen Studio: A Visual Multi-Agent Programming Environment](https://arxiv.org/abs/2312.98765) - User interface developments for multi-agent systems
+### Recent Multi-Agent Research Tracking
+For current multi-agent research, use live feeds and benchmark hubs instead of static hand-picked lists:
+- [arXiv cs.AI (recent)](https://arxiv.org/list/cs.AI/recent)
+- [arXiv cs.MA (multi-agent systems)](https://arxiv.org/list/cs.MA/recent)
+- [Papers With Code: Multi-Agent](https://paperswithcode.com/task/multi-agent-reinforcement-learning)
+- [Google Scholar Alerts](https://scholar.google.com/)
 
 ### Planning and Reasoning
 - [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903) - Foundation of CoT reasoning

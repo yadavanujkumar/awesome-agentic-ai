@@ -1,118 +1,36 @@
 # Examples
 
-Real-world Agentic AI projects and implementations.
+Real-world Agentic AI project blueprints and pattern collections.
+
+## Included Example Directories
+
+- [personal-assistant](./personal-assistant/)
+- [research-agent](./research-agent/)
+- [coding-agent](./coding-agent/)
+- [multi-agent-collab](./multi-agent-collab/)
+- [agent-patterns-2026](./agent-patterns-2026/)
+- [agent-patterns-march-2026](./agent-patterns-march-2026/)
 
 ## Framework Coverage
 
-Our examples demonstrate implementation patterns across multiple frameworks:
+Examples focus on implementation patterns commonly used with:
 
-### 🦜 **LangChain & LangGraph**
-- Personal Assistant with stateful workflows
-- Research Agent with advanced RAG patterns
-- Multi-step reasoning with LangGraph Cloud
-- Type-safe implementations with LangGraph 2026
+- LangChain / LangGraph
+- AutoGen-style multi-agent collaboration
+- Crew-style role orchestration
+- Type-safe Python agent patterns
 
-### 🤖 **AutoGen & AutoGen Studio 2.0**
-- Multi-agent software development teams
-- Collaborative problem-solving systems
-- Code generation and review workflows
-- Visual agent design with Studio 2.0
+## Notes on Structure
 
-### ⚡ **CrewAI Enterprise**
-- Role-based team collaborations
-- Specialized agent workflows
-- Enterprise automation scenarios
-- Hierarchical agent management
-
-### 🌊 **OpenAI Swarm**
-- Lightweight multi-agent coordination
-- Simple handoff patterns
-- Function calling orchestration
-
-### 🧠 **PydanticAI & Type-Safe Patterns**
-- Type-safe agent implementations
-- Structured output validation
-- Production-ready agent services
-
-### 🎯 **2026 Emerging Frameworks**
-- **Mem0**: Adaptive memory agents
-- **LlamaAgents**: Document-centric multi-agents
-- **Agency Swarm**: Complex multi-agent team structures
-- **Computer Use**: Desktop automation agents
-
-## Categories
-
-### 🤖 Personal Assistants
-Intelligent agents that help with daily tasks and productivity.
-
-- **Smart Calendar Agent** - Manages schedules and meetings
-- **Email Processing Agent** - Automates email triage and responses
-- **Research Assistant** - Gathers and summarizes information on topics
-
-### 🔬 Research Agents
-Specialized agents for academic and scientific research.
-
-- **Literature Review Agent** - Automated research paper analysis
-- **Data Analysis Agent** - Statistical analysis and insights generation
-- **Hypothesis Testing Agent** - Experimental design and validation
-
-### 💻 Coding Agents
-AI-powered development and programming assistants.
-
-- **Code Review Agent** - Automated code quality assessment
-- **Documentation Generator** - Auto-generates project documentation
-- **Bug Hunter Agent** - Identifies and suggests fixes for code issues
-
-### 🔗 Multi-Agent Collaboration
-Systems where multiple agents work together.
-
-- **Software Development Team** - Agents for different development roles
-- **Customer Service System** - Specialized agents for different support areas
-- **Trading Simulation** - Multi-agent market simulation
-
-### 🏭 Business Automation
-Enterprise-focused agent implementations.
-
-- **Invoice Processing Agent** - Automated invoice handling
-- **Inventory Management Agent** - Stock tracking and optimization
-- **Content Creation Pipeline** - Multi-step content generation
-
-### 🚀 Latest 2026 Patterns
-Cutting-edge agent architectures and implementation patterns.
-
-- **[February 2026 Agent Patterns](./agent-patterns-2026/)** - Type-safe agents, adaptive memory, computer use, Deep Agents
-- **[March 2026 Agent Patterns](./agent-patterns-march-2026/)** - GPT-5 orchestrators, human-in-the-loop, graph memory, mixed-model pipelines 🆕 **New**
-- **PydanticAI Implementation** - Production-ready type-safe agents with graph control flow (v0.6+)
-- **Mem0 Graph Memory Agents** - Relationship-aware long-term memory (v0.4+)
-- **Computer Use Automation** - Desktop and application control with Claude 4.1
-- **Enterprise Deployment** - Scalable production patterns with LangGraph Cloud v2.1
-
-## Project Structure
-
-Each example includes:
-- `README.md` - Project description and use case
-- `requirements.txt` - Dependencies and setup instructions
-- `src/` - Source code and implementation
-- `docs/` - Detailed documentation and architecture notes
-- `tests/` - Test cases and validation scripts
-- `deployment/` - Cloud deployment configurations (AWS, GCP, Azure)
-- `monitoring/` - Observability setup (LangSmith, W&B, etc.)
+Not every example currently includes `src/`, `tests/`, `deployment/`, or notebook assets. Some directories are concept guides and architecture references rather than complete runnable packages.
 
 ## Getting Started
 
-1. **Choose an example** that matches your use case
-2. **Select a framework** based on complexity and requirements
-3. **Follow the setup instructions** in each project's README
-4. **Customize and extend** for your specific needs
-5. **Deploy using provided configurations** and monitoring setups
-
-## Getting Started
-
-1. Choose an example that matches your use case
-2. Follow the setup instructions in the project's README
-3. Explore the code and adapt it to your needs
-4. Check the documentation for customization options
+1. Open an example directory
+2. Read its `README.md`
+3. Use that directory's setup instructions and dependencies
+4. Adapt patterns to your own use case
 
 ## Contributing
 
-Have a cool Agentic AI project to share? We'd love to include it! See our [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines.
+Want to add your own example? See [../CONTRIBUTING.md](../CONTRIBUTING.md).
