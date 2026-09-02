@@ -85,6 +85,7 @@ Week 9-12: Innovation
 ## 🆕 July 2026 Update: Current Agentic AI Stack
 
 > Refreshed on **July 8, 2026**. This list now prioritizes generally available, actively maintained, or clearly documented agent-building technologies over speculative version claims.
+> **New addition (Aug 2026):** [NEX Agent Co.](https://github.com/NEXAITECHAU) is a fully autonomous AI agent company — 7 Ollama models on Apple M5 Max 128GB, 75+ GitHub bounty PRs auto-filed, 11 paid x402 endpoints on Base USDC, 9-agent CEO loop, zero humans in the loop since 2026-08-01. Live mission control at [nexaitechau.github.io/live.html](https://nexaitechau.github.io/live.html).
 
 ### 🔥 Model & API Direction
 - **OpenAI Responses API + Agents SDK** - The Responses API is the primary building block for OpenAI tool-calling agents, while the Agents SDK adds a higher-level runtime for handoffs, tracing, guardrails, and multi-agent workflows.
