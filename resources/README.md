@@ -255,6 +255,7 @@ Cutting-edge research and production systems (8-12 weeks)
 
 ### Newsletters & Subscriptions
 - **[The Batch](https://www.deeplearning.ai/the-batch/)** - Andrew Ng's weekly AI newsletter
+- **[AI Weekly](https://aiweekly.co/)** - Discover what AI experts are reading and sharing right now
 - **[AI Research](https://airesearch.com/newsletter)** - Weekly research summaries
 - **[ImportAI](https://jack-clark.net/)** - Jack Clark's AI policy and research newsletter
 - **[The Gradient Newsletter](https://thegradient.pub/newsletter/)** - AI research insights
