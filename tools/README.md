@@ -73,6 +73,8 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
   - [Documentation](https://langtest.org/) | [Examples](https://github.com/JohnSnowLabs/langtest/tree/main/examples)
 - **[OpenAI Evals](https://github.com/openai/evals)** - Framework for evaluating AI systems (2025 updates)
   - [Documentation](https://github.com/openai/evals/blob/main/docs/eval-templates.md) | [Registry](https://github.com/openai/evals/tree/main/evals/registry)
+- **[YYLO Benchmark](https://github.com/yylo-dev/yylo-benchmark)** - Flexible, isolated evaluation layer for task prompts with normalized attempt contracts and retained run evidence
+  - [GitHub](https://github.com/yylo-dev/yylo-benchmark) | [npm Package](https://www.npmjs.com/package/@yylo/benchmark) | [Documentation](https://yylo.dev)
 
 ### Agent Debugging & Visualization
 - **[Phoenix](https://phoenix.arize.com/)** - AI observability and evaluation platform
