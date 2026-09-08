@@ -53,6 +53,8 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
   - [GitHub](https://github.com/Agenta-AI/agenta) | [Documentation](https://docs.agenta.ai/)
 - **[PromptLayer](https://promptlayer.com/)** - Prompt engineering and management platform (2026)
   - [GitHub](https://github.com/MagnivOrg/prompt-layer-library) | [Documentation](https://docs.promptlayer.com/)
+- **[YYLO](https://github.com/yylo-dev/yylo)** - Command-line orchestrator for coding agents with typed task, validation, merge, and release-readiness boundaries in a dedicated branch/worktree
+  - [GitHub](https://github.com/yylo-dev/yylo) | [npm Package](https://www.npmjs.com/package/@yylo/cli) | [Documentation](https://yylo.dev)
 
 ### Testing and Validation
 - **[Agent QA](https://github.com/vostride/agent-qa)** - Source-available application QA harness for natural-language web and mobile regression tests with persistent test memory
