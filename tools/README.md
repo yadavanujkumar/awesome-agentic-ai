@@ -57,7 +57,7 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
   - [GitHub](https://github.com/yylo-dev/yylo) | [npm Package](https://www.npmjs.com/package/@yylo/cli) | [Documentation](https://yylo.dev)
 
 ### Testing and Validation
-- **[Agent QA](https://github.com/vostride/agent-qa)** - Source-available application QA harness for natural-language web and mobile regression tests with persistent test memory
+- **[Agent QA](https://github.com/vostride/agent-qa)** - Self-improving QA agent for natural-language web and mobile regression tests with persistent test memory
   - [npm Package](https://www.npmjs.com/package/@vostride/agent-qa)
 - **[PromptFoo](https://www.promptfoo.dev/)** - Test and evaluate LLM outputs systematically
   - [GitHub](https://github.com/promptfoo/promptfoo) | [CLI Tool](https://www.npmjs.com/package/promptfoo)
