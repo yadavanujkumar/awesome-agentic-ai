@@ -168,6 +168,7 @@ Week 9-12: Innovation
 - **[Databricks Mosaic AI](https://www.databricks.com/product/machine-learning/mosaic-ai)** - Enterprise data and AI platform for retrieval, model serving, and agent applications.
 - **[Hugging Face Agents / Smolagents](https://huggingface.co/docs/smolagents)** - Open-source agent tooling with local and hosted model options.
 - **[OpenRouter](https://openrouter.ai/)** - Unified API for routing across many commercial and open model providers.
+- **[Tale](https://tale.dev/)** - Shared workspace for assigning tasks to reusable AI agents, running coding harnesses in sandboxes, and reviewing deliverables.
 
 **[Explore Framework Landscape & Local Guides →](./frameworks/README.md)**
 
