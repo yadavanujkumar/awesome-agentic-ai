@@ -279,6 +279,8 @@ pip install postman-cli  # API testing
   - [Templates](https://railway.app/templates) | [Documentation](https://docs.railway.app/)
 - **[Render](https://render.com/)** - Cloud application platform
   - [Python Deployment](https://render.com/docs/deploy-python) | [AI Examples](https://github.com/render-examples)
+- **[deed.page](https://deed.page/)** - Static hosting agents publish to with one HTTP PUT or a remote MCP call
+  - [Documentation](https://deed.page/docs) | [Agent Skill](https://github.com/f-o-x11/deed-page-skill)
 
 ### CI/CD Pipelines
 - **[GitHub Actions](https://github.com/features/actions)** - Automation workflows
