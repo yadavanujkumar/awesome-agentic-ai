@@ -304,6 +304,8 @@ pip install postman-cli  # API testing
   - [Documentation](https://docs.nvidia.com/nemo/guardrails/) | [Examples](https://github.com/NVIDIA/NeMo-Guardrails/tree/main/examples)
 - **[LangKit](https://github.com/whylabs/langkit)** - LLM monitoring toolkit with safety features
   - [Documentation](https://langkit.readthedocs.io/) | [WhyLabs Integration](https://whylabs.ai/langkit)
+- **[Agent Coach (upskill.coach)](https://upskill.coach/)** - Free coach for AI agents: matches skills, MCP servers and prompts that passed a security scan (prompt injection, malicious code, secret leaks) at a pinned commit, then runs daily check-ins with public keep/temporary/remove rules
+  - [Documentation](https://upskill.coach/docs) | [Remote MCP server](https://upskill.coach/docs/mcp) | [Scan research](https://upskill.coach/research/agent-skill-security)
 
 ### Input Validation & Sanitization
 - **[Prompt Injection Detector](https://github.com/protectai/llm-guard)** - LLM security toolkit
