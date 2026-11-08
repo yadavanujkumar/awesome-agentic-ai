@@ -129,6 +129,9 @@
       <button onclick="switchView('game')" id="tab-game" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold bg-white dark:bg-blue-600 text-blue-600 dark:text-white shadow-sm flex items-center gap-1 transition-all" title="3D Open World">
         <span>🌐</span><span class="hidden xs:inline">3D</span>
       </button>
+      <button onclick="switchView('sandbox')" id="tab-sandbox" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 transition-all" title="Live Agent Simulator & Sandbox">
+        <span>🤖</span><span class="hidden xs:inline">Simulator</span>
+      </button>
       <button onclick="switchView('mindmap')" id="tab-mindmap" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 transition-all" title="Mindmap Knowledge Tree">
         <span>🌳</span><span class="hidden xs:inline">Tree</span>
       </button>
@@ -199,9 +202,26 @@
           <span class="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></span>
           <span class="text-xs font-mono font-bold text-slate-900 dark:text-cyan-400 uppercase tracking-wider" id="hud-world-title">WORLD: SILICON ISLAND</span>
         </div>
-        <div class="flex items-center gap-1.5">
-          <button onclick="toggleSound()" class="text-[10px] text-slate-600 dark:text-slate-300 font-mono px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 hover:bg-slate-200" id="btn-sound">&#x1F50A; SFX</button>
+        <div class="flex items-center gap-1">
+          <button onclick="toggleRadio()" class="text-[10px] text-cyan-600 dark:text-cyan-300 font-mono px-1.5 py-0.5 rounded-md bg-cyan-50 dark:bg-cyan-950/70 border border-cyan-200 dark:border-cyan-800 hover:bg-cyan-100 transition" id="btn-radio" title="Synthwave In-Car Radio">📻 OFF</button>
+          <button onclick="openGarageModal()" class="text-[10px] text-purple-600 dark:text-purple-300 font-mono px-1.5 py-0.5 rounded-md bg-purple-50 dark:bg-purple-950/70 border border-purple-200 dark:border-purple-800 hover:bg-purple-100 transition" id="btn-garage" title="Vehicle & Neon Garage">🏎️ Garage</button>
+          <button onclick="toggleSound()" class="text-[10px] text-slate-600 dark:text-slate-300 font-mono px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 hover:bg-slate-200" id="btn-sound">&#x1F50A;</button>
           <button onclick="toggleHUD(true)" title="Collapse HUD ([H] key)" class="text-[11px] text-slate-500 hover:text-slate-900 dark:hover:text-white px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-bold">&#x2500;</button>
+        </div>
+      </div>
+
+      <!-- Player Level & XP Progression -->
+      <div class="bg-slate-50/70 dark:bg-[#0c101c]/70 p-2 rounded-xl border border-slate-200 dark:border-slate-800 space-y-1 font-mono">
+        <div class="flex items-center justify-between text-[10px]">
+          <span class="text-slate-500">Agent Rank:</span>
+          <strong id="hud-rank-label" class="text-amber-500 font-bold">Lvl 1: Prompt Novice</strong>
+        </div>
+        <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+          <div id="hud-xp-bar" class="bg-gradient-to-r from-blue-600 to-cyan-400 h-full w-[10%] transition-all duration-300"></div>
+        </div>
+        <div class="flex items-center justify-between text-[9px] text-slate-400">
+          <span id="hud-xp-text">0 / 300 XP</span>
+          <button onclick="openQuestsTab()" class="text-blue-500 hover:underline">Quests &rarr;</button>
         </div>
       </div>
 
@@ -270,6 +290,16 @@
       <button onclick="triggerCurrentChest()" class="pointer-events-auto shrink-0 px-3.5 sm:px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold font-mono shadow-md transition-transform active:scale-95">Open</button>
     </div>
 
+    <!-- NPC Interaction Banner (Appears when near an autonomous patrolling agent) -->
+    <div id="npc-proximity-banner" class="absolute bottom-36 sm:bottom-24 left-1/2 -translate-x-1/2 hud-glass px-5 sm:px-6 py-3.5 sm:py-4 border-emerald-500/50 shadow-2xl flex items-center gap-3.5 sm:gap-4 transition-all duration-300 opacity-0 pointer-events-none translate-y-6 z-40 max-w-lg w-[92%] sm:w-auto">
+      <div class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-emerald-500 animate-ping shrink-0"></div>
+      <div class="flex-1 min-w-0">
+        <div id="npc-banner-name" class="font-bold text-slate-900 dark:text-white text-xs font-mono uppercase tracking-wide truncate">AGENT PATROL DETECTED</div>
+        <div id="npc-banner-quote" class="text-[10px] sm:text-[11px] text-slate-600 dark:text-slate-300 truncate font-mono">Press [T] to talk with agent</div>
+      </div>
+      <button onclick="triggerCurrentNPC()" class="pointer-events-auto shrink-0 px-3.5 sm:px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold font-mono shadow-md transition-transform active:scale-95">Talk</button>
+    </div>
+
     <!-- MOBILE ERGONOMIC DRIVING COCKPIT (Dual-Thumb Controls on Phones) -->
     <div id="mobile-driving-cockpit" class="absolute inset-x-0 bottom-0 pointer-events-none z-30 pb-3 sm:pb-6 px-3 sm:px-6 flex items-end justify-between select-none touch-none sm:hidden">
       <!-- LEFT THUMB: Ergonomic Steering Pads -->
@@ -284,16 +314,26 @@
         </button>
       </div>
 
-      <!-- CENTER: Quick Landmark Interaction & Camera View -->
+      <!-- CENTER: Quick Landmark Interaction & Camera & Radio & Garage -->
       <div class="pointer-events-auto flex flex-col items-center gap-1.5 mb-1">
         <!-- Floating Inspect Button (Shows when near landmark) -->
         <button id="btn-touch-inspect" onclick="triggerCurrentChest()" class="hidden px-3.5 py-1.5 rounded-full bg-emerald-600 active:bg-emerald-500 text-white font-mono text-[11px] font-bold shadow-xl border border-emerald-400 animate-pulse active:scale-95 transition-all">
           &#x1F50D; INSPECT
         </button>
-        <!-- Camera Mode Quick Toggle -->
-        <button id="btn-touch-cam" onclick="cycleCameraMode()" class="px-3 py-1 rounded-full bg-slate-900/80 text-slate-200 border border-white/20 active:bg-slate-800 text-[10px] font-mono backdrop-blur-md shadow-md active:scale-95">
-          &#x1F4F7; <span id="mobile-cam-label">CHASE</span>
-        </button>
+        <div class="flex items-center gap-1">
+          <!-- Camera Mode Quick Toggle -->
+          <button id="btn-touch-cam" onclick="cycleCameraMode()" class="px-2.5 py-1 rounded-full bg-slate-900/80 text-slate-200 border border-white/20 active:bg-slate-800 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
+            &#x1F4F7; <span id="mobile-cam-label">CHASE</span>
+          </button>
+          <!-- Quick Radio Toggle -->
+          <button id="btn-touch-radio" onclick="toggleRadio()" class="px-2.5 py-1 rounded-full bg-cyan-950/80 text-cyan-200 border border-cyan-500/30 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
+            📻 <span id="mobile-radio-label">RADIO</span>
+          </button>
+          <!-- Quick Garage -->
+          <button onclick="openGarageModal()" class="px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-200 border border-purple-500/30 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
+            🏎️
+          </button>
+        </div>
       </div>
 
       <!-- RIGHT THUMB: Drive (Gas) & Brake (Reverse) Pedals -->
@@ -419,6 +459,385 @@
       </div>
     </div>
   </section>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 5: LIVE AGENT SIMULATOR & ARCHITECTURE BLUEPRINT SANDBOX -->
+  <!-- ========================================================================= -->
+  <section id="view-sandbox" class="flex-1 w-full h-full overflow-y-auto p-4 sm:p-6 lg:p-8 hidden bg-slate-50 dark:bg-[#080a10]">
+    <div class="max-w-6xl mx-auto space-y-6">
+      <!-- Sandbox Header & Mode Selector -->
+      <div class="border-b border-slate-200 dark:border-slate-800 pb-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+            <span>🤖 Live Agent Simulator & Architecture Sandbox</span>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-semibold">Interactive</span>
+          </h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Execute live ReAct reasoning loops, simulate multi-agent swarms, inspect Model Context Protocol (MCP) packets, and generate production architecture blueprints.</p>
+        </div>
+        <div class="flex flex-wrap gap-1 font-mono text-[11px] sm:text-xs">
+          <button onclick="switchSandboxSubTab('react')" id="sbox-tab-react" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium shadow-sm transition">⚡ ReAct Execution</button>
+          <button onclick="switchSandboxSubTab('swarm')" id="sbox-tab-swarm" class="px-3 py-1.5 rounded-lg bg-white dark:bg-[#151b2b] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition">🐝 Swarm Chat</button>
+          <button onclick="switchSandboxSubTab('mcp')" id="sbox-tab-mcp" class="px-3 py-1.5 rounded-lg bg-white dark:bg-[#151b2b] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition">🔌 MCP Flowchart</button>
+          <button onclick="switchSandboxSubTab('blueprint')" id="sbox-tab-blueprint" class="px-3 py-1.5 rounded-lg bg-white dark:bg-[#151b2b] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition">🏗️ Stack Blueprint</button>
+        </div>
+      </div>
+
+      <!-- SUB-PANE 1: ReAct Execution Engine -->
+      <div id="sbox-pane-react" class="space-y-4">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <!-- Control Panel -->
+          <div class="card-surface p-4 sm:p-5 rounded-2xl space-y-4">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white flex items-center justify-between">
+              <span>Agent Configuration</span>
+              <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">● ReAct Loop Ready</span>
+            </h3>
+            
+            <div class="space-y-1.5">
+              <label class="text-[11px] font-mono text-slate-500">Preset Scenario:</label>
+              <select id="react-preset-select" onchange="loadReactPreset(this.value)" class="w-full bg-slate-50 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-800 dark:text-slate-200 font-mono outline-none">
+                <option value="swe">Autonomous SWE Bugfix (CodeRabbit + Test)</option>
+                <option value="research">Competitive Tech Research (Gemini + Web)</option>
+                <option value="financial">Financial RAG Analysis (LangGraph + SQLite)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1.5">
+              <label class="text-[11px] font-mono text-slate-500">Task Objective Prompt:</label>
+              <textarea id="react-task-input" rows="3" class="w-full bg-slate-50 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-lg p-2.5 text-xs text-slate-800 dark:text-slate-200 font-mono outline-none focus:border-blue-500 leading-relaxed resize-none"></textarea>
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800 text-[11px] font-mono">
+              <div class="flex justify-between text-slate-500">
+                <span>Model Engine:</span>
+                <span class="text-blue-600 dark:text-cyan-400 font-bold">Gemini 2.5 Flash</span>
+              </div>
+              <div class="flex justify-between text-slate-500">
+                <span>Tool Protocol:</span>
+                <span class="text-slate-800 dark:text-slate-200">Model Context Protocol (MCP)</span>
+              </div>
+              <div class="flex justify-between text-slate-500">
+                <span>Max Iterations:</span>
+                <span class="text-slate-800 dark:text-slate-200">5 Turns</span>
+              </div>
+            </div>
+
+            <button onclick="runReactSimulation()" id="btn-run-react" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 active:scale-95 text-white font-mono text-xs font-bold shadow-md transition flex items-center justify-center gap-2">
+              <span>▶ Run Live Agent Trace</span>
+            </button>
+          </div>
+
+          <!-- Execution Trace Feed -->
+          <div class="lg:col-span-2 card-surface p-4 sm:p-5 rounded-2xl flex flex-col h-[520px]">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-mono text-xs font-bold text-slate-900 dark:text-white">Live Execution Terminal</span>
+              </div>
+              <div class="flex items-center gap-3 text-[10px] font-mono text-slate-500">
+                <span id="react-step-counter">Steps: 0/5</span>
+                <span id="react-latency-label">Latency: 0ms</span>
+                <button onclick="clearReactTrace()" class="hover:text-slate-900 dark:hover:text-white">Clear</button>
+              </div>
+            </div>
+
+            <div id="react-terminal-output" class="flex-1 overflow-y-auto space-y-3 font-mono text-xs pr-1">
+              <div class="text-slate-400 text-center py-16">Click "Run Live Agent Trace" to observe the step-by-step Thought &rarr; Action &rarr; Observation loop in real time.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-PANE 2: Multi-Agent Swarm Chat -->
+      <div id="sbox-pane-swarm" class="space-y-4 hidden">
+        <div class="card-surface p-4 sm:p-6 rounded-2xl space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 gap-2">
+            <div>
+              <h3 class="font-bold text-sm text-slate-900 dark:text-white">Hierarchical Multi-Agent Swarm Collaboration</h3>
+              <p class="text-xs text-slate-500">Watch 3 specialized autonomous agents (Planner, Researcher, Code Reviewer) negotiate and complete an end-to-end task.</p>
+            </div>
+            <button onclick="simulateSwarmChat()" id="btn-run-swarm" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-mono text-xs font-bold shadow-md transition self-start sm:self-auto">
+              🐝 Run Swarm Simulation
+            </button>
+          </div>
+
+          <!-- Active Swarm Agents Roster -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono">
+            <div class="p-2.5 rounded-xl bg-blue-50/60 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 flex items-center gap-2.5">
+              <span class="text-lg">🧭</span>
+              <div>
+                <div class="font-bold text-blue-700 dark:text-blue-300">Planner Agent</div>
+                <div class="text-[10px] text-slate-500">LangGraph Graph State</div>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-amber-50/60 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 flex items-center gap-2.5">
+              <span class="text-lg">🔬</span>
+              <div>
+                <div class="font-bold text-amber-700 dark:text-amber-300">Research Agent</div>
+                <div class="text-[10px] text-slate-500">CrewAI Web/RAG Worker</div>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 flex items-center gap-2.5">
+              <span class="text-lg">🛠️</span>
+              <div>
+                <div class="font-bold text-emerald-700 dark:text-emerald-300">SWE Review Agent</div>
+                <div class="text-[10px] text-slate-500">CodeRabbit Autofix Sandbox</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Swarm Chat Stream -->
+          <div id="swarm-chat-container" class="border border-slate-200 dark:border-slate-800 rounded-xl p-4 bg-slate-50 dark:bg-[#0b0e17] h-[400px] overflow-y-auto space-y-3 font-sans text-xs">
+            <div class="text-slate-400 font-mono text-center py-16">Press "Run Swarm Simulation" to observe collaborative inter-agent communication.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-PANE 3: Interactive MCP Protocol Flowchart -->
+      <div id="sbox-pane-mcp" class="space-y-4 hidden">
+        <div class="card-surface p-4 sm:p-6 rounded-2xl space-y-5">
+          <div class="border-b border-slate-200 dark:border-slate-800 pb-3">
+            <h3 class="font-bold text-base text-slate-900 dark:text-white">Model Context Protocol (MCP) Interactive Flowchart</h3>
+            <p class="text-xs text-slate-500 mt-1">Click through each protocol phase to inspect the JSON-RPC standard used to connect frontier LLMs to external tools, databases, and filesystem servers.</p>
+          </div>
+
+          <!-- Step Progression Navigator -->
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 font-mono text-xs" id="mcp-steps-nav">
+            <button onclick="showMCPStep(0)" id="mcp-step-btn-0" class="p-2.5 rounded-xl bg-blue-600 text-white font-bold text-left transition shadow-sm">
+              <div class="text-[10px] opacity-75">STEP 1</div>
+              <div>Handshake</div>
+            </button>
+            <button onclick="showMCPStep(1)" id="mcp-step-btn-1" class="p-2.5 rounded-xl bg-slate-100 dark:bg-[#131929] text-slate-700 dark:text-slate-300 font-bold text-left hover:bg-slate-200 transition">
+              <div class="text-[10px] opacity-75">STEP 2</div>
+              <div>Capabilities</div>
+            </button>
+            <button onclick="showMCPStep(2)" id="mcp-step-btn-2" class="p-2.5 rounded-xl bg-slate-100 dark:bg-[#131929] text-slate-700 dark:text-slate-300 font-bold text-left hover:bg-slate-200 transition">
+              <div class="text-[10px] opacity-75">STEP 3</div>
+              <div>Tool Discovery</div>
+            </button>
+            <button onclick="showMCPStep(3)" id="mcp-step-btn-3" class="p-2.5 rounded-xl bg-slate-100 dark:bg-[#131929] text-slate-700 dark:text-slate-300 font-bold text-left hover:bg-slate-200 transition">
+              <div class="text-[10px] opacity-75">STEP 4</div>
+              <div>Tool Call</div>
+            </button>
+            <button onclick="showMCPStep(4)" id="mcp-step-btn-4" class="p-2.5 rounded-xl bg-slate-100 dark:bg-[#131929] text-slate-700 dark:text-slate-300 font-bold text-left hover:bg-slate-200 transition">
+              <div class="text-[10px] opacity-75">STEP 5</div>
+              <div>Output Stream</div>
+            </button>
+          </div>
+
+          <!-- Interactive MCP Packet Inspector -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-xl bg-slate-100 dark:bg-[#0e121e] border border-slate-200 dark:border-slate-800 space-y-2">
+              <h4 id="mcp-detail-title" class="font-bold text-xs font-mono text-blue-600 dark:text-cyan-400 uppercase tracking-wide">Phase 1: Protocol Initialization & Handshake</h4>
+              <p id="mcp-detail-desc" class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans">The MCP client (e.g. Claude Desktop, Antigravity IDE, Cursor) initiates connection with the MCP server over standard stdio or SSE transport.</p>
+              <div class="pt-3 border-t border-slate-200 dark:border-slate-800 text-[11px] font-mono text-slate-500 space-y-1">
+                <div>Transport: <strong class="text-slate-800 dark:text-slate-200">stdio / HTTP+SSE</strong></div>
+                <div>Spec Version: <strong class="text-slate-800 dark:text-slate-200">2024-11-05 (Stable)</strong></div>
+              </div>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-900 text-slate-200 font-mono text-xs overflow-x-auto shadow-inner">
+              <div class="text-[10px] text-slate-400 mb-2 font-bold uppercase tracking-wider flex items-center justify-between">
+                <span>JSON-RPC 2.0 Payload</span>
+                <span class="text-emerald-400">Validated</span>
+              </div>
+              <pre id="mcp-code-preview" class="text-[11px] leading-relaxed text-cyan-300">// JSON payload will display here</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-PANE 4: Architecture Stack Blueprint Generator -->
+      <div id="sbox-pane-blueprint" class="space-y-4 hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <!-- Stack Selectors -->
+          <div class="card-surface p-4 sm:p-5 rounded-2xl space-y-4">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Custom Stack Configurator</h3>
+            
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono text-slate-500">1. Orchestration Engine:</label>
+              <select id="bp-orchestrator" onchange="generateBlueprint()" class="w-full bg-slate-50 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-xs font-mono outline-none">
+                <option value="langgraph">LangGraph (Stateful Cyclic Graphs)</option>
+                <option value="crewai">CrewAI (Role-Playing Multi-Agent)</option>
+                <option value="pydanticai">PydanticAI (Type-Safe Schema First)</option>
+                <option value="adk">Google Agent Development Kit (ADK)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono text-slate-500">2. LLM Model Backbone:</label>
+              <select id="bp-model" onchange="generateBlueprint()" class="w-full bg-slate-50 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-xs font-mono outline-none">
+                <option value="gemini">Gemini 2.5 Flash (1M Token Window)</option>
+                <option value="claude">Claude 3.7 Sonnet (Hybrid Reasoning)</option>
+                <option value="gpt4o">GPT-4o (Multimodal Realtime)</option>
+                <option value="deepseek">DeepSeek R1 (Open Weights Reasoning)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono text-slate-500">3. Tool & Protocol Layer:</label>
+              <select id="bp-tools" onchange="generateBlueprint()" class="w-full bg-slate-50 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-xs font-mono outline-none">
+                <option value="mcp">Model Context Protocol (Standardized MCP Servers)</option>
+                <option value="custom">Custom Python Function Call Decorators</option>
+                <option value="openapi">OpenAPI Spec Auto-Generation</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono text-slate-500">4. Memory & Vector Store:</label>
+              <select id="bp-memory" onchange="generateBlueprint()" class="w-full bg-slate-50 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-xs font-mono outline-none">
+                <option value="pgvector">PostgreSQL + pgvector (ACID Checkpointing)</option>
+                <option value="chromadb">ChromaDB (Embedded In-Memory RAG)</option>
+                <option value="redis">Redis (Sub-Millisecond Ephemeral Cache)</option>
+              </select>
+            </div>
+
+            <div class="space-y-1">
+              <label class="text-[11px] font-mono text-slate-500">5. Quality & SWE Guardrail:</label>
+              <select id="bp-guard" onchange="generateBlueprint()" class="w-full bg-slate-50 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-lg p-2 text-xs font-mono outline-none">
+                <option value="coderabbit">CodeRabbit SWE Autofix & Automated Review</option>
+                <option value="pydantic">Pydantic V2 Strict Validator</option>
+                <option value="nemo">NeMo Guardrails (Input/Output Safety)</option>
+              </select>
+            </div>
+
+            <button onclick="copyBlueprintCode()" id="btn-copy-bp" class="w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-semibold shadow transition">
+              📋 Copy Production Boilerplate
+            </button>
+          </div>
+
+          <!-- Generated Architecture Preview -->
+          <div class="lg:col-span-2 card-surface p-4 sm:p-5 rounded-2xl flex flex-col space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+              <span class="font-mono text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">Generated Architecture Specification</span>
+              <span id="bp-badge" class="px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-cyan-300 font-mono text-[10px] font-bold">PRODUCTION READY</span>
+            </div>
+
+            <div class="bg-slate-900 text-slate-200 p-4 rounded-xl font-mono text-xs overflow-x-auto flex-1 h-[420px]">
+              <pre id="bp-code-display" class="text-[11px] leading-relaxed text-emerald-300"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- GARAGE CUSTOMIZER & QUESTS MODAL (Vehicles, Paint, Neon Underglow, XP) -->
+  <!-- ========================================================================= -->
+  <div id="garage-modal" class="fixed inset-0 bg-slate-900/60 dark:bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-4 hidden transition-all">
+    <div class="card-surface w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl border-purple-500/40 rounded-3xl">
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">🏎️</span>
+          <div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">Agentic Garage & Quests Hub</h3>
+            <p class="text-[10px] text-slate-500 font-mono">Customize vehicle chassis, paint, neon underglow, and track learning quests</p>
+          </div>
+        </div>
+        <button onclick="closeGarageModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-2xl font-bold leading-none p-1.5">&times;</button>
+      </div>
+
+      <div class="p-4 sm:p-6 overflow-y-auto space-y-5 text-xs font-mono">
+        <!-- Vehicle Model Selection -->
+        <div class="space-y-2">
+          <label class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">1. Select Vehicle Chassis:</label>
+          <div class="grid grid-cols-3 gap-2.5">
+            <button onclick="selectVehicleChassis('roadster')" id="vbtn-roadster" class="p-3 rounded-2xl border-2 border-blue-600 bg-blue-50/70 dark:bg-blue-950/40 text-left transition space-y-1">
+              <div class="text-lg">🏎️</div>
+              <div class="font-bold text-slate-900 dark:text-white">Cyber Roadster</div>
+              <div class="text-[10px] text-slate-500 font-normal">Aerodynamic Coupe</div>
+            </button>
+            <button onclick="selectVehicleChassis('rover')" id="vbtn-rover" class="p-3 rounded-2xl border border-slate-200 dark:border-slate-800 text-left hover:border-blue-400 transition space-y-1">
+              <div class="text-lg">🚜</div>
+              <div class="font-bold text-slate-900 dark:text-white">Titan 6-Wheel Rover</div>
+              <div class="text-[10px] text-slate-500 font-normal">Rugged Planetary Chassis</div>
+            </button>
+            <button onclick="selectVehicleChassis('drone')" id="vbtn-drone" class="p-3 rounded-2xl border border-slate-200 dark:border-slate-800 text-left hover:border-blue-400 transition space-y-1">
+              <div class="text-lg">🛸</div>
+              <div class="font-bold text-slate-900 dark:text-white">Nexus Hover Drone</div>
+              <div class="text-[10px] text-slate-500 font-normal">Anti-Gravity Thrusters</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Body Paint Color -->
+        <div class="space-y-2">
+          <label class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">2. Body Paint Palette:</label>
+          <div class="flex flex-wrap gap-2" id="paint-color-picker">
+            <button onclick="selectPaintColor(0x2563eb)" class="w-8 h-8 rounded-full bg-blue-600 ring-2 ring-white shadow transition hover:scale-110" title="Cyber Blue"></button>
+            <button onclick="selectPaintColor(0x7c3aed)" class="w-8 h-8 rounded-full bg-purple-600 transition hover:scale-110" title="Neon Violet"></button>
+            <button onclick="selectPaintColor(0xd97706)" class="w-8 h-8 rounded-full bg-amber-600 transition hover:scale-110" title="Solar Amber"></button>
+            <button onclick="selectPaintColor(0x059669)" class="w-8 h-8 rounded-full bg-emerald-600 transition hover:scale-110" title="Emerald Racer"></button>
+            <button onclick="selectPaintColor(0xdc2626)" class="w-8 h-8 rounded-full bg-red-600 transition hover:scale-110" title="Crimson"></button>
+            <button onclick="selectPaintColor(0x1e293b)" class="w-8 h-8 rounded-full bg-slate-800 border border-slate-600 transition hover:scale-110" title="Stealth Carbon"></button>
+          </div>
+        </div>
+
+        <!-- Neon Underglow Selection -->
+        <div class="space-y-2">
+          <label class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">3. Glowing Underglow Neon:</label>
+          <div class="flex flex-wrap gap-2" id="underglow-picker">
+            <button onclick="selectUnderglow(0x06b6d4)" class="px-2.5 py-1 rounded-lg bg-cyan-950 text-cyan-300 border border-cyan-500/50 shadow-cyan-500/20 shadow-md">Cyan Glow</button>
+            <button onclick="selectUnderglow(0xec4899)" class="px-2.5 py-1 rounded-lg bg-pink-950 text-pink-300 border border-pink-500/50">Magenta Glow</button>
+            <button onclick="selectUnderglow(0x10b981)" class="px-2.5 py-1 rounded-lg bg-emerald-950 text-emerald-300 border border-emerald-500/50">Lime Glow</button>
+            <button onclick="selectUnderglow(0xf59e0b)" class="px-2.5 py-1 rounded-lg bg-amber-950 text-amber-300 border border-amber-500/50">Amber Glow</button>
+            <button onclick="selectUnderglow(0x8b5cf6)" class="px-2.5 py-1 rounded-lg bg-purple-950 text-purple-300 border border-purple-500/50">Purple Glow</button>
+            <button onclick="selectUnderglow(null)" class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Off / Stealth</button>
+          </div>
+        </div>
+
+        <!-- District Learning Quests Tracker -->
+        <div class="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2.5">
+          <label class="text-[11px] font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center justify-between">
+            <span>District Learning Quests</span>
+            <span id="garage-quests-status" class="text-amber-500">0 / 4 Completed</span>
+          </label>
+          <div class="space-y-2" id="garage-quests-list">
+            <!-- Dynamically updated -->
+          </div>
+        </div>
+      </div>
+
+      <div class="p-3 sm:p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between font-mono text-xs shrink-0">
+        <span class="text-slate-500 text-[10px]">Changes applied instantly in 3D world</span>
+        <button onclick="closeGarageModal()" class="px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium shadow-md">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- NPC AGENT INTERACTIVE DIALOG MODAL -->
+  <!-- ========================================================================= -->
+  <div id="npc-dialog-modal" class="fixed inset-0 bg-slate-900/60 dark:bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-4 hidden transition-all">
+    <div class="card-surface w-full max-w-lg flex flex-col overflow-hidden shadow-2xl border-emerald-500/40 rounded-3xl">
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2.5">
+          <span class="text-2xl" id="npc-modal-icon">🤖</span>
+          <div>
+            <h3 id="npc-modal-name" class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">LangGraph Overseer</h3>
+            <p id="npc-modal-role" class="text-[10px] text-emerald-600 dark:text-emerald-400 font-mono">Stateful Graph Orchestrator</p>
+          </div>
+        </div>
+        <button onclick="closeNPCModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-2xl font-bold leading-none p-1.5">&times;</button>
+      </div>
+
+      <div class="p-5 space-y-4 text-xs font-sans leading-relaxed">
+        <div class="p-4 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-slate-800 dark:text-slate-200 font-mono text-xs">
+          <span class="text-emerald-600 dark:text-emerald-400 font-bold">&ldquo;</span>
+          <span id="npc-modal-quote">Architectural advice goes here...</span>
+          <span class="text-emerald-600 dark:text-emerald-400 font-bold">&rdquo;</span>
+        </div>
+        <p id="npc-modal-bio" class="text-slate-600 dark:text-slate-400">Bio description of this agent...</p>
+      </div>
+
+      <div class="p-3 sm:p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between font-mono text-xs shrink-0">
+        <button onclick="closeNPCModal()" class="px-3 py-1.5 rounded-lg bg-white dark:bg-[#151b2b] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800">Dismiss</button>
+        <button onclick="openNPCDoc()" id="btn-npc-doc" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium shadow-md">Inspect Architecture &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti Particle Celebration Canvas -->
+  <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50 hidden"></canvas>
 
   <!-- ========================================================================= -->
   <!-- KNOWLEDGE CHEST INSPECTION MODAL (Mobile Bottom Sheet / Desktop Modal) -->
@@ -833,6 +1252,11 @@
 
       showWorldToast(iconMap[worldId], titleMap[worldId]);
 
+      if (typeof playerProfile !== 'undefined') {
+        playerProfile.visitedWorlds[worldId] = true;
+        if (typeof updateQuestsProgress === 'function') updateQuestsProgress();
+      }
+
       // Reset car safely onto the road forward
       carState.x = 0;
       carState.z = 14;
@@ -912,7 +1336,7 @@
 
     function switchView(viewName) {
       currentActiveView = viewName;
-      ['game', 'mindmap', 'docs', 'matrix'].forEach(v => {
+      ['game', 'sandbox', 'mindmap', 'docs', 'matrix'].forEach(v => {
         const el = document.getElementById('view-' + v);
         const tab = document.getElementById('tab-' + v);
         if (el) el.classList.add('hidden');
@@ -928,7 +1352,9 @@
         targetTab.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-blue-600 text-blue-600 dark:text-white shadow-sm transition-all";
       }
 
-      if (viewName === 'mindmap') {
+      if (viewName === 'sandbox') {
+        initSandbox();
+      } else if (viewName === 'mindmap') {
         renderMindmapTree();
         startMindmapGraph();
       } else if (viewName === 'docs') {
@@ -1280,9 +1706,136 @@
     }
 
     // =========================================================================
-    // 8. KNOWLEDGE MODAL CONTROLS
+    // 8. PLAYER PROGRESSION, QUIZZES, AUDIO & MULTIVERSE ECOSYSTEM
     // =========================================================================
     let currentModalDocId = null;
+
+    // --- PLAYER XP & RANK SYSTEM ---
+    const playerProfile = {
+      xp: 0,
+      level: 1,
+      rank: "Lvl 1: Prompt Novice",
+      mastered: {},
+      visitedWorlds: { island: true }
+    };
+
+    const rankTiers = [
+      { minXp: 0, level: 1, name: "Lvl 1: Prompt Novice", maxXp: 300 },
+      { minXp: 300, level: 2, name: "Lvl 2: Flow Orchestrator", maxXp: 800 },
+      { minXp: 800, level: 3, name: "Lvl 3: Swarm Architect", maxXp: 1600 },
+      { minXp: 1600, level: 4, name: "Lvl 4: Autonomous SWE Pioneer", maxXp: 2600 },
+      { minXp: 2600, level: 5, name: "Lvl 5: AGI Systems Sovereign", maxXp: 4000 }
+    ];
+
+    const districtQuests = [
+      { id: "quest-foundations", title: "The Frontier Trail", desc: "Master ReAct, Toolformer, and Reflexion papers", targets: ["paper-react", "paper-toolformer", "paper-reflexion"] },
+      { id: "quest-protocols", title: "Enterprise Protocols", desc: "Master MCP, PydanticAI, and Google ADK", targets: ["mcp-protocol", "frameworks-pydanticai", "frameworks-adk"] },
+      { id: "quest-swe", title: "Autonomous SWE Industrialist", desc: "Master CodeRabbit SWE Drydock & Coding Agent Lab", targets: ["coderabbit-review", "lab-coding"] },
+      { id: "quest-multiverse", title: "Multiverse Traveler", desc: "Warp and discover all 4 themed worlds", isWorldQuest: true }
+    ];
+
+    function addXP(amount) {
+      playerProfile.xp += amount;
+      let currentTier = rankTiers[0];
+      for (let i = rankTiers.length - 1; i >= 0; i--) {
+        if (playerProfile.xp >= rankTiers[i].minXp) {
+          currentTier = rankTiers[i];
+          break;
+        }
+      }
+
+      if (currentTier.level > playerProfile.level) {
+        playerProfile.level = currentTier.level;
+        playerProfile.rank = currentTier.name;
+        showWorldToast("🏆", "LEVEL UP: " + currentTier.name.toUpperCase());
+        triggerConfetti();
+        playTone(587, 'triangle', 0.2);
+        setTimeout(() => playTone(880, 'triangle', 0.35), 150);
+      } else {
+        playerProfile.rank = currentTier.name;
+      }
+      updatePlayerHUD();
+    }
+
+    function updatePlayerHUD() {
+      const rankLabel = document.getElementById('hud-rank-label');
+      const xpBar = document.getElementById('hud-xp-bar');
+      const xpText = document.getElementById('hud-xp-text');
+      if (!rankLabel || !xpBar || !xpText) return;
+
+      rankLabel.innerText = playerProfile.rank;
+      const currentTier = rankTiers.find(t => t.level === playerProfile.level) || rankTiers[0];
+      const tierProgress = Math.min(100, Math.round(((playerProfile.xp - currentTier.minXp) / (currentTier.maxXp - currentTier.minXp)) * 100));
+      xpBar.style.width = Math.max(8, tierProgress) + '%';
+      xpText.innerText = `${playerProfile.xp} / ${currentTier.maxXp} XP`;
+    }
+
+    // --- QUIZ REPOSITORY ---
+    const landmarkQuizzes = {
+      "frameworks-langgraph": {
+        q: "How does LangGraph achieve stateful, cyclic agent execution?",
+        options: [
+          "(Recommended) Checkpointer-backed state graphs that persist cyclic turns",
+          "Hardcoded infinite loops with sleep intervals",
+          "Stateless HTTP GET queries"
+        ],
+        answer: 0,
+        tip: "LangGraph uses StateGraph with checkpointers enabling cyclic self-correction loops."
+      },
+      "mcp-protocol": {
+        q: "What is the primary architectural purpose of the Model Context Protocol (MCP)?",
+        options: [
+          "(Recommended) Standardize client-to-tool connections over JSON-RPC so tools are model-agnostic",
+          "Replace Python with a proprietary binary compiler",
+          "Speed up GPU matrix multiplication"
+        ],
+        answer: 0,
+        tip: "MCP standardizes tool and resource discovery over JSON-RPC across all frontier LLMs."
+      },
+      "coderabbit-review": {
+        q: "How does CodeRabbit improve SWE agent reliability in CI/CD pipelines?",
+        options: [
+          "(Recommended) Automated code review, PR linting, and sandbox test-validation loops",
+          "Writing arbitrary code directly to production without testing",
+          "Generating marketing presentations"
+        ],
+        answer: 0,
+        tip: "CodeRabbit provides high-signal code reviews, catching hallucinations and regressions before merge."
+      },
+      "frameworks-pydanticai": {
+        q: "Why choose PydanticAI for production AI agent development?",
+        options: [
+          "(Recommended) Type-safe structured outputs with automatic schema validation and retries",
+          "Exclusive video synthesis capabilities",
+          "Replacing Docker containers"
+        ],
+        answer: 0,
+        tip: "PydanticAI enforces strict Pydantic v2 type safety and automatically retries invalid LLM outputs."
+      },
+      "paper-react": {
+        q: "What core cycle does the ReAct paper introduce?",
+        options: [
+          "(Recommended) Interleaving 'Reasoning' (Thoughts) and 'Acting' (Tool Calls)",
+          "Recursive SQL migrations",
+          "Random token sampling"
+        ],
+        answer: 0,
+        tip: "Yao et al. showed interleaving Thought, Action, and Observation dramatically outperforms pure reasoning."
+      }
+    };
+
+    function getFallbackQuiz(doc) {
+      return {
+        q: `What is the core production value of ${doc.title}?`,
+        options: [
+          `(Recommended) Provides enterprise-grade ${doc.badge} architecture with robust agent workflows`,
+          "Requires no evaluation or testing",
+          "Only works on local laptops without cloud support"
+        ],
+        answer: 0,
+        tip: `${doc.title} standardizes ${doc.badge} capabilities across production agent pipelines.`
+      };
+    }
 
     function openKnowledgeModal(docId) {
       const doc = repoDocs.find(d => d.id === docId);
@@ -1290,16 +1843,77 @@
       currentModalDocId = docId;
       document.getElementById('modal-badge').innerText = doc.badge;
       document.getElementById('modal-title').innerText = doc.title;
+
+      const isMastered = !!playerProfile.mastered[docId];
+      const quiz = landmarkQuizzes[docId] || getFallbackQuiz(doc);
+
       document.getElementById('modal-body').innerHTML = `
-        <div class="p-3 bg-blue-50 dark:bg-[#101422] border border-blue-200 dark:border-slate-800 rounded-lg font-mono text-xs text-blue-800 dark:text-cyan-300">
+        <div class="p-3 bg-blue-50 dark:bg-[#101422] border border-blue-200 dark:border-slate-800 rounded-xl font-mono text-xs text-blue-800 dark:text-cyan-300">
           ${doc.summary}
         </div>
         <div class="pt-2 space-y-3">
           ${doc.content}
         </div>
+
+        <!-- Interactive Knowledge Verification Quiz -->
+        <div class="mt-6 p-4 rounded-2xl bg-slate-50 dark:bg-[#0c101c] border border-slate-200 dark:border-slate-800 space-y-3 font-mono text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+              <span>🏆 Knowledge Verification Challenge</span>
+              ${isMastered ? '<span class="text-amber-500 font-bold">⭐ MASTERED</span>' : '<span class="text-emerald-500 text-[10px]">+100 XP</span>'}
+            </span>
+            <span class="text-[10px] text-slate-400">1 Question</span>
+          </div>
+          <p class="text-slate-700 dark:text-slate-300 font-sans text-xs">${quiz.q}</p>
+          <div class="space-y-1.5 pt-1">
+            ${quiz.options.map((opt, idx) => `
+              <button onclick="submitQuizAnswer('${docId}', ${idx})" id="quiz-opt-${docId}-${idx}" class="w-full text-left p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#131929] hover:border-blue-500 text-slate-800 dark:text-slate-200 text-xs transition flex items-center justify-between group">
+                <span>${opt}</span>
+                <span class="text-[10px] text-slate-400 group-hover:text-blue-500">&rarr;</span>
+              </button>
+            `).join('')}
+          </div>
+          <div id="quiz-feedback-${docId}" class="hidden"></div>
+        </div>
       `;
+
       document.getElementById('knowledge-modal').classList.remove('hidden');
       playTone(600, 'sine', 0.15);
+    }
+
+    function submitQuizAnswer(docId, selectedIndex) {
+      const doc = repoDocs.find(d => d.id === docId);
+      const quiz = landmarkQuizzes[docId] || getFallbackQuiz(doc);
+      const isCorrect = selectedIndex === quiz.answer;
+      const feedbackEl = document.getElementById('quiz-feedback-' + docId);
+      const btnEl = document.getElementById(`quiz-opt-${docId}-${selectedIndex}`);
+
+      if (feedbackEl) feedbackEl.classList.remove('hidden');
+
+      if (isCorrect) {
+        if (feedbackEl) {
+          feedbackEl.innerHTML = `<span class="text-emerald-500 font-bold">✓ CORRECT (+100 XP)!</span> ${quiz.tip}`;
+          feedbackEl.className = "p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-800 text-xs font-mono text-emerald-800 dark:text-emerald-200 mt-2";
+        }
+        if (btnEl) {
+          btnEl.className = "w-full text-left p-2.5 rounded-xl border border-emerald-500 bg-emerald-600 text-white text-xs font-bold transition flex items-center justify-between";
+        }
+        if (!playerProfile.mastered[docId]) {
+          playerProfile.mastered[docId] = true;
+          addXP(100);
+          triggerConfetti();
+          playTone(523, 'triangle', 0.12);
+          setTimeout(() => playTone(659, 'triangle', 0.12), 90);
+          setTimeout(() => playTone(784, 'triangle', 0.25), 180);
+        }
+      } else {
+        if (feedbackEl) {
+          feedbackEl.innerHTML = `<span class="text-rose-500 font-bold">✗ Incorrect:</span> Try again! Hint: ${quiz.tip}`;
+          feedbackEl.className = "p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-300 dark:border-rose-800 text-xs font-mono text-rose-800 dark:text-rose-200 mt-2";
+        }
+        playTone(180, 'sawtooth', 0.2);
+      }
+      updateQuestsProgress();
     }
 
     function closeKnowledgeModal() {
@@ -1316,8 +1930,117 @@
       if (currentNearbyWaypoint) openKnowledgeModal(currentNearbyWaypoint.docId);
     }
 
-    // Web Audio Synthesizer
+    // --- CELEBRATION CONFETTI ENGINE ---
+    let confettiParticles = [];
+    let confettiAnimId = null;
+
+    function triggerConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      canvas.classList.remove('hidden');
+
+      confettiParticles = [];
+      const colors = ['#2563eb', '#06b6d4', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6'];
+      for (let i = 0; i < 80; i++) {
+        confettiParticles.push({
+          x: window.innerWidth / 2 + (Math.random() - 0.5) * 160,
+          y: window.innerHeight / 2 + (Math.random() - 0.5) * 80,
+          w: Math.random() * 8 + 4,
+          h: Math.random() * 12 + 6,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 14,
+          vy: Math.random() * -12 - 4,
+          gravity: 0.35,
+          rot: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 12,
+          opacity: 1
+        });
+      }
+
+      if (!confettiAnimId) renderConfettiLoop();
+    }
+
+    function renderConfettiLoop() {
+      const canvas = document.getElementById('confetti-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      let alive = false;
+      confettiParticles.forEach(p => {
+        p.vy += p.gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vRot;
+        p.opacity -= 0.012;
+
+        if (p.opacity > 0 && p.y < canvas.height + 20) {
+          alive = true;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rot * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = Math.max(0, p.opacity);
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+        }
+      });
+
+      if (alive) {
+        confettiAnimId = requestAnimationFrame(renderConfettiLoop);
+      } else {
+        cancelAnimationFrame(confettiAnimId);
+        confettiAnimId = null;
+        canvas.classList.add('hidden');
+      }
+    }
+
+    // --- PROCEDURAL SYNTHWAVE RADIO & DRIFT AUDIO ENGINE ---
     let audioCtx = null, soundEnabled = true;
+    let radioStation = 'off';
+    let radioInterval = null;
+    let radioStep = 0;
+
+    const radioTracks = {
+      chill: {
+        name: "🌌 Cyber Chill",
+        bpm: 92,
+        bassWave: 'triangle',
+        leadWave: 'sine',
+        chords: [
+          [220.0, 261.63, 329.63],
+          [174.61, 220.0, 261.63],
+          [130.81, 164.81, 196.0],
+          [196.0, 246.94, 293.66]
+        ]
+      },
+      mars: {
+        name: "🚀 Mars Ambient",
+        bpm: 72,
+        bassWave: 'sine',
+        leadWave: 'triangle',
+        chords: [
+          [146.83, 174.61, 220.0],
+          [116.54, 146.83, 174.61],
+          [164.81, 196.0, 246.94],
+          [220.0, 277.18, 329.63]
+        ]
+      },
+      drift: {
+        name: "⚡ Synth Drift",
+        bpm: 122,
+        bassWave: 'sawtooth',
+        leadWave: 'sawtooth',
+        chords: [
+          [146.83, 220.0, 293.66],
+          [174.61, 261.63, 349.23],
+          [196.0, 293.66, 392.0],
+          [220.0, 329.63, 440.0]
+        ]
+      }
+    };
 
     function initAudio() {
       if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1343,7 +2066,555 @@
 
     function toggleSound() {
       soundEnabled = !soundEnabled;
-      document.getElementById('btn-sound').innerHTML = soundEnabled ? '&#x1F50A; SFX' : '&#x1F507; OFF';
+      document.getElementById('btn-sound').innerHTML = soundEnabled ? '&#x1F50A;' : '&#x1F507;';
+    }
+
+    function toggleRadio() {
+      const order = ['off', 'chill', 'mars', 'drift'];
+      const nextIdx = (order.indexOf(radioStation) + 1) % order.length;
+      setRadioStation(order[nextIdx]);
+    }
+
+    function setRadioStation(station) {
+      radioStation = station;
+      if (radioInterval) { clearInterval(radioInterval); radioInterval = null; }
+
+      const hudBtn = document.getElementById('btn-radio');
+      const mobLabel = document.getElementById('mobile-radio-label');
+
+      if (station === 'off') {
+        if (hudBtn) hudBtn.innerText = "📻 OFF";
+        if (mobLabel) mobLabel.innerText = "RADIO";
+        return;
+      }
+
+      initAudio();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const track = radioTracks[station];
+      if (hudBtn) hudBtn.innerText = track.name;
+      if (mobLabel) mobLabel.innerText = track.name.split(' ')[1] || "PLAY";
+
+      const stepMs = (60 / track.bpm / 2) * 1000;
+      radioStep = 0;
+      radioInterval = setInterval(() => {
+        if (!soundEnabled || radioStation === 'off') return;
+        const chordIdx = Math.floor(radioStep / 8) % track.chords.length;
+        const chord = track.chords[chordIdx];
+        const noteIdx = radioStep % chord.length;
+        const noteFreq = chord[noteIdx];
+
+        if (radioStep % 4 === 0) {
+          playProceduralSynth(chord[0] * 0.5, track.bassWave, 0.2, 0.06);
+        }
+        playProceduralSynth(noteFreq * (radioStep % 2 === 0 ? 1 : 2), track.leadWave, 0.12, 0.03);
+        radioStep = (radioStep + 1) % 32;
+      }, stepMs);
+    }
+
+    function playProceduralSynth(freq, type, duration, vol = 0.04) {
+      if (!audioCtx || !soundEnabled) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (_) {}
+    }
+
+    let lastSkidTime = 0;
+    function playDriftSkid() {
+      if (!soundEnabled || Date.now() - lastSkidTime < 240) return;
+      lastSkidTime = Date.now();
+      playTone(120, 'sawtooth', 0.14);
+    }
+
+    // --- GARAGE & VEHICLE CUSTOMIZER ---
+    let currentVehicleModel = 'roadster'; // 'roadster', 'rover', 'drone'
+    let currentVehicleColor = 0x2563eb;
+    let currentUnderglowColor = 0x06b6d4;
+
+    function openGarageModal() {
+      updateQuestsProgress();
+      document.getElementById('garage-modal').classList.remove('hidden');
+    }
+
+    function closeGarageModal() {
+      document.getElementById('garage-modal').classList.add('hidden');
+    }
+
+    function openQuestsTab() {
+      openGarageModal();
+    }
+
+    function selectVehicleChassis(model) {
+      currentVehicleModel = model;
+      ['roadster', 'rover', 'drone'].forEach(m => {
+        const btn = document.getElementById('vbtn-' + m);
+        if (btn) {
+          if (m === model) btn.className = "p-3 rounded-2xl border-2 border-blue-600 bg-blue-50/70 dark:bg-blue-950/40 text-left transition space-y-1";
+          else btn.className = "p-3 rounded-2xl border border-slate-200 dark:border-slate-800 text-left hover:border-blue-400 transition space-y-1";
+        }
+      });
+      buildVehicle(currentVehicleModel, currentVehicleColor, currentUnderglowColor);
+      playTone(480, 'sine', 0.15);
+    }
+
+    function selectPaintColor(colorHex) {
+      currentVehicleColor = colorHex;
+      buildVehicle(currentVehicleModel, currentVehicleColor, currentUnderglowColor);
+      playTone(550, 'triangle', 0.12);
+    }
+
+    function selectUnderglow(colorHex) {
+      currentUnderglowColor = colorHex;
+      buildVehicle(currentVehicleModel, currentVehicleColor, currentUnderglowColor);
+      playTone(620, 'sine', 0.12);
+    }
+
+    function updateQuestsProgress() {
+      const container = document.getElementById('garage-quests-list');
+      const statusEl = document.getElementById('garage-quests-status');
+      if (!container) return;
+
+      let completedCount = 0;
+      container.innerHTML = districtQuests.map(q => {
+        let isDone = false;
+        let progressText = "";
+        if (q.isWorldQuest) {
+          const visitedCount = Object.keys(playerProfile.visitedWorlds).length;
+          isDone = visitedCount >= 4;
+          progressText = `${visitedCount} / 4 Worlds`;
+        } else {
+          const masteredCount = q.targets.filter(t => !!playerProfile.mastered[t]).length;
+          isDone = masteredCount === q.targets.length;
+          progressText = `${masteredCount} / ${q.targets.length} Landmarks`;
+        }
+
+        if (isDone) completedCount++;
+
+        return `
+          <div class="p-2.5 rounded-xl border ${isDone ? 'border-emerald-300 dark:border-emerald-800 bg-emerald-50/50 dark:bg-emerald-950/30' : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-[#101422]'} flex items-center justify-between text-xs">
+            <div>
+              <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                <span>${isDone ? '✅' : '🚩'}</span>
+                <span>${q.title}</span>
+              </div>
+              <div class="text-[10px] text-slate-500 font-normal mt-0.5">${q.desc}</div>
+            </div>
+            <div class="text-[10px] font-mono font-bold ${isDone ? 'text-emerald-600 dark:text-emerald-400' : 'text-blue-600 dark:text-cyan-400'}">
+              ${progressText}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (statusEl) statusEl.innerText = `${completedCount} / ${districtQuests.length} Completed`;
+    }
+
+    // --- AUTONOMOUS ROAMING NPC AGENTS ---
+    const npcAgents = [
+      {
+        id: "npc-langgraph",
+        name: "LangGraph Overseer",
+        role: "Stateful Cyclic Graph Orchestrator",
+        color: 0x2563eb,
+        quote: "Cyclic graphs with checkpoint persistence prevent infinite loops while giving agents self-healing capabilities!",
+        bio: "Patrols the Downtown Metropolis ensuring multi-turn agent graphs execute with durable state checkpointers.",
+        docId: "frameworks-langgraph",
+        path: [{x: -45, z: -45}, {x: 45, z: -45}, {x: 45, z: 45}, {x: -45, z: 45}],
+        currWp: 0, x: -45, z: -45, angle: 0, speed: 0.28, mesh: null
+      },
+      {
+        id: "npc-coderabbit",
+        name: "CodeRabbit SWE Scout",
+        role: "Autonomous SWE Reviewer",
+        color: 0x059669,
+        quote: "Safety Rule: Always execute agent-generated patches in an isolated sandbox with regression test loops!",
+        bio: "Patrols the SWE Docks district running automated PR reviews, AST lints, and self-healing test fixes.",
+        docId: "coderabbit-review",
+        path: [{x: -140, z: -35}, {x: -180, z: 10}, {x: -140, z: 50}, {x: -100, z: 10}],
+        currWp: 0, x: -140, z: -35, angle: 0, speed: 0.32, mesh: null
+      },
+      {
+        id: "npc-crewai",
+        name: "CrewAI Ambassador",
+        role: "Role-Playing Multi-Agent Lead",
+        color: 0xd97706,
+        quote: "Swarm Tip: Keep agent personas laser-focused. Delegate tasks hierarchically for maximum reasoning accuracy!",
+        bio: "Orchestrates multi-role collaborative swarms across the Research Quad with clear separation of duties.",
+        docId: "frameworks-crewai",
+        path: [{x: 0, z: -90}, {x: 80, z: -90}, {x: 80, z: -150}, {x: 0, z: -150}],
+        currWp: 0, x: 0, z: -90, angle: 0, speed: 0.26, mesh: null
+      },
+      {
+        id: "npc-mcp",
+        name: "MCP Protocol Drone",
+        role: "Model Context Protocol Sentinel",
+        color: 0x7c3aed,
+        quote: "Protocol Insight: MCP standardizes client-to-tool connections over JSON-RPC. Write one tool, run on every LLM!",
+        bio: "Guards the high-speed protocol conduits between model clients and tool servers across the Summit.",
+        docId: "mcp-protocol",
+        path: [{x: 60, z: -130}, {x: 120, z: -90}, {x: 140, z: -35}, {x: 80, z: -60}],
+        currWp: 0, x: 60, z: -130, angle: 0, speed: 0.35, isHover: true, mesh: null
+      }
+    ];
+
+    let currentNearbyNPC = null;
+
+    function triggerCurrentNPC() {
+      if (currentNearbyNPC) openNPCModal(currentNearbyNPC.id);
+    }
+
+    function openNPCModal(npcId) {
+      const npc = npcAgents.find(n => n.id === npcId);
+      if (!npc) return;
+      currentNearbyNPC = npc;
+      document.getElementById('npc-modal-name').innerText = npc.name;
+      document.getElementById('npc-modal-role').innerText = npc.role;
+      document.getElementById('npc-modal-quote').innerText = npc.quote;
+      document.getElementById('npc-modal-bio').innerText = npc.bio;
+      document.getElementById('npc-dialog-modal').classList.remove('hidden');
+      playTone(520, 'sine', 0.2);
+    }
+
+    function closeNPCModal() {
+      document.getElementById('npc-dialog-modal').classList.add('hidden');
+    }
+
+    function openNPCDoc() {
+      closeNPCModal();
+      if (currentNearbyNPC && currentNearbyNPC.docId) {
+        switchView('docs');
+        loadDocById(currentNearbyNPC.docId);
+      }
+    }
+
+    // --- LIVE AGENT SIMULATOR & ARCHITECTURE BLUEPRINT SANDBOX ---
+    function initSandbox() {
+      loadReactPreset('swe');
+      showMCPStep(0);
+      generateBlueprint();
+    }
+
+    function switchSandboxSubTab(tab) {
+      ['react', 'swarm', 'mcp', 'blueprint'].forEach(t => {
+        const pane = document.getElementById('sbox-pane-' + t);
+        const btn = document.getElementById('sbox-tab-' + t);
+        if (pane) pane.classList.add('hidden');
+        if (btn) btn.className = "px-3 py-1.5 rounded-lg bg-white dark:bg-[#151b2b] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:bg-slate-100 transition";
+      });
+
+      const activePane = document.getElementById('sbox-pane-' + tab);
+      const activeBtn = document.getElementById('sbox-tab-' + tab);
+      if (activePane) activePane.classList.remove('hidden');
+      if (activeBtn) activeBtn.className = "px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium shadow-sm transition";
+    }
+
+    const reactPresets = {
+      swe: {
+        task: "Fix intermittent memory leak in worker pool and verify with CodeRabbit review suite.",
+        steps: [
+          { type: "thought", text: "Analyzing repository issue #104. Suspect unclosed connections in async worker task pool." },
+          { type: "action", cmd: 'call_mcp_tool(name="github_repo_search", query="worker_pool.py unclosed")' },
+          { type: "obs", text: 'Found line 84 in src/worker.py: listener callbacks appended without weakref cleanup.' },
+          { type: "thought", text: "Root cause verified. Applying weakref callback decorator and running pytest sandbox." },
+          { type: "action", cmd: 'call_mcp_tool(name="coderabbit_autofix", target="src/worker.py")' },
+          { type: "obs", text: 'CodeRabbit Review: 0 warnings, 0 memory leaks, all 42 unit tests passed in 1.4s.' },
+          { type: "final", text: "SUCCESS: Patch applied and verified in sandbox. Memory usage reduced by 48MB per worker loop." }
+        ]
+      },
+      research: {
+        task: "Compare LangGraph vs CrewAI for stateful multi-turn human-in-the-loop applications.",
+        steps: [
+          { type: "thought", text: "Querying academic papers and documentation archives for state persistence benchmarks." },
+          { type: "action", cmd: 'call_mcp_tool(name="arxiv_paper_search", query="LangGraph cyclic state graph")' },
+          { type: "obs", text: 'Retrieved 8 papers: StateGraph Checkpointer architecture delivers determinism for interrupts.' },
+          { type: "thought", text: "Synthesizing architectural trade-offs: LangGraph excels at state machine graphs; CrewAI excels at role-based task delegation." },
+          { type: "final", text: "RECOMMENDATION: Use LangGraph for workflow state machines requiring checkpoints; use CrewAI for creative multi-agent role play." }
+        ]
+      },
+      financial: {
+        task: "Query Q3 earnings database, calculate net operating margin, and generate structured executive summary.",
+        steps: [
+          { type: "thought", text: "Retrieving verified schema from SQLite database server via MCP." },
+          { type: "action", cmd: 'call_mcp_tool(name="sqlite_query", sql="SELECT revenue, opex FROM financials WHERE quarter=\'Q3-2026\'")' },
+          { type: "obs", text: 'Result: revenue = $14.2M, opex = $8.9M, net_operating_margin = 37.32%.' },
+          { type: "thought", text: "Validating output against Pydantic schema for executive compliance." },
+          { type: "final", text: "EXECUTIVE SUMMARY: Q3 Revenue reached $14.2M (+18% YoY) with healthy 37.3% net operating margin." }
+        ]
+      }
+    };
+
+    function loadReactPreset(key) {
+      const preset = reactPresets[key] || reactPresets.swe;
+      const input = document.getElementById('react-task-input');
+      if (input) input.value = preset.task;
+    }
+
+    let isRunningReact = false;
+    function runReactSimulation() {
+      if (isRunningReact) return;
+      isRunningReact = true;
+
+      const presetKey = document.getElementById('react-preset-select').value;
+      const preset = reactPresets[presetKey] || reactPresets.swe;
+      const terminal = document.getElementById('react-terminal-output');
+      const counter = document.getElementById('react-step-counter');
+      const latency = document.getElementById('react-latency-label');
+      const btn = document.getElementById('btn-run-react');
+
+      terminal.innerHTML = "";
+      btn.innerText = "⏳ Executing ReAct Loop...";
+      btn.classList.add('opacity-75');
+
+      let currentStep = 0;
+      const startTime = Date.now();
+
+      function stepNext() {
+        if (currentStep >= preset.steps.length) {
+          isRunningReact = false;
+          btn.innerText = "▶ Run Live Agent Trace";
+          btn.classList.remove('opacity-75');
+          playTone(660, 'triangle', 0.25);
+          return;
+        }
+
+        const s = preset.steps[currentStep];
+        currentStep++;
+        counter.innerText = `Steps: ${currentStep}/${preset.steps.length}`;
+        latency.innerText = `Latency: ${Date.now() - startTime}ms`;
+
+        let html = '';
+        if (s.type === 'thought') {
+          html = `
+            <div class="p-3 rounded-xl bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/40 text-blue-900 dark:text-cyan-300">
+              <span class="font-bold text-blue-600 dark:text-cyan-400">💭 THOUGHT:</span> ${s.text}
+            </div>
+          `;
+          playTone(420, 'sine', 0.08);
+        } else if (s.type === 'action') {
+          html = `
+            <div class="p-3 rounded-xl bg-purple-50/60 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-900/40 text-purple-900 dark:text-purple-300 font-mono">
+              <span class="font-bold text-purple-600 dark:text-purple-400">🛠️ ACTION:</span> <code>${s.cmd}</code>
+            </div>
+          `;
+          playTone(550, 'square', 0.08);
+        } else if (s.type === 'obs') {
+          html = `
+            <div class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-mono">
+              <span class="font-bold text-slate-500">👁️ OBSERVATION:</span> ${s.text}
+            </div>
+          `;
+          playTone(360, 'sine', 0.08);
+        } else if (s.type === 'final') {
+          html = `
+            <div class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-400 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200">
+              <div class="font-bold text-emerald-600 dark:text-emerald-400 mb-1">🎯 FINAL VERIFIED RESPONSE:</div>
+              <div>${s.text}</div>
+            </div>
+          `;
+          playTone(880, 'sine', 0.2);
+        }
+
+        terminal.innerHTML += html;
+        terminal.scrollTop = terminal.scrollHeight;
+        setTimeout(stepNext, 750);
+      }
+
+      stepNext();
+    }
+
+    function clearReactTrace() {
+      document.getElementById('react-terminal-output').innerHTML = '<div class="text-slate-400 text-center py-16">Terminal cleared. Click "Run Live Agent Trace" to execute.</div>';
+      document.getElementById('react-step-counter').innerText = "Steps: 0/5";
+      document.getElementById('react-latency-label').innerText = "Latency: 0ms";
+    }
+
+    function simulateSwarmChat() {
+      const container = document.getElementById('swarm-chat-container');
+      const btn = document.getElementById('btn-run-swarm');
+      if (!container) return;
+
+      container.innerHTML = "";
+      btn.innerText = "⏳ Swarm in Motion...";
+      btn.classList.add('opacity-75');
+
+      const messages = [
+        { agent: "Planner Agent", avatar: "🧭", color: "blue", text: "Goal received: Deploy high-performance RAG pipeline with MCP filesystem tools. Decomposing into 2 subtasks: Research optimal chunking & Implement Pydantic schema." },
+        { agent: "Research Agent", avatar: "🔬", color: "amber", text: "Executing arXiv lookup for late-chunking vs semantic chunking... Semantic chunking with 512-token overlap yields 14% higher retrieval precision." },
+        { agent: "Planner Agent", avatar: "🧭", color: "blue", text: "Acknowledged. Routing semantic chunking parameters to SWE Review Agent for schema synthesis." },
+        { agent: "SWE Review Agent", avatar: "🛠️", color: "emerald", text: "CodeRabbit review complete. Pydantic v2 model generated with strict field validation. Sandbox tests passed with 0 regressions. Ready for production merge." }
+      ];
+
+      let idx = 0;
+      function showNextMessage() {
+        if (idx >= messages.length) {
+          btn.innerText = "🐝 Run Swarm Simulation";
+          btn.classList.remove('opacity-75');
+          playTone(720, 'sine', 0.2);
+          return;
+        }
+
+        const m = messages[idx];
+        idx++;
+
+        const msgHtml = `
+          <div class="flex items-start gap-3 p-3 rounded-xl bg-white dark:bg-[#111624] border border-slate-200 dark:border-slate-800 shadow-sm">
+            <span class="text-2xl">${m.avatar}</span>
+            <div class="flex-1 min-w-0 space-y-1">
+              <div class="flex items-center justify-between">
+                <strong class="text-xs font-mono font-bold text-${m.color}-600 dark:text-${m.color}-400">${m.agent}</strong>
+                <span class="text-[9px] font-mono text-slate-400">TURN ${idx}</span>
+              </div>
+              <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">${m.text}</p>
+            </div>
+          </div>
+        `;
+        container.innerHTML += msgHtml;
+        container.scrollTop = container.scrollHeight;
+        playTone(500 + idx * 50, 'sine', 0.1);
+        setTimeout(showNextMessage, 900);
+      }
+
+      showNextMessage();
+    }
+
+    const mcpSteps = [
+      {
+        title: "Phase 1: Protocol Initialization & Handshake",
+        desc: "The client establishes connection with the MCP server over stdio or HTTP+SSE transport and exchanges protocol versions.",
+        json: {
+          jsonrpc: "2.0",
+          id: 1,
+          method: "initialize",
+          params: {
+            protocolVersion: "2024-11-05",
+            capabilities: { tools: {}, resources: {}, prompts: {} },
+            clientInfo: { name: "awesome-agentic-client", version: "1.0.0" }
+          }
+        }
+      },
+      {
+        title: "Phase 2: Capability Negotiation",
+        desc: "The MCP server responds with supported capabilities (tools, resources, prompt templates, logging).",
+        json: {
+          jsonrpc: "2.0",
+          id: 1,
+          result: {
+            protocolVersion: "2024-11-05",
+            capabilities: { tools: { listChanged: true }, logging: {} },
+            serverInfo: { name: "github-sqlite-mcp-server", version: "2.4.0" }
+          }
+        }
+      },
+      {
+        title: "Phase 3: Tool Discovery (tools/list)",
+        desc: "The LLM client requests available tools, their JSON Schema parameters, and parameter docstrings.",
+        json: {
+          jsonrpc: "2.0",
+          id: 2,
+          method: "tools/list",
+          params: {}
+        }
+      },
+      {
+        title: "Phase 4: Tool Execution (tools/call)",
+        desc: "The LLM generates tool call arguments, and the client dispatches the request to the MCP server.",
+        json: {
+          jsonrpc: "2.0",
+          id: 3,
+          method: "tools/call",
+          params: {
+            name: "execute_sql_query",
+            arguments: {
+              query: "SELECT name, stars FROM agent_repos WHERE stars > 10000 ORDER BY stars DESC LIMIT 5"
+            }
+          }
+        }
+      },
+      {
+        title: "Phase 5: Output Streaming & Results",
+        desc: "The MCP server returns structured content back to the client for LLM synthesis.",
+        json: {
+          jsonrpc: "2.0",
+          id: 3,
+          result: {
+            content: [
+              { type: "text", text: '[{"name": "LangGraph", "stars": 18200}, {"name": "CrewAI", "stars": 24100}]' }
+            ],
+            isError: false
+          }
+        }
+      }
+    ];
+
+    function showMCPStep(stepIdx) {
+      for (let i = 0; i < 5; i++) {
+        const btn = document.getElementById('mcp-step-btn-' + i);
+        if (btn) {
+          if (i === stepIdx) btn.className = "p-2.5 rounded-xl bg-blue-600 text-white font-bold text-left transition shadow-sm";
+          else btn.className = "p-2.5 rounded-xl bg-slate-100 dark:bg-[#131929] text-slate-700 dark:text-slate-300 font-bold text-left hover:bg-slate-200 transition";
+        }
+      }
+
+      const s = mcpSteps[stepIdx];
+      document.getElementById('mcp-detail-title').innerText = s.title;
+      document.getElementById('mcp-detail-desc').innerText = s.desc;
+      document.getElementById('mcp-code-preview').innerText = JSON.stringify(s.json, null, 2);
+    }
+
+    function generateBlueprint() {
+      const orch = document.getElementById('bp-orchestrator').value;
+      const model = document.getElementById('bp-model').value;
+      const tools = document.getElementById('bp-tools').value;
+      const mem = document.getElementById('bp-memory').value;
+      const guard = document.getElementById('bp-guard').value;
+
+      const code = `"""
+PRODUCTION AGENT SPECIFICATION (Generated November 2026)
+Architecture Stack:
+  - Orchestration: ${orch.toUpperCase()}
+  - Foundation LLM: ${model.toUpperCase()}
+  - Tool Standard: ${tools.toUpperCase()} (Model Context Protocol)
+  - Memory / Vector: ${mem.toUpperCase()}
+  - Guardrail / Review: ${guard.toUpperCase()}
+"""
+import asyncio
+from pydantic import BaseModel, Field
+
+class AgentState(BaseModel):
+    query: str
+    tool_history: list = Field(default_factory=list)
+    output: str | None = None
+
+async def main():
+    print("🚀 Initializing Production Agent System...")
+    # 1. Connect to Model Context Protocol (MCP) tool servers
+    # 2. Bind ${model} reasoning engine with structured schemas
+    # 3. Checkpoint state against ${mem}
+    # 4. Enforce ${guard} test & autofix validation before merge
+    print("✓ Agent Pipeline Active and Verified.")
+
+if __name__ == "__main__":
+    asyncio.run(main())`;
+
+      document.getElementById('bp-code-display').innerText = code;
+    }
+
+    function copyBlueprintCode() {
+      const code = document.getElementById('bp-code-display').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = document.getElementById('btn-copy-bp');
+        btn.innerText = "✓ Copied to Clipboard!";
+        setTimeout(() => { btn.innerText = "📋 Copy Production Boilerplate"; }, 2000);
+      });
     }
 
     // =========================================================================
@@ -1587,8 +2858,9 @@
       // Build Selected World Environment (defaults to 'island')
       rebuildWorldEnvironment(currentWorld);
 
-      // Build Real Sports Roadster
-      buildRealCar();
+      // Build Player Vehicle & Autonomous NPCs
+      buildVehicle(currentVehicleModel, currentVehicleColor, currentUnderglowColor);
+      initNPCs();
 
       // Radar Markers & Camera Controls
       setupRadarMarkers();
@@ -2017,12 +3289,16 @@
     }
 
     // =========================================================================
-    // 11. REAL SPORTS ROADSTER 3D MODEL
+    // 11. VEHICLE GARAGE ENGINE (ROADSTER, TITAN ROVER, NEXUS DRONE + NEON)
     // =========================================================================
-    function buildRealCar() {
+    function buildVehicle(model = 'roadster', colorHex = 0x2563eb, underglowHex = 0x06b6d4) {
+      if (carGroup && scene) {
+        scene.remove(carGroup);
+      }
       carGroup = new THREE.Group();
+      allWheels = [];
 
-      const bodyPaintMat = new THREE.MeshStandardMaterial({ color: 0x2563eb, roughness: 0.22, metalness: 0.78 });
+      const bodyPaintMat = new THREE.MeshStandardMaterial({ color: colorHex, roughness: 0.22, metalness: 0.78 });
       const carbonTrimMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.55, metalness: 0.25 });
       const glassMat = new THREE.MeshPhysicalMaterial({ color: 0x1e293b, roughness: 0.1, transparent: true, opacity: 0.75, transmission: 0.5 });
       const chromeMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.1, metalness: 0.95 });
@@ -2032,79 +3308,241 @@
 
       taillightMesh = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.12, 0.15), new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0xdc2626, emissiveIntensity: 0.6 }));
 
-      // Lower Body
-      const lowerBody = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.45, 4.4), bodyPaintMat);
-      lowerBody.position.y = 0.6; lowerBody.castShadow = true; carGroup.add(lowerBody);
+      // Underglow Neon Ground Illumination
+      if (underglowHex !== null) {
+        const underglowGeo = new THREE.PlaneGeometry(2.4, 4.4);
+        underglowGeo.rotateX(-Math.PI / 2);
+        const underglowMat = new THREE.MeshBasicMaterial({ color: underglowHex, transparent: true, opacity: 0.65, side: THREE.DoubleSide });
+        const underglowMesh = new THREE.Mesh(underglowGeo, underglowMat);
+        underglowMesh.position.y = 0.08;
+        carGroup.add(underglowMesh);
 
-      // Hood & Splitter
-      const hood = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.3, 1.8), bodyPaintMat);
-      hood.position.set(0, 0.85, -1.0); hood.rotation.x = 0.08; hood.castShadow = true; carGroup.add(hood);
+        const underLight = new THREE.PointLight(underglowHex, 1.8, 6.0);
+        underLight.position.y = 0.25;
+        carGroup.add(underLight);
+      }
 
-      const splitter = new THREE.Mesh(new THREE.BoxGeometry(2.08, 0.08, 0.6), carbonTrimMat);
-      splitter.position.set(0, 0.4, -2.15); carGroup.add(splitter);
-
-      // Trunk & Spoiler
-      const trunk = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.35, 1.1), bodyPaintMat);
-      trunk.position.set(0, 0.85, 1.4); trunk.castShadow = true; carGroup.add(trunk);
-
-      const spoilerWing = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.08, 0.4), carbonTrimMat);
-      spoilerWing.position.set(0, 1.25, 2.05); carGroup.add(spoilerWing);
-      const strutL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat); strutL.position.set(-0.6, 1.1, 2.05); carGroup.add(strutL);
-      const strutR = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat); strutR.position.set(0.6, 1.1, 2.05); carGroup.add(strutR);
-
-      // Cabin & Windows
-      const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.65, 0.5, 1.9), bodyPaintMat);
-      cabin.position.set(0, 1.18, 0.15); carGroup.add(cabin);
-
-      const frontGlass = new THREE.Mesh(new THREE.BoxGeometry(1.58, 0.48, 0.8), glassMat);
-      frontGlass.position.set(0, 1.18, -0.6); frontGlass.rotation.x = -0.55; carGroup.add(frontGlass);
-
-      const rearGlass = new THREE.Mesh(new THREE.BoxGeometry(1.58, 0.45, 0.75), glassMat);
-      rearGlass.position.set(0, 1.18, 0.85); rearGlass.rotation.x = 0.52; carGroup.add(rearGlass);
-
-      // Headlights & Taillights
-      const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.12, 0.15), headlightGlowMat); hlL.position.set(-0.65, 0.72, -2.18); carGroup.add(hlL);
-      const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.12, 0.15), headlightGlowMat); hlR.position.set(0.65, 0.72, -2.18); carGroup.add(hlR);
-
-      const beamL = new THREE.SpotLight(0xffffff, 2.5, 35, Math.PI / 7, 0.4);
-      beamL.position.set(-0.65, 0.75, -2.2); beamL.target.position.set(-0.65, 0, -20); carGroup.add(beamL); carGroup.add(beamL.target);
-      const beamR = new THREE.SpotLight(0xffffff, 2.5, 35, Math.PI / 7, 0.4);
-      beamR.position.set(0.65, 0.75, -2.2); beamR.target.position.set(0.65, 0, -20); carGroup.add(beamR); carGroup.add(beamR.target);
-
-      taillightMesh.position.set(0, 0.8, 2.18); carGroup.add(taillightMesh);
-
-      // Wheels
-      function makeWheel() {
+      function makeWheel(radius = 0.45, width = 0.35) {
         const wg = new THREE.Group();
-        const tire = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.35, 20).rotateZ(Math.PI / 2), tireRubberMat);
+        const tire = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, width, 20).rotateZ(Math.PI / 2), tireRubberMat);
         tire.castShadow = true; wg.add(tire);
-        const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.36, 16).rotateZ(Math.PI / 2), chromeMat);
+        const rim = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.7, radius * 0.7, width + 0.01, 16).rotateZ(Math.PI / 2), chromeMat);
         wg.add(rim);
         for (let i = 0; i < 5; i++) {
-          const spoke = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.6, 0.37), chromeMat);
+          const spoke = new THREE.Mesh(new THREE.BoxGeometry(0.06, radius * 1.35, width + 0.02), chromeMat);
           spoke.rotation.x = (i * Math.PI) / 2.5; wg.add(spoke);
         }
-        const caliper = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.25, 0.3), brakeCaliperMat);
-        caliper.position.set(0, 0.15, 0); wg.add(caliper);
+        const caliper = new THREE.Mesh(new THREE.BoxGeometry(0.12, radius * 0.55, width * 0.85), brakeCaliperMat);
+        caliper.position.set(0, radius * 0.3, 0); wg.add(caliper);
         return wg;
       }
 
-      frontLeftPivot = new THREE.Group(); frontLeftPivot.position.set(-1.12, 0.45, -1.35);
-      const wFL = makeWheel(); frontLeftPivot.add(wFL); carGroup.add(frontLeftPivot);
+      if (model === 'rover') {
+        // --- TITAN 6-WHEEL EXPLORATION ROVER ---
+        const chassis = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.75, 4.5), bodyPaintMat);
+        chassis.position.y = 0.95; chassis.castShadow = true; carGroup.add(chassis);
 
-      frontRightPivot = new THREE.Group(); frontRightPivot.position.set(1.12, 0.45, -1.35);
-      const wFR = makeWheel(); frontRightPivot.add(wFR); carGroup.add(frontRightPivot);
+        const cab = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.7, 2.2), carbonTrimMat);
+        cab.position.set(0, 1.6, -0.4); carGroup.add(cab);
 
-      const rL = new THREE.Group(); rL.position.set(-1.12, 0.45, 1.35);
-      const wRL = makeWheel(); rL.add(wRL); carGroup.add(rL);
+        const cabGlass = new THREE.Mesh(new THREE.BoxGeometry(1.82, 0.6, 1.1), glassMat);
+        cabGlass.position.set(0, 1.62, -1.0); cabGlass.rotation.x = -0.3; carGroup.add(cabGlass);
 
-      const rR = new THREE.Group(); rR.position.set(1.12, 0.45, 1.35);
-      const wRR = makeWheel(); rR.add(wRR); carGroup.add(rR);
+        // Rotating Satellite Radar Dish
+        const dishPole = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.5), chromeMat);
+        dishPole.position.set(0, 2.15, 0.3); carGroup.add(dishPole);
+        const radarDish = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.1, 0.2, 16), chromeMat);
+        radarDish.position.set(0, 2.45, 0.3); radarDish.rotation.x = 0.5; carGroup.add(radarDish);
 
-      allWheels = [wFL, wFR, wRL, wRR];
+        // Headlights & Taillights
+        const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.2, 0.15), headlightGlowMat); hlL.position.set(-0.75, 1.05, -2.28); carGroup.add(hlL);
+        const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.2, 0.15), headlightGlowMat); hlR.position.set(0.75, 1.05, -2.28); carGroup.add(hlR);
+        taillightMesh.position.set(0, 1.05, 2.28); carGroup.add(taillightMesh);
+
+        // 6 Rugged All-Terrain Wheels
+        frontLeftPivot = new THREE.Group(); frontLeftPivot.position.set(-1.3, 0.55, -1.4);
+        const wFL = makeWheel(0.55, 0.42); frontLeftPivot.add(wFL); carGroup.add(frontLeftPivot);
+
+        frontRightPivot = new THREE.Group(); frontRightPivot.position.set(1.3, 0.55, -1.4);
+        const wFR = makeWheel(0.55, 0.42); frontRightPivot.add(wFR); carGroup.add(frontRightPivot);
+
+        const wML = makeWheel(0.55, 0.42); wML.position.set(-1.3, 0.55, 0); carGroup.add(wML);
+        const wMR = makeWheel(0.55, 0.42); wMR.position.set(1.3, 0.55, 0); carGroup.add(wMR);
+
+        const wRL = makeWheel(0.55, 0.42); wRL.position.set(-1.3, 0.55, 1.4); carGroup.add(wRL);
+        const wRR = makeWheel(0.55, 0.42); wRR.position.set(1.3, 0.55, 1.4); carGroup.add(wRR);
+
+        allWheels = [wFL, wFR, wML, wMR, wRL, wRR];
+
+      } else if (model === 'drone') {
+        // --- NEXUS HOVER DRONE (ANTI-GRAVITY THRUSTERS) ---
+        const coreFuselage = new THREE.Mesh(new THREE.CylinderGeometry(1.3, 1.5, 0.55, 8), bodyPaintMat);
+        coreFuselage.position.y = 0.95; coreFuselage.castShadow = true; carGroup.add(coreFuselage);
+
+        const energyCore = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 16), new THREE.MeshStandardMaterial({ color: 0x06b6d4, emissive: 0x06b6d4, emissiveIntensity: 1.2 }));
+        energyCore.position.set(0, 1.35, 0); carGroup.add(energyCore);
+
+        // 4 Corner Ducted Thruster Pods
+        const corners = [[-1.55, -1.55], [1.55, -1.55], [-1.55, 1.55], [1.55, 1.55]];
+        corners.forEach(([cx, cz]) => {
+          const arm = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.12, 1.2), carbonTrimMat);
+          arm.position.set(cx * 0.5, 0.95, cz * 0.5);
+          arm.rotation.y = Math.atan2(cx, cz);
+          carGroup.add(arm);
+
+          const duct = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.1, 8, 16).rotateX(Math.PI / 2), carbonTrimMat);
+          duct.position.set(cx, 0.95, cz); carGroup.add(duct);
+
+          const glowJet = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.1, 0.4, 12), new THREE.MeshBasicMaterial({ color: 0x00f5ff, transparent: true, opacity: 0.85 }));
+          glowJet.position.set(cx, 0.7, cz); carGroup.add(glowJet);
+        });
+
+        // Headlights & Taillights
+        const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.12, 0.15), headlightGlowMat); hlL.position.set(-0.5, 1.0, -1.55); carGroup.add(hlL);
+        const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.12, 0.15), headlightGlowMat); hlR.position.set(0.5, 1.0, -1.55); carGroup.add(hlR);
+        taillightMesh.position.set(0, 1.0, 1.55); carGroup.add(taillightMesh);
+
+        frontLeftPivot = new THREE.Group(); frontRightPivot = new THREE.Group();
+        allWheels = [];
+
+      } else {
+        // --- CYBER SPORTS ROADSTER ---
+        const lowerBody = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.45, 4.4), bodyPaintMat);
+        lowerBody.position.y = 0.6; lowerBody.castShadow = true; carGroup.add(lowerBody);
+
+        const hood = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.3, 1.8), bodyPaintMat);
+        hood.position.set(0, 0.85, -1.0); hood.rotation.x = 0.08; hood.castShadow = true; carGroup.add(hood);
+
+        const splitter = new THREE.Mesh(new THREE.BoxGeometry(2.08, 0.08, 0.6), carbonTrimMat);
+        splitter.position.set(0, 0.4, -2.15); carGroup.add(splitter);
+
+        const trunk = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.35, 1.1), bodyPaintMat);
+        trunk.position.set(0, 0.85, 1.4); trunk.castShadow = true; carGroup.add(trunk);
+
+        const spoilerWing = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.08, 0.4), carbonTrimMat);
+        spoilerWing.position.set(0, 1.25, 2.05); carGroup.add(spoilerWing);
+        const strutL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat); strutL.position.set(-0.6, 1.1, 2.05); carGroup.add(strutL);
+        const strutR = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat); strutR.position.set(0.6, 1.1, 2.05); carGroup.add(strutR);
+
+        const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.65, 0.5, 1.9), bodyPaintMat);
+        cabin.position.set(0, 1.18, 0.15); carGroup.add(cabin);
+
+        const frontGlass = new THREE.Mesh(new THREE.BoxGeometry(1.58, 0.48, 0.8), glassMat);
+        frontGlass.position.set(0, 1.18, -0.6); frontGlass.rotation.x = -0.55; carGroup.add(frontGlass);
+
+        const rearGlass = new THREE.Mesh(new THREE.BoxGeometry(1.58, 0.45, 0.75), glassMat);
+        rearGlass.position.set(0, 1.18, 0.85); rearGlass.rotation.x = 0.52; carGroup.add(rearGlass);
+
+        const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.12, 0.15), headlightGlowMat); hlL.position.set(-0.65, 0.72, -2.18); carGroup.add(hlL);
+        const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.12, 0.15), headlightGlowMat); hlR.position.set(0.65, 0.72, -2.18); carGroup.add(hlR);
+
+        const beamL = new THREE.SpotLight(0xffffff, 2.5, 35, Math.PI / 7, 0.4);
+        beamL.position.set(-0.65, 0.75, -2.2); beamL.target.position.set(-0.65, 0, -20); carGroup.add(beamL); carGroup.add(beamL.target);
+        const beamR = new THREE.SpotLight(0xffffff, 2.5, 35, Math.PI / 7, 0.4);
+        beamR.position.set(0.65, 0.75, -2.2); beamR.target.position.set(0.65, 0, -20); carGroup.add(beamR); carGroup.add(beamR.target);
+
+        taillightMesh.position.set(0, 0.8, 2.18); carGroup.add(taillightMesh);
+
+        frontLeftPivot = new THREE.Group(); frontLeftPivot.position.set(-1.12, 0.45, -1.35);
+        const wFL = makeWheel(); frontLeftPivot.add(wFL); carGroup.add(frontLeftPivot);
+
+        frontRightPivot = new THREE.Group(); frontRightPivot.position.set(1.12, 0.45, -1.35);
+        const wFR = makeWheel(); frontRightPivot.add(wFR); carGroup.add(frontRightPivot);
+
+        const rL = new THREE.Group(); rL.position.set(-1.12, 0.45, 1.35);
+        const wRL = makeWheel(); rL.add(wRL); carGroup.add(rL);
+
+        const rR = new THREE.Group(); rR.position.set(1.12, 0.45, 1.35);
+        const wRR = makeWheel(); rR.add(wRR); carGroup.add(rR);
+
+        allWheels = [wFL, wFR, wRL, wRR];
+      }
 
       carGroup.position.set(carState.x, 0, carState.z);
       scene.add(carGroup);
+    }
+
+    // --- AUTONOMOUS NPC INITIALIZER & OVERHEAD BILLBOARDS ---
+    function initNPCs() {
+      npcAgents.forEach(npc => {
+        const group = new THREE.Group();
+        const mat = new THREE.MeshStandardMaterial({ color: npc.color, roughness: 0.35, metalness: 0.65 });
+        const carbonMat = new THREE.MeshStandardMaterial({ color: 0x111827 });
+
+        const body = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.45, 3.8), mat);
+        body.position.y = 0.55; body.castShadow = true; group.add(body);
+
+        const cab = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.42, 1.8), carbonMat);
+        cab.position.set(0, 0.95, 0.1); group.add(cab);
+
+        // Overhead Text Billboard Sprite
+        const canvas = document.createElement('canvas');
+        canvas.width = 256; canvas.height = 64;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+        ctx.roundRect(4, 4, 248, 56, 12);
+        ctx.fill();
+        ctx.strokeStyle = "#38bdf8";
+        ctx.lineWidth = 3;
+        ctx.roundRect(4, 4, 248, 56, 12);
+        ctx.stroke();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 20px monospace";
+        ctx.textAlign = "center";
+        ctx.fillText(npc.name, 128, 38);
+
+        const texture = new THREE.CanvasTexture(canvas);
+        const spriteMat = new THREE.SpriteMaterial({ map: texture, transparent: true });
+        const sprite = new THREE.Sprite(spriteMat);
+        sprite.position.set(0, 2.2, 0);
+        sprite.scale.set(3.2, 0.8, 1);
+        group.add(sprite);
+
+        group.position.set(npc.x, npc.isHover ? 0.8 : 0, npc.z);
+        scene.add(group);
+        npc.mesh = group;
+      });
+    }
+
+    function updateNPCs() {
+      let foundNearbyNPC = null;
+
+      npcAgents.forEach(npc => {
+        if (!npc.mesh) return;
+
+        const target = npc.path[npc.currWp];
+        const dx = target.x - npc.x;
+        const dz = target.z - npc.z;
+        const distToWp = Math.hypot(dx, dz);
+
+        if (distToWp < 2.5) {
+          npc.currWp = (npc.currWp + 1) % npc.path.length;
+        } else {
+          const moveAngle = Math.atan2(-dx, -dz);
+          npc.angle = moveAngle;
+          npc.x -= Math.sin(moveAngle) * npc.speed;
+          npc.z -= Math.cos(moveAngle) * npc.speed;
+        }
+
+        npc.mesh.position.set(npc.x, npc.isHover ? 0.75 + Math.sin(Date.now() * 0.003) * 0.15 : 0, npc.z);
+        npc.mesh.rotation.y = npc.angle;
+
+        const playerDist = Math.hypot(carState.x - npc.x, carState.z - npc.z);
+        if (playerDist < 8.0) {
+          foundNearbyNPC = npc;
+        }
+      });
+
+      const banner = document.getElementById('npc-proximity-banner');
+      if (foundNearbyNPC) {
+        currentNearbyNPC = foundNearbyNPC;
+        document.getElementById('npc-banner-name').innerText = foundNearbyNPC.name.toUpperCase();
+        document.getElementById('npc-banner-quote').innerText = `"${foundNearbyNPC.quote}"`;
+        banner.classList.remove('opacity-0', 'translate-y-6', 'pointer-events-none');
+      } else {
+        currentNearbyNPC = null;
+        banner.classList.add('opacity-0', 'translate-y-6', 'pointer-events-none');
+      }
     }
 
     function setupRadarMarkers() {
@@ -2168,6 +3606,10 @@
 
       if (k === 'e' || k === ' ' || c === 'keye' || c === 'space') {
         if (currentNearbyWaypoint) openKnowledgeModal(currentNearbyWaypoint.docId);
+      }
+
+      if (k === 't' || c === 'keyt') {
+        if (currentNearbyNPC) openNPCModal(currentNearbyNPC.id);
       }
     });
 
@@ -2451,8 +3893,16 @@
         triggerCollisionFeedback(impactSpeed);
       }
 
-      carGroup.position.set(carState.x, 0, carState.z);
+      carGroup.position.set(carState.x, currentVehicleModel === 'drone' ? 0.75 + Math.sin(Date.now() * 0.005) * 0.12 : 0, carState.z);
       carGroup.rotation.y = carState.angle;
+
+      // Update Autonomous Patrolling NPC Agents
+      updateNPCs();
+
+      // Dynamic Drift Skid Audio
+      if (Math.abs(carState.speed) > 0.52 && (isLeft || isRight)) {
+        playDriftSkid();
+      }
 
       // Dynamic Camera
       if (cameraMode === 'hood') {
@@ -2557,6 +4007,8 @@
       applyTheme(currentTheme);
       init3DWorld();
       setupMobileTouchControls();
+      updatePlayerHUD();
+      updateQuestsProgress();
       if (window.innerWidth < 768) {
         hudCollapsed = true;
         updateHUDDisplay();
