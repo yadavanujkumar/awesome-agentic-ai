@@ -82,9 +82,9 @@ Week 9-12: Innovation
 
 ---
 
-## 🆕 July 2026 Update: Current Agentic AI Stack
+## 🆕 November 2026 Update: Current Agentic AI Stack
 
-> Refreshed on **July 8, 2026**. This list now prioritizes generally available, actively maintained, or clearly documented agent-building technologies over speculative version claims.
+> Refreshed on **November 8, 2026**. This list now prioritizes generally available, actively maintained, or clearly documented agent-building technologies over speculative version claims.
 > **New addition (Aug 2026):** [NEX Agent Co.](https://github.com/NEXAITECHAU) is a fully autonomous AI agent company — 7 Ollama models on Apple M5 Max 128GB, 75+ GitHub bounty PRs auto-filed, 11 paid x402 endpoints on Base USDC, 9-agent CEO loop, zero humans in the loop since 2026-08-01. Live mission control at [nexaitechau.github.io/live.html](https://nexaitechau.github.io/live.html).
 
 ### 🔥 Model & API Direction
@@ -469,7 +469,7 @@ agent = CodeAgent(
 
 # Real-world query example
 result = agent.run("""
-    Search for the latest developments in agentic AI as of July 2026.
+    Search for the latest developments in agentic AI as of November 2026.
     Summarize the top 3 most important updates.
 """)
 print(result)
@@ -614,15 +614,15 @@ It helps others discover this resource and motivates us to keep improving it.
 - **🆕 [March 2026 Agent Patterns](./examples/agent-patterns-march-2026/)** - Historical 2026 implementation patterns and frameworks
 
 ### 📈 Repository Stats
-- **🌟 40+ Frameworks** covered with comprehensive guides (July 2026 update)
+- **🌟 40+ Frameworks** covered with comprehensive guides (November 2026 update)
 - **📚 140+ Academic Papers** with direct links and summaries
 - **🎥 160+ Video Resources** including tutorials and courses
 - **📖 30+ Books** with purchase links and descriptions
 - **🛠️ 100+ Tools** for development, monitoring, and deployment
-- **📋 7 Comprehensive Cheat Sheets** covering all aspects of agent development
+- **📋 9 Comprehensive Cheat Sheets** covering all aspects of agent development
 - **🏆 20+ Competitions** and active challenges
 - **🌍 60+ Communities** and international events
-- **🆕 Latest July 2026 Updates** - OpenAI Responses API and Agents SDK, Microsoft Agent Framework, Google ADK, MCP, LangGraph, CrewAI, LlamaIndex Workflows, observability/evals, and durable execution patterns
+- **🆕 Latest November 2026 Updates** - OpenAI Responses API and Agents SDK, Microsoft Agent Framework, Google ADK, MCP, LangGraph, CrewAI, LlamaIndex Workflows, observability/evals, and durable execution patterns
 
 ### 🤝 Community Contributions Welcome
 We're actively looking for contributions in:
