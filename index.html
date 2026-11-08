@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awesome Agentic AI &mdash; 3D Interactive World, Mindmap &amp; Git Docs Hub</title>
+  <title>Awesome Agentic AI &mdash; Open World 3D Campus, Mindmap &amp; Git Docs Hub</title>
   <!-- Tailwind CSS & Three.js CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -69,7 +69,7 @@
       padding-left: 0.75rem;
     }
     .hud-glass {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid rgba(226, 232, 240, 0.9);
@@ -77,7 +77,7 @@
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
     }
     .dark .hud-glass {
-      background: rgba(15, 21, 35, 0.9);
+      background: rgba(15, 21, 35, 0.92);
       border-color: rgba(30, 41, 59, 0.9);
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
     }
@@ -106,16 +106,16 @@
       <div>
         <div class="flex items-center gap-2">
           <h1 class="font-bold text-sm text-slate-900 dark:text-white tracking-tight leading-none">Awesome Agentic AI</h1>
-          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-semibold">Nov 8, 2026</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-semibold">Open World &bull; Nov 2026</span>
         </div>
-        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">3D Interactive Campus &bull; Mindmap Tree &bull; Git Docs Hub</p>
+        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">3D Open World &bull; 28 Knowledge Landmarks &bull; Git Docs Hub</p>
       </div>
     </div>
 
     <!-- Mode Selector Tabs -->
     <div class="flex items-center bg-slate-100 dark:bg-[#131929] p-1 rounded-xl border border-slate-200 dark:border-slate-800 gap-1">
       <button onclick="switchView('game')" id="tab-game" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-blue-600 text-blue-600 dark:text-white shadow-sm flex items-center gap-1.5 transition-all">
-        <span>&#x1F697; 3D Real Car</span>
+        <span>&#x1F30E; 3D Open World</span>
       </button>
       <button onclick="switchView('mindmap')" id="tab-mindmap" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 transition-all">
         <span>&#x1F333; Mindmap Tree</span>
@@ -149,7 +149,7 @@
   </header>
 
   <!-- ========================================================================= -->
-  <!-- VIEW 1: 3D REAL SPORTS CAR CAMPUS -->
+  <!-- VIEW 1: 3D OPEN WORLD REAL ROADSTER CAMPUS -->
   <!-- ========================================================================= -->
   <section id="view-game" class="flex-1 w-full h-full relative overflow-hidden">
     <!-- WebGL Canvas Wrapper -->
@@ -158,25 +158,26 @@
     </div>
 
     <!-- HUD Overlay: Top Left Car Dashboard & Controls -->
-    <div class="absolute top-4 left-4 hud-glass p-3.5 space-y-2.5 pointer-events-none text-xs max-w-xs transition-all">
+    <div class="absolute top-4 left-4 hud-glass p-3.5 space-y-2.5 pointer-events-none text-xs max-w-sm transition-all shadow-xl">
       <div class="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-1.5">
         <div class="flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></span>
-          <span class="text-xs font-mono font-bold text-slate-900 dark:text-cyan-400 uppercase tracking-wider">ROADSTER HUD</span>
+          <span class="text-xs font-mono font-bold text-slate-900 dark:text-cyan-400 uppercase tracking-wider" id="hud-district">OPEN WORLD: DOWNTOWN METROPOLIS</span>
         </div>
         <button onclick="toggleSound()" class="pointer-events-auto text-[10px] text-slate-600 dark:text-slate-300 font-mono px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 hover:bg-slate-200" id="btn-sound">&#x1F50A; SFX ON</button>
       </div>
 
       <!-- Controls Guide -->
       <div class="text-slate-700 dark:text-slate-300 font-mono space-y-1 text-[11px]">
-        <div>&bull; <strong class="text-blue-600 dark:text-cyan-400">WASD / Arrow Keys</strong>: Drive &amp; Steer</div>
-        <div>&bull; <strong class="text-blue-600 dark:text-cyan-400">Space / [E]</strong>: Inspect Nearby Knowledge</div>
+        <div>&bull; <strong class="text-blue-600 dark:text-cyan-400">WASD / Arrows</strong>: Drive, Drift &amp; Steer Roadster</div>
+        <div>&bull; <strong class="text-blue-600 dark:text-cyan-400">Space / [E]</strong>: Inspect Nearby Knowledge Landmark</div>
+        <div>&bull; <strong class="text-emerald-600 dark:text-emerald-400">Boost Pads</strong>: Drive over glowing cyan arrows for Turbo!</div>
       </div>
 
       <!-- Camera Mode Selector & Drag Hint -->
       <div class="pt-2 border-t border-slate-200 dark:border-white/10 pointer-events-auto">
         <div class="flex items-center justify-between text-[10px] font-mono text-slate-600 dark:text-slate-400 mb-1 font-semibold">
-          <span>Camera View ([C] to toggle):</span>
+          <span>Camera View ([C] key):</span>
           <button onclick="resetCameraAngle()" class="text-blue-600 dark:text-cyan-400 hover:underline">Reset</button>
         </div>
         <div class="grid grid-cols-4 gap-1 font-mono text-[10px]">
@@ -185,52 +186,51 @@
           <button onclick="setCameraMode('drone')" id="cam-btn-drone" class="px-1.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Drone</button>
           <button onclick="setCameraMode('orbit')" id="cam-btn-orbit" class="px-1.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Orbit</button>
         </div>
-        <div class="text-[9px] text-slate-500 dark:text-slate-400 mt-1 font-mono">&bull; Drag mouse to orbit camera &bull; Scroll to zoom</div>
+        <div class="text-[9px] text-slate-500 dark:text-slate-400 mt-1 font-mono">&bull; Drag mouse to look around &bull; Scroll wheel to zoom</div>
       </div>
 
-      <!-- Live Speedometer & Waypoints -->
+      <!-- Live Speedometer, Turbo & Discovery Progress -->
       <div class="pt-1.5 border-t border-slate-200 dark:border-white/10 flex items-center justify-between font-mono text-[11px]">
         <div>Speed: <strong id="hud-speed" class="text-blue-600 dark:text-cyan-400 font-bold">0 km/h</strong></div>
-        <div id="discovered-counter" class="text-emerald-600 dark:text-emerald-400 font-bold">0 / 8 Visited</div>
+        <div id="discovered-counter" class="text-emerald-600 dark:text-emerald-400 font-bold">0 / 28 Discovered (0%)</div>
       </div>
 
-      <!-- Quick Teleport Shortcuts -->
-      <div class="pt-1 pointer-events-auto">
-        <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400 mb-1 font-semibold">Quick Waypoint Jump:</div>
-        <div class="flex flex-wrap gap-1 font-mono text-[10px]">
-          <button onclick="teleportTo('frameworks-matrix')" class="px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-900/50 hover:bg-blue-600 hover:text-white text-blue-700 dark:text-blue-200 border border-blue-200 dark:border-blue-700 transition">Citadel</button>
-          <button onclick="teleportTo('mcp-protocol')" class="px-2 py-0.5 rounded-md bg-purple-50 dark:bg-purple-900/50 hover:bg-purple-600 hover:text-white text-purple-700 dark:text-purple-200 border border-purple-200 dark:border-purple-700 transition">MCP</button>
-          <button onclick="teleportTo('coderabbit-review')" class="px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-900/50 hover:bg-emerald-600 hover:text-white text-emerald-700 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-700 transition">CodeRabbit</button>
-          <button onclick="teleportTo('academic-papers')" class="px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-900/50 hover:bg-amber-600 hover:text-white text-amber-700 dark:text-amber-200 border border-amber-200 dark:border-amber-700 transition">Papers</button>
-          <button onclick="teleportTo('starter-labs')" class="px-2 py-0.5 rounded-md bg-rose-50 dark:bg-rose-900/50 hover:bg-rose-600 hover:text-white text-rose-700 dark:text-rose-200 border border-rose-200 dark:border-rose-700 transition">Labs</button>
-          <button onclick="teleportTo('mastery-roadmaps')" class="px-2 py-0.5 rounded-md bg-cyan-50 dark:bg-cyan-900/50 hover:bg-cyan-600 hover:text-white text-cyan-700 dark:text-cyan-200 border border-cyan-200 dark:border-cyan-700 transition">Roadmaps</button>
+      <!-- District Fast-Travel Hub -->
+      <div class="pt-1.5 pointer-events-auto border-t border-slate-200 dark:border-white/10">
+        <div class="text-[10px] font-mono text-slate-500 dark:text-slate-400 mb-1 font-semibold">District Fast-Travel:</div>
+        <div class="grid grid-cols-4 gap-1 font-mono text-[10px]">
+          <button onclick="teleportToDistrict('downtown')" class="px-1.5 py-1 rounded-md bg-blue-50 dark:bg-blue-900/50 hover:bg-blue-600 hover:text-white text-blue-700 dark:text-blue-200 border border-blue-200 dark:border-blue-700 transition">Downtown</button>
+          <button onclick="teleportToDistrict('research')" class="px-1.5 py-1 rounded-md bg-amber-50 dark:bg-amber-900/50 hover:bg-amber-600 hover:text-white text-amber-700 dark:text-amber-200 border border-amber-200 dark:border-amber-700 transition">Research</button>
+          <button onclick="teleportToDistrict('industrial')" class="px-1.5 py-1 rounded-md bg-emerald-50 dark:bg-emerald-900/50 hover:bg-emerald-600 hover:text-white text-emerald-700 dark:text-emerald-200 border border-emerald-200 dark:border-emerald-700 transition">SWE Docks</button>
+          <button onclick="teleportToDistrict('summit')" class="px-1.5 py-1 rounded-md bg-purple-50 dark:bg-purple-900/50 hover:bg-purple-600 hover:text-white text-purple-700 dark:text-purple-200 border border-purple-200 dark:border-purple-700 transition">Summit</button>
         </div>
       </div>
     </div>
 
-    <!-- HUD Overlay: Top Right Mini-Map Radar -->
+    <!-- HUD Overlay: Top Right Open World Radar -->
     <div class="absolute top-4 right-4 hud-glass p-3 text-xs space-y-1.5 hidden sm:block shadow-lg">
       <div class="flex items-center justify-between text-[10px] font-mono text-slate-600 dark:text-slate-400 uppercase tracking-wider font-semibold">
-        <span>Campus Radar</span>
+        <span>World Radar (28 Nodes)</span>
         <span class="text-blue-600 dark:text-cyan-400 font-bold" id="radar-coords">X:0 Z:0</span>
       </div>
-      <div class="w-36 h-36 bg-slate-100 dark:bg-[#07090f] border border-slate-300 dark:border-slate-800 rounded-xl relative overflow-hidden" id="radar-container">
+      <div class="w-44 h-44 bg-slate-100 dark:bg-[#07090f] border border-slate-300 dark:border-slate-800 rounded-xl relative overflow-hidden" id="radar-container">
+        <!-- Radar Grid Lines & Concentric Rings -->
         <div class="absolute inset-0 rounded-full border border-slate-300 dark:border-blue-900/40 m-2"></div>
-        <div class="absolute inset-0 rounded-full border border-slate-300 dark:border-blue-900/20 m-6"></div>
+        <div class="absolute inset-0 rounded-full border border-slate-300 dark:border-blue-900/20 m-8"></div>
         <div class="absolute left-1/2 top-0 bottom-0 w-[1px] bg-slate-300 dark:bg-blue-900/30 -translate-x-1/2"></div>
         <div class="absolute top-1/2 left-0 right-0 h-[1px] bg-slate-300 dark:bg-blue-900/30 -translate-y-1/2"></div>
         <!-- Player Car blip -->
-        <div id="radar-player" class="w-3 h-3 rounded-full bg-blue-600 dark:bg-cyan-400 absolute -translate-x-1/2 -translate-y-1/2 shadow-md flex items-center justify-center transition-transform duration-75">
-          <div class="w-0.5 h-1.5 bg-white rounded-full mb-1"></div>
+        <div id="radar-player" class="w-3.5 h-3.5 rounded-full bg-blue-600 dark:bg-cyan-400 absolute -translate-x-1/2 -translate-y-1/2 shadow-md flex items-center justify-center transition-transform duration-75 z-20">
+          <div class="w-0.5 h-2 bg-white rounded-full mb-1"></div>
         </div>
       </div>
     </div>
 
-    <!-- Proximity Interaction Banner (Appears when near knowledge chests/trees) -->
+    <!-- Proximity Interaction Banner (Appears when near any of the 28 landmarks) -->
     <div id="proximity-banner" class="absolute bottom-8 left-1/2 -translate-x-1/2 hud-glass px-6 py-4 border-blue-500/50 shadow-2xl flex items-center gap-4 transition-all duration-300 opacity-0 pointer-events-none translate-y-6 z-40 max-w-lg w-[92%] sm:w-auto">
       <div class="w-4 h-4 rounded-full bg-blue-600 dark:bg-cyan-400 animate-ping shrink-0"></div>
       <div class="flex-1">
-        <div id="proximity-title" class="font-bold text-slate-900 dark:text-white text-xs font-mono uppercase tracking-wide">KNOWLEDGE WAYPOINT NEARBY</div>
+        <div id="proximity-title" class="font-bold text-slate-900 dark:text-white text-xs font-mono uppercase tracking-wide">KNOWLEDGE LANDMARK NEARBY</div>
         <div class="text-[11px] text-slate-600 dark:text-slate-300">Press <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-blue-950 border border-slate-300 dark:border-blue-500 text-blue-600 dark:text-white font-mono text-[10px] font-bold">[Space]</kbd> or <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-blue-950 border border-slate-300 dark:border-blue-500 text-blue-600 dark:text-white font-mono text-[10px] font-bold">[E]</kbd> to unlock details.</div>
       </div>
       <button onclick="triggerCurrentChest()" class="pointer-events-auto px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold font-mono shadow-md transition-transform active:scale-95">Open Knowledge</button>
@@ -251,7 +251,6 @@
   <!-- VIEW 2: INTERACTIVE MINDMAP & KNOWLEDGE TREE -->
   <!-- ========================================================================= -->
   <section id="view-mindmap" class="flex-1 w-full h-full flex flex-col lg:flex-row overflow-hidden hidden bg-slate-50 dark:bg-[#07090f]">
-    <!-- Sub-View Left: Interactive Canvas Mindmap Graph -->
     <div class="w-full lg:w-1/2 h-1/2 lg:h-full relative border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 flex flex-col bg-white dark:bg-[#07090f]">
       <div class="p-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2">
@@ -265,13 +264,12 @@
       </div>
     </div>
 
-    <!-- Sub-View Right: Expandable Hierarchical Mindmap Tree -->
     <div class="w-full lg:w-1/2 h-1/2 lg:h-full flex flex-col bg-slate-50 dark:bg-[#0a0d17] overflow-hidden">
       <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101c] flex items-center justify-between shrink-0">
         <div>
           <h2 class="text-sm font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
             <span>&#x1F333; Hierarchical Knowledge Tree</span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 font-semibold">Complete Taxonomy</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 font-semibold">28 Modules</span>
           </h2>
           <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Explore structured branches matching repository modules.</p>
         </div>
@@ -281,12 +279,10 @@
         </div>
       </div>
 
-      <!-- Tree Filter Search -->
       <div class="p-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0e121e]">
         <input type="text" id="tree-search" oninput="filterTree(this.value)" placeholder="Filter knowledge tree branches..." class="w-full bg-slate-50 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 font-mono outline-none focus:border-blue-500">
       </div>
 
-      <!-- Tree Nodes Container -->
       <div id="tree-content-container" class="flex-1 overflow-y-auto p-5 space-y-4 font-mono text-xs">
         <!-- Rendered dynamically -->
       </div>
@@ -297,20 +293,15 @@
   <!-- VIEW 3: FULL GIT DOCUMENTATION HUB -->
   <!-- ========================================================================= -->
   <section id="view-docs" class="flex-1 w-full h-full flex overflow-hidden hidden bg-slate-50 dark:bg-[#080a10]">
-    <!-- Left Navigation Sidebar -->
     <aside class="w-80 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101c] flex flex-col shrink-0 overflow-hidden">
-      <!-- Search inside docs -->
       <div class="p-3 border-b border-slate-200 dark:border-slate-800">
         <input type="text" id="docs-sidebar-search" oninput="filterDocsList(this.value)" placeholder="Filter git documentation..." class="w-full bg-slate-50 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 font-mono outline-none focus:border-blue-500">
       </div>
-
-      <!-- Nav Items List -->
       <div id="docs-nav-list" class="flex-1 overflow-y-auto p-3 space-y-5">
         <!-- Rendered dynamically -->
       </div>
     </aside>
 
-    <!-- Main Reader Area -->
     <main class="flex-1 overflow-y-auto p-6 lg:p-10">
       <div class="max-w-4xl mx-auto space-y-6" id="docs-reader-container">
         <!-- Content injected dynamically -->
@@ -331,7 +322,6 @@
           </h2>
           <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Benchmarked against state persistence, MCP tool integration, type safety, and multi-agent coordination.</p>
         </div>
-        <!-- Filter chips -->
         <div class="flex flex-wrap gap-1.5 font-mono text-xs" id="matrix-filter-buttons">
           <button onclick="filterMatrix('all')" class="matrix-filter-btn px-3 py-1 rounded-lg bg-blue-600 text-white font-medium" data-cat="all">All (40+)</button>
           <button onclick="filterMatrix('orchestration')" class="matrix-filter-btn px-3 py-1 rounded-lg bg-white dark:bg-[#151b2b] hover:bg-slate-100 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800" data-cat="orchestration">Orchestration</button>
@@ -341,7 +331,6 @@
         </div>
       </div>
 
-      <!-- Matrix Grid -->
       <div id="frameworks-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- Rendered dynamically -->
       </div>
@@ -355,7 +344,7 @@
     <div class="card-surface max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl border-blue-500/40">
       <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between">
         <div class="flex items-center gap-2.5">
-          <span id="modal-badge" class="px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-cyan-950 text-blue-800 dark:text-cyan-300 font-mono text-[10px] border border-blue-200 dark:border-cyan-800 font-bold uppercase">WAYPOINT DISCOVERED</span>
+          <span id="modal-badge" class="px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-cyan-950 text-blue-800 dark:text-cyan-300 font-mono text-[10px] border border-blue-200 dark:border-cyan-800 font-bold uppercase">LANDMARK DISCOVERED</span>
           <h3 id="modal-title" class="font-bold text-slate-900 dark:text-white text-base">Knowledge Title</h3>
         </div>
         <button onclick="closeKnowledgeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-2xl font-bold leading-none p-1">&times;</button>
@@ -376,78 +365,200 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- JAVASCRIPT: REPOSITORY KNOWLEDGE STORE & 3D REAL CAR ENGINE -->
+  <!-- JAVASCRIPT: REPOSITORY KNOWLEDGE STORE & 3D OPEN WORLD ENGINE -->
   <!-- ========================================================================= -->
   <script>
     // =========================================================================
-    // 1. REPOSITORY MASTER DATA STORE (ALL REAL GIT CONTENT)
+    // 1. REPOSITORY MASTER DATA STORE (28 COMPREHENSIVE KNOWLEDGE MODULES)
     // =========================================================================
     const repoDocs = [
+      // --- DOWNTOWN METROPOLIS DISTRICT ---
       {
-        id: "frameworks-matrix",
+        id: "frameworks-langgraph",
+        district: "downtown",
         category: "Frameworks & Architecture",
-        title: "Agent Frameworks Ecosystem (40+ Evaluated)",
-        badge: "FRAMEWORKS",
-        summary: "Comprehensive evaluation matrix covering LangGraph, CrewAI, AutoGen, PydanticAI, Google ADK, and MS Agent Framework.",
-        gitPath: "frameworks/README.md",
+        title: "LangGraph Stateful Cyclic Graph Orchestrator",
+        badge: "ORCHESTRATION",
+        summary: "Durable state graphs, checkpointing persistence, human-in-the-loop interrupts, and multi-agent cyclic loops.",
+        gitPath: "frameworks/langchain/README.md",
         content: `
           <div class="space-y-4">
-            <p>The 2026 agent ecosystem has matured from fragile single-prompt scripts to durable, stateful, type-safe execution runtimes. Below are the key architectures supported in the repository:</p>
-            <div class="grid sm:grid-cols-2 gap-3 font-mono text-xs">
-              <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-                <div class="text-blue-600 dark:text-blue-400 font-bold text-sm">1. LangGraph</div>
-                <div class="text-slate-700 dark:text-slate-300 mt-1">Durable state machine built on cyclic graph computation. Features built-in persistence, time-travel debugging, and explicit human-in-the-loop interrupts.</div>
-                <div class="text-[10px] text-cyan-600 dark:text-cyan-400 mt-2 font-semibold">Best for: Enterprise workflows requiring deterministic state checkpoints.</div>
-              </div>
-              <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-                <div class="text-emerald-600 dark:text-emerald-400 font-bold text-sm">2. CrewAI</div>
-                <div class="text-slate-700 dark:text-slate-300 mt-1">Role-based autonomous agents mimicking team structures. Features automated task delegation, hierarchical crews, and process flows.</div>
-                <div class="text-[10px] text-cyan-600 dark:text-cyan-400 mt-2 font-semibold">Best for: Collaborative research, content generation, and multi-step business pipelines.</div>
-              </div>
-              <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-                <div class="text-purple-600 dark:text-purple-400 font-bold text-sm">3. PydanticAI</div>
-                <div class="text-slate-700 dark:text-slate-300 mt-1">Python-native agent framework built directly on Pydantic v2. Provides strict schema validation, type safety, and structured output guarantees.</div>
-                <div class="text-[10px] text-cyan-600 dark:text-cyan-400 mt-2 font-semibold">Best for: Production API services requiring guaranteed structured JSON schemas.</div>
-              </div>
-              <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-                <div class="text-amber-600 dark:text-amber-400 font-bold text-sm">4. Google ADK &amp; Vertex AI</div>
-                <div class="text-slate-700 dark:text-slate-300 mt-1">Code-first multi-language agent platform spanning Python, Go, Java, and TypeScript. Native integration with Gemini models and Google Cloud IAM.</div>
-                <div class="text-[10px] text-cyan-600 dark:text-cyan-400 mt-2 font-semibold">Best for: Cloud-scale enterprise deployments with Google Cloud infrastructure.</div>
-              </div>
+            <p><strong>LangGraph</strong> is the gold standard for cyclic, stateful multi-agent systems. It models agents as explicit directed graphs where nodes are Python functions and edges represent conditional transitions.</p>
+            <div class="p-4 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg font-mono text-xs space-y-2">
+              <div class="text-blue-600 dark:text-cyan-400 font-bold">// Key LangGraph Architectural Primitives:</div>
+              <div>&bull; <strong class="text-slate-900 dark:text-white">StateGraph(TypedDict)</strong>: Strictly defines state schema preserved across turns.</div>
+              <div>&bull; <strong class="text-slate-900 dark:text-white">Checkpointers (MemorySaver / PostgresSaver)</strong>: Enables session resumption and time-travel rollbacks.</div>
+              <div>&bull; <strong class="text-slate-900 dark:text-white">interrupt_before / interrupt_after</strong>: Human-in-the-loop review before dangerous tool calls.</div>
             </div>
-            <div class="callout-box mt-4">
-              <strong class="text-slate-900 dark:text-white">Repository Implementation:</strong> See complete code examples in <code>examples/agent-patterns-2026/type_safe_agents/customer_service.py</code>.
+            <div class="callout-box">
+              <strong class="text-slate-900 dark:text-white">Production Recommendation:</strong> Use for mission-critical enterprise workflows requiring auditability and checkpoint persistence.
             </div>
           </div>
         `
       },
       {
         id: "mcp-protocol",
+        district: "downtown",
         category: "Protocols & Standards",
-        title: "Model Context Protocol (MCP) Specification",
+        title: "Model Context Protocol (MCP) Tower",
         badge: "PROTOCOL",
-        summary: "Universal open standard replacing brittle custom wrappers with JSON-RPC 2.0 client-server communication.",
+        summary: "Universal open JSON-RPC 2.0 standard replacing bespoke wrappers for tools, prompts, and resources.",
         gitPath: "resources/cheat-sheets/communication-protocols.md",
         content: `
           <div class="space-y-4">
-            <p>The <strong>Model Context Protocol (MCP)</strong> has become the universal standard for AI agents to discover tools, inspect resources, and safely invoke external systems without custom bespoke code for each tool.</p>
+            <p>The <strong>Model Context Protocol (MCP)</strong> created by Anthropic establishes a standardized client-server model over JSON-RPC 2.0 for agents to interact with external tools and data sources.</p>
             <div class="p-4 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg font-mono text-xs space-y-2">
-              <div class="text-blue-600 dark:text-cyan-400 font-bold">// MCP JSON-RPC 2.0 Core Primitives:</div>
-              <div><strong class="text-slate-900 dark:text-white">tools/list</strong>: Returns JSON schemas of all sandboxed functions available to the agent.</div>
-              <div><strong class="text-slate-900 dark:text-white">tools/call</strong>: Invokes a specific function with validated parameters.</div>
-              <div><strong class="text-slate-900 dark:text-white">resources/list &amp; resources/read</strong>: Safe read-only ingestion of file system nodes, databases, or memory context.</div>
-              <div><strong class="text-slate-900 dark:text-white">prompts/list &amp; prompts/get</strong>: Standardized dynamic prompt templates with parameter injection.</div>
-            </div>
-            <div class="callout-box">
-              <strong class="text-slate-900 dark:text-white">Agent-to-Agent (A2A) Protocol:</strong> When independent agents coordinate across runtimes, they utilize A2A task envelopes containing <code>conversation_id</code>, <code>intent</code>, and structured task results.
+              <div class="text-blue-600 dark:text-cyan-400 font-bold">// Core MCP JSON-RPC Interfaces:</div>
+              <div>&bull; <strong class="text-slate-900 dark:text-white">tools/list &amp; tools/call</strong>: Dynamic discovery and execution of sandboxed functions.</div>
+              <div>&bull; <strong class="text-slate-900 dark:text-white">resources/read</strong>: URI-based context streaming from databases and files.</div>
+              <div>&bull; <strong class="text-slate-900 dark:text-white">prompts/get</strong>: Parameterized prompt templates injected directly into context.</div>
             </div>
           </div>
         `
       },
       {
+        id: "frameworks-crewai",
+        district: "downtown",
+        category: "Frameworks & Architecture",
+        title: "CrewAI Autonomous Team Commons",
+        badge: "MULTI-AGENT",
+        summary: "Role-playing autonomous teams, task delegation, hierarchical crews, and process pipelines.",
+        gitPath: "frameworks/README.md",
+        content: `
+          <div class="space-y-4">
+            <p><strong>CrewAI</strong> orchestrates teams of specialized agents with distinct personas, goals, and toolkits collaborating on complex end-to-end deliverables.</p>
+            <div class="p-4 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg font-mono text-xs space-y-1">
+              <div>&bull; <strong class="text-slate-900 dark:text-white">Sequential &amp; Hierarchical Processes</strong>: Supports managerial task delegation.</div>
+              <div>&bull; <strong class="text-slate-900 dark:text-white">Memory &amp; Cache</strong>: Built-in short-term, long-term, and entity memory layers.</div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "frameworks-pydanticai",
+        district: "downtown",
+        category: "Frameworks & Architecture",
+        title: "PydanticAI Schema Validation Center",
+        badge: "TYPE-SAFE",
+        summary: "Type-safe Python agents built on Pydantic v2 with strict structured outputs and dependency injection.",
+        gitPath: "examples/agent-patterns-2026/README.md",
+        content: `
+          <div class="space-y-4">
+            <p><strong>PydanticAI</strong> brings production-grade Python typing to generative AI. Outputs are guaranteed to conform to Pydantic models at runtime.</p>
+            <div class="callout-box">
+              <strong class="text-slate-900 dark:text-white">Verified Codebase:</strong> Check <code>examples/agent-patterns-2026/type_safe_agents/customer_service.py</code> for an enterprise banking agent implementation.
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "frameworks-adk",
+        district: "downtown",
+        category: "Frameworks & Architecture",
+        title: "Google ADK &amp; Vertex AI Pavilion",
+        badge: "ENTERPRISE",
+        summary: "Polyglot code-first agent framework across Python, Go, Java, and TypeScript for cloud-scale deployment.",
+        gitPath: "frameworks/README.md",
+        content: `<p>Google's open-source Agent Development Kit provides native bindings for Gemini multimodal reasoning, Vertex AI Grounding, and enterprise IAM policies.</p>`
+      },
+      {
+        id: "frameworks-msagent",
+        district: "downtown",
+        category: "Frameworks & Architecture",
+        title: "Microsoft Agent Framework Tower",
+        badge: "CLOUD",
+        summary: "Unified enterprise successor to AutoGen and Semantic Kernel with integrated telemetry and filters.",
+        gitPath: "frameworks/README.md",
+        content: `<p>Brings together Microsoft's Semantic Kernel plugins, Azure OpenAI function calling, and AutoGen conversation threads with enterprise security.</p>`
+      },
+      {
+        id: "frameworks-llamaindex",
+        district: "downtown",
+        category: "Frameworks & Architecture",
+        title: "LlamaIndex RAG &amp; Vector Workflows",
+        badge: "RAG & DATA",
+        summary: "Event-driven asynchronous agent pipelines optimized for multimodal data ingestion and hybrid vector indexing.",
+        gitPath: "frameworks/README.md",
+        content: `<p>Features Workflows for event-driven agent architectures and high-throughput document Q&A over vector and graph databases.</p>`
+      },
+      {
+        id: "frameworks-autogen",
+        district: "downtown",
+        category: "Frameworks & Architecture",
+        title: "AutoGen Multi-Agent Dialogue Plaza",
+        badge: "CONVERSATIONAL",
+        summary: "Asynchronous messaging framework for multi-agent group chats, human proxy agents, and code execution.",
+        gitPath: "frameworks/README.md",
+        content: `<p>Supports asynchronous event-driven group chats with code execution sandboxes and dynamic speaker selection.</p>`
+      },
+
+      // --- RESEARCH NATURE PARK & ACADEMIC QUAD ---
+      {
+        id: "paper-react",
+        district: "research",
+        category: "Academic Literature",
+        title: "ReAct: Synergizing Reasoning and Acting",
+        badge: "FOUNDATION",
+        summary: "arXiv:2210.03629 (Yao et al.) &mdash; Foundational paper establishing interleaved thought-action-observation loops.",
+        gitPath: "README.md",
+        content: `
+          <div class="space-y-4">
+            <p><strong>ReAct</strong> demonstrates that interleaving reasoning traces ("Thought") with domain-specific actions ("Action") allows language models to dynamically solve complex multi-step challenges.</p>
+            <div class="p-4 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg font-mono text-xs">
+              Thought: I need to check user account balance.<br>
+              Action: get_balance(account_id="123")<br>
+              Observation: Balance is $450.00
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "paper-toolformer",
+        district: "research",
+        category: "Academic Literature",
+        title: "Toolformer: Teaching LMs to Use Tools",
+        badge: "TOOL USE",
+        summary: "arXiv:2302.04761 (Schick et al.) &mdash; Enables models to decide which APIs to call, when, and with what arguments.",
+        gitPath: "README.md",
+        content: `<p>Pioneered self-supervised API calling, demonstrating that language models can autonomously teach themselves when to ground outputs via external search and math calculators.</p>`
+      },
+      {
+        id: "paper-reflexion",
+        district: "research",
+        category: "Academic Literature",
+        title: "Reflexion: Verbal Reinforcement Learning",
+        badge: "REFLECTION",
+        summary: "arXiv:2303.11366 (Shinn et al.) &mdash; Dynamic memory and self-reflective feedback to learn from execution errors.",
+        gitPath: "README.md",
+        content: `<p>Reflexion agents convert binary task failures into descriptive verbal reflections stored in episodic memory, dramatically improving trajectory success rates on subsequent attempts.</p>`
+      },
+      {
+        id: "academic-papers-archive",
+        district: "research",
+        category: "Academic Literature",
+        title: "140+ arXiv Research Papers Archive",
+        badge: "140+ PAPERS",
+        summary: "Definitive curated bibliography of agent literature across reasoning, tool use, swarms, and safety.",
+        gitPath: "README.md",
+        content: `<p>Contains direct arXiv links, abstracts, and key takeaways for 140+ foundational and frontier AI agent research publications.</p>`
+      },
+      {
+        id: "paper-metagpt",
+        district: "research",
+        category: "Academic Literature",
+        title: "MetaGPT: Standard Operating Procedures",
+        badge: "COLLABORATION",
+        summary: "arXiv:2308.08155 (Hong et al.) &mdash; Encodes human software development SOPs into multi-agent workflows.",
+        gitPath: "README.md",
+        content: `<p>Demonstrates that assigning standardized engineering artifacts (PRD, design document, code review) prevents coordination decay in large multi-agent swarms.</p>`
+      },
+
+      // --- SWE INDUSTRIAL HARBOR & CODEBASE LABS ---
+      {
         id: "coderabbit-review",
+        district: "industrial",
         category: "Verification & Quality",
-        title: "CodeRabbit SWE Verification & Automated PR Reviews",
+        title: "CodeRabbit SWE Verification Drydock",
         badge: "CODE REVIEW",
         summary: "Autonomous code verification, machine-readable NDJSON review streaming, and self-healing fix cycles.",
         gitPath: "resources/cheat-sheets/coderabbit-code-review.md",
@@ -460,135 +571,148 @@
               <div>&bull; <span class="text-amber-600 dark:text-amber-400 font-bold">major</span>: Unhandled edge cases, broken API contracts, resource leaks.</div>
               <div>&bull; <span class="text-blue-600 dark:text-blue-400 font-bold">minor</span>: Anti-patterns, bare excepts, missing type annotations.</div>
             </div>
-            <p class="text-slate-700 dark:text-slate-300">The coding agent parses the NDJSON stream from CodeRabbit, applies fixes targeted to the flagged file and line ranges, and verifies resolution before opening a GitHub PR.</p>
           </div>
         `
       },
       {
-        id: "academic-papers",
-        category: "Academic Literature",
-        title: "140+ Academic Research Papers (arXiv Catalog)",
-        badge: "RESEARCH",
-        summary: "Curated research papers spanning reasoning loops, tool use, multi-agent coordination, and memory architectures.",
-        gitPath: "README.md",
-        content: `
-          <div class="space-y-3 font-mono text-xs">
-            <p class="font-sans text-slate-700 dark:text-slate-300">Key foundational and frontier literature included in the repository:</p>
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <a href="https://arxiv.org/abs/2210.03629" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-bold">ReAct: Synergizing Reasoning and Acting in Language Models &rarr;</a>
-              <div class="text-slate-500 dark:text-slate-400 text-[11px] mt-1">Interleaves reasoning thoughts and tool actions for dynamic problem solving.</div>
-            </div>
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <a href="https://arxiv.org/abs/2302.04761" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-bold">Toolformer: Language Models Can Teach Themselves to Use Tools &rarr;</a>
-              <div class="text-slate-500 dark:text-slate-400 text-[11px] mt-1">Enables self-supervised learning of API calls and execution parameters.</div>
-            </div>
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <a href="https://arxiv.org/abs/2303.11366" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-bold">Reflexion: Language Agents with Verbal Reinforcement Learning &rarr;</a>
-              <div class="text-slate-500 dark:text-slate-400 text-[11px] mt-1">Dynamic memory and self-reflective feedback to evaluate mistakes and correct future trajectories.</div>
-            </div>
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <a href="https://arxiv.org/abs/2308.08155" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline font-bold">MetaGPT: Meta Programming for Multi-Agent Collaborative Framework &rarr;</a>
-              <div class="text-slate-500 dark:text-slate-400 text-[11px] mt-1">Standard Operating Procedures (SOPs) encoded into multi-agent software development teams.</div>
-            </div>
-          </div>
-        `
+        id: "docker-containers",
+        district: "industrial",
+        category: "Verification & Quality",
+        title: "Docker Sandboxing &amp; Container Depot",
+        badge: "SANDBOXING",
+        summary: "Ephemeral containerization, healthchecks, and non-root execution environments for agent security.",
+        gitPath: "tutorials/beginner/06-deployment/README.md",
+        content: `<p>Details best practices for containerizing agent workloads with lightweight Alpine/Slim base images, proper curl healthchecks, and strict network isolation.</p>`
       },
       {
-        id: "starter-labs",
+        id: "lab-assistant",
+        district: "industrial",
         category: "Runnable Projects",
-        title: "4 Executable Starter Codebases",
-        badge: "STARTER LABS",
-        summary: "Production-ready, thoroughly tested starter templates complete with CLI entry points and unit tests.",
-        gitPath: "examples/README.md",
+        title: "Personal Assistant (examples/personal-assistant)",
+        badge: "STARTER LAB",
+        summary: "Runnable multi-tool assistant with CalendarTool, EmailTool, TaskTool, SearchTool, and ConversationMemory.",
+        gitPath: "examples/personal-assistant/README.md",
         content: `
           <div class="space-y-3 font-mono text-xs">
+            <p class="font-sans text-slate-700 dark:text-slate-300">Complete tested starter project ready to run in your workspace:</p>
             <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <div class="text-slate-900 dark:text-white font-bold text-sm">1. Personal Assistant (examples/personal-assistant)</div>
-              <div class="text-slate-600 dark:text-slate-300 mt-1">Multi-tool productivity assistant with CalendarTool, EmailTool, TaskTool, SearchTool, and ConversationMemory.</div>
-              <div class="text-blue-600 dark:text-cyan-400 text-[11px] mt-1 font-semibold">Run: <code>python examples/basic_usage.py</code></div>
-            </div>
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <div class="text-slate-900 dark:text-white font-bold text-sm">2. SWE Coding Agent (examples/coding-agent)</div>
-              <div class="text-slate-600 dark:text-slate-300 mt-1">Autonomous coding assistant with AST syntax validation, safe diff application, and CodeRabbit review feedback.</div>
-              <div class="text-blue-600 dark:text-cyan-400 text-[11px] mt-1 font-semibold">Run: <code>python examples/run_coding_agent.py</code></div>
-            </div>
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <div class="text-slate-900 dark:text-white font-bold text-sm">3. Research Agent (examples/research-agent)</div>
-              <div class="text-slate-600 dark:text-slate-300 mt-1">Decomposes complex research questions, queries multiple sources, extracts evidence, and synthesizes structured summaries with citations.</div>
-              <div class="text-blue-600 dark:text-cyan-400 text-[11px] mt-1 font-semibold">Run: <code>python examples/run_research_agent.py</code></div>
-            </div>
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <div class="text-slate-900 dark:text-white font-bold text-sm">4. Multi-Agent Swarm (examples/multi-agent-collab)</div>
-              <div class="text-slate-600 dark:text-slate-300 mt-1">Hierarchical multi-agent collaboration with a Planner, Worker, and Reviewer coordinating via structured message envelopes.</div>
-              <div class="text-blue-600 dark:text-cyan-400 text-[11px] mt-1 font-semibold">Run: <code>python examples/run_collaboration.py</code></div>
+              <div class="text-blue-600 dark:text-cyan-400 font-bold"># Run in terminal:</div>
+              <div class="text-slate-900 dark:text-white">python examples/personal-assistant/examples/basic_usage.py</div>
             </div>
           </div>
         `
       },
       {
-        id: "mastery-roadmaps",
+        id: "lab-coding",
+        district: "industrial",
+        category: "Runnable Projects",
+        title: "SWE Coding Agent (examples/coding-agent)",
+        badge: "STARTER LAB",
+        summary: "Self-healing coding agent with AST syntax validation, safe diff generation, and CodeRabbit review integration.",
+        gitPath: "examples/coding-agent/README.md",
+        content: `<p>Demonstrates an automated software engineering bot that implements functions, verifies syntax trees, and audits code via CodeRabbit CLI before committing.</p>`
+      },
+      {
+        id: "lab-research",
+        district: "industrial",
+        category: "Runnable Projects",
+        title: "Research Agent (examples/research-agent)",
+        badge: "STARTER LAB",
+        summary: "Decomposes complex research questions, queries multiple sources, extracts evidence, and synthesizes structured summaries with citations.",
+        gitPath: "examples/research-agent/README.md",
+        content: `<p>Autonomous research assistant with source verification, citation extraction, and markdown report synthesis.</p>`
+      },
+      {
+        id: "lab-swarm",
+        district: "industrial",
+        category: "Runnable Projects",
+        title: "Multi-Agent Swarm (examples/multi-agent-collab)",
+        badge: "STARTER LAB",
+        summary: "Hierarchical collaboration with a Planner, Worker, and Reviewer coordinating via structured message envelopes.",
+        gitPath: "examples/multi-agent-collab/README.md",
+        content: `<p>Shows a complete 3-agent swarm where a Planner breaks down goals, a Worker executes subtasks, and a Reviewer validates quality against acceptance criteria.</p>`
+      },
+
+      // --- FRONTIER MOUNTAINS & MASTERY SUMMIT ---
+      {
+        id: "roadmap-beginner",
+        district: "summit",
         category: "Learning Roadmaps",
-        title: "Mastery Roadmaps (Beginner to Expert)",
-        badge: "ROADMAPS",
-        summary: "Phased engineering curricula guiding developers through agent construction, state management, and production operations.",
-        gitPath: "resources/roadmaps/complete-roadmap.md",
-        content: `
-          <div class="space-y-3 font-sans text-xs">
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <div class="text-emerald-600 dark:text-emerald-400 font-mono font-bold text-sm">&#x1F331; Beginner Track (Weeks 1–6)</div>
-              <div class="text-slate-700 dark:text-slate-300 mt-1">Prompt engineering primitives, ReAct loop mechanics, AST-safe calculators (zero-eval), tool calling schemas, and basic Docker containers.</div>
-            </div>
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <div class="text-blue-600 dark:text-cyan-400 font-mono font-bold text-sm">&#x26A1; Intermediate Track (Weeks 1–8)</div>
-              <div class="text-slate-700 dark:text-slate-300 mt-1">LangGraph state graphs, Model Context Protocol (MCP), Redis memory stores, AgentOps telemetry, and human-in-the-loop checkpoints.</div>
-            </div>
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <div class="text-purple-600 dark:text-purple-400 font-mono font-bold text-sm">&#x1F680; Expert Track (Weeks 1–12)</div>
-              <div class="text-slate-700 dark:text-slate-300 mt-1">Autonomous SWE bots, automated CodeRabbit PR workflows, SOC2 compliance, circuit breakers, semantic caching, and distributed multi-agent swarms.</div>
-            </div>
-          </div>
-        `
+        title: "Beginner Track: Primitives &amp; ReAct (Weeks 1–6)",
+        badge: "ROADMAP",
+        summary: "Master LLM APIs, prompt schemas, AST calculators (zero-eval), tool calling, and Docker containers.",
+        gitPath: "resources/roadmaps/beginner.md",
+        content: `<p>Phase 1 covers environment setup, safe Python execution, function calling schemas, and building your first single-agent tool loop.</p>`
       },
       {
-        id: "enterprise-deployment",
+        id: "roadmap-intermediate",
+        district: "summit",
+        category: "Learning Roadmaps",
+        title: "Intermediate Track: State &amp; MCP (Weeks 1–8)",
+        badge: "ROADMAP",
+        summary: "Stateful LangGraph graphs, Model Context Protocol, Redis memory backends, and LangSmith tracing.",
+        gitPath: "resources/roadmaps/intermediate.md",
+        content: `<p>Phase 2 covers cyclic state machines, tool discovery via MCP servers, checkpoint persistence, and observability telemetry.</p>`
+      },
+      {
+        id: "roadmap-expert",
+        district: "summit",
+        category: "Learning Roadmaps",
+        title: "Expert Track: Autonomous SWE &amp; Production (Weeks 1–12)",
+        badge: "ROADMAP",
+        summary: "Autonomous SWE bots, automated CodeRabbit PR workflows, SOC2 compliance, circuit breakers, and distributed multi-agent swarms.",
+        gitPath: "resources/roadmaps/expert.md",
+        content: `<p>Phase 3 covers production deployment, self-healing code loops, security guardrails, rate limiting, and novel A2A protocols.</p>`
+      },
+      {
+        id: "enterprise-security",
+        district: "summit",
         category: "Cheat Sheets & Guides",
-        title: "Enterprise AI Agent Deployment (2026 Production)",
+        title: "Enterprise Security &amp; SOC2 Fortress",
         badge: "ENTERPRISE",
-        summary: "Operational guide covering Docker containerization, Kubernetes manifests, LangSmith tracing, and rate-limiting guardrails.",
+        summary: "Circuit breakers, rate limits, PII redaction, sandbox isolation, and cryptographic audit logs.",
         gitPath: "resources/cheat-sheets/enterprise-deployment-2026.md",
-        content: `
-          <div class="space-y-4">
-            <p>Deploying production agents requires strict operational isolation, observability, and defensive controls:</p>
-            <div class="p-4 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg font-mono text-xs space-y-2">
-              <div class="text-blue-600 dark:text-blue-400 font-bold"># Production Guardrails Architecture:</div>
-              <div>&bull; <strong class="text-slate-900 dark:text-white">Circuit Breakers</strong>: Maximum turns per task (e.g. max 15 steps) to prevent runaway billing.</div>
-              <div>&bull; <strong class="text-slate-900 dark:text-white">Sandboxed Execution</strong>: Tools executed in ephemeral Docker containers or gVisor sandboxes.</div>
-              <div>&bull; <strong class="text-slate-900 dark:text-white">AST-Safe Parsing</strong>: Strictly forbidden to use <code>eval()</code> or <code>exec()</code> on untrusted agent outputs.</div>
-              <div>&bull; <strong class="text-slate-900 dark:text-white">Distributed Tracing</strong>: End-to-end telemetry via OpenTelemetry, LangSmith, and AgentOps.</div>
-            </div>
-          </div>
-        `
+        content: `<p>Comprehensive defensive runbook detailing circuit breakers to prevent runaway billing, secret management, and SOC2 audit trails.</p>`
       },
       {
-        id: "setup-scripts",
+        id: "ast-sandbox-station",
+        district: "summit",
+        category: "Verification & Quality",
+        title: "AST Zero-Eval Security Station",
+        badge: "SECURITY",
+        summary: "Eliminates arbitrary code execution vulnerabilities by replacing eval() with safe AST expression parsers.",
+        gitPath: "resources/cheat-sheets/enterprise-deployment-2026.md",
+        content: `<p>Detailed implementation showing how to safely evaluate mathematical expressions and logical queries without executing arbitrary Python code.</p>`
+      },
+      {
+        id: "observability-radar",
+        district: "summit",
+        category: "Cheat Sheets & Guides",
+        title: "Observability &amp; LangSmith Telemetry Radar",
+        badge: "OBSERVABILITY",
+        summary: "Distributed tracing, prompt evaluation benchmarks, and token cost monitoring with LangSmith and AgentOps.",
+        gitPath: "resources/cheat-sheets/enterprise-deployment-2026.md",
+        content: `<p>Instrumenting multi-turn agent conversations with OpenTelemetry, span tags, token cost tracking, and automated evals.</p>`
+      },
+      {
+        id: "prompt-engineering-spire",
+        district: "summit",
+        category: "Cheat Sheets & Guides",
+        title: "Prompt Engineering &amp; Guardrails Spire",
+        badge: "PROMPTS",
+        summary: "Few-shot prompting, chain-of-thought scratchpads, system prompt templates, and defensive negative constraints.",
+        gitPath: "resources/cheat-sheets/prompt-engineering.md",
+        content: `<p>Production-tested prompt structures including role definition, tool instructions, output format schemas, and boundary constraints.</p>`
+      },
+      {
+        id: "setup-scripts-hub",
+        district: "summit",
         category: "Tooling & Setup",
-        title: "Cross-Platform Environment Setup Scripts",
-        badge: "SETUP",
-        summary: "Automated scripts for Windows PowerShell and Linux/macOS Bash to prepare Python virtual environments.",
+        title: "Setup Scripts &amp; Workspace Automation Hub",
+        badge: "SCRIPTS",
+        summary: "Automated scripts for Windows PowerShell (setup.ps1) and Linux/macOS Bash (setup.sh).",
         gitPath: "scripts/setup.ps1",
-        content: `
-          <div class="space-y-3 font-mono text-xs">
-            <p class="font-sans text-slate-700 dark:text-slate-300">Execute automated setup in your workspace:</p>
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <div class="text-blue-600 dark:text-cyan-400 font-bold mb-1"># Windows PowerShell:</div>
-              <div class="text-slate-900 dark:text-white bg-white dark:bg-[#07090f] p-2 rounded border border-slate-200 dark:border-[#1f273d]">.\\scripts\\setup.ps1</div>
-            </div>
-            <div class="p-3 bg-slate-100 dark:bg-[#101422] border border-slate-200 dark:border-[#1f273d] rounded-lg">
-              <div class="text-emerald-600 dark:text-emerald-400 font-bold mb-1"># Linux / macOS Bash:</div>
-              <div class="text-slate-900 dark:text-white bg-white dark:bg-[#07090f] p-2 rounded border border-slate-200 dark:border-[#1f273d]">bash ./scripts/setup.sh</div>
-            </div>
-          </div>
-        `
+        content: `<p>One-command environment preparation configuring Python virtual environments, installing dependencies, and testing tool bindings.</p>`
       }
     ];
 
@@ -609,7 +733,7 @@
     ];
 
     // =========================================================================
-    // 2. THEME CONTROLLER (LIGHT & DARK MODES)
+    // 2. THEME CONTROLLER
     // =========================================================================
     let currentTheme = localStorage.getItem('agentic_theme') || 'light';
 
@@ -668,7 +792,7 @@
       } else if (viewName === 'docs') {
         renderDocsSidebar();
         if (!document.getElementById('docs-reader-container').innerHTML.trim()) {
-          loadDocById('frameworks-matrix');
+          loadDocById('frameworks-langgraph');
         }
       } else if (viewName === 'matrix') {
         renderFrameworksGrid(frameworksData);
@@ -678,85 +802,28 @@
     // =========================================================================
     // 4. MINDMAP & TREE ENGINE
     // =========================================================================
-    const treeData = [
-      {
-        id: "t-fw",
-        title: "Agent Frameworks Ecosystem",
-        icon: "&#x1F9E9;",
-        desc: "Durable state graphs, multi-agent crews, and type-safe runtimes.",
-        children: [
-          { title: "LangGraph: Cyclic state graph orchestration with persistence & checkpoints", docId: "frameworks-matrix" },
-          { title: "CrewAI: Role-based teams and autonomous task delegation", docId: "frameworks-matrix" },
-          { title: "PydanticAI: Strict Pydantic v2 schema validation & type safety", docId: "frameworks-matrix" },
-          { title: "Google ADK: Cloud-scale enterprise agent platform", docId: "frameworks-matrix" },
-          { title: "MS Agent Framework: Unified enterprise AutoGen & Semantic Kernel successor", docId: "frameworks-matrix" }
-        ]
-      },
-      {
-        id: "t-proto",
-        title: "Protocols & Interoperability",
-        icon: "&#x1F50C;",
-        desc: "Open JSON-RPC 2.0 communication standards replacing custom API wrappers.",
-        children: [
-          { title: "Model Context Protocol (MCP): tools/list, tools/call, resources/read", docId: "mcp-protocol" },
-          { title: "Agent-to-Agent (A2A): Task delegation envelopes with conversation_id", docId: "mcp-protocol" },
-          { title: "Streaming JSON-RPC: Real-time asynchronous tool outputs over WebSockets", docId: "mcp-protocol" }
-        ]
-      },
-      {
-        id: "t-verif",
-        title: "Verification, Code Review & Safety",
-        icon: "&#x1F6E1;",
-        desc: "Continuous automated review loops and zero-eval execution guarantees.",
-        children: [
-          { title: "CodeRabbit CLI Review: Machine-readable NDJSON stream for agents", docId: "coderabbit-review" },
-          { title: "Autonomous Autofix Loop: Generate -> Review -> Fix -> Verify cycle", docId: "coderabbit-review" },
-          { title: "AST Expression Sandboxing: Mathematical evaluation eliminating eval() vulnerabilities", docId: "enterprise-deployment" },
-          { title: "SOC2 Compliance & Guardrails: Circuit breakers, rate limits, and audit logs", docId: "enterprise-deployment" }
-        ]
-      },
-      {
-        id: "t-labs",
-        title: "4 Runnable Starter Codebases",
-        icon: "&#x1F4BB;",
-        desc: "Complete, production-tested agent starters with unit tests.",
-        children: [
-          { title: "examples/personal-assistant: Multi-tool assistant with calendar, email, tasks", docId: "starter-labs" },
-          { title: "examples/coding-agent: Self-healing SWE coding bot with CodeRabbit review", docId: "starter-labs" },
-          { title: "examples/research-agent: Query decomposition & evidence synthesis", docId: "starter-labs" },
-          { title: "examples/multi-agent-collab: Hierarchical Planner, Worker, Reviewer swarm", docId: "starter-labs" }
-        ]
-      },
-      {
-        id: "t-roadmaps",
-        title: "Mastery Roadmaps",
-        icon: "&#x1F5FA;",
-        desc: "Phased engineering curricula from beginner primitives to distributed multi-agent systems.",
-        children: [
-          { title: "Beginner Track (Weeks 1–6): LLM primitives, ReAct loop, AST calculators, Docker", docId: "mastery-roadmaps" },
-          { title: "Intermediate Track (Weeks 1–8): LangGraph, Model Context Protocol, Redis memory", docId: "mastery-roadmaps" },
-          { title: "Expert Track (Weeks 1–12): Autonomous SWE bots, automated CodeRabbit PRs, SOC2", docId: "mastery-roadmaps" }
-        ]
-      }
-    ];
-
     function renderMindmapTree() {
       const container = document.getElementById('tree-content-container');
-      container.innerHTML = treeData.map(node => `
-        <div class="card-surface p-4 rounded-xl tree-card" data-title="${node.title.toLowerCase()}">
-          <div class="flex items-center justify-between cursor-pointer" onclick="toggleTreeBranch('${node.id}')">
+      const grouped = {};
+      repoDocs.forEach(doc => {
+        if (!grouped[doc.category]) grouped[doc.category] = [];
+        grouped[doc.category].push(doc);
+      });
+
+      container.innerHTML = Object.keys(grouped).map((cat, idx) => `
+        <div class="card-surface p-4 rounded-xl tree-card" data-title="${cat.toLowerCase()}">
+          <div class="flex items-center justify-between cursor-pointer" onclick="toggleTreeBranch('tree-branch-${idx}')">
             <div class="flex items-center gap-2.5">
-              <span class="text-base">${node.icon}</span>
-              <strong class="text-slate-900 dark:text-white text-xs tracking-tight">${node.title}</strong>
+              <span class="text-base">&#x1F4DA;</span>
+              <strong class="text-slate-900 dark:text-white text-xs tracking-tight">${cat}</strong>
             </div>
-            <span id="arrow-${node.id}" class="text-slate-400 font-mono text-[10px] bg-slate-100 dark:bg-[#151b2b] px-2 py-0.5 rounded border border-slate-200 dark:border-slate-800">&#x25BC;</span>
+            <span id="arrow-tree-branch-${idx}" class="text-slate-400 font-mono text-[10px] bg-slate-100 dark:bg-[#151b2b] px-2 py-0.5 rounded border border-slate-200 dark:border-slate-800">&#x25BC;</span>
           </div>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 pl-7">${node.desc}</p>
-          <div id="${node.id}" class="tree-branch mt-3 space-y-2 text-slate-600 dark:text-slate-300">
-            ${node.children.map(ch => `
-              <div class="flex items-start gap-2 hover:text-blue-600 dark:hover:text-white cursor-pointer group" onclick="switchView('docs'); loadDocById('${ch.docId}');">
+          <div id="tree-branch-${idx}" class="tree-branch mt-3 space-y-2 text-slate-600 dark:text-slate-300">
+            ${grouped[cat].map(doc => `
+              <div class="flex items-start gap-2 hover:text-blue-600 dark:hover:text-white cursor-pointer group" onclick="switchView('docs'); loadDocById('${doc.id}');">
                 <span class="text-blue-500 dark:text-cyan-400 mt-0.5">&bull;</span>
-                <span class="group-hover:underline text-[11px] leading-relaxed">${ch.title}</span>
+                <span class="group-hover:underline text-[11px] leading-relaxed">${doc.title}</span>
               </div>
             `).join('')}
           </div>
@@ -774,57 +841,40 @@
     }
 
     function expandAllTree(expand) {
-      treeData.forEach(node => {
-        const el = document.getElementById(node.id);
-        const arr = document.getElementById('arrow-' + node.id);
-        if (el) {
-          if (expand) {
-            el.classList.remove('hidden');
-            if (arr) arr.innerHTML = '&#x25BC;';
-          } else {
-            el.classList.add('hidden');
-            if (arr) arr.innerHTML = '&#x25B6;';
-          }
-        }
+      document.querySelectorAll('.tree-branch').forEach(el => {
+        if (expand) el.classList.remove('hidden');
+        else el.classList.add('hidden');
       });
     }
 
     function filterTree(q) {
       const query = q.toLowerCase().trim();
       document.querySelectorAll('.tree-card').forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(query) ? 'block' : 'none';
+        card.style.display = card.innerText.toLowerCase().includes(query) ? 'block' : 'none';
       });
     }
 
-    // =========================================================================
-    // 5. INTERACTIVE CANVAS GRAPH ENGINE (PHYSICS & DRAGGING)
-    // =========================================================================
+    // Canvas Knowledge Graph
     const graphNodes = [
-      { id: "core", label: "Agentic AI Universe", x: 0, y: 0, vx: 0, vy: 0, r: 24, color: "#2563eb", docId: "frameworks-matrix" },
-      { id: "fw", label: "Frameworks (40+)", x: -120, y: -80, vx: 0, vy: 0, r: 18, color: "#3b82f6", docId: "frameworks-matrix" },
-      { id: "mcp", label: "MCP Protocol", x: 120, y: -80, vx: 0, vy: 0, r: 18, color: "#7c3aed", docId: "mcp-protocol" },
-      { id: "cr", label: "CodeRabbit Review", x: 140, y: 70, vx: 0, vy: 0, r: 18, color: "#059669", docId: "coderabbit-review" },
-      { id: "labs", label: "4 Starter Labs", x: -140, y: 70, vx: 0, vy: 0, r: 18, color: "#e11d48", docId: "starter-labs" },
-      { id: "road", label: "Mastery Roadmaps", x: 0, y: 130, vx: 0, vy: 0, r: 18, color: "#0891b2", docId: "mastery-roadmaps" },
-      { id: "papers", label: "140+ arXiv Papers", x: 0, y: -130, vx: 0, vy: 0, r: 18, color: "#d97706", docId: "academic-papers" }
+      { id: "core", label: "Agentic AI Core", x: 0, y: 0, r: 24, color: "#2563eb", docId: "frameworks-langgraph" },
+      { id: "downtown", label: "Downtown Metropolis", x: 0, y: -100, r: 18, color: "#3b82f6", docId: "frameworks-langgraph" },
+      { id: "research", label: "Research Park", x: 130, y: -20, r: 18, color: "#d97706", docId: "paper-react" },
+      { id: "industrial", label: "SWE Docks", x: -130, y: -20, r: 18, color: "#059669", docId: "coderabbit-review" },
+      { id: "summit", label: "Mastery Summit", x: 0, y: 110, r: 18, color: "#7c3aed", docId: "roadmap-expert" }
     ];
 
     const graphEdges = [
-      { from: "core", to: "fw" },
-      { from: "core", to: "mcp" },
-      { from: "core", to: "cr" },
-      { from: "core", to: "labs" },
-      { from: "core", to: "road" },
-      { from: "core", to: "papers" },
-      { from: "fw", to: "labs" },
-      { from: "mcp", to: "fw" },
-      { from: "cr", to: "labs" }
+      { from: "core", to: "downtown" },
+      { from: "core", to: "research" },
+      { from: "core", to: "industrial" },
+      { from: "core", to: "summit" },
+      { from: "downtown", to: "industrial" },
+      { from: "downtown", to: "research" },
+      { from: "industrial", to: "summit" },
+      { from: "research", to: "summit" }
     ];
 
-    let graphCanvas, graphCtx;
-    let graphDragNode = null;
-    let graphAnimId = null;
+    let graphCanvas, graphCtx, graphDragNode = null, graphAnimId = null;
 
     function startMindmapGraph() {
       const container = document.getElementById('mindmap-canvas-container');
@@ -862,39 +912,30 @@
       });
 
       window.addEventListener('mouseup', () => {
-        if (graphDragNode) {
-          openKnowledgeModal(graphDragNode.docId);
-        }
+        if (graphDragNode) openKnowledgeModal(graphDragNode.docId);
         graphDragNode = null;
       });
 
-      if (!graphAnimId) {
-        animateGraph();
-      }
+      if (!graphAnimId) animateGraph();
     }
 
     function resetGraphPhysics() {
       graphNodes[0].x = 0; graphNodes[0].y = 0;
-      graphNodes[1].x = -120; graphNodes[1].y = -80;
-      graphNodes[2].x = 120; graphNodes[2].y = -80;
-      graphNodes[3].x = 140; graphNodes[3].y = 70;
-      graphNodes[4].x = -140; graphNodes[4].y = 70;
-      graphNodes[5].x = 0; graphNodes[5].y = 130;
-      graphNodes[6].x = 0; graphNodes[6].y = -130;
+      graphNodes[1].x = 0; graphNodes[1].y = -100;
+      graphNodes[2].x = 130; graphNodes[2].y = -20;
+      graphNodes[3].x = -130; graphNodes[3].y = -20;
+      graphNodes[4].x = 0; graphNodes[4].y = 110;
     }
 
     function animateGraph() {
       graphAnimId = requestAnimationFrame(animateGraph);
       if (currentActiveView !== 'mindmap' || !graphCtx) return;
 
-      const w = graphCanvas.width;
-      const h = graphCanvas.height;
+      const w = graphCanvas.width, h = graphCanvas.height;
       graphCtx.clearRect(0, 0, w, h);
-
       graphCtx.save();
       graphCtx.translate(w / 2, h / 2);
 
-      // Draw Edges
       graphEdges.forEach(e => {
         const n1 = graphNodes.find(n => n.id === e.from);
         const n2 = graphNodes.find(n => n.id === e.to);
@@ -907,7 +948,6 @@
         graphCtx.stroke();
       });
 
-      // Draw Nodes
       graphNodes.forEach(n => {
         graphCtx.beginPath();
         graphCtx.arc(n.x, n.y, n.r + 5, 0, Math.PI * 2);
@@ -932,7 +972,7 @@
     }
 
     // =========================================================================
-    // 6. FULL GIT DOCS ENGINE
+    // 5. FULL GIT DOCS ENGINE
     // =========================================================================
     function renderDocsSidebar() {
       const container = document.getElementById('docs-nav-list');
@@ -992,7 +1032,7 @@
     }
 
     // =========================================================================
-    // 7. FRAMEWORK MATRIX RENDERER
+    // 6. FRAMEWORK MATRIX RENDERER
     // =========================================================================
     function renderFrameworksGrid(list) {
       const grid = document.getElementById('frameworks-grid');
@@ -1021,28 +1061,20 @@
           btn.className = "matrix-filter-btn px-3 py-1 rounded-lg bg-white dark:bg-[#151b2b] hover:bg-slate-100 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800";
         }
       });
-      if (cat === 'all') {
-        renderFrameworksGrid(frameworksData);
-      } else {
-        renderFrameworksGrid(frameworksData.filter(f => f.cat === cat));
-      }
+      if (cat === 'all') renderFrameworksGrid(frameworksData);
+      else renderFrameworksGrid(frameworksData.filter(f => f.cat === cat));
     }
 
-    // =========================================================================
-    // 8. OMNI SEARCH
-    // =========================================================================
     function handleOmniSearch(query) {
       const q = query.toLowerCase().trim();
       if (!q) return;
       switchView('docs');
       const matched = repoDocs.find(d => d.title.toLowerCase().includes(q) || d.summary.toLowerCase().includes(q) || d.content.toLowerCase().includes(q));
-      if (matched) {
-        loadDocById(matched.id);
-      }
+      if (matched) loadDocById(matched.id);
     }
 
     // =========================================================================
-    // 9. KNOWLEDGE MODAL CONTROLS
+    // 7. KNOWLEDGE MODAL CONTROLS
     // =========================================================================
     let currentModalDocId = null;
 
@@ -1071,27 +1103,18 @@
     function openInDocsFromModal() {
       closeKnowledgeModal();
       switchView('docs');
-      if (currentModalDocId) {
-        loadDocById(currentModalDocId);
-      }
+      if (currentModalDocId) loadDocById(currentModalDocId);
     }
 
     function triggerCurrentChest() {
-      if (currentNearbyWaypoint) {
-        openKnowledgeModal(currentNearbyWaypoint.docId);
-      }
+      if (currentNearbyWaypoint) openKnowledgeModal(currentNearbyWaypoint.docId);
     }
 
-    // =========================================================================
-    // 10. WEB AUDIO SYNTHESIZER
-    // =========================================================================
-    let audioCtx = null;
-    let soundEnabled = true;
+    // Web Audio Synthesizer
+    let audioCtx = null, soundEnabled = true;
 
     function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
 
     function playTone(freq, type = 'sine', duration = 0.1) {
@@ -1118,17 +1141,44 @@
     }
 
     // =========================================================================
-    // 11. 3D REAL SPORTS CAR & CAMPUS WORLD ENGINE (THREE.JS)
+    // 8. 3D OPEN WORLD REAL ROADSTER CAMPUS ENGINE (THREE.JS)
     // =========================================================================
+    // 28 Distinct Landmarks Positioned across 4 Open World Districts (Map size 600x600!)
     const waypoints = [
-      { docId: "frameworks-matrix", label: "Agent Frameworks Citadel", color: 0x2563eb, x: 0, z: -46, discovered: false },
-      { docId: "mcp-protocol", label: "Model Context Protocol (MCP)", color: 0x7c3aed, x: 44, z: -25, discovered: false },
-      { docId: "coderabbit-review", label: "CodeRabbit Verification Vault", color: 0x059669, x: 44, z: 25, discovered: false },
-      { docId: "academic-papers", label: "Academic Research Library", color: 0xd97706, x: -44, z: 25, discovered: false },
-      { docId: "starter-labs", label: "Executable Codebases Lab", color: 0xe11d48, x: -44, z: -25, discovered: false },
-      { docId: "mastery-roadmaps", label: "Mastery Roadmaps Station", color: 0x0891b2, x: 0, z: 46, discovered: false },
-      { docId: "enterprise-deployment", label: "Enterprise Security Fortress", color: 0xdc2626, x: 25, z: 0, discovered: false },
-      { docId: "setup-scripts", label: "Setup Scripts & AST Sandbox", color: 0x10b981, x: -25, z: 0, discovered: false }
+      // 1. Downtown Metropolis (North, Z: -180 to -50)
+      { docId: "frameworks-langgraph", district: "downtown", label: "LangGraph High-Rise", color: 0x2563eb, x: 0, z: -150, type: "tower", discovered: false },
+      { docId: "mcp-protocol", district: "downtown", label: "Model Context Protocol Tower", color: 0x7c3aed, x: 60, z: -130, type: "obelisk", discovered: false },
+      { docId: "frameworks-pydanticai", district: "downtown", label: "PydanticAI Type-Safe Center", color: 0x059669, x: -60, z: -130, type: "tower", discovered: false },
+      { docId: "frameworks-adk", district: "downtown", label: "Google ADK Pavilion", color: 0x0891b2, x: 120, z: -90, type: "rotunda", discovered: false },
+      { docId: "frameworks-msagent", district: "downtown", label: "MS Agent Framework Tower", color: 0x2563eb, x: -120, z: -90, type: "tower", discovered: false },
+      { docId: "frameworks-crewai", district: "downtown", label: "CrewAI Multi-Agent Commons", color: 0xd97706, x: 0, z: -90, type: "rotunda", discovered: false },
+      { docId: "frameworks-llamaindex", district: "downtown", label: "LlamaIndex RAG Library", color: 0xe11d48, x: 55, z: -55, type: "monolith", discovered: false },
+      { docId: "frameworks-autogen", district: "downtown", label: "AutoGen Conversational Plaza", color: 0x7c3aed, x: -55, z: -55, type: "monolith", discovered: false },
+
+      // 2. Research Nature Park & Quad (East, X: 70 to 200, Z: -50 to 90)
+      { docId: "paper-react", district: "research", label: "ReAct Foundational Monolith", color: 0x2563eb, x: 140, z: -35, type: "monolith", discovered: false },
+      { docId: "paper-toolformer", district: "research", label: "Toolformer API Forge", color: 0xd97706, x: 180, z: 10, type: "forge", discovered: false },
+      { docId: "paper-reflexion", district: "research", label: "Reflexion Self-Correction Hall", color: 0x059669, x: 140, z: 50, type: "rotunda", discovered: false },
+      { docId: "academic-papers-archive", district: "research", label: "140+ arXiv Research Quad", color: 0xe11d48, x: 195, z: -60, type: "library", discovered: false },
+      { docId: "paper-metagpt", district: "research", label: "MetaGPT Collaboration Hall", color: 0x7c3aed, x: 170, z: 90, type: "rotunda", discovered: false },
+
+      // 3. SWE Industrial Harbor & Shipyard (West, X: -70 to -200, Z: -50 to 120)
+      { docId: "coderabbit-review", district: "industrial", label: "CodeRabbit SWE Drydock", color: 0x059669, x: -140, z: -35, type: "crane", discovered: false },
+      { docId: "docker-containers", district: "industrial", label: "Docker Sandboxing Depot", color: 0x0891b2, x: -180, z: 10, type: "depot", discovered: false },
+      { docId: "lab-assistant", district: "industrial", label: "Personal Assistant Workshop", color: 0x2563eb, x: -140, z: 50, type: "workshop", discovered: false },
+      { docId: "lab-coding", district: "industrial", label: "Coding Agent Lab", color: 0x059669, x: -195, z: -60, type: "workshop", discovered: false },
+      { docId: "lab-research", district: "industrial", label: "Research Agent Hub", color: 0xd97706, x: -170, z: 90, type: "workshop", discovered: false },
+      { docId: "lab-swarm", district: "industrial", label: "Multi-Agent Swarm Hangar", color: 0xe11d48, x: -130, z: 120, type: "depot", discovered: false },
+
+      // 4. Frontier Mountains & Mastery Summit (South, Z: 50 to 220)
+      { docId: "roadmap-beginner", district: "summit", label: "Beginner Trailhead (W1-6)", color: 0x059669, x: -90, z: 160, type: "monolith", discovered: false },
+      { docId: "roadmap-intermediate", district: "summit", label: "Intermediate Circuit (W1-8)", color: 0x0891b2, x: 0, z: 190, type: "monolith", discovered: false },
+      { docId: "roadmap-expert", district: "summit", label: "Expert Production Summit", color: 0x7c3aed, x: 90, z: 160, type: "spire", discovered: false },
+      { docId: "enterprise-security", district: "summit", label: "Enterprise Security Fortress", color: 0xdc2626, x: 0, z: 130, type: "fortress", discovered: false },
+      { docId: "observability-radar", district: "summit", label: "LangSmith Telemetry Radar", color: 0x0891b2, x: 75, z: 110, type: "radar", discovered: false },
+      { docId: "ast-sandbox-station", district: "summit", label: "AST Zero-Eval Security Station", color: 0x059669, x: -75, z: 110, type: "station", discovered: false },
+      { docId: "prompt-engineering-spire", district: "summit", label: "Prompt Engineering Spire", color: 0xd97706, x: 0, z: 70, type: "spire", discovered: false },
+      { docId: "setup-scripts-hub", district: "summit", label: "Workspace Setup Automation", color: 0x2563eb, x: -45, z: 30, type: "station", discovered: false }
     ];
 
     let currentNearbyWaypoint = null;
@@ -1137,28 +1187,29 @@
     // Three.js State
     let scene, camera, renderer;
     let dirSunLight, ambientLight;
-    let terrainMesh, roadMesh;
+    let terrainMesh, roadGroup;
     let carGroup;
     let frontLeftPivot, frontRightPivot;
     let allWheels = [];
     let taillightMesh;
     const waypointMeshes = [];
+    const boostPads = [];
 
-    // Real Car Physics State - Spawn parked on road at Z: 10 facing North
+    // Real Roadster Physics
     const carState = {
       x: 0,
-      z: 10,
+      z: 12,
       angle: 0,
       speed: 0,
-      maxSpeed: 0.95,
-      accel: 0.04,
-      friction: 0.95,
-      turnSpeed: 0.045,
+      maxSpeed: 1.05,
+      accel: 0.042,
+      friction: 0.955,
+      turnSpeed: 0.046,
       steeringAngle: 0
     };
 
-    // Camera Modes & Free Orbit Controls
-    let cameraMode = 'chase'; // 'chase', 'hood', 'drone', 'orbit'
+    // Camera Modes
+    let cameraMode = 'chase';
     let orbitYaw = 0;
     let orbitPitch = 0.32;
     let orbitDistance = 14;
@@ -1168,11 +1219,8 @@
       ['chase', 'hood', 'drone', 'orbit'].forEach(m => {
         const btn = document.getElementById('cam-btn-' + m);
         if (btn) {
-          if (m === mode) {
-            btn.className = "px-1.5 py-1 rounded-md bg-blue-600 text-white font-semibold";
-          } else {
-            btn.className = "px-1.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300";
-          }
+          if (m === mode) btn.className = "px-1.5 py-1 rounded-md bg-blue-600 text-white font-semibold";
+          else btn.className = "px-1.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300";
         }
       });
     }
@@ -1184,7 +1232,6 @@
       setCameraMode('chase');
     }
 
-    // Robust Keyboard Map
     const activeKeys = {};
 
     function init3DWorld() {
@@ -1193,57 +1240,49 @@
       const width = container.clientWidth || window.innerWidth;
       const height = container.clientHeight || (window.innerHeight - 56);
 
-      // Scene
       scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1500);
+      camera.position.set(0, 14, 26);
 
-      // Camera
-      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-      camera.position.set(0, 14, 24);
-
-      // Renderer
       renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, powerPreference: "high-performance" });
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-      // Sun & Ambient Lighting
-      ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+      ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
       scene.add(ambientLight);
 
       dirSunLight = new THREE.DirectionalLight(0xfff8ed, 1.35);
-      dirSunLight.position.set(40, 60, 30);
+      dirSunLight.position.set(80, 120, 60);
       dirSunLight.castShadow = true;
       dirSunLight.shadow.mapSize.width = 1024;
       dirSunLight.shadow.mapSize.height = 1024;
       dirSunLight.shadow.camera.near = 0.5;
-      dirSunLight.shadow.camera.far = 180;
-      dirSunLight.shadow.camera.left = -60;
-      dirSunLight.shadow.camera.right = 60;
-      dirSunLight.shadow.camera.top = 60;
-      dirSunLight.shadow.camera.bottom = -60;
+      dirSunLight.shadow.camera.far = 350;
+      dirSunLight.shadow.camera.left = -160;
+      dirSunLight.shadow.camera.right = 160;
+      dirSunLight.shadow.camera.top = 160;
+      dirSunLight.shadow.camera.bottom = -160;
       scene.add(dirSunLight);
 
-      // Build World Environment & Road Network
-      buildWorldEnvironment();
+      // Build Vast Open World Campus ($600 \times 600$ Units!)
+      buildExpansiveWorld();
 
-      // Build Sleek Real Sports Car
+      // Build Real Sports Car
       buildRealCar();
 
-      // Setup Radar & Apply Theme
+      // Setup Radar & Camera Drag
       setupRadarMarkers();
       update3DWorldTheme(currentTheme);
-
-      // Setup Interactive Orbit & Zoom Drag Listeners
       setupCameraInteractions(canvas);
 
-      // Start Game Loop
       animateGameLoop();
     }
 
-    function buildWorldEnvironment() {
-      // 1. Base Ground (Campus Lawn)
-      const groundGeo = new THREE.PlaneGeometry(240, 240, 1, 1);
+    function buildExpansiveWorld() {
+      // 1. Vast Terrain (600x600)
+      const groundGeo = new THREE.PlaneGeometry(650, 650, 1, 1);
       const groundMat = new THREE.MeshLambertMaterial({ color: 0x86efac });
       groundGeo.rotateX(-Math.PI / 2);
       terrainMesh = new THREE.Mesh(groundGeo, groundMat);
@@ -1251,135 +1290,185 @@
       terrainMesh.position.y = -0.02;
       scene.add(terrainMesh);
 
-      // 2. Road Network
-      const roadGroup = new THREE.Group();
+      // 2. Open World Road Network (Highways, Avenues, Ring Road & Connectors)
+      roadGroup = new THREE.Group();
+      const asphaltMat = new THREE.MeshLambertMaterial({ color: 0x334155 });
+      const whiteLineMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      const yellowCurbsMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b });
 
-      // Central Plaza (Roundabout)
-      const plazaGeo = new THREE.CircleGeometry(16, 32);
+      // Outer Highway Ring (Radius 215)
+      const ringRoadGeo = new THREE.RingGeometry(208, 222, 64);
+      ringRoadGeo.rotateX(-Math.PI / 2);
+      const ringRoad = new THREE.Mesh(ringRoadGeo, asphaltMat);
+      ringRoad.receiveShadow = true;
+      roadGroup.add(ringRoad);
+
+      // Central Roundabout Plaza
+      const plazaGeo = new THREE.CircleGeometry(20, 36);
       plazaGeo.rotateX(-Math.PI / 2);
-      const roadMat = new THREE.MeshLambertMaterial({ color: 0x334155 });
-      const plaza = new THREE.Mesh(plazaGeo, roadMat);
+      const plaza = new THREE.Mesh(plazaGeo, asphaltMat);
       plaza.receiveShadow = true;
       roadGroup.add(plaza);
 
-      // Plaza outer white ring
-      const innerRingGeo = new THREE.RingGeometry(15.2, 15.6, 32);
-      innerRingGeo.rotateX(-Math.PI / 2);
-      const lineMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-      const innerRing = new THREE.Mesh(innerRingGeo, lineMat);
-      innerRing.position.y = 0.01;
-      roadGroup.add(innerRing);
-
-      // Flat decorative center mosaic (Flush with ground so car drives unobstructed!)
-      const centerDecoGeo = new THREE.CircleGeometry(5.0, 32);
+      // Flush Center Mosaic Ring
+      const centerDecoGeo = new THREE.RingGeometry(5.0, 5.5, 36);
       centerDecoGeo.rotateX(-Math.PI / 2);
-      const centerDecoMat = new THREE.MeshLambertMaterial({ color: 0x2563eb });
-      const centerDeco = new THREE.Mesh(centerDecoGeo, centerDecoMat);
-      centerDeco.position.y = 0.015;
+      const centerDeco = new THREE.Mesh(centerDecoGeo, whiteLineMat);
+      centerDeco.position.y = 0.02;
       roadGroup.add(centerDeco);
 
-      const centerInnerRingGeo = new THREE.RingGeometry(4.8, 5.0, 32);
-      centerInnerRingGeo.rotateX(-Math.PI / 2);
-      const centerInnerRing = new THREE.Mesh(centerInnerRingGeo, lineMat);
-      centerInnerRing.position.y = 0.02;
-      roadGroup.add(centerInnerRing);
+      // North Highway into Downtown (Z: 0 to -210)
+      const roadNorth = new THREE.Mesh(new THREE.PlaneGeometry(8.5, 215).rotateX(-Math.PI / 2), asphaltMat);
+      roadNorth.position.set(0, 0, -107); roadNorth.receiveShadow = true; roadGroup.add(roadNorth);
 
-      // 4 Main Road Avenues
-      const roadGeo = new THREE.PlaneGeometry(7.5, 80);
-      roadGeo.rotateX(-Math.PI / 2);
+      // South Highway into Summit (Z: 0 to +210)
+      const roadSouth = new THREE.Mesh(new THREE.PlaneGeometry(8.5, 215).rotateX(-Math.PI / 2), asphaltMat);
+      roadSouth.position.set(0, 0, 107); roadSouth.receiveShadow = true; roadGroup.add(roadSouth);
 
-      const roadN = new THREE.Mesh(roadGeo, roadMat); roadN.position.set(0, 0, -45); roadN.receiveShadow = true; roadGroup.add(roadN);
-      const roadS = new THREE.Mesh(roadGeo, roadMat); roadS.position.set(0, 0, 45); roadS.receiveShadow = true; roadGroup.add(roadS);
-      const roadE = new THREE.Mesh(roadGeo, roadMat); roadE.rotation.y = Math.PI / 2; roadE.position.set(45, 0, 0); roadE.receiveShadow = true; roadGroup.add(roadE);
-      const roadW = new THREE.Mesh(roadGeo, roadMat); roadW.rotation.y = Math.PI / 2; roadW.position.set(-45, 0, 0); roadW.receiveShadow = true; roadGroup.add(roadW);
+      // East Highway into Research Park (X: 0 to +210)
+      const roadEast = new THREE.Mesh(new THREE.PlaneGeometry(8.5, 215).rotateX(-Math.PI / 2).rotateY(Math.PI / 2), asphaltMat);
+      roadEast.position.set(107, 0, 0); roadEast.receiveShadow = true; roadGroup.add(roadEast);
 
-      // Diagonal connector roads
-      const diagGeo = new THREE.PlaneGeometry(6.5, 60);
-      diagGeo.rotateX(-Math.PI / 2);
-      const diag1 = new THREE.Mesh(diagGeo, roadMat); diag1.rotation.y = Math.PI / 4; diag1.position.set(28, 0, 28); roadGroup.add(diag1);
-      const diag2 = new THREE.Mesh(diagGeo, roadMat); diag2.rotation.y = -Math.PI / 4; diag2.position.set(-28, 0, 28); roadGroup.add(diag2);
-      const diag3 = new THREE.Mesh(diagGeo, roadMat); diag3.rotation.y = -Math.PI / 4; diag3.position.set(28, 0, -28); roadGroup.add(diag3);
-      const diag4 = new THREE.Mesh(diagGeo, roadMat); diag4.rotation.y = Math.PI / 4; diag4.position.set(-28, 0, -28); roadGroup.add(diag4);
+      // West Highway into Industrial Shipyard (X: 0 to -210)
+      const roadWest = new THREE.Mesh(new THREE.PlaneGeometry(8.5, 215).rotateX(-Math.PI / 2).rotateY(Math.PI / 2), asphaltMat);
+      roadWest.position.set(-107, 0, 0); roadWest.receiveShadow = true; roadGroup.add(roadWest);
+
+      // Downtown Grid Cross Avenues (Z: -60, -110, -150)
+      [-60, -110, -150].forEach(zPos => {
+        const crossAve = new THREE.Mesh(new THREE.PlaneGeometry(7.5, 260).rotateX(-Math.PI / 2).rotateY(Math.PI / 2), asphaltMat);
+        crossAve.position.set(0, 0, zPos); crossAve.receiveShadow = true; roadGroup.add(crossAve);
+      });
+
+      // Diagonal Expressways
+      [-1, 1].forEach(dx => {
+        [-1, 1].forEach(dz => {
+          const diag = new THREE.Mesh(new THREE.PlaneGeometry(7.0, 160).rotateX(-Math.PI / 2), asphaltMat);
+          diag.rotation.y = (dx * dz * Math.PI) / 4;
+          diag.position.set(dx * 75, 0, dz * 75);
+          diag.receiveShadow = true;
+          roadGroup.add(diag);
+        });
+      });
+
+      // Speed Turbo Boost Pads on Straightaways
+      const boostLocations = [
+        [0, -45], [0, -125], [0, 45], [0, 140],
+        [65, 0], [150, 0], [-65, 0], [-150, 0]
+      ];
+      boostLocations.forEach(pos => {
+        const padGeo = new THREE.PlaneGeometry(4.0, 5.0).rotateX(-Math.PI / 2);
+        const padMat = new THREE.MeshBasicMaterial({ color: 0x06b6d4 });
+        const pad = new THREE.Mesh(padGeo, padMat);
+        pad.position.set(pos[0], 0.03, pos[1]);
+        roadGroup.add(pad);
+        boostPads.push(pad);
+      });
 
       scene.add(roadGroup);
-      roadMesh = roadGroup;
 
-      plantCampusTrees();
-      buildCampusWaypoints();
+      // 3. Build Downtown Skyscrapers, Industrial Cranes, Research Lakes & Summit Pines
+      buildOpenWorldDistricts();
+
+      // 4. Build 28 Themed Knowledge Landmarks
+      build28Landmarks();
     }
 
-    function plantCampusTrees() {
-      const treePositions = [
-        [-12, -18], [12, -18], [-12, 18], [12, 18],
-        [-20, -38], [20, -38], [-20, 38], [20, 38],
-        [-38, -12], [-38, 12], [38, -12], [38, 12],
-        [-22, -12], [22, -12], [-22, 12], [22, 12],
-        [-52, -35], [52, -35], [-52, 35], [52, 35]
-      ];
+    function buildOpenWorldDistricts() {
+      // Downtown Skyscrapers (North)
+      const bldgMat1 = new THREE.MeshLambertMaterial({ color: 0x1e293b });
+      const bldgMat2 = new THREE.MeshLambertMaterial({ color: 0x334155 });
+      const bldgMat3 = new THREE.MeshLambertMaterial({ color: 0x475569 });
+      const mats = [bldgMat1, bldgMat2, bldgMat3];
 
-      treePositions.forEach(pos => {
+      for (let i = 0; i < 28; i++) {
+        const bx = (Math.random() - 0.5) * 220;
+        const bz = -70 - Math.random() * 100;
+        // avoid road centerlines
+        if (Math.abs(bx) < 14) continue;
+        const h = 25 + Math.random() * 45;
+        const w = 12 + Math.random() * 10;
+        const bldg = new THREE.Mesh(new THREE.BoxGeometry(w, h, w), mats[i % 3]);
+        bldg.position.set(bx, h / 2, bz);
+        bldg.castShadow = true;
+        scene.add(bldg);
+      }
+
+      // Research Park Water Canal / Lake (East, X: 110 to 190, Z: -20 to 60)
+      const lakeGeo = new THREE.PlaneGeometry(75, 95).rotateX(-Math.PI / 2);
+      const lakeMat = new THREE.MeshLambertMaterial({ color: 0x38bdf8 });
+      const lake = new THREE.Mesh(lakeGeo, lakeMat);
+      lake.position.set(155, 0.01, 20);
+      scene.add(lake);
+
+      // Bridges over Lake
+      const bridgeGeo = new THREE.BoxGeometry(8.5, 0.6, 26);
+      const bridgeMat = new THREE.MeshLambertMaterial({ color: 0x64748b });
+      const bridge1 = new THREE.Mesh(bridgeGeo, bridgeMat); bridge1.position.set(155, 0.4, 0); scene.add(bridge1);
+
+      // Industrial Shipyard Containers & Cranes (West)
+      const containerColors = [0xef4444, 0x2563eb, 0xf59e0b, 0x10b981];
+      for (let i = 0; i < 30; i++) {
+        const cx = -80 - Math.random() * 95;
+        const cz = (Math.random() - 0.5) * 160;
+        if (Math.abs(cz) < 12) continue;
+        const cmat = new THREE.MeshLambertMaterial({ color: containerColors[i % 4] });
+        const container = new THREE.Mesh(new THREE.BoxGeometry(10, 4.5, 4.5), cmat);
+        container.position.set(cx, 2.25, cz);
+        container.castShadow = true;
+        scene.add(container);
+      }
+
+      // 60+ Natural Trees across Campus & Parks
+      for (let i = 0; i < 75; i++) {
+        const tx = (Math.random() - 0.5) * 440;
+        const tz = (Math.random() - 0.5) * 440;
+        if (Math.abs(tx) < 14 || Math.abs(tz) < 14) continue;
         const tree = new THREE.Group();
-        tree.position.set(pos[0], 0, pos[1]);
+        tree.position.set(tx, 0, tz);
 
-        // Trunk
-        const trunkGeo = new THREE.CylinderGeometry(0.35, 0.45, 2.5, 8);
-        const trunkMat = new THREE.MeshLambertMaterial({ color: 0x78350f });
-        const trunk = new THREE.Mesh(trunkGeo, trunkMat);
-        trunk.position.y = 1.25;
-        trunk.castShadow = true;
-        tree.add(trunk);
+        const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.45, 3.0, 8), new THREE.MeshLambertMaterial({ color: 0x78350f }));
+        trunk.position.y = 1.5; tree.add(trunk);
 
-        // Tiered Foliage Cones
         const foliageMat = new THREE.MeshLambertMaterial({ color: 0x15803d });
-        const c1 = new THREE.Mesh(new THREE.ConeGeometry(2.0, 2.4, 7), foliageMat); c1.position.y = 3.0; c1.castShadow = true; tree.add(c1);
-        const c2 = new THREE.Mesh(new THREE.ConeGeometry(1.6, 2.0, 7), foliageMat); c2.position.y = 4.2; c2.castShadow = true; tree.add(c2);
-        const c3 = new THREE.Mesh(new THREE.ConeGeometry(1.1, 1.6, 7), foliageMat); c3.position.y = 5.2; c3.castShadow = true; tree.add(c3);
-
+        const c1 = new THREE.Mesh(new THREE.ConeGeometry(2.4, 3.2, 7), foliageMat); c1.position.y = 3.6; tree.add(c1);
+        const c2 = new THREE.Mesh(new THREE.ConeGeometry(1.8, 2.6, 7), foliageMat); c2.position.y = 5.2; tree.add(c2);
         scene.add(tree);
-      });
+      }
     }
 
-    function buildCampusWaypoints() {
+    function build28Landmarks() {
       waypoints.forEach(wp => {
         const group = new THREE.Group();
         group.position.set(wp.x, 0, wp.z);
 
-        // Ground Pedestal Ring
-        const ringGeo = new THREE.RingGeometry(3.0, 3.6, 32);
+        // Ground Target Ring
+        const ringGeo = new THREE.RingGeometry(3.5, 4.2, 32);
         ringGeo.rotateX(-Math.PI / 2);
         const ringMat = new THREE.MeshBasicMaterial({ color: wp.color, side: THREE.DoubleSide });
         const ring = new THREE.Mesh(ringGeo, ringMat);
         ring.position.y = 0.05;
         group.add(ring);
 
-        // Circular Marble Pedestal
-        const pedGeo = new THREE.CylinderGeometry(2.6, 2.8, 1.4, 24);
-        const pedMat = new THREE.MeshLambertMaterial({ color: 0xf1f5f9 });
-        const ped = new THREE.Mesh(pedGeo, pedMat);
-        ped.position.y = 0.7;
-        ped.castShadow = true;
-        ped.receiveShadow = true;
-        group.add(ped);
+        // Pedestal
+        const ped = new THREE.Mesh(new THREE.CylinderGeometry(3.2, 3.4, 1.2, 24), new THREE.MeshLambertMaterial({ color: 0xf1f5f9 }));
+        ped.position.y = 0.6; ped.castShadow = true; ped.receiveShadow = true; group.add(ped);
 
         // Floating Gemstone Crystal Core
-        const coreGeo = new THREE.OctahedronGeometry(1.0);
+        const coreGeo = new THREE.OctahedronGeometry(1.2);
         const coreMat = new THREE.MeshStandardMaterial({
-          color: wp.color,
-          roughness: 0.1,
-          metalness: 0.8,
-          emissive: wp.color,
-          emissiveIntensity: 0.45
+          color: wp.color, roughness: 0.1, metalness: 0.8,
+          emissive: wp.color, emissiveIntensity: 0.5
         });
         const core = new THREE.Mesh(coreGeo, coreMat);
-        core.position.y = 2.8;
-        core.castShadow = true;
-        group.add(core);
+        core.position.y = 3.2; core.castShadow = true; group.add(core);
 
-        // Surrounding 3 Mini Floating Crystals
-        const miniGeo = new THREE.DodecahedronGeometry(0.3);
-        const m1 = new THREE.Mesh(miniGeo, coreMat); m1.position.set(1.4, 2.5, 0); group.add(m1);
-        const m2 = new THREE.Mesh(miniGeo, coreMat); m2.position.set(-0.7, 2.5, 1.2); group.add(m2);
-        const m3 = new THREE.Mesh(miniGeo, coreMat); m3.position.set(-0.7, 2.5, -1.2); group.add(m3);
+        // 3 Orbiting Satellites
+        for (let i = 0; i < 3; i++) {
+          const m = new THREE.Mesh(new THREE.DodecahedronGeometry(0.35), coreMat);
+          const a = (i * Math.PI * 2) / 3;
+          m.position.set(Math.cos(a) * 1.8, 3.0, Math.sin(a) * 1.8);
+          group.add(m);
+        }
 
         group.userData = { coreMesh: core, wpData: wp };
         scene.add(group);
@@ -1388,163 +1477,79 @@
     }
 
     // =========================================================================
-    // 12. DETAILED REAL SPORTS CAR 3D MODEL
+    // 9. REAL SPORTS ROADSTER 3D MODEL
     // =========================================================================
     function buildRealCar() {
       carGroup = new THREE.Group();
 
-      const bodyPaintMat = new THREE.MeshStandardMaterial({
-        color: 0x2563eb, // Sporty Alpine Blue
-        roughness: 0.22,
-        metalness: 0.78
-      });
-      const carbonTrimMat = new THREE.MeshStandardMaterial({
-        color: 0x0f172a,
-        roughness: 0.55,
-        metalness: 0.25
-      });
-      const glassMat = new THREE.MeshPhysicalMaterial({
-        color: 0x1e293b,
-        roughness: 0.1,
-        transparent: true,
-        opacity: 0.75,
-        transmission: 0.5
-      });
-      const chromeMat = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        roughness: 0.1,
-        metalness: 0.95
-      });
-      const tireRubberMat = new THREE.MeshStandardMaterial({
-        color: 0x1e2229,
-        roughness: 0.85,
-        metalness: 0.1
-      });
-      const brakeCaliperMat = new THREE.MeshStandardMaterial({
-        color: 0xdc2626,
-        roughness: 0.3,
-        metalness: 0.4
-      });
-      const headlightGlowMat = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        emissive: 0x93c5fd,
-        emissiveIntensity: 0.9,
-        roughness: 0.1
-      });
-      taillightMesh = new THREE.Mesh(
-        new THREE.BoxGeometry(1.9, 0.12, 0.15),
-        new THREE.MeshStandardMaterial({
-          color: 0xef4444,
-          emissive: 0xdc2626,
-          emissiveIntensity: 0.6,
-          roughness: 0.2
-        })
-      );
+      const bodyPaintMat = new THREE.MeshStandardMaterial({ color: 0x2563eb, roughness: 0.22, metalness: 0.78 });
+      const carbonTrimMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.55, metalness: 0.25 });
+      const glassMat = new THREE.MeshPhysicalMaterial({ color: 0x1e293b, roughness: 0.1, transparent: true, opacity: 0.75, transmission: 0.5 });
+      const chromeMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.1, metalness: 0.95 });
+      const tireRubberMat = new THREE.MeshStandardMaterial({ color: 0x1e2229, roughness: 0.85, metalness: 0.1 });
+      const brakeCaliperMat = new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.3, metalness: 0.4 });
+      const headlightGlowMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0x93c5fd, emissiveIntensity: 0.9 });
 
-      // --- Lower Body & Aerodynamics ---
+      taillightMesh = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.12, 0.15), new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0xdc2626, emissiveIntensity: 0.6 }));
+
+      // Chassis & Body
       const lowerBody = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.45, 4.4), bodyPaintMat);
-      lowerBody.position.y = 0.6;
-      lowerBody.castShadow = true;
-      carGroup.add(lowerBody);
+      lowerBody.position.y = 0.6; lowerBody.castShadow = true; carGroup.add(lowerBody);
 
-      // Front Sloping Hood
-      const hoodGeo = new THREE.BoxGeometry(1.9, 0.3, 1.8);
-      const hood = new THREE.Mesh(hoodGeo, bodyPaintMat);
-      hood.position.set(0, 0.85, -1.0);
-      hood.rotation.x = 0.08;
-      hood.castShadow = true;
-      carGroup.add(hood);
+      // Hood
+      const hood = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.3, 1.8), bodyPaintMat);
+      hood.position.set(0, 0.85, -1.0); hood.rotation.x = 0.08; hood.castShadow = true; carGroup.add(hood);
 
-      // Front Carbon Splitter
+      // Splitter
       const splitter = new THREE.Mesh(new THREE.BoxGeometry(2.08, 0.08, 0.6), carbonTrimMat);
-      splitter.position.set(0, 0.4, -2.15);
-      carGroup.add(splitter);
+      splitter.position.set(0, 0.4, -2.15); carGroup.add(splitter);
 
-      // Rear Trunk
+      // Trunk & Spoiler Wing
       const trunk = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.35, 1.1), bodyPaintMat);
-      trunk.position.set(0, 0.85, 1.4);
-      trunk.castShadow = true;
-      carGroup.add(trunk);
+      trunk.position.set(0, 0.85, 1.4); trunk.castShadow = true; carGroup.add(trunk);
 
-      // Rear Spoiler Wing
       const spoilerWing = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.08, 0.4), carbonTrimMat);
-      spoilerWing.position.set(0, 1.25, 2.05);
-      carGroup.add(spoilerWing);
-      const strutL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat);
-      strutL.position.set(-0.6, 1.1, 2.05); carGroup.add(strutL);
-      const strutR = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat);
-      strutR.position.set(0.6, 1.1, 2.05); carGroup.add(strutR);
+      spoilerWing.position.set(0, 1.25, 2.05); carGroup.add(spoilerWing);
+      const strutL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat); strutL.position.set(-0.6, 1.1, 2.05); carGroup.add(strutL);
+      const strutR = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat); strutR.position.set(0.6, 1.1, 2.05); carGroup.add(strutR);
 
-      // --- Cabin & Glass ---
-      const cabinGeo = new THREE.BoxGeometry(1.65, 0.5, 1.9);
-      const cabin = new THREE.Mesh(cabinGeo, bodyPaintMat);
-      cabin.position.set(0, 1.18, 0.15);
-      carGroup.add(cabin);
+      // Cabin & Windows
+      const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.65, 0.5, 1.9), bodyPaintMat);
+      cabin.position.set(0, 1.18, 0.15); carGroup.add(cabin);
 
-      // Front Windshield
       const frontGlass = new THREE.Mesh(new THREE.BoxGeometry(1.58, 0.48, 0.8), glassMat);
-      frontGlass.position.set(0, 1.18, -0.6);
-      frontGlass.rotation.x = -0.55;
-      carGroup.add(frontGlass);
+      frontGlass.position.set(0, 1.18, -0.6); frontGlass.rotation.x = -0.55; carGroup.add(frontGlass);
 
-      // Rear Windshield
       const rearGlass = new THREE.Mesh(new THREE.BoxGeometry(1.58, 0.45, 0.75), glassMat);
-      rearGlass.position.set(0, 1.18, 0.85);
-      rearGlass.rotation.x = 0.52;
-      carGroup.add(rearGlass);
+      rearGlass.position.set(0, 1.18, 0.85); rearGlass.rotation.x = 0.52; carGroup.add(rearGlass);
 
-      // Side Windows
-      const sideGlassL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.35, 1.1), glassMat);
-      sideGlassL.position.set(-0.83, 1.18, 0.15); carGroup.add(sideGlassL);
-      const sideGlassR = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.35, 1.1), glassMat);
-      sideGlassR.position.set(0.83, 1.18, 0.15); carGroup.add(sideGlassR);
-
-      // Side Mirrors
-      const mirrorL = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.15, 0.18), carbonTrimMat);
-      mirrorL.position.set(-0.95, 1.1, -0.4); carGroup.add(mirrorL);
-      const mirrorR = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.15, 0.18), carbonTrimMat);
-      mirrorR.position.set(0.95, 1.1, -0.4); carGroup.add(mirrorR);
-
-      // Headlights & Taillights
+      // Headlights & Spotlights
       const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.12, 0.15), headlightGlowMat);
       hlL.position.set(-0.65, 0.72, -2.18); carGroup.add(hlL);
       const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.12, 0.15), headlightGlowMat);
       hlR.position.set(0.65, 0.72, -2.18); carGroup.add(hlR);
 
-      const beamL = new THREE.SpotLight(0xffffff, 2.5, 30, Math.PI / 7, 0.4);
-      beamL.position.set(-0.65, 0.75, -2.2); beamL.target.position.set(-0.65, 0, -18); carGroup.add(beamL); carGroup.add(beamL.target);
-      const beamR = new THREE.SpotLight(0xffffff, 2.5, 30, Math.PI / 7, 0.4);
-      beamR.position.set(0.65, 0.75, -2.2); beamR.target.position.set(0.65, 0, -18); carGroup.add(beamR); carGroup.add(beamR.target);
+      const beamL = new THREE.SpotLight(0xffffff, 2.5, 35, Math.PI / 7, 0.4);
+      beamL.position.set(-0.65, 0.75, -2.2); beamL.target.position.set(-0.65, 0, -20); carGroup.add(beamL); carGroup.add(beamL.target);
+      const beamR = new THREE.SpotLight(0xffffff, 2.5, 35, Math.PI / 7, 0.4);
+      beamR.position.set(0.65, 0.75, -2.2); beamR.target.position.set(0.65, 0, -20); carGroup.add(beamR); carGroup.add(beamR.target);
 
-      taillightMesh.position.set(0, 0.8, 2.18);
-      carGroup.add(taillightMesh);
+      taillightMesh.position.set(0, 0.8, 2.18); carGroup.add(taillightMesh);
 
-      // --- Wheels with Rims, Spokes & Red Calipers ---
+      // Wheels & Pivots
       function makeWheel() {
-        const wheelGroup = new THREE.Group();
-        const tireGeo = new THREE.CylinderGeometry(0.45, 0.45, 0.35, 20);
-        tireGeo.rotateZ(Math.PI / 2);
-        const tire = new THREE.Mesh(tireGeo, tireRubberMat);
-        tire.castShadow = true;
-        wheelGroup.add(tire);
-
-        const rimGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.36, 16);
-        rimGeo.rotateZ(Math.PI / 2);
-        const rim = new THREE.Mesh(rimGeo, chromeMat);
-        wheelGroup.add(rim);
-
+        const wg = new THREE.Group();
+        const tire = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.35, 20).rotateZ(Math.PI / 2), tireRubberMat);
+        tire.castShadow = true; wg.add(tire);
+        const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.32, 0.36, 16).rotateZ(Math.PI / 2), chromeMat);
+        wg.add(rim);
         for (let i = 0; i < 5; i++) {
-          const spokeGeo = new THREE.BoxGeometry(0.06, 0.6, 0.37);
-          const spoke = new THREE.Mesh(spokeGeo, chromeMat);
-          spoke.rotation.x = (i * Math.PI) / 2.5;
-          wheelGroup.add(spoke);
+          const spoke = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.6, 0.37), chromeMat);
+          spoke.rotation.x = (i * Math.PI) / 2.5; wg.add(spoke);
         }
-
         const caliper = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.25, 0.3), brakeCaliperMat);
-        caliper.position.set(0, 0.15, 0);
-        wheelGroup.add(caliper);
-
-        return wheelGroup;
+        caliper.position.set(0, 0.15, 0); wg.add(caliper);
+        return wg;
       }
 
       frontLeftPivot = new THREE.Group(); frontLeftPivot.position.set(-1.12, 0.45, -1.35);
@@ -1553,11 +1558,11 @@
       frontRightPivot = new THREE.Group(); frontRightPivot.position.set(1.12, 0.45, -1.35);
       const wFR = makeWheel(); frontRightPivot.add(wFR); carGroup.add(frontRightPivot);
 
-      const rearLeftPivot = new THREE.Group(); rearLeftPivot.position.set(-1.12, 0.45, 1.35);
-      const wRL = makeWheel(); rearLeftPivot.add(wRL); carGroup.add(rearLeftPivot);
+      const rL = new THREE.Group(); rL.position.set(-1.12, 0.45, 1.35);
+      const wRL = makeWheel(); rL.add(wRL); carGroup.add(rL);
 
-      const rearRightPivot = new THREE.Group(); rearRightPivot.position.set(1.12, 0.45, 1.35);
-      const wRR = makeWheel(); rearRightPivot.add(wRR); carGroup.add(rearRightPivot);
+      const rR = new THREE.Group(); rR.position.set(1.12, 0.45, 1.35);
+      const wRR = makeWheel(); rR.add(wRR); carGroup.add(rR);
 
       allWheels = [wFL, wFR, wRL, wRR];
 
@@ -1565,73 +1570,75 @@
       scene.add(carGroup);
     }
 
+    // Dynamic Open World Radar Setup
     function setupRadarMarkers() {
       const radar = document.getElementById('radar-container');
       waypoints.forEach(wp => {
         const blip = document.createElement('div');
-        blip.className = "w-2.5 h-2.5 rounded-full absolute -translate-x-1/2 -translate-y-1/2 shadow-sm border border-white/50";
+        blip.className = "w-2.5 h-2.5 rounded-full absolute -translate-x-1/2 -translate-y-1/2 shadow-sm border border-white/60";
+        blip.id = "blip-" + wp.docId;
         blip.style.backgroundColor = '#' + wp.color.toString(16).padStart(6, '0');
-        const rx = ((wp.x + 55) / 110) * 144;
-        const rz = ((wp.z + 55) / 110) * 144;
-        blip.style.left = rx + 'px';
-        blip.style.top = rz + 'px';
         radar.appendChild(blip);
       });
     }
 
     function updateRadar() {
       const playerBlip = document.getElementById('radar-player');
-      const rx = ((carState.x + 55) / 110) * 144;
-      const rz = ((carState.z + 55) / 110) * 144;
-      playerBlip.style.left = Math.max(4, Math.min(140, rx)) + 'px';
-      playerBlip.style.top = Math.max(4, Math.min(140, rz)) + 'px';
+      // Scale (-260, 260) to 176px radar container
+      const rx = ((carState.x + 260) / 520) * 176;
+      const rz = ((carState.z + 260) / 520) * 176;
+      playerBlip.style.left = Math.max(4, Math.min(172, rx)) + 'px';
+      playerBlip.style.top = Math.max(4, Math.min(172, rz)) + 'px';
       playerBlip.style.transform = `translate(-50%, -50%) rotate(${carState.angle}rad)`;
       document.getElementById('radar-coords').innerText = `X:${Math.round(carState.x)} Z:${Math.round(carState.z)}`;
+
+      // Update Waypoints blips
+      waypoints.forEach(wp => {
+        const blip = document.getElementById("blip-" + wp.docId);
+        if (blip) {
+          const bx = ((wp.x + 260) / 520) * 176;
+          const bz = ((wp.z + 260) / 520) * 176;
+          blip.style.left = Math.max(4, Math.min(172, bx)) + 'px';
+          blip.style.top = Math.max(4, Math.min(172, bz)) + 'px';
+        }
+      });
     }
 
     function update3DWorldTheme(theme) {
       if (!scene || !dirSunLight || !ambientLight) return;
       if (theme === 'dark') {
         scene.background = new THREE.Color(0x090c15);
-        scene.fog = new THREE.FogExp2(0x090c15, 0.015);
-        ambientLight.color.setHex(0xffffff);
-        ambientLight.intensity = 0.4;
-        dirSunLight.color.setHex(0x60a5fa);
-        dirSunLight.intensity = 0.8;
+        scene.fog = new THREE.FogExp2(0x090c15, 0.007);
+        ambientLight.color.setHex(0xffffff); ambientLight.intensity = 0.45;
+        dirSunLight.color.setHex(0x60a5fa); dirSunLight.intensity = 0.85;
         if (terrainMesh) terrainMesh.material.color.setHex(0x0f1523);
       } else {
         scene.background = new THREE.Color(0xdbeafe);
-        scene.fog = new THREE.FogExp2(0xdbeafe, 0.011);
-        ambientLight.color.setHex(0xffffff);
-        ambientLight.intensity = 0.85;
-        dirSunLight.color.setHex(0xfffbeb);
-        dirSunLight.intensity = 1.35;
+        scene.fog = new THREE.FogExp2(0xdbeafe, 0.005);
+        ambientLight.color.setHex(0xffffff); ambientLight.intensity = 0.9;
+        dirSunLight.color.setHex(0xfffbeb); dirSunLight.intensity = 1.35;
         if (terrainMesh) terrainMesh.material.color.setHex(0x86efac);
       }
     }
 
-    function teleportTo(docId) {
-      const wp = waypoints.find(w => w.docId === docId);
-      if (!wp) return;
-      carState.x = wp.x;
-      carState.z = wp.z + 7;
+    function teleportToDistrict(distName) {
+      const target = waypoints.find(w => w.district === distName);
+      if (!target) return;
+      carState.x = target.x;
+      carState.z = target.z + 8;
       carState.speed = 0;
       carState.angle = 0;
-      playTone(520, 'sine', 0.2);
+      playTone(540, 'sine', 0.2);
     }
 
     // =========================================================================
-    // 13. BULLETPROOF KEYBOARD & CAMERA DRAG/ZOOM CONTROLS
+    // 10. CONTROLS, CAMERA DRAG & ZOOM
     // =========================================================================
     window.addEventListener('keydown', e => {
-      // Ignore if user is currently searching in an input box
-      if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
-        return;
-      }
+      if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
       const k = e.key.toLowerCase();
       const c = e.code ? e.code.toLowerCase() : '';
 
-      // Prevent page scrolling on navigation keys
       if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', 'w', 'a', 's', 'd', ' '].includes(k) ||
           ['keyw', 'keys', 'keya', 'keyd', 'space'].includes(c)) {
         e.preventDefault();
@@ -1641,18 +1648,14 @@
       if (c) activeKeys[c] = true;
       initAudio();
 
-      // Cycle camera view with [C]
       if (k === 'c') {
         const modes = ['chase', 'hood', 'drone', 'orbit'];
         const nextIdx = (modes.indexOf(cameraMode) + 1) % modes.length;
         setCameraMode(modes[nextIdx]);
       }
 
-      // Interact with nearby chest with [E] or [Space]
       if (k === 'e' || k === ' ' || c === 'keye' || c === 'space') {
-        if (currentNearbyWaypoint) {
-          openKnowledgeModal(currentNearbyWaypoint.docId);
-        }
+        if (currentNearbyWaypoint) openKnowledgeModal(currentNearbyWaypoint.docId);
       }
     });
 
@@ -1663,7 +1666,6 @@
       if (c) activeKeys[c] = false;
     });
 
-    // Touch D-Pad bindings
     const bindTouchControl = (btnId, keyName) => {
       const el = document.getElementById(btnId);
       if (!el) return;
@@ -1676,15 +1678,12 @@
     bindTouchControl('ctrl-left', 'a');
     bindTouchControl('ctrl-right', 'd');
 
-    // Camera Drag & Scroll Zoom Event Listeners
     function setupCameraInteractions(canvas) {
-      let isDragging = false;
-      let prevX = 0, prevY = 0;
+      let isDragging = false, prevX = 0, prevY = 0;
 
       canvas.addEventListener('mousedown', e => {
         isDragging = true;
-        prevX = e.clientX;
-        prevY = e.clientY;
+        prevX = e.clientX; prevY = e.clientY;
         canvas.style.cursor = 'grabbing';
       });
 
@@ -1692,8 +1691,7 @@
         if (!isDragging) return;
         const dx = e.clientX - prevX;
         const dy = e.clientY - prevY;
-        prevX = e.clientX;
-        prevY = e.clientY;
+        prevX = e.clientX; prevY = e.clientY;
 
         orbitYaw -= dx * 0.007;
         orbitPitch = Math.max(0.06, Math.min(1.35, orbitPitch + dy * 0.007));
@@ -1704,18 +1702,15 @@
         if (canvas) canvas.style.cursor = 'grab';
       });
 
-      // Zoom via Mouse Wheel
       canvas.addEventListener('wheel', e => {
         e.preventDefault();
-        orbitDistance = Math.max(5, Math.min(38, orbitDistance + e.deltaY * 0.02));
+        orbitDistance = Math.max(5, Math.min(42, orbitDistance + e.deltaY * 0.02));
       }, { passive: false });
 
-      // Mobile Touch Drag for Orbit
       canvas.addEventListener('touchstart', e => {
         if (e.touches.length === 1) {
           isDragging = true;
-          prevX = e.touches[0].clientX;
-          prevY = e.touches[0].clientY;
+          prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
         }
       }, { passive: true });
 
@@ -1723,32 +1718,27 @@
         if (!isDragging || e.touches.length !== 1) return;
         const dx = e.touches[0].clientX - prevX;
         const dy = e.touches[0].clientY - prevY;
-        prevX = e.touches[0].clientX;
-        prevY = e.touches[0].clientY;
+        prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
 
         orbitYaw -= dx * 0.007;
         orbitPitch = Math.max(0.06, Math.min(1.35, orbitPitch + dy * 0.007));
       }, { passive: true });
 
-      canvas.addEventListener('touchend', () => {
-        isDragging = false;
-      });
+      canvas.addEventListener('touchend', () => { isDragging = false; });
     }
 
     // =========================================================================
-    // 14. REAL CAR GAME LOOP & DYNAMIC CAMERA
+    // 11. OPEN WORLD GAME LOOP WITH SPEED BOOST PADS
     // =========================================================================
     function animateGameLoop() {
       requestAnimationFrame(animateGameLoop);
       if (currentActiveView !== 'game') return;
 
-      // WASD / Arrow Key States
       const isForward = activeKeys['arrowup'] || activeKeys['w'] || activeKeys['keyw'];
       const isBackward = activeKeys['arrowdown'] || activeKeys['s'] || activeKeys['keys'];
       const isLeft = activeKeys['arrowleft'] || activeKeys['a'] || activeKeys['keya'];
       const isRight = activeKeys['arrowright'] || activeKeys['d'] || activeKeys['keyd'];
 
-      // Acceleration & Braking
       if (isForward) {
         carState.speed = Math.min(carState.speed + carState.accel, carState.maxSpeed);
         if (Math.random() < 0.12) playTone(140, 'triangle', 0.04);
@@ -1758,12 +1748,17 @@
         carState.speed *= carState.friction;
       }
 
-      // Taillight brake light brightening
-      if (taillightMesh) {
-        taillightMesh.material.emissiveIntensity = isBackward ? 1.5 : 0.6;
-      }
+      // Check Turbo Boost Pads Collision
+      boostPads.forEach(pad => {
+        const d = Math.hypot(carState.x - pad.position.x, carState.z - pad.position.z);
+        if (d < 3.2 && carState.speed > 0.1) {
+          carState.speed = 1.7; // Instant turbo speed surge!
+          playTone(880, 'sawtooth', 0.25);
+        }
+      });
 
-      // Steering with Visual Wheel Turn Angle
+      if (taillightMesh) taillightMesh.material.emissiveIntensity = isBackward ? 1.5 : 0.6;
+
       let targetSteer = 0;
       if (isLeft) targetSteer = 0.38;
       if (isRight) targetSteer = -0.38;
@@ -1778,64 +1773,58 @@
         carState.angle += carState.steeringAngle * carState.turnSpeed * (carState.speed / carState.maxSpeed);
       }
 
-      // Rotate Wheel Meshes proportionally to speed
       allWheels.forEach(w => {
         w.rotation.x -= carState.speed * 1.6;
       });
 
-      // Update position
       carState.x -= Math.sin(carState.angle) * carState.speed;
       carState.z -= Math.cos(carState.angle) * carState.speed;
 
-      // World boundary clamping
-      carState.x = Math.max(-52, Math.min(52, carState.x));
-      carState.z = Math.max(-52, Math.min(52, carState.z));
+      // Expansive Open World Clamping (-260 to +260)
+      carState.x = Math.max(-260, Math.min(260, carState.x));
+      carState.z = Math.max(-260, Math.min(260, carState.z));
 
-      // Car Group Transform
       carGroup.position.set(carState.x, 0, carState.z);
       carGroup.rotation.y = carState.angle;
 
-      // --- DYNAMIC CAMERA MODES ---
+      // Update Current District in HUD
+      let currentDistName = "DOWNTOWN METROPOLIS";
+      if (carState.z > 40) currentDistName = "FRONTIER SUMMIT & MOUNTAINS";
+      else if (carState.x > 50) currentDistName = "RESEARCH NATURE PARK";
+      else if (carState.x < -50) currentDistName = "SWE INDUSTRIAL SHIPYARD";
+      document.getElementById('hud-district').innerText = `OPEN WORLD: ${currentDistName}`;
+
+      // Dynamic Camera
       if (cameraMode === 'hood') {
-        // First-Person / Cockpit Hood View
-        const hoodCamX = carGroup.position.x - Math.sin(carState.angle) * 0.4;
-        const hoodCamY = carGroup.position.y + 1.35;
-        const hoodCamZ = carGroup.position.z - Math.cos(carState.angle) * 0.4;
-        camera.position.set(hoodCamX, hoodCamY, hoodCamZ);
-        camera.lookAt(
-          carGroup.position.x - Math.sin(carState.angle) * 25,
-          carGroup.position.y + 1.1,
-          carGroup.position.z - Math.cos(carState.angle) * 25
-        );
+        const hx = carGroup.position.x - Math.sin(carState.angle) * 0.4;
+        const hy = carGroup.position.y + 1.35;
+        const hz = carGroup.position.z - Math.cos(carState.angle) * 0.4;
+        camera.position.set(hx, hy, hz);
+        camera.lookAt(carGroup.position.x - Math.sin(carState.angle) * 25, carGroup.position.y + 1.1, carGroup.position.z - Math.cos(carState.angle) * 25);
       } else if (cameraMode === 'drone') {
-        // Overhead Tactical Drone View
-        const droneX = carGroup.position.x;
-        const droneY = carGroup.position.y + 36;
-        const droneZ = carGroup.position.z + 0.1;
-        camera.position.x += (droneX - camera.position.x) * 0.12;
-        camera.position.y += (droneY - camera.position.y) * 0.12;
-        camera.position.z += (droneZ - camera.position.z) * 0.12;
+        camera.position.x += (carGroup.position.x - camera.position.x) * 0.12;
+        camera.position.y += (carGroup.position.y + 38 - camera.position.y) * 0.12;
+        camera.position.z += (carGroup.position.z + 0.1 - camera.position.z) * 0.12;
         camera.lookAt(carGroup.position.x, 0, carGroup.position.z);
       } else if (cameraMode === 'orbit') {
-        // Free 360 Orbit Camera
         const horizDist = orbitDistance * Math.cos(orbitPitch);
-        const tX = carGroup.position.x + Math.sin(orbitYaw) * horizDist;
-        const tY = carGroup.position.y + 1.2 + Math.sin(orbitPitch) * orbitDistance;
-        const tZ = carGroup.position.z + Math.cos(orbitYaw) * horizDist;
-        camera.position.x += (tX - camera.position.x) * 0.14;
-        camera.position.y += (tY - camera.position.y) * 0.14;
-        camera.position.z += (tZ - camera.position.z) * 0.14;
+        const tx = carGroup.position.x + Math.sin(orbitYaw) * horizDist;
+        const ty = carGroup.position.y + 1.2 + Math.sin(orbitPitch) * orbitDistance;
+        const tz = carGroup.position.z + Math.cos(orbitYaw) * horizDist;
+        camera.position.x += (tx - camera.position.x) * 0.14;
+        camera.position.y += (ty - camera.position.y) * 0.14;
+        camera.position.z += (tz - camera.position.z) * 0.14;
         camera.lookAt(carGroup.position.x, carGroup.position.y + 1.0, carGroup.position.z);
       } else {
-        // Default Dynamic Chase View with Orbit Offset Support
+        // Chase Mode
         const totalAngle = carState.angle + orbitYaw;
         const horizDist = orbitDistance * Math.cos(orbitPitch);
-        const tX = carGroup.position.x + Math.sin(totalAngle) * horizDist;
-        const tY = carGroup.position.y + 1.2 + Math.sin(orbitPitch) * orbitDistance;
-        const tZ = carGroup.position.z + Math.cos(totalAngle) * horizDist;
-        camera.position.x += (tX - camera.position.x) * 0.12;
-        camera.position.y += (tY - camera.position.y) * 0.12;
-        camera.position.z += (tZ - camera.position.z) * 0.12;
+        const tx = carGroup.position.x + Math.sin(totalAngle) * horizDist;
+        const ty = carGroup.position.y + 1.2 + Math.sin(orbitPitch) * orbitDistance;
+        const tz = carGroup.position.z + Math.cos(totalAngle) * horizDist;
+        camera.position.x += (tx - camera.position.x) * 0.12;
+        camera.position.y += (ty - camera.position.y) * 0.12;
+        camera.position.z += (tz - camera.position.z) * 0.12;
         camera.lookAt(carGroup.position.x, carGroup.position.y + 1.0, carGroup.position.z);
       }
 
@@ -1843,19 +1832,16 @@
       const kmh = Math.round(Math.abs(carState.speed) * 85);
       document.getElementById('hud-speed').innerText = `${kmh} km/h`;
 
-      // Animate Waypoint Floating Crystals & Proximity
+      // Animate 28 Landmarks & Proximity Check
       let foundNearby = null;
       waypointMeshes.forEach(mesh => {
         mesh.userData.coreMesh.rotation.y += 0.02;
         mesh.userData.coreMesh.rotation.x += 0.01;
 
         const dist = Math.hypot(carState.x - mesh.position.x, carState.z - mesh.position.z);
-        if (dist < 6.8) {
-          foundNearby = mesh.userData.wpData;
-        }
+        if (dist < 7.2) foundNearby = mesh.userData.wpData;
       });
 
-      // Update Proximity HUD
       const banner = document.getElementById('proximity-banner');
       if (foundNearby) {
         currentNearbyWaypoint = foundNearby;
@@ -1865,7 +1851,8 @@
         if (!foundNearby.discovered) {
           foundNearby.discovered = true;
           discoveredTotal++;
-          document.getElementById('discovered-counter').innerText = `${discoveredTotal} / ${waypoints.length} Visited`;
+          const pct = Math.round((discoveredTotal / waypoints.length) * 100);
+          document.getElementById('discovered-counter').innerText = `${discoveredTotal} / ${waypoints.length} Discovered (${pct}%)`;
           playTone(440, 'sine', 0.2);
         }
       } else {
@@ -1873,25 +1860,19 @@
         banner.classList.add('opacity-0', 'translate-y-6', 'pointer-events-none');
       }
 
-      // Update Radar
       updateRadar();
-
       renderer.render(scene, camera);
     }
 
     window.addEventListener('resize', () => {
       const wrapper = document.getElementById('canvas-3d-wrapper');
       if (!wrapper || !camera || !renderer) return;
-      const w = wrapper.clientWidth;
-      const h = wrapper.clientHeight;
+      const w = wrapper.clientWidth, h = wrapper.clientHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     });
 
-    // =========================================================================
-    // 15. BOOTSTRAP ON LOAD
-    // =========================================================================
     window.addEventListener('DOMContentLoaded', () => {
       applyTheme(currentTheme);
       init3DWorld();
