@@ -154,6 +154,10 @@
       <canvas id="game-canvas" class="w-full h-full block cursor-grab active:cursor-grabbing"></canvas>
     </div>
 
+    <!-- Red Collision Flash & Impact Feedback -->
+    <div id="collision-flash" class="absolute inset-0 border-4 border-red-500/80 pointer-events-none opacity-0 transition-opacity duration-150 z-30"></div>
+    <div id="collision-toast" class="absolute bottom-24 left-1/2 -translate-x-1/2 bg-red-600/90 text-white font-mono text-xs px-4 py-1.5 rounded-full shadow-2xl opacity-0 pointer-events-none transition-all duration-200 z-30 transform scale-90">💥 IMPACT! OBSTACLE HIT</div>
+
     <!-- World Arrival Announcement Toast -->
     <div id="world-toast" class="absolute top-5 left-1/2 -translate-x-1/2 bg-slate-900/95 text-white px-5 py-2 rounded-full border border-blue-500/50 backdrop-blur-md shadow-2xl flex items-center gap-3 font-mono text-xs opacity-0 pointer-events-none transition-all duration-300 z-40 transform scale-90">
       <span class="text-base" id="toast-icon">🏝️</span>
@@ -1262,6 +1266,8 @@
     let taillightMesh;
     const waypointMeshes = [];
     const boostPads = [];
+    const worldObstacles = [];
+    let cameraShake = 0;
 
     // Real Roadster Physics
     const carState = {
@@ -1302,6 +1308,108 @@
 
     const activeKeys = {};
 
+    // Crash Sparks & Hindrance Feedback
+    const sparkParticles = [];
+    function initSparkPool() {
+      const sparkMat = new THREE.MeshBasicMaterial({ color: 0xffaa00 });
+      for (let i = 0; i < 24; i++) {
+        const spark = new THREE.Mesh(new THREE.SphereGeometry(0.16, 4, 4), sparkMat);
+        spark.visible = false;
+        scene.add(spark);
+        sparkParticles.push({ mesh: spark, vx: 0, vy: 0, vz: 0, life: 0 });
+      }
+    }
+
+    function createCrashSparks(x, z) {
+      for (let i = 0; i < 10; i++) {
+        const p = sparkParticles.find(sp => sp.life <= 0);
+        if (!p) break;
+        p.mesh.position.set(x, 0.5 + Math.random() * 0.5, z);
+        p.mesh.visible = true;
+        p.vx = (Math.random() - 0.5) * 0.7;
+        p.vy = 0.25 + Math.random() * 0.45;
+        p.vz = (Math.random() - 0.5) * 0.7;
+        p.life = 1.0;
+      }
+    }
+
+    function updateCrashSparks() {
+      sparkParticles.forEach(p => {
+        if (p.life > 0) {
+          p.mesh.position.x += p.vx;
+          p.mesh.position.y += p.vy;
+          p.mesh.position.z += p.vz;
+          p.vy -= 0.035;
+          p.life -= 0.065;
+          p.mesh.scale.setScalar(Math.max(0.01, p.life));
+          if (p.life <= 0) p.mesh.visible = false;
+        }
+      });
+    }
+
+    let collisionToastTimer = null;
+    function triggerCollisionFeedback(impact) {
+      const flash = document.getElementById('collision-flash');
+      const toast = document.getElementById('collision-toast');
+      if (flash) {
+        flash.classList.remove('opacity-0');
+        setTimeout(() => flash.classList.add('opacity-0'), 140);
+      }
+      if (toast) {
+        toast.classList.remove('opacity-0', 'scale-90');
+        toast.classList.add('scale-100');
+        if (collisionToastTimer) clearTimeout(collisionToastTimer);
+        collisionToastTimer = setTimeout(() => {
+          toast.classList.add('opacity-0', 'scale-90');
+          toast.classList.remove('scale-100');
+        }, 1100);
+      }
+      playCrashSound();
+    }
+
+    function playCrashSound() {
+      if (!audioCtx) return;
+      playTone(110, 'sawtooth', 0.18);
+      setTimeout(() => playTone(75, 'square', 0.14), 45);
+    }
+
+    // Roadway Zone Checker - keeps highways clear while placing obstacles as roadside & terrain hindrances!
+    function isOnRoad(x, z, margin = 4.0) {
+      // 1. Center roundabout plaza
+      if (Math.hypot(x, z) < 22 + margin) return true;
+
+      // 2. North & South Main Highways (|x| < 4.5, |z| < 222)
+      if (Math.abs(x) < 4.5 + margin && Math.abs(z) < 222) return true;
+
+      // 3. East & West Main Highways (|z| < 4.5, |x| < 222)
+      if (Math.abs(z) < 4.5 + margin && Math.abs(x) < 222) return true;
+
+      // 4. Outer Ring Expressway (radius 208 to 222, center 215)
+      const r = Math.hypot(x, z);
+      if (Math.abs(r - 215) < 7.5 + margin) return true;
+
+      // 5. Diagonal Expressways (line x = z and x = -z for |x| < 135)
+      if (Math.abs(x) < 135 && Math.abs(z) < 135) {
+        const d1 = Math.abs(x - z) * 0.7071;
+        const d2 = Math.abs(x + z) * 0.7071;
+        if (d1 < 4.0 + margin || d2 < 4.0 + margin) return true;
+      }
+
+      // 6. Landmark Pedestal clear zones
+      for (let i = 0; i < waypoints.length; i++) {
+        const wp = waypoints[i];
+        if (Math.hypot(x - wp.x, z - wp.z) < 6.0 + margin) return true;
+      }
+
+      // 7. Stargate portal clear zones
+      const gates = [[0, -215], [215, 0], [0, 215], [-215, 0]];
+      for (let i = 0; i < gates.length; i++) {
+        if (Math.hypot(x - gates[i][0], z - gates[i][1]) < 12.0 + margin) return true;
+      }
+
+      return false;
+    }
+
     function init3DWorld() {
       const container = document.getElementById('canvas-3d-wrapper');
       const canvas = document.getElementById('game-canvas');
@@ -1334,6 +1442,9 @@
       dirSunLight.shadow.camera.bottom = -200;
       scene.add(dirSunLight);
 
+      // Initialize crash particle pool
+      initSparkPool();
+
       // Build Selected World Environment (defaults to 'island')
       rebuildWorldEnvironment(currentWorld);
 
@@ -1356,6 +1467,7 @@
       }
       waypointMeshes.length = 0;
       boostPads.length = 0;
+      worldObstacles.length = 0;
 
       worldEnvironmentGroup = new THREE.Group();
 
@@ -1395,12 +1507,12 @@
         beach.position.y = -0.01;
         worldEnvironmentGroup.add(beach);
 
-        // Palm Trees
-        for (let i = 0; i < 70; i++) {
+        // 80 Palm Trees (Solid Trunk Hindrances!)
+        for (let i = 0; i < 80; i++) {
           const a = Math.random() * Math.PI * 2;
-          const r = 30 + Math.random() * 190;
+          const r = 25 + Math.random() * 205;
           const px = Math.cos(a) * r, pz = Math.sin(a) * r;
-          if (Math.abs(px) < 14 || Math.abs(pz) < 14) continue;
+          if (isOnRoad(px, pz, 3.2)) continue;
 
           const palm = new THREE.Group();
           palm.position.set(px, 0, pz);
@@ -1409,6 +1521,22 @@
           const crown = new THREE.Mesh(new THREE.ConeGeometry(2.8, 1.8, 6), new THREE.MeshLambertMaterial({ color: 0x15803d }));
           crown.position.y = 3.6; palm.add(crown);
           worldEnvironmentGroup.add(palm);
+
+          // Solid trunk hindrance
+          worldObstacles.push({ type: 'circle', x: px, z: pz, radius: 1.25, name: 'Palm Tree' });
+        }
+
+        // 25 Tropical Beach Rocks (Solid Hindrances!)
+        for (let i = 0; i < 25; i++) {
+          const a = Math.random() * Math.PI * 2;
+          const r = 180 + Math.random() * 52;
+          const rx = Math.cos(a) * r, rz = Math.sin(a) * r;
+          if (isOnRoad(rx, rz, 2.5)) continue;
+          const br = 1.8 + Math.random() * 1.5;
+          const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(br, 1), new THREE.MeshLambertMaterial({ color: 0x64748b }));
+          rock.position.set(rx, br * 0.6, rz);
+          worldEnvironmentGroup.add(rock);
+          worldObstacles.push({ type: 'circle', x: rx, z: rz, radius: br, name: 'Beach Rock' });
         }
 
       } else if (worldId === 'city') {
@@ -1420,15 +1548,15 @@
         cityGround.position.y = -0.02; cityGround.receiveShadow = true;
         worldEnvironmentGroup.add(cityGround);
 
-        // 40+ Towering Skyscrapers with Illuminated Windows
+        // 55 Towering Skyscrapers (Solid Box Hindrances!)
         const bldgColors = [0x1e293b, 0x334155, 0x1e1b4b, 0x0f172a];
-        for (let i = 0; i < 48; i++) {
+        for (let i = 0; i < 55; i++) {
           const bx = (Math.random() - 0.5) * 440;
           const bz = (Math.random() - 0.5) * 440;
-          if (Math.abs(bx) < 16 || Math.abs(bz) < 16) continue;
+          const w = 14 + Math.random() * 12;
+          if (isOnRoad(bx, bz, w / 2 + 3.0)) continue;
 
           const h = 30 + Math.random() * 55;
-          const w = 14 + Math.random() * 12;
           const bldg = new THREE.Mesh(new THREE.BoxGeometry(w, h, w), new THREE.MeshLambertMaterial({ color: bldgColors[i % 4] }));
           bldg.position.set(bx, h / 2, bz); bldg.castShadow = true;
           worldEnvironmentGroup.add(bldg);
@@ -1437,6 +1565,30 @@
           const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.2, 8, 6), new THREE.MeshBasicMaterial({ color: 0x38bdf8 }));
           ant.position.set(bx, h + 4, bz);
           worldEnvironmentGroup.add(ant);
+
+          // Solid AABB Box Hindrance
+          worldObstacles.push({
+            type: 'box',
+            minX: bx - w / 2,
+            maxX: bx + w / 2,
+            minZ: bz - w / 2,
+            maxZ: bz + w / 2,
+            name: 'Skyscraper'
+          });
+        }
+
+        // Roadway Neon Traffic Barriers along outer highway
+        for (let i = 0; i < 20; i++) {
+          const angle = (i / 20) * Math.PI * 2;
+          const barX = Math.cos(angle) * 198;
+          const barZ = Math.sin(angle) * 198;
+          if (isOnRoad(barX, barZ, 1.0)) {
+            const bar = new THREE.Mesh(new THREE.BoxGeometry(2.0, 1.2, 0.6), new THREE.MeshLambertMaterial({ color: 0xf59e0b }));
+            bar.position.set(barX, 0.6, barZ);
+            bar.rotation.y = angle + Math.PI / 2;
+            worldEnvironmentGroup.add(bar);
+            worldObstacles.push({ type: 'circle', x: barX, z: barZ, radius: 1.2, name: 'Traffic Barrier' });
+          }
         }
 
       } else if (worldId === 'mars') {
@@ -1448,17 +1600,37 @@
         marsSoil.position.y = -0.02; marsSoil.receiveShadow = true;
         worldEnvironmentGroup.add(marsSoil);
 
-        // Craters & Geodesic Pressurized Biodomes
-        for (let i = 0; i < 16; i++) {
-          const mx = (Math.random() - 0.5) * 380;
-          const mz = (Math.random() - 0.5) * 380;
-          if (Math.abs(mx) < 16 || Math.abs(mz) < 16) continue;
+        // 20 Geodesic Pressurized Biodomes (Solid Sphere Hindrances!)
+        for (let i = 0; i < 20; i++) {
+          const mx = (Math.random() - 0.5) * 400;
+          const mz = (Math.random() - 0.5) * 400;
+          const domeRadius = 9 + Math.random() * 6;
+          // Clear road by domeRadius + 3.5 margin so it doesn't block the highway!
+          if (isOnRoad(mx, mz, domeRadius + 3.5)) continue;
 
-          const domeGeo = new THREE.IcosahedronGeometry(9 + Math.random() * 6, 2);
+          const domeGeo = new THREE.IcosahedronGeometry(domeRadius, 2);
           const domeMat = new THREE.MeshPhysicalMaterial({ color: 0x93c5fd, transparent: true, opacity: 0.65, roughness: 0.1 });
           const dome = new THREE.Mesh(domeGeo, domeMat);
           dome.position.set(mx, 2, mz);
           worldEnvironmentGroup.add(dome);
+
+          // Solid Dome Hindrance!
+          worldObstacles.push({ type: 'circle', x: mx, z: mz, radius: domeRadius, name: 'Martian Biodome' });
+        }
+
+        // 35 Martian Rocky Spires & Boulders (Solid Hindrances!)
+        for (let i = 0; i < 35; i++) {
+          const rx = (Math.random() - 0.5) * 440;
+          const rz = (Math.random() - 0.5) * 440;
+          const br = 2.0 + Math.random() * 2.8;
+          if (isOnRoad(rx, rz, br + 2.0)) continue;
+
+          const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(br, 1), new THREE.MeshLambertMaterial({ color: 0x991b1b }));
+          rock.position.set(rx, br * 0.7, rz);
+          rock.rotation.set(Math.random(), Math.random(), Math.random());
+          worldEnvironmentGroup.add(rock);
+
+          worldObstacles.push({ type: 'circle', x: rx, z: rz, radius: br, name: 'Martian Rock' });
         }
 
       } else {
@@ -1470,11 +1642,11 @@
         alpineGround.position.y = -0.02; alpineGround.receiveShadow = true;
         worldEnvironmentGroup.add(alpineGround);
 
-        // Snow-covered Pine Trees & Mountain Peaks
-        for (let i = 0; i < 65; i++) {
+        // 80 Snow-covered Pine Trees (Solid Trunk Hindrances!)
+        for (let i = 0; i < 80; i++) {
           const ax = (Math.random() - 0.5) * 440;
           const az = (Math.random() - 0.5) * 440;
-          if (Math.abs(ax) < 15 || Math.abs(az) < 15) continue;
+          if (isOnRoad(ax, az, 3.5)) continue;
 
           const pine = new THREE.Group();
           pine.position.set(ax, 0, az);
@@ -1483,6 +1655,22 @@
           const snowCone = new THREE.Mesh(new THREE.ConeGeometry(2.4, 3.6, 7), new THREE.MeshLambertMaterial({ color: 0xe2e8f0 }));
           snowCone.position.y = 3.6; pine.add(snowCone);
           worldEnvironmentGroup.add(pine);
+
+          worldObstacles.push({ type: 'circle', x: ax, z: az, radius: 1.4, name: 'Snow Pine' });
+        }
+
+        // 30 Alpine Mountain Boulders (Solid Hindrances!)
+        for (let i = 0; i < 30; i++) {
+          const bx = (Math.random() - 0.5) * 440;
+          const bz = (Math.random() - 0.5) * 440;
+          const br = 2.2 + Math.random() * 2.2;
+          if (isOnRoad(bx, bz, br + 2.0)) continue;
+
+          const boulder = new THREE.Mesh(new THREE.DodecahedronGeometry(br, 1), new THREE.MeshLambertMaterial({ color: 0x94a3b8 }));
+          boulder.position.set(bx, br * 0.7, bz);
+          worldEnvironmentGroup.add(boulder);
+
+          worldObstacles.push({ type: 'circle', x: bx, z: bz, radius: br, name: 'Alpine Boulder' });
         }
       }
 
@@ -1648,6 +1836,11 @@
           targetWorld: p.target,
           cooldown: false
         });
+
+        // Register Left & Right Base Pillars as solid hindrances
+        const cos = Math.cos(p.rotY), sin = Math.sin(p.rotY);
+        worldObstacles.push({ type: 'circle', x: p.x - cos * 5.5, z: p.z + sin * 5.5, radius: 1.4, name: 'Portal Pillar' });
+        worldObstacles.push({ type: 'circle', x: p.x + cos * 5.5, z: p.z - sin * 5.5, radius: 1.4, name: 'Portal Pillar' });
       });
     }
 
@@ -1678,6 +1871,9 @@
         group.userData = { coreMesh: core, wpData: wp };
         parentGroup.add(group);
         waypointMeshes.push(group);
+
+        // Solid Pedestal Platform Hindrance (Cannot drive straight through!)
+        worldObstacles.push({ type: 'circle', x: wp.x, z: wp.z, radius: 3.4, name: wp.label });
       });
     }
 
@@ -1980,8 +2176,83 @@
       carState.x -= Math.sin(carState.angle) * carState.speed;
       carState.z -= Math.cos(carState.angle) * carState.speed;
 
-      carState.x = Math.max(-260, Math.min(260, carState.x));
-      carState.z = Math.max(-260, Math.min(260, carState.z));
+      carState.x = Math.max(-255, Math.min(255, carState.x));
+      carState.z = Math.max(-255, Math.min(255, carState.z));
+
+      // --- PHYSICAL SOLID OBSTACLE HINDRANCE & BOUNCE RESOLUTION ---
+      const carRadius = 1.35;
+      let hitObstacle = false;
+      let impactSpeed = 0;
+
+      for (let i = 0; i < worldObstacles.length; i++) {
+        const obs = worldObstacles[i];
+        if (obs.type === 'circle') {
+          const dx = carState.x - obs.x;
+          const dz = carState.z - obs.z;
+          const dist = Math.hypot(dx, dz);
+          const minDist = carRadius + obs.radius;
+          if (dist < minDist) {
+            hitObstacle = true;
+            const safeDist = dist < 0.001 ? 0.001 : dist;
+            const overlap = minDist - safeDist;
+            const nx = dx / safeDist;
+            const nz = dz / safeDist;
+
+            // Push car out so it physically cannot penetrate or ghost through the obstacle
+            carState.x += nx * overlap;
+            carState.z += nz * overlap;
+
+            impactSpeed = Math.max(impactSpeed, Math.abs(carState.speed));
+            // Elastic bounce recoil (acts as true physical hindrance)
+            carState.speed = -carState.speed * 0.45;
+
+            createCrashSparks(carState.x - nx * carRadius, carState.z - nz * carRadius);
+          }
+        } else if (obs.type === 'box') {
+          const closestX = Math.max(obs.minX, Math.min(carState.x, obs.maxX));
+          const closestZ = Math.max(obs.minZ, Math.min(carState.z, obs.maxZ));
+          const dx = carState.x - closestX;
+          const dz = carState.z - closestZ;
+          const distSq = dx * dx + dz * dz;
+
+          if (distSq < carRadius * carRadius) {
+            hitObstacle = true;
+            const dist = Math.sqrt(distSq) || 0.001;
+            const overlap = carRadius - dist;
+            const nx = dx / dist;
+            const nz = dz / dist;
+
+            carState.x += nx * overlap;
+            carState.z += nz * overlap;
+
+            impactSpeed = Math.max(impactSpeed, Math.abs(carState.speed));
+            carState.speed = -carState.speed * 0.45;
+
+            createCrashSparks(closestX, closestZ);
+          }
+        }
+      }
+
+      // Island ocean boundary hindrance
+      if (currentWorld === 'island') {
+        const islandDist = Math.hypot(carState.x, carState.z);
+        if (islandDist > 238) {
+          const overlap = islandDist - 238;
+          const nx = carState.x / islandDist;
+          const nz = carState.z / islandDist;
+          carState.x -= nx * overlap;
+          carState.z -= nz * overlap;
+          impactSpeed = Math.max(impactSpeed, Math.abs(carState.speed));
+          carState.speed = -carState.speed * 0.35;
+          hitObstacle = true;
+          createCrashSparks(carState.x, carState.z);
+        }
+      }
+
+      if (hitObstacle && impactSpeed > 0.06) {
+        cameraShake = Math.min(1.4, impactSpeed * 1.5);
+        triggerCollisionFeedback(impactSpeed);
+      }
 
       carGroup.position.set(carState.x, 0, carState.z);
       carGroup.rotation.y = carState.angle;
@@ -2018,6 +2289,17 @@
         camera.position.z += (tz - camera.position.z) * 0.12;
         camera.lookAt(carGroup.position.x, carGroup.position.y + 1.0, carGroup.position.z);
       }
+
+      // Apply Camera Shake on Obstacle Collision
+      if (cameraShake > 0.01) {
+        camera.position.x += (Math.random() - 0.5) * cameraShake;
+        camera.position.y += (Math.random() - 0.5) * cameraShake;
+        camera.position.z += (Math.random() - 0.5) * cameraShake;
+        cameraShake *= 0.82;
+      }
+
+      // Update crash spark physics
+      updateCrashSparks();
 
       // Speedometer update
       const kmh = Math.round(Math.abs(carState.speed) * 85);
