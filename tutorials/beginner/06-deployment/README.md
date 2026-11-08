@@ -4,7 +4,7 @@
 **Prerequisites**: [Tutorial 5: Prompt Engineering for Agents](../05-prompt-engineering/)  
 **Goal**: Learn how to deploy your agent for real-world use
 
-## ðŸŽ¯ Learning Objectives
+## 🎯 Learning Objectives
 
 After completing this tutorial, you will:
 - Package your agent application properly
@@ -16,26 +16,26 @@ After completing this tutorial, you will:
 
 ---
 
-## ðŸ“¦ Application Packaging
+## 📦 Application Packaging
 
 ### Project Structure
 ```
 my-agent-app/
-â”œâ”€â”€ app/
-â”‚   â”œâ”€â”€ __init__.py
-â”‚   â”œâ”€â”€ agent.py
-â”‚   â”œâ”€â”€ tools.py
-â”‚   â””â”€â”€ config.py
-â”œâ”€â”€ tests/
-â”‚   â”œâ”€â”€ test_agent.py
-â”‚   â””â”€â”€ test_tools.py
-â”œâ”€â”€ deployment/
-â”‚   â”œâ”€â”€ Dockerfile
-â”‚   â”œâ”€â”€ docker-compose.yml
-â”‚   â””â”€â”€ requirements.txt
-â”œâ”€â”€ .env.example
-â”œâ”€â”€ README.md
-â””â”€â”€ setup.py
+├── app/
+│   ├── __init__.py
+│   ├── agent.py
+│   ├── tools.py
+│   └── config.py
+├── tests/
+│   ├── test_agent.py
+│   └── test_tools.py
+├── deployment/
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   └── requirements.txt
+├── .env.example
+├── README.md
+└── setup.py
 ```
 
 ### Configuration Management
@@ -65,7 +65,7 @@ class Config:
 
 ---
 
-## ðŸŒ Web Interface with Streamlit
+## 🌐 Web Interface with Streamlit
 
 ### Basic Streamlit App
 ```python
@@ -75,7 +75,7 @@ from app.agent import create_agent
 from app.config import Config
 
 def main():
-    st.title("ðŸ¤– My AI Agent")
+    st.title("🤖 My AI Agent")
     st.sidebar.header("Configuration")
     
     # Initialize agent
@@ -152,7 +152,7 @@ def advanced_interface():
 
 ---
 
-## ðŸ“Š Monitoring and Logging
+## 📊 Monitoring and Logging
 
 ### Logging Setup
 ```python
@@ -237,18 +237,19 @@ class AgentMetrics:
 
 ---
 
-## ðŸ³ Docker Deployment
+## 🐳 Docker Deployment
 
 ### Dockerfile
 ```dockerfile
 # Dockerfile
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install Python dependencies
@@ -305,7 +306,7 @@ volumes:
 
 ---
 
-## â˜ï¸ Cloud Deployment Options
+## ☁️ Cloud Deployment Options
 
 ### Streamlit Cloud
 ```bash
@@ -349,7 +350,7 @@ sudo docker-compose up -d
 
 ---
 
-## ðŸ”’ Security Best Practices
+## 🔒 Security Best Practices
 
 ### Environment Variables
 ```bash
@@ -418,7 +419,7 @@ def rate_limit(max_calls=10, window=60):
 
 ---
 
-## ðŸ§ª Testing Deployment
+## 🧪 Testing Deployment
 
 ### Integration Tests
 ```python
@@ -452,7 +453,7 @@ def test_docker_deployment():
 
 ---
 
-## ðŸ“ˆ Performance Optimization
+## 📈 Performance Optimization
 
 ### Caching Strategies
 ```python
@@ -479,7 +480,7 @@ def get_cached_response(key):
 
 ---
 
-## ðŸŽ¯ Production Checklist
+## 🎯 Production Checklist
 
 ### Before Deployment
 - [ ] Environment variables configured
@@ -505,7 +506,7 @@ def get_cached_response(key):
 
 ---
 
-## ðŸŽ¯ Exercises
+## 🎯 Exercises
 
 1. **Multi-Environment Setup**: Configure staging and production environments
 2. **Advanced Monitoring**: Add custom metrics and alerting
@@ -515,7 +516,7 @@ def get_cached_response(key):
 
 ---
 
-## ðŸ† Completion Certificate
+## 🏆 Completion Certificate
 
 Congratulations! You've completed all 6 beginner tutorials. You now have:
 - Built functional AI agents
@@ -528,7 +529,7 @@ Congratulations! You've completed all 6 beginner tutorials. You now have:
 
 ---
 
-## ðŸ“– Additional Resources
+## 📖 Additional Resources
 
 - [Production Deployment Best Practices](../../../resources/cheat-sheets/deployment-guide.md)
 - [Monitoring and Observability Guide](../../../tools/README.md#monitoring-tools)

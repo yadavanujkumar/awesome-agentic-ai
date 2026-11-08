@@ -2,7 +2,7 @@
 
 Utilities, CLI tools, and integrations to enhance your Agentic AI development workflow.
 
-## ðŸ› ï¸ Development Tools
+## 🛠️ Development Tools
 
 ### 2026 Agent Protocols & Runtime Building Blocks
 - **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)** - Open protocol for connecting LLM applications to external data sources and tools.
@@ -94,7 +94,7 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
 - **[Humanloop](https://humanloop.com/)** - LLM application development platform (2026)
   - [Documentation](https://humanloop.com/docs) | [Examples](https://humanloop.com/examples)
 
-## ðŸ”§ CLI Tools
+## 🔧 CLI Tools
 
 ### Agent Development CLIs
 ```bash
@@ -168,7 +168,7 @@ pip install httpx requests-toolbelt
 pip install postman-cli  # API testing
 ```
 
-## ðŸ”Œ Integrations
+## 🔌 Integrations
 
 ### IDE Extensions
 - **[GitHub Copilot](https://github.com/features/copilot)** - AI pair programmer for VS Code, JetBrains, Neovim
@@ -208,7 +208,7 @@ pip install postman-cli  # API testing
 - **[Qdrant](https://qdrant.tech/)** - Vector similarity search engine
   - [Python Client](https://github.com/qdrant/qdrant-client) | [Documentation](https://qdrant.tech/documentation/)
 
-## ðŸ“Š Monitoring and Analytics
+## 📊 Monitoring and Analytics
 
 ### Agent Performance Monitoring
 - **[LangSmith](https://smith.langchain.com/)** - Comprehensive LLM application monitoring
@@ -244,7 +244,7 @@ pip install postman-cli  # API testing
 - **[DataDog](https://www.datadoghq.com/)** - Infrastructure and application monitoring
   - [LLM Observability](https://docs.datadoghq.com/llm_observability/) | [Python SDK](https://github.com/DataDog/dd-trace-py)
 
-## ðŸš€ Deployment Tools
+## 🚀 Deployment Tools
 
 ### Container Solutions
 - **[Docker](https://www.docker.com/)** - Containerization platform
@@ -295,7 +295,7 @@ pip install postman-cli  # API testing
 - **[Jenkins](https://www.jenkins.io/)** - Automation server
   - [AI/ML Plugins](https://plugins.jenkins.io/machine-learning/) | [Pipeline Examples](https://github.com/jenkinsci/pipeline-examples)
 
-## ðŸ” Security and Compliance
+## 🔐 Security and Compliance
 
 ### Security Tools
 - **[OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)** - Security risks for LLM applications
@@ -339,7 +339,7 @@ pip install postman-cli  # API testing
 - **[Fluentd](https://www.fluentd.org/)** - Data collection and logging
   - [Documentation](https://docs.fluentd.org/) | [AI Monitoring Plugins](https://www.fluentd.org/plugins)
 
-## ðŸ“± Mobile and Web Tools
+## 📱 Mobile and Web Tools
 
 ### Web Interfaces & Demos
 - **[Streamlit](https://streamlit.io/)** - Create web apps for AI agents

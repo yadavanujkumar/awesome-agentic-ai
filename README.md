@@ -1,4 +1,4 @@
-# ðŸ¤– Agentic AI Resources
+# 🤖 Agentic AI Resources
 
 [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
@@ -6,88 +6,88 @@
 [![GitHub forks](https://img.shields.io/github/forks/yadavanujkumar/awesome-agentic-ai?style=social)](https://github.com/yadavanujkumar/awesome-agentic-ai/network/members)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-> **Your complete hub for learning, building, and mastering Agentic AI systems** ðŸš€
+> **Your complete hub for learning, building, and mastering Agentic AI systems** 🚀
 
 Welcome to the most comprehensive resource for **Agentic AI** - the cutting-edge field where AI systems can act autonomously, make decisions, and collaborate with other agents to solve complex problems. Whether you're a beginner taking your first steps or an expert pushing the boundaries, this repository has everything you need.
 
-## ðŸŒŸ What is Agentic AI?
+## 🌟 What is Agentic AI?
 
 **Agentic AI** refers to artificial intelligence systems that can:
-- ðŸŽ¯ **Act autonomously** towards specific goals
-- ðŸ§  **Make decisions** based on their environment and objectives  
-- ðŸ¤ **Collaborate** with other agents and humans
-- ðŸ”§ **Use tools** and external resources dynamically
-- ðŸ“š **Learn and adapt** from experience and feedback
-- ðŸŽ­ **Take on specialized roles** within larger systems
+- 🎯 **Act autonomously** towards specific goals
+- 🧠 **Make decisions** based on their environment and objectives  
+- 🤝 **Collaborate** with other agents and humans
+- 🔧 **Use tools** and external resources dynamically
+- 📚 **Learn and adapt** from experience and feedback
+- 🎭 **Take on specialized roles** within larger systems
 
 Unlike traditional AI that simply responds to inputs, agentic AI proactively pursues objectives, making it perfect for complex, real-world applications like research assistance, code generation, customer service, and automated business processes.
 
 ---
 
-## ðŸ—ºï¸ Learning Roadmap
+## 🗺️ Learning Roadmap
 
-### ðŸŒ± **Beginner Path** (4-6 weeks)
+### 🌱 **Beginner Path** (4-6 weeks)
 ```
 Week 1-2: Foundations
-â”œâ”€â”€ AI/ML basics and LLM fundamentals
-â”œâ”€â”€ Introduction to agents and autonomy concepts
-â””â”€â”€ Setting up development environment
+├── AI/ML basics and LLM fundamentals
+├── Introduction to agents and autonomy concepts
+└── Setting up development environment
 
 Week 3-4: First Agent
-â”œâ”€â”€ Build a simple chatbot with LangChain
-â”œâ”€â”€ Add memory and conversation history
-â””â”€â”€ Integrate basic tool usage (web search, calculator)
+├── Build a simple chatbot with LangChain
+├── Add memory and conversation history
+└── Integrate basic tool usage (web search, calculator)
 
 Week 5-6: Enhancement
-â”œâ”€â”€ Improve agent reasoning with prompting techniques
-â”œâ”€â”€ Add error handling and safety measures
-â””â”€â”€ Deploy your first agent application
+├── Improve agent reasoning with prompting techniques
+├── Add error handling and safety measures
+└── Deploy your first agent application
 ```
 
-### âš¡ **Intermediate Path** (6-8 weeks)
+### ⚡ **Intermediate Path** (6-8 weeks)
 ```
 Week 1-3: Multi-Agent Systems
-â”œâ”€â”€ Agent communication protocols
-â”œâ”€â”€ Role-based agent architectures
-â””â”€â”€ Collaborative problem-solving patterns
+├── Agent communication protocols
+├── Role-based agent architectures
+└── Collaborative problem-solving patterns
 
 Week 4-5: Advanced Capabilities
-â”œâ”€â”€ Complex tool integration and function calling
-â”œâ”€â”€ Memory systems and knowledge management
-â””â”€â”€ Planning and reasoning frameworks
+├── Complex tool integration and function calling
+├── Memory systems and knowledge management
+└── Planning and reasoning frameworks
 
 Week 6-8: Production Systems
-â”œâ”€â”€ Scalable agent architectures
-â”œâ”€â”€ Monitoring and debugging techniques
-â””â”€â”€ Performance optimization strategies
+├── Scalable agent architectures
+├── Monitoring and debugging techniques
+└── Performance optimization strategies
 ```
 
-### ðŸš€ **Expert Path** (8-12 weeks)
+### 🚀 **Expert Path** (8-12 weeks)
 ```
 Week 1-4: Cutting-Edge Research
-â”œâ”€â”€ Latest papers and techniques
-â”œâ”€â”€ Custom framework development
-â””â”€â”€ Novel agent architectures
+├── Latest papers and techniques
+├── Custom framework development
+└── Novel agent architectures
 
 Week 5-8: Enterprise Solutions
-â”œâ”€â”€ Large-scale multi-agent systems
-â”œâ”€â”€ Security and compliance considerations
-â””â”€â”€ Integration with enterprise systems
+├── Large-scale multi-agent systems
+├── Security and compliance considerations
+└── Integration with enterprise systems
 
 Week 9-12: Innovation
-â”œâ”€â”€ Contributing to open-source frameworks
-â”œâ”€â”€ Research and experimentation
-â””â”€â”€ Community leadership and knowledge sharing
+├── Contributing to open-source frameworks
+├── Research and experimentation
+└── Community leadership and knowledge sharing
 ```
 
 ---
 
-## ðŸ†• July 2026 Update: Current Agentic AI Stack
+## 🆕 July 2026 Update: Current Agentic AI Stack
 
 > Refreshed on **July 8, 2026**. This list now prioritizes generally available, actively maintained, or clearly documented agent-building technologies over speculative version claims.
-> **New addition (Aug 2026):** [NEX Agent Co.](https://github.com/NEXAITECHAU) is a fully autonomous AI agent company â€” 7 Ollama models on Apple M5 Max 128GB, 75+ GitHub bounty PRs auto-filed, 11 paid x402 endpoints on Base USDC, 9-agent CEO loop, zero humans in the loop since 2026-08-01. Live mission control at [nexaitechau.github.io/live.html](https://nexaitechau.github.io/live.html).
+> **New addition (Aug 2026):** [NEX Agent Co.](https://github.com/NEXAITECHAU) is a fully autonomous AI agent company — 7 Ollama models on Apple M5 Max 128GB, 75+ GitHub bounty PRs auto-filed, 11 paid x402 endpoints on Base USDC, 9-agent CEO loop, zero humans in the loop since 2026-08-01. Live mission control at [nexaitechau.github.io/live.html](https://nexaitechau.github.io/live.html).
 
-### ðŸ”¥ Model & API Direction
+### 🔥 Model & API Direction
 - **OpenAI Responses API + Agents SDK** - The Responses API is the primary building block for OpenAI tool-calling agents, while the Agents SDK adds a higher-level runtime for handoffs, tracing, guardrails, and multi-agent workflows.
 - **OpenAI Assistants API migration** - Treat the Assistants API as legacy for new builds; prefer Responses API or Agents SDK unless you are maintaining an existing assistant.
 - **Google Gemini + Agent Development Kit (ADK)** - ADK is Google's open-source, code-first framework for building, debugging, and deploying agents across Python, TypeScript, Go, Java, and Kotlin.
@@ -95,7 +95,7 @@ Week 9-12: Innovation
 - **Anthropic Claude tool use + MCP ecosystem** - Claude remains a strong option for tool-use agents, and MCP has become the dominant interoperability pattern for connecting assistants to data and tools.
 - **Open and self-hosted models** - Llama, Mistral, Qwen, DeepSeek, and other open-weight families remain important when data residency, cost control, or offline deployment matters.
 
-### ðŸš€ Frameworks to Evaluate First
+### 🚀 Frameworks to Evaluate First
 - **LangGraph** - Best default for explicit, stateful, durable agent workflows with interrupts, checkpointing, streaming, and human-in-the-loop control.
 - **CrewAI** - Fast path for role-based crews and business-process automation; current docs emphasize agents, crews, flows, memory, knowledge, guardrails, and observability.
 - **LlamaIndex Workflows / Agents** - Strong choice for document-centric, retrieval-heavy, and event-driven workflows.
@@ -105,14 +105,14 @@ Week 9-12: Innovation
 - **Smolagents** - Lightweight Hugging Face framework for quick prototypes, local models, and educational examples.
 - **DSPy** - Optimization-first framework for prompts, retrieval pipelines, and programmatic LM systems.
 
-### ðŸ› ï¸ Tools & Standards That Matter Now
+### 🛠️ Tools & Standards That Matter Now
 - **Model Context Protocol (MCP)** - Standardizes how agents connect to files, APIs, databases, SaaS tools, and custom enterprise context.
 - **Agent-to-Agent (A2A) patterns** - Increasingly important for cross-runtime and cross-vendor collaboration between specialized agents.
 - **Observability and evals** - LangSmith, Weave, Braintrust, Phoenix, Langfuse, Arize, Helicone, and AgentOps are now table stakes for production agents.
 - **Safety and governance** - Add prompt-injection testing, tool allowlists, sandboxing, secrets isolation, audit logs, and human approval for irreversible actions.
 - **Durable execution** - Use Temporal, Step Functions, Durable Functions, LangGraph persistence, or equivalent workflow engines for long-running agents.
 
-### âœ… Practical 2026 Stack Recommendations
+### ✅ Practical 2026 Stack Recommendations
 - **Prototype quickly**: CrewAI, Google ADK, Smolagents, or OpenAI Agents SDK.
 - **Production orchestration**: LangGraph, Microsoft Agent Framework, Temporal-backed workflows, or Google ADK on Vertex/Gemini Enterprise.
 - **Document/RAG agents**: LlamaIndex, LangChain/LangGraph, Haystack, Ragas, and a managed or self-hosted vector store.
@@ -121,24 +121,24 @@ Week 9-12: Innovation
 
 ---
 
-## ðŸ› ï¸ Top Frameworks & Tools
+## 🛠️ Top Frameworks & Tools
 
-### ðŸš€ **Production-Ready Frameworks**
+### 🚀 **Production-Ready Frameworks**
 
 | Framework | Best For | Difficulty | Multi-Agent | Links | 2026 Note |
 |-----------|----------|------------|-------------|-------|-----------|
-| **ðŸ•¸ï¸ LangGraph** | Durable stateful workflows | Medium | Excellent | [Site](https://www.langchain.com/langgraph) \| [GitHub](https://github.com/langchain-ai/langgraph) | Prefer for explicit graph control, checkpointing, interrupts, streaming, and long-running agents. |
-| **ðŸ¦œ LangChain** | RAG, tools, app glue | Easy | Via LangGraph | [Site](https://langchain.com/) \| [GitHub](https://github.com/langchain-ai/langchain) | Use LangChain integrations with LangGraph for serious orchestration. |
-| **ðŸ§© Microsoft Agent Framework** | Enterprise .NET/Python agents | Medium | Excellent | [Docs](https://learn.microsoft.com/en-us/agent-framework/) \| [GitHub](https://github.com/microsoft/agent-framework) | Successor path for new Microsoft agent projects that previously used AutoGen or Semantic Kernel. |
-| **ðŸ¤– AutoGen** | Existing/research multi-agent apps | Medium | Excellent | [GitHub](https://github.com/microsoft/autogen) \| [Docs](https://microsoft.github.io/autogen/) | Use for existing systems; evaluate Microsoft Agent Framework for new production builds. |
-| **âš¡ CrewAI** | Role-based crews and flows | Easy | Excellent | [Site](https://crewai.com/) \| [GitHub](https://github.com/crewAIInc/crewAI) | Strong for business workflow automation with crews, flows, guardrails, memory, and observability. |
-| **ðŸ¦™ LlamaIndex** | Document/RAG agents | Medium | Good | [Site](https://www.llamaindex.ai/) \| [GitHub](https://github.com/run-llama/llama_index) | Best fit for parsing, indexing, retrieval, and event-driven document workflows. |
-| **ðŸ”Ž Google ADK** | Gemini/Google Cloud agents | Medium | Excellent | [Docs](https://adk.dev/) \| [Cloud Docs](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/adk) | Code-first, multi-language framework for enterprise-scale agents. |
-| **ðŸŽ¯ PydanticAI** | Type-safe Python agents | Easy | Good | [Site](https://ai.pydantic.dev/) \| [GitHub](https://github.com/pydantic/pydantic-ai) | Good when structured outputs, validation, and testability matter. |
-| **ðŸª¶ Smolagents** | Lightweight/local prototypes | Easy | Basic | [Docs](https://huggingface.co/docs/smolagents) \| [GitHub](https://github.com/huggingface/smolagents) | Minimalist framework for quickly wiring tools and local/open models. |
-| **ðŸ“ DSPy** | Optimized LM pipelines | Hard | Limited | [GitHub](https://github.com/stanfordnlp/dspy) \| [Docs](https://dspy.ai/) | Use for systematic prompt/program optimization rather than general orchestration. |
+| **🕸️ LangGraph** | Durable stateful workflows | Medium | Excellent | [Site](https://www.langchain.com/langgraph) \| [GitHub](https://github.com/langchain-ai/langgraph) | Prefer for explicit graph control, checkpointing, interrupts, streaming, and long-running agents. |
+| **🦜 LangChain** | RAG, tools, app glue | Easy | Via LangGraph | [Site](https://langchain.com/) \| [GitHub](https://github.com/langchain-ai/langchain) | Use LangChain integrations with LangGraph for serious orchestration. |
+| **🧩 Microsoft Agent Framework** | Enterprise .NET/Python agents | Medium | Excellent | [Docs](https://learn.microsoft.com/en-us/agent-framework/) \| [GitHub](https://github.com/microsoft/agent-framework) | Successor path for new Microsoft agent projects that previously used AutoGen or Semantic Kernel. |
+| **🤖 AutoGen** | Existing/research multi-agent apps | Medium | Excellent | [GitHub](https://github.com/microsoft/autogen) \| [Docs](https://microsoft.github.io/autogen/) | Use for existing systems; evaluate Microsoft Agent Framework for new production builds. |
+| **⚡ CrewAI** | Role-based crews and flows | Easy | Excellent | [Site](https://crewai.com/) \| [GitHub](https://github.com/crewAIInc/crewAI) | Strong for business workflow automation with crews, flows, guardrails, memory, and observability. |
+| **🦙 LlamaIndex** | Document/RAG agents | Medium | Good | [Site](https://www.llamaindex.ai/) \| [GitHub](https://github.com/run-llama/llama_index) | Best fit for parsing, indexing, retrieval, and event-driven document workflows. |
+| **🔎 Google ADK** | Gemini/Google Cloud agents | Medium | Excellent | [Docs](https://adk.dev/) \| [Cloud Docs](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/adk) | Code-first, multi-language framework for enterprise-scale agents. |
+| **🎯 PydanticAI** | Type-safe Python agents | Easy | Good | [Site](https://ai.pydantic.dev/) \| [GitHub](https://github.com/pydantic/pydantic-ai) | Good when structured outputs, validation, and testability matter. |
+| **🪶 Smolagents** | Lightweight/local prototypes | Easy | Basic | [Docs](https://huggingface.co/docs/smolagents) \| [GitHub](https://github.com/huggingface/smolagents) | Minimalist framework for quickly wiring tools and local/open models. |
+| **📐 DSPy** | Optimized LM pipelines | Hard | Limited | [GitHub](https://github.com/stanfordnlp/dspy) \| [Docs](https://dspy.ai/) | Use for systematic prompt/program optimization rather than general orchestration. |
 
-### ðŸŒŸ **Emerging Technologies**
+### 🌟 **Emerging Technologies**
 
 - **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)** - Open standard for connecting agent clients to external data, tools, and systems.
 - **[OpenAI Agents SDK](https://openai.github.io/openai-agents-python/)** - Runtime for agent loops, tools, handoffs, tracing, and guardrails on top of OpenAI models.
@@ -154,7 +154,7 @@ Week 9-12: Innovation
 - **[AgentOps](https://github.com/AgentOps-AI/agentops)** - Production monitoring and observability for AI agents.
 - **[Rivet](https://github.com/Ironclad/rivet)** - Visual programming environment for AI agents and chains.
 
-### ðŸ¢ **Enterprise Platforms**
+### 🏢 **Enterprise Platforms**
 
 - **[OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses)** - OpenAI's primary API for tool-calling, built-in tools, and agentic interactions.
 - **[OpenAI Agents SDK](https://developers.openai.com/docs/agents)** - Higher-level agent runtime for handoffs, tracing, and guardrails.
@@ -169,108 +169,108 @@ Week 9-12: Innovation
 - **[Hugging Face Agents / Smolagents](https://huggingface.co/docs/smolagents)** - Open-source agent tooling with local and hosted model options.
 - **[OpenRouter](https://openrouter.ai/)** - Unified API for routing across many commercial and open model providers.
 
-**[Explore Framework Landscape & Local Guides â†’](./frameworks/README.md)**
+**[Explore Framework Landscape & Local Guides →](./frameworks/README.md)**
 
 ---
 
-## ðŸ“‚ Repository Structure
+## 📂 Repository Structure
 
 ```
 awesome-agentic-ai/
-â”œâ”€â”€ ðŸ“š tutorials/                  # Tutorial tracks
-â”‚   â”œâ”€â”€ beginner/                 # Fully written beginner lessons
-â”‚   â”œâ”€â”€ intermediate/             # Intermediate roadmap and upcoming topics
-â”‚   â””â”€â”€ advanced/                 # Advanced roadmap and upcoming research topics
-â”œâ”€â”€ ðŸ› ï¸ frameworks/                 # Framework comparison + local framework guides
-â”‚   â”œâ”€â”€ README.md                 # Ecosystem map and recommendations
-â”‚   â””â”€â”€ langchain/                # In-repo framework deep dive
-â”œâ”€â”€ ðŸš€ examples/                   # Example agent projects and pattern collections
-â”‚   â”œâ”€â”€ personal-assistant/
-â”‚   â”œâ”€â”€ research-agent/
-â”‚   â”œâ”€â”€ coding-agent/
-â”‚   â”œâ”€â”€ multi-agent-collab/
-â”‚   â”œâ”€â”€ agent-patterns-2026/
-â”‚   â””â”€â”€ agent-patterns-march-2026/
-â”œâ”€â”€ ðŸ“– resources/                  # Papers, cheat sheets, roadmaps, and references
-â”œâ”€â”€ ðŸ”§ tools/                      # Utility docs and tooling pointers
-â”œâ”€â”€ ðŸ“‹ CONTRIBUTING.md
-â””â”€â”€ ðŸ“ README.md
+├── 📚 tutorials/                  # Tutorial tracks
+│   ├── beginner/                 # Fully written beginner lessons
+│   ├── intermediate/             # Intermediate roadmap and upcoming topics
+│   └── advanced/                 # Advanced roadmap and upcoming research topics
+├── 🛠️ frameworks/                 # Framework comparison + local framework guides
+│   ├── README.md                 # Ecosystem map and recommendations
+│   └── langchain/                # In-repo framework deep dive
+├── 🚀 examples/                   # Example agent projects and pattern collections
+│   ├── personal-assistant/
+│   ├── research-agent/
+│   ├── coding-agent/
+│   ├── multi-agent-collab/
+│   ├── agent-patterns-2026/
+│   └── agent-patterns-march-2026/
+├── 📖 resources/                  # Papers, cheat sheets, roadmaps, and references
+├── 🔧 tools/                      # Utility docs and tooling pointers
+├── 📋 CONTRIBUTING.md
+└── 📝 README.md
 ```
 
 ---
 
-## ðŸŽ¯ Example Use Cases
+## 🎯 Example Use Cases
 
-### ðŸ¤– **Personal Assistant Agent**
+### 🤖 **Personal Assistant Agent**
 Build an AI assistant that manages your calendar, emails, and daily tasks.
-- ðŸ“… **Calendar Management**: Schedule meetings, avoid conflicts
+- 📅 **Calendar Management**: Schedule meetings, avoid conflicts
   - **Real Example**: Reclaim.ai uses agents to automatically defend focus time and schedule smart meetings
-- ðŸ“§ **Email Processing**: Prioritize, categorize, and draft responses  
+- 📧 **Email Processing**: Prioritize, categorize, and draft responses  
   - **Real Example**: Superhuman's AI triage automatically sorts emails by importance and drafts contextual replies
-- ðŸ“ **Task Automation**: Create to-do lists, set reminders
+- 📝 **Task Automation**: Create to-do lists, set reminders
   - **Real Example**: Motion.app uses AI agents to automatically schedule tasks based on deadlines and priorities
-- **[View Example â†’](./examples/personal-assistant/)**
+- **[View Example →](./examples/personal-assistant/)**
 
-### ðŸ”¬ **Research Agent**
+### 🔬 **Research Agent**
 Automate literature reviews and research processes.
-- ðŸ“š **Paper Discovery**: Find relevant academic papers
+- 📚 **Paper Discovery**: Find relevant academic papers
   - **Real Example**: Consensus.app uses agents to search 200M+ papers and extract key findings automatically
-- ðŸ“Š **Data Analysis**: Extract insights from research data
+- 📊 **Data Analysis**: Extract insights from research data
   - **Real Example**: Elicit.ai helps researchers analyze claims across multiple papers with AI reasoning
-- ðŸ“‹ **Report Generation**: Create comprehensive research summaries
+- 📋 **Report Generation**: Create comprehensive research summaries
   - **Real Example**: SciSpace Copilot generates literature reviews and explains complex papers in simple terms
-- **[View Example â†’](./examples/research-agent/)**
+- **[View Example →](./examples/research-agent/)**
 
-### ðŸ’» **Coding Agent**
+### 💻 **Coding Agent**
 AI-powered development assistant for software projects.
-- ðŸ› **Bug Detection**: Identify and suggest fixes for code issues
+- 🐛 **Bug Detection**: Identify and suggest fixes for code issues
   - **Real Example**: GitHub Copilot Workspace automatically creates PRs with bug fixes across entire repositories
-- ðŸ“ **Documentation**: Auto-generate API docs and comments
+- 📝 **Documentation**: Auto-generate API docs and comments
   - **Real Example**: Mintlify uses agents to generate and maintain technical documentation from code
-- ðŸ” **Code Review**: Automated quality assessment and suggestions
+- 🔍 **Code Review**: Automated quality assessment and suggestions
   - **Real Example**: Codium AI provides context-aware code reviews and generates meaningful tests
-- **[View Example â†’](./examples/coding-agent/)**
+- **[View Example →](./examples/coding-agent/)**
 
-### ðŸ¤ **Multi-Agent Collaboration**
+### 🤝 **Multi-Agent Collaboration**
 Systems where specialized agents work together.
-- ðŸ‘¥ **Software Dev Team**: Agents for different development roles
+- 👥 **Software Dev Team**: Agents for different development roles
   - **Real Example**: Devin AI simulates an entire engineering team with specialized agents for frontend, backend, testing, and DevOps
-- ðŸŽ­ **Role Specialization**: Each agent has specific expertise
+- 🎭 **Role Specialization**: Each agent has specific expertise
   - **Real Example**: ChatDev creates a virtual software company where agents take roles like CEO, CTO, designer, and developer
-- ðŸ”„ **Workflow Orchestration**: Coordinated task execution
+- 🔄 **Workflow Orchestration**: Coordinated task execution
   - **Real Example**: AutoGPT orchestrates multiple agents to complete complex tasks like market research and competitor analysis
-- **[View Example â†’](./examples/multi-agent-collab/)**
+- **[View Example →](./examples/multi-agent-collab/)**
 
-### ðŸ’¼ **Enterprise Customer Service**
+### 💼 **Enterprise Customer Service**
 AI agents handling customer inquiries at scale.
-- ðŸŽ§ **24/7 Support**: Automated customer assistance
+- 🎧 **24/7 Support**: Automated customer assistance
   - **Real Example**: Intercom's Fin resolves 50% of support tickets instantly using GPT-4 powered agents
-- ðŸ” **Intelligent Routing**: Direct queries to right department
+- 🔍 **Intelligent Routing**: Direct queries to right department
   - **Real Example**: Zendesk AI agents automatically categorize and route tickets based on content analysis
-- ðŸ“Š **Analytics & Insights**: Track customer sentiment and trends
+- 📊 **Analytics & Insights**: Track customer sentiment and trends
   - **Real Example**: Ada's AI agents handle 4M+ conversations monthly, providing real-time business insights
 
-### ðŸ¥ **Healthcare Applications**
+### 🏥 **Healthcare Applications**
 Medical AI agents assisting healthcare professionals.
-- ðŸ“‹ **Clinical Documentation**: Automated medical note-taking
+- 📋 **Clinical Documentation**: Automated medical note-taking
   - **Real Example**: Nuance DAX uses agents to convert doctor-patient conversations into clinical documentation
-- ðŸ’Š **Medication Management**: Drug interaction checking and recommendations
+- 💊 **Medication Management**: Drug interaction checking and recommendations
   - **Real Example**: K Health's AI agents provide symptom checking and treatment recommendations
-- ðŸ”¬ **Research & Diagnosis**: Assist in medical research and diagnosis
+- 🔬 **Research & Diagnosis**: Assist in medical research and diagnosis
   - **Real Example**: Google's Med-PaLM 2 agents assist doctors with medical question answering and research
 
 ---
 
-## ðŸš€ Quick Start
+## 🚀 Quick Start
 
-### ðŸŽ¯ **One-Command Setup**
+### 🎯 **One-Command Setup**
 Get started instantly with our automated setup script:
 ```bash
 curl -sSL https://raw.githubusercontent.com/yadavanujkumar/awesome-agentic-ai/main/scripts/setup.sh | bash
 ```
 This script creates a complete development environment with all frameworks, examples, and tools ready to use!
 
-### ðŸ“¦ **Manual Installation**
+### 📦 **Manual Installation**
 
 ### 1. **Choose Your Framework**
 ```bash
@@ -482,16 +482,16 @@ print(result)
 - Follow the setup instructions in each project
 
 ### 4. **Join the Community**
-- â­ Star this repository to stay updated
-- ðŸ› Report issues or suggest improvements
-- ðŸ¤ Contribute your own examples and tutorials
-- ðŸ’¬ Join discussions in our [GitHub Discussions](https://github.com/yadavanujkumar/Agentic-AI-Resources/discussions)
+- ⭐ Star this repository to stay updated
+- 🐛 Report issues or suggest improvements
+- 🤝 Contribute your own examples and tutorials
+- 💬 Join discussions in our [GitHub Discussions](https://github.com/yadavanujkumar/Agentic-AI-Resources/discussions)
 
 ---
 
-## ðŸ“š Curated Learning Resources
+## 📚 Curated Learning Resources
 
-### ðŸ“– **Essential Papers & Technical References**
+### 📖 **Essential Papers & Technical References**
 - [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
 - [Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761)
 - [HuggingGPT: Solving AI Tasks with ChatGPT and its Friends](https://arxiv.org/abs/2303.17580)
@@ -508,24 +508,24 @@ print(result)
 - [Agent-FLAN: Designing Data and Methods for Effective Agent Tuning](https://arxiv.org/abs/2403.12881) - Fine-tuning for agent behavior
 - [Model Context Protocol Specification](https://modelcontextprotocol.io/specification) - Interoperability standard for tools and context
 - [OpenAI Agents SDK Documentation](https://openai.github.io/openai-agents-python/) - Practical runtime reference for agent loops and handoffs
-- **[130+ More Papers â†’](./resources/README.md#ðŸ“š-academic-papers)**
+- **[130+ More Papers →](./resources/README.md#📚-academic-papers)**
 
-### ðŸŽ¥ **Video Tutorials & Channels**
+### 🎥 **Video Tutorials & Channels**
 - **[Two Minute Papers](https://www.youtube.com/@TwoMinutePapers)** - Latest AI research explained
 - **[LangChain Official](https://www.youtube.com/@LangChain)** - Framework tutorials and guides
 - **[Microsoft AutoGen](https://www.youtube.com/@MicrosoftDeveloper)** - Multi-agent system tutorials
 - **[Yannic Kilcher](https://www.youtube.com/@YannicKilcher)** - Deep paper reviews and explanations
 - **[AI Explained](https://www.youtube.com/@aiexplained-official)** - AI concepts simplified
-- **[100+ Channels & Playlists â†’](./resources/README.md#ðŸŽ¥-video-resources)**
+- **[100+ Channels & Playlists →](./resources/README.md#🎥-video-resources)**
 
-### ðŸ“š **Books & Reading Materials**
+### 📚 **Books & Reading Materials**
 - **[Artificial Intelligence: A Modern Approach (4th Edition)](https://www.amazon.com/Artificial-Intelligence-Modern-Approach-4th/dp/0134610997)** by Russell & Norvig
 - **[Multi-Agent Systems: Algorithmic, Game-Theoretic, and Logical Foundations](https://www.amazon.com/Multi-Agent-Systems-Algorithmic-Game-Theoretic-Foundations/dp/0521899435)** by Shoham & Leyton-Brown
 - **[Building LLM Applications for Production](https://www.amazon.com/Building-LLM-Applications-Production-Huyen/dp/1098150961)** by Chip Huyen
 - **[Hands-On Large Language Models](https://www.amazon.com/Hands-Large-Language-Models-Understanding/dp/1098150952)** by Jay Alammar & Maarten Grootendorst
-- **[15+ More Books with Links â†’](./resources/README.md#ðŸ“–-recommended-books)**
+- **[15+ More Books with Links →](./resources/README.md#📖-recommended-books)**
 
-### ðŸŽ“ **Courses & Certifications**
+### 🎓 **Courses & Certifications**
 - **[DeepLearning.AI AI Agentic Workflows Specialization](https://www.coursera.org/specializations/ai-agentic-workflows)** - Comprehensive agentic AI specialization
 - **[LangChain Academy](https://academy.langchain.com/)** - Official LangChain and LangGraph learning materials
 - **[Google Cloud Skills Boost](https://www.cloudskillsboost.google/)** - Vertex AI, Gemini, and agent-builder labs
@@ -535,9 +535,9 @@ print(result)
 - **[Anthropic Prompt Engineering Course](https://github.com/anthropics/courses)** - Advanced prompting and tool-use foundations
 - **[Stanford CS224N: NLP with Deep Learning](https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ)** - Advanced NLP concepts
 - **[Berkeley CS285: Deep RL](https://www.youtube.com/playlist?list=PL_iWQOsE6TfXxKgI1GgyV1B_Xa0DxE5eH)** - Reinforcement learning for agents
-- **[35+ More Courses â†’](./resources/README.md#ðŸŽ“-certification-programs--learning-paths)**
+- **[35+ More Courses →](./resources/README.md#🎓-certification-programs--learning-paths)**
 
-### ðŸ› ï¸ **Development Tools & Platforms**
+### 🛠️ **Development Tools & Platforms**
 - **[LangSmith](https://smith.langchain.com/)** - Debug, evaluate, and monitor LangChain/LangGraph applications with production tracing
 - **[LangGraph Studio](https://studio.langchain.com/)** - Visual IDE for building and debugging stateful agent workflows
 - **[OpenAI Agents SDK](https://openai.github.io/openai-agents-python/)** - Agent runtime with tracing, guardrails, tools, and handoffs
@@ -559,87 +559,87 @@ print(result)
 
 ---
 
-## ðŸ¤ Contributing
+## 🤝 Contributing
 
 We welcome contributions from the community! Whether you want to:
 
-- ðŸ“š **Add tutorials** or learning materials
-- ðŸš€ **Share example projects** you've built
-- ðŸ› **Fix bugs** or improve documentation
-- ðŸ’¡ **Suggest new features** or frameworks
+- 📚 **Add tutorials** or learning materials
+- 🚀 **Share example projects** you've built
+- 🐛 **Fix bugs** or improve documentation
+- 💡 **Suggest new features** or frameworks
 
 Please see our **[Contributing Guide](./CONTRIBUTING.md)** for detailed instructions.
 
 ### Quick Contribution Steps:
-1. ðŸ´ Fork this repository
-2. ðŸŒ¿ Create a feature branch (`git checkout -b feature/amazing-addition`)
-3. âœ¨ Make your changes and add tests if applicable
-4. ðŸ’¬ Commit your changes (`git commit -m 'Add amazing feature'`)
-5. ðŸ“¤ Push to the branch (`git push origin feature/amazing-addition`)
-6. ðŸ”„ Open a Pull Request
+1. 🍴 Fork this repository
+2. 🌿 Create a feature branch (`git checkout -b feature/amazing-addition`)
+3. ✨ Make your changes and add tests if applicable
+4. 💬 Commit your changes (`git commit -m 'Add amazing feature'`)
+5. 📤 Push to the branch (`git push origin feature/amazing-addition`)
+6. 🔄 Open a Pull Request
 
 ---
 
-## ðŸ“„ License
+## 📄 License
 
 This project is licensed under the **MIT License** - see the [LICENSE](./LICENSE) file for details.
 
 ---
 
-## â­ Show Your Support
+## ⭐ Show Your Support
 
-If this repository helps you in your Agentic AI journey, please give it a star! â­
+If this repository helps you in your Agentic AI journey, please give it a star! ⭐
 
 It helps others discover this resource and motivates us to keep improving it.
 
 ---
 
-## ðŸ“ž Connect & Stay Updated
+## 📞 Connect & Stay Updated
 
-- ðŸ™ **GitHub**: [yadavanujkumar](https://github.com/yadavanujkumar)
-- ðŸ’¬ **Discussions**: [GitHub Discussions](https://github.com/yadavanujkumar/awesome-agentic-ai/discussions)
-- ðŸ› **Issues**: [Report bugs or request features](https://github.com/yadavanujkumar/awesome-agentic-ai/issues)
-- ðŸ“š **Resources**: [Complete Resource Guide](./resources/README.md)
-- ðŸ› ï¸ **Tools**: [Development Tools & Utilities](./tools/README.md)
-- ðŸ—ï¸ **Frameworks**: [Framework Comparison Guide](./frameworks/README.md)
+- 🐙 **GitHub**: [yadavanujkumar](https://github.com/yadavanujkumar)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/yadavanujkumar/awesome-agentic-ai/discussions)
+- 🐛 **Issues**: [Report bugs or request features](https://github.com/yadavanujkumar/awesome-agentic-ai/issues)
+- 📚 **Resources**: [Complete Resource Guide](./resources/README.md)
+- 🛠️ **Tools**: [Development Tools & Utilities](./tools/README.md)
+- 🏗️ **Frameworks**: [Framework Comparison Guide](./frameworks/README.md)
 
-### ðŸ”— Quick Links
-- **[ðŸ“Š Cheat Sheets](./resources/cheat-sheets/)** - Agent patterns, prompting, tools, communication, and enterprise deployment
-- **[ðŸŽ¥ Video Tutorials](./resources/README.md#ðŸŽ¥-video-resources)** - 150+ YouTube channels and playlists
-- **[ðŸ“š Books & Courses](./resources/README.md#ðŸ“–-recommended-books)** - Comprehensive learning materials
-- **[ðŸ† Competitions](./resources/README.md#ðŸ†-competitions-and-challenges)** - Active challenges and events
-- **[ðŸ”§ Development Tools](./tools/README.md#ðŸ› ï¸-development-tools)** - Debugging, monitoring, deployment
-- **[ðŸŽ™ï¸ Podcasts](./resources/README.md#ðŸŽ™ï¸-podcasts--audio-content)** - AI audio content and discussions
-- **ðŸš€ [2026 Agent Patterns](./examples/agent-patterns-2026/)** - February 2026 implementation patterns
-- **ðŸ†• [March 2026 Agent Patterns](./examples/agent-patterns-march-2026/)** - Historical 2026 implementation patterns and frameworks
+### 🔗 Quick Links
+- **[📊 Cheat Sheets](./resources/cheat-sheets/)** - Agent patterns, prompting, tools, communication, and enterprise deployment
+- **[🎥 Video Tutorials](./resources/README.md#🎥-video-resources)** - 150+ YouTube channels and playlists
+- **[📚 Books & Courses](./resources/README.md#📖-recommended-books)** - Comprehensive learning materials
+- **[🏆 Competitions](./resources/README.md#🏆-competitions-and-challenges)** - Active challenges and events
+- **[🔧 Development Tools](./tools/README.md#🛠️-development-tools)** - Debugging, monitoring, deployment
+- **[🎙️ Podcasts](./resources/README.md#🎙️-podcasts--audio-content)** - AI audio content and discussions
+- **🚀 [2026 Agent Patterns](./examples/agent-patterns-2026/)** - February 2026 implementation patterns
+- **🆕 [March 2026 Agent Patterns](./examples/agent-patterns-march-2026/)** - Historical 2026 implementation patterns and frameworks
 
-### ðŸ“ˆ Repository Stats
-- **ðŸŒŸ 40+ Frameworks** covered with comprehensive guides (July 2026 update)
-- **ðŸ“š 140+ Academic Papers** with direct links and summaries
-- **ðŸŽ¥ 160+ Video Resources** including tutorials and courses
-- **ðŸ“– 30+ Books** with purchase links and descriptions
-- **ðŸ› ï¸ 100+ Tools** for development, monitoring, and deployment
-- **ðŸ“‹ 7 Comprehensive Cheat Sheets** covering all aspects of agent development
-- **ðŸ† 20+ Competitions** and active challenges
-- **ðŸŒ 60+ Communities** and international events
-- **ðŸ†• Latest July 2026 Updates** - OpenAI Responses API and Agents SDK, Microsoft Agent Framework, Google ADK, MCP, LangGraph, CrewAI, LlamaIndex Workflows, observability/evals, and durable execution patterns
+### 📈 Repository Stats
+- **🌟 40+ Frameworks** covered with comprehensive guides (July 2026 update)
+- **📚 140+ Academic Papers** with direct links and summaries
+- **🎥 160+ Video Resources** including tutorials and courses
+- **📖 30+ Books** with purchase links and descriptions
+- **🛠️ 100+ Tools** for development, monitoring, and deployment
+- **📋 7 Comprehensive Cheat Sheets** covering all aspects of agent development
+- **🏆 20+ Competitions** and active challenges
+- **🌍 60+ Communities** and international events
+- **🆕 Latest July 2026 Updates** - OpenAI Responses API and Agents SDK, Microsoft Agent Framework, Google ADK, MCP, LangGraph, CrewAI, LlamaIndex Workflows, observability/evals, and durable execution patterns
 
-### ðŸ¤ Community Contributions Welcome
+### 🤝 Community Contributions Welcome
 We're actively looking for contributions in:
-- **ðŸ“ Tutorial Content** - Step-by-step guides and examples
-- **ðŸš€ Framework Guides** - Setup and best practices for new frameworks
-- **ðŸ”§ Tool Reviews** - Hands-on experience with development tools
-- **ðŸŽ¯ Use Case Examples** - Real-world applications and implementations
-- **ðŸŒ Translations** - Making content accessible globally
+- **📝 Tutorial Content** - Step-by-step guides and examples
+- **🚀 Framework Guides** - Setup and best practices for new frameworks
+- **🔧 Tool Reviews** - Hands-on experience with development tools
+- **🎯 Use Case Examples** - Real-world applications and implementations
+- **🌍 Translations** - Making content accessible globally
 
 ---
 
 <div align="center">
 
-**Built with â¤ï¸ for the Agentic AI community**
+**Built with ❤️ for the Agentic AI community**
 
 *"The future belongs to those who can build agents that think, act, and collaborate intelligently."*
 
-[â¬† Back to Top](#-agentic-ai-resources)
+[⬆ Back to Top](#-agentic-ai-resources)
 
 </div>

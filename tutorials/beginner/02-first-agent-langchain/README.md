@@ -4,7 +4,7 @@
 **Prerequisites**: [Tutorial 1: Introduction to AI Agents](../01-introduction-to-agents/)  
 **Goal**: Create a practical AI agent using LangChain framework with real tools
 
-## ðŸŽ¯ Learning Objectives
+## 🎯 Learning Objectives
 
 After completing this tutorial, you will:
 - Set up LangChain development environment
@@ -15,7 +15,7 @@ After completing this tutorial, you will:
 
 ---
 
-## ðŸ¦œ Introduction to LangChain
+## 🦜 Introduction to LangChain
 
 LangChain is a powerful framework for building applications with large language models. It provides:
 
@@ -33,7 +33,7 @@ LangChain is a powerful framework for building applications with large language 
 
 ---
 
-## ðŸ› ï¸ Environment Setup
+## 🛠️ Environment Setup
 
 ### Step 1: Install Dependencies
 
@@ -64,7 +64,7 @@ LANGCHAIN_API_KEY=your_langsmith_api_key_here  # Optional: for debugging
 
 ---
 
-## ðŸ§° Building Your First LangChain Agent
+## 🧰 Building Your First LangChain Agent
 
 ### Step 1: Basic Agent Setup
 
@@ -91,17 +91,25 @@ def create_basic_agent():
         openai_api_key=os.getenv("OPENAI_API_KEY")
     )
     
-    # Create simple tools
+    # Create simple tools using AST for secure evaluation (avoiding dangerous eval)
+    import ast, operator
+    safe_ops = {ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul, ast.Div: operator.truediv, ast.Pow: operator.pow}
+    
+    def safe_calc_node(node):
+        if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
+            return node.value
+        elif isinstance(node, ast.BinOp) and type(node.op) in safe_ops:
+            return safe_ops[type(node.op)](safe_calc_node(node.left), safe_calc_node(node.right))
+        elif isinstance(node, ast.UnaryOp) and type(node.op) == ast.USub:
+            return -safe_calc_node(node.operand)
+        raise ValueError("Invalid math syntax")
+
     def calculator(expression):
-        """Evaluate mathematical expressions safely"""
+        """Evaluate mathematical expressions safely using AST"""
         try:
-            # Basic safety check
-            allowed_chars = set('0123456789+-*/.() ')
-            if all(c in allowed_chars for c in expression):
-                result = eval(expression)
-                return f"The answer is: {result}"
-            else:
-                return "Error: Invalid characters in expression"
+            parsed = ast.parse(expression.strip(), mode='eval')
+            result = safe_calc_node(parsed.body)
+            return f"The answer is: {result}"
         except Exception as e:
             return f"Error calculating: {str(e)}"
     
@@ -145,7 +153,7 @@ def run_basic_agent():
     """Run the basic agent in a chat loop"""
     agent = create_basic_agent()
     
-    print("ðŸ¦œ LangChain Agent initialized!")
+    print("🦜 LangChain Agent initialized!")
     print("Available tools: Calculator, Text Length")
     print("Type 'quit' to exit\n")
     
@@ -153,7 +161,7 @@ def run_basic_agent():
         user_input = input("You: ").strip()
         
         if user_input.lower() in ['quit', 'exit', 'bye']:
-            print("ðŸ¦œ Agent: Goodbye!")
+            print("🦜 Agent: Goodbye!")
             break
             
         if not user_input:
@@ -161,9 +169,9 @@ def run_basic_agent():
         
         try:
             response = agent.run(user_input)
-            print(f"ðŸ¦œ Agent: {response}\n")
+            print(f"🦜 Agent: {response}\n")
         except Exception as e:
-            print(f"ðŸ¦œ Agent: Sorry, I encountered an error: {str(e)}\n")
+            print(f"🦜 Agent: Sorry, I encountered an error: {str(e)}\n")
 
 if __name__ == "__main__":
     run_basic_agent()
@@ -171,7 +179,7 @@ if __name__ == "__main__":
 
 ---
 
-## ðŸŒ Adding Web Search Capabilities
+## 🌐 Adding Web Search Capabilities
 
 ### Step 2: Enhanced Agent with Web Search
 
@@ -252,7 +260,7 @@ def run_web_agent():
     """Run the web-enabled agent"""
     agent = create_web_agent()
     
-    print("ðŸŒ Web-Enabled LangChain Agent initialized!")
+    print("🌐 Web-Enabled LangChain Agent initialized!")
     print("Available tools: Web Search, Wikipedia, Weather Info, Current Time")
     print("Type 'quit' to exit\n")
     
@@ -260,7 +268,7 @@ def run_web_agent():
         user_input = input("You: ").strip()
         
         if user_input.lower() in ['quit', 'exit', 'bye']:
-            print("ðŸŒ Agent: Goodbye!")
+            print("🌐 Agent: Goodbye!")
             break
             
         if not user_input:
@@ -268,9 +276,9 @@ def run_web_agent():
         
         try:
             response = agent.run(user_input)
-            print(f"ðŸŒ Agent: {response}\n")
+            print(f"🌐 Agent: {response}\n")
         except Exception as e:
-            print(f"ðŸŒ Agent: I encountered an error: {str(e)}")
+            print(f"🌐 Agent: I encountered an error: {str(e)}")
             print("Let me try a different approach.\n")
 
 if __name__ == "__main__":
@@ -279,7 +287,7 @@ if __name__ == "__main__":
 
 ---
 
-## ðŸ§  Advanced Memory Management
+## 🧠 Advanced Memory Management
 
 ### Step 3: Agent with Persistent Memory
 
@@ -388,7 +396,7 @@ def run_memory_agent():
     """Run the agent with persistent memory"""
     agent = PersistentMemoryAgent()
     
-    print("ðŸ§  Memory-Enhanced LangChain Agent initialized!")
+    print("🧠 Memory-Enhanced LangChain Agent initialized!")
     print("I can remember facts between conversations!")
     print("Try: 'Remember that I like pizza' or 'What do you remember about me?'")
     print("Type 'quit' to exit\n")
@@ -397,7 +405,7 @@ def run_memory_agent():
         user_input = input("You: ").strip()
         
         if user_input.lower() in ['quit', 'exit', 'bye']:
-            print("ðŸ§  Agent: Goodbye! I'll remember our conversation.")
+            print("🧠 Agent: Goodbye! I'll remember our conversation.")
             break
             
         if not user_input:
@@ -405,9 +413,9 @@ def run_memory_agent():
         
         try:
             response = agent.run(user_input)
-            print(f"ðŸ§  Agent: {response}\n")
+            print(f"🧠 Agent: {response}\n")
         except Exception as e:
-            print(f"ðŸ§  Agent: Error: {str(e)}\n")
+            print(f"🧠 Agent: Error: {str(e)}\n")
 
 if __name__ == "__main__":
     run_memory_agent()
@@ -415,7 +423,7 @@ if __name__ == "__main__":
 
 ---
 
-## ðŸ›¡ï¸ Safety and Error Handling
+## 🛡️ Safety and Error Handling
 
 ### Best Practices
 
@@ -449,7 +457,7 @@ def safe_agent_wrapper(agent, user_input):
 
 ---
 
-## ðŸ§ª Testing Your Agent
+## 🧪 Testing Your Agent
 
 ### Test Scenarios
 
@@ -461,7 +469,7 @@ def safe_agent_wrapper(agent, user_input):
 
 ---
 
-## ðŸŽ¯ Exercises
+## 🎯 Exercises
 
 ### Exercise 1: Add Custom Tool
 Create a tool that can read and summarize text files.
@@ -477,7 +485,7 @@ Enable the agent to break down complex tasks into steps.
 
 ---
 
-## ðŸ“š Key Concepts Review
+## 📚 Key Concepts Review
 
 - **LangChain Framework**: Modular approach to LLM applications
 - **Tools and Chains**: Extending agent capabilities
@@ -487,7 +495,7 @@ Enable the agent to break down complex tasks into steps.
 
 ---
 
-## ðŸš€ Next Steps
+## 🚀 Next Steps
 
 1. **Tutorial 3**: [Agent Memory and State Management](../03-memory-and-state/)
 2. **Explore Tools**: Try more LangChain tools and integrations
@@ -496,7 +504,7 @@ Enable the agent to break down complex tasks into steps.
 
 ---
 
-## ðŸ“– Additional Resources
+## 📖 Additional Resources
 
 - [LangChain Documentation](https://python.langchain.com/docs/get_started)
 - [LangChain Agents Guide](https://python.langchain.com/docs/modules/agents/)
@@ -504,4 +512,4 @@ Enable the agent to break down complex tasks into steps.
 
 ---
 
-**Excellent work!** ðŸŽ‰ You've built a powerful LangChain agent with web search, memory, and safety features. You're now ready to explore more advanced agent capabilities!
+**Excellent work!** 🎉 You've built a powerful LangChain agent with web search, memory, and safety features. You're now ready to explore more advanced agent capabilities!
