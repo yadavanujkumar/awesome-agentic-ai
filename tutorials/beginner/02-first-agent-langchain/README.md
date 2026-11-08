@@ -4,7 +4,7 @@
 **Prerequisites**: [Tutorial 1: Introduction to AI Agents](../01-introduction-to-agents/)  
 **Goal**: Create a practical AI agent using LangChain framework with real tools
 
-## 🎯 Learning Objectives
+## ðŸŽ¯ Learning Objectives
 
 After completing this tutorial, you will:
 - Set up LangChain development environment
@@ -15,7 +15,7 @@ After completing this tutorial, you will:
 
 ---
 
-## 🦜 Introduction to LangChain
+## ðŸ¦œ Introduction to LangChain
 
 LangChain is a powerful framework for building applications with large language models. It provides:
 
@@ -33,7 +33,7 @@ LangChain is a powerful framework for building applications with large language 
 
 ---
 
-## 🛠️ Environment Setup
+## ðŸ› ï¸ Environment Setup
 
 ### Step 1: Install Dependencies
 
@@ -64,7 +64,7 @@ LANGCHAIN_API_KEY=your_langsmith_api_key_here  # Optional: for debugging
 
 ---
 
-## 🧰 Building Your First LangChain Agent
+## ðŸ§° Building Your First LangChain Agent
 
 ### Step 1: Basic Agent Setup
 
@@ -145,7 +145,7 @@ def run_basic_agent():
     """Run the basic agent in a chat loop"""
     agent = create_basic_agent()
     
-    print("🦜 LangChain Agent initialized!")
+    print("ðŸ¦œ LangChain Agent initialized!")
     print("Available tools: Calculator, Text Length")
     print("Type 'quit' to exit\n")
     
@@ -153,7 +153,7 @@ def run_basic_agent():
         user_input = input("You: ").strip()
         
         if user_input.lower() in ['quit', 'exit', 'bye']:
-            print("🦜 Agent: Goodbye!")
+            print("ðŸ¦œ Agent: Goodbye!")
             break
             
         if not user_input:
@@ -161,9 +161,9 @@ def run_basic_agent():
         
         try:
             response = agent.run(user_input)
-            print(f"🦜 Agent: {response}\n")
+            print(f"ðŸ¦œ Agent: {response}\n")
         except Exception as e:
-            print(f"🦜 Agent: Sorry, I encountered an error: {str(e)}\n")
+            print(f"ðŸ¦œ Agent: Sorry, I encountered an error: {str(e)}\n")
 
 if __name__ == "__main__":
     run_basic_agent()
@@ -171,7 +171,7 @@ if __name__ == "__main__":
 
 ---
 
-## 🌐 Adding Web Search Capabilities
+## ðŸŒ Adding Web Search Capabilities
 
 ### Step 2: Enhanced Agent with Web Search
 
@@ -252,7 +252,7 @@ def run_web_agent():
     """Run the web-enabled agent"""
     agent = create_web_agent()
     
-    print("🌐 Web-Enabled LangChain Agent initialized!")
+    print("ðŸŒ Web-Enabled LangChain Agent initialized!")
     print("Available tools: Web Search, Wikipedia, Weather Info, Current Time")
     print("Type 'quit' to exit\n")
     
@@ -260,7 +260,7 @@ def run_web_agent():
         user_input = input("You: ").strip()
         
         if user_input.lower() in ['quit', 'exit', 'bye']:
-            print("🌐 Agent: Goodbye!")
+            print("ðŸŒ Agent: Goodbye!")
             break
             
         if not user_input:
@@ -268,9 +268,9 @@ def run_web_agent():
         
         try:
             response = agent.run(user_input)
-            print(f"🌐 Agent: {response}\n")
+            print(f"ðŸŒ Agent: {response}\n")
         except Exception as e:
-            print(f"🌐 Agent: I encountered an error: {str(e)}")
+            print(f"ðŸŒ Agent: I encountered an error: {str(e)}")
             print("Let me try a different approach.\n")
 
 if __name__ == "__main__":
@@ -279,7 +279,7 @@ if __name__ == "__main__":
 
 ---
 
-## 🧠 Advanced Memory Management
+## ðŸ§  Advanced Memory Management
 
 ### Step 3: Agent with Persistent Memory
 
@@ -388,7 +388,7 @@ def run_memory_agent():
     """Run the agent with persistent memory"""
     agent = PersistentMemoryAgent()
     
-    print("🧠 Memory-Enhanced LangChain Agent initialized!")
+    print("ðŸ§  Memory-Enhanced LangChain Agent initialized!")
     print("I can remember facts between conversations!")
     print("Try: 'Remember that I like pizza' or 'What do you remember about me?'")
     print("Type 'quit' to exit\n")
@@ -397,7 +397,7 @@ def run_memory_agent():
         user_input = input("You: ").strip()
         
         if user_input.lower() in ['quit', 'exit', 'bye']:
-            print("🧠 Agent: Goodbye! I'll remember our conversation.")
+            print("ðŸ§  Agent: Goodbye! I'll remember our conversation.")
             break
             
         if not user_input:
@@ -405,9 +405,9 @@ def run_memory_agent():
         
         try:
             response = agent.run(user_input)
-            print(f"🧠 Agent: {response}\n")
+            print(f"ðŸ§  Agent: {response}\n")
         except Exception as e:
-            print(f"🧠 Agent: Error: {str(e)}\n")
+            print(f"ðŸ§  Agent: Error: {str(e)}\n")
 
 if __name__ == "__main__":
     run_memory_agent()
@@ -415,7 +415,7 @@ if __name__ == "__main__":
 
 ---
 
-## 🛡️ Safety and Error Handling
+## ðŸ›¡ï¸ Safety and Error Handling
 
 ### Best Practices
 
@@ -449,7 +449,7 @@ def safe_agent_wrapper(agent, user_input):
 
 ---
 
-## 🧪 Testing Your Agent
+## ðŸ§ª Testing Your Agent
 
 ### Test Scenarios
 
@@ -461,7 +461,7 @@ def safe_agent_wrapper(agent, user_input):
 
 ---
 
-## 🎯 Exercises
+## ðŸŽ¯ Exercises
 
 ### Exercise 1: Add Custom Tool
 Create a tool that can read and summarize text files.
@@ -477,7 +477,7 @@ Enable the agent to break down complex tasks into steps.
 
 ---
 
-## 📚 Key Concepts Review
+## ðŸ“š Key Concepts Review
 
 - **LangChain Framework**: Modular approach to LLM applications
 - **Tools and Chains**: Extending agent capabilities
@@ -487,7 +487,7 @@ Enable the agent to break down complex tasks into steps.
 
 ---
 
-## 🚀 Next Steps
+## ðŸš€ Next Steps
 
 1. **Tutorial 3**: [Agent Memory and State Management](../03-memory-and-state/)
 2. **Explore Tools**: Try more LangChain tools and integrations
@@ -496,7 +496,7 @@ Enable the agent to break down complex tasks into steps.
 
 ---
 
-## 📖 Additional Resources
+## ðŸ“– Additional Resources
 
 - [LangChain Documentation](https://python.langchain.com/docs/get_started)
 - [LangChain Agents Guide](https://python.langchain.com/docs/modules/agents/)
@@ -504,4 +504,4 @@ Enable the agent to break down complex tasks into steps.
 
 ---
 
-**Excellent work!** 🎉 You've built a powerful LangChain agent with web search, memory, and safety features. You're now ready to explore more advanced agent capabilities!
+**Excellent work!** ðŸŽ‰ You've built a powerful LangChain agent with web search, memory, and safety features. You're now ready to explore more advanced agent capabilities!

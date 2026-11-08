@@ -1,13 +1,14 @@
 """
 Type-Safe Customer Service Agent using PydanticAI
-Demonstrates 2025 patterns for production-ready agents
+Demonstrates 2026 patterns for production-ready agents
 """
 
-from pydantic_ai import Agent
-from pydantic import BaseModel, Field
-from typing import List, Optional, Literal
-from datetime import datetime
+from datetime import datetime, timezone
+import os
 import asyncio
+from typing import List, Optional, Literal
+from pydantic import BaseModel, Field
+from pydantic_ai import Agent
 
 
 class CustomerQuery(BaseModel):
@@ -20,7 +21,7 @@ class CustomerQuery(BaseModel):
     priority: Literal["low", "medium", "high"] = Field(
         default="medium", description="Query priority level"
     )
-    timestamp: datetime = Field(default_factory=datetime.now)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class CustomerResponse(BaseModel):
@@ -30,7 +31,7 @@ class CustomerResponse(BaseModel):
         ..., ge=0.0, le=1.0, description="Confidence in response accuracy"
     )
     suggested_actions: List[str] = Field(
-        default=[], description="Recommended follow-up actions"
+        default_factory=list, description="Recommended follow-up actions"
     )
     escalation_required: bool = Field(
         default=False, description="Whether human escalation is needed"
@@ -44,11 +45,12 @@ class CustomerResponse(BaseModel):
 class CustomerServiceAgent:
     """Type-safe customer service agent with PydanticAI"""
     
-    def __init__(self):
-        # Initialize the agent with type safety
+    def __init__(self, model_name: str = 'openai:gpt-4o-mini'):
+        # Initialize the agent with type-safe deps and result type
         self.agent = Agent(
-            model='openai:gpt-4o',
+            model=model_name,
             result_type=CustomerResponse,
+            deps_type=dict,
             system_prompt=self._get_system_prompt()
         )
     
@@ -71,7 +73,7 @@ class CustomerServiceAgent:
     async def handle_customer_query(self, query: CustomerQuery) -> CustomerResponse:
         """Process customer query with full type safety"""
         
-        # Prepare context for the agent
+        # Prepare typed context for the agent
         context = {
             "customer_id": query.customer_id,
             "query_type": query.query_type,
@@ -98,7 +100,18 @@ class CustomerServiceAgent:
 # Usage example and testing
 async def main():
     """Example usage of type-safe customer service agent"""
-    
+    if not os.getenv("OPENAI_API_KEY"):
+        print("ℹ️ Note: OPENAI_API_KEY not set in environment. Running schema validation test only.")
+        test_query = CustomerQuery(
+            customer_id="CUST_001",
+            query_type="billing",
+            message="I was charged twice for my subscription this month. Can you help me understand why?",
+            priority="high"
+        )
+        print("✅ CustomerQuery validation passed successfully:")
+        print(test_query.model_dump_json(indent=2))
+        return
+
     # Initialize agent
     service_agent = CustomerServiceAgent()
     
@@ -131,17 +144,12 @@ async def main():
         print(f"{'='*50}")
         
         try:
-            # Process with type safety
             response = await service_agent.handle_customer_query(query)
-            
-            # Display results
             print(f"Customer ID: {query.customer_id}")
             print(f"Query Type: {query.query_type}")
             print(f"Priority: {query.priority}")
-            print(f"\nCustomer Message:")
-            print(f"  {query.message}")
-            print(f"\nAgent Response:")
-            print(f"  {response.response_text}")
+            print(f"\nCustomer Message:\n  {query.message}")
+            print(f"\nAgent Response:\n  {response.response_text}")
             print(f"\nConfidence Score: {response.confidence_score:.2f}")
             print(f"Escalation Required: {response.escalation_required}")
             
@@ -160,5 +168,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    # Run the example
     asyncio.run(main())

@@ -2,7 +2,7 @@
 
 Utilities, CLI tools, and integrations to enhance your Agentic AI development workflow.
 
-## 🛠️ Development Tools
+## ðŸ› ï¸ Development Tools
 
 ### 2026 Agent Protocols & Runtime Building Blocks
 - **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/)** - Open protocol for connecting LLM applications to external data sources and tools.
@@ -56,7 +56,9 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
 - **[YYLO](https://github.com/yylo-dev/yylo)** - Command-line orchestrator for coding agents with typed task, validation, merge, and release-readiness boundaries in a dedicated branch/worktree
   - [GitHub](https://github.com/yylo-dev/yylo) | [npm Package](https://www.npmjs.com/package/@yylo/cli) | [Documentation](https://yylo.dev)
 
-### Testing and Validation
+### Testing, Code Review and Validation
+- **[CodeRabbit](https://coderabbit.ai/)** - AI-first code review platform and CLI (coderabbit review --agent) enabling automated pull request reviews, prioritized severity findings (critical to info), and autonomous autofix feedback loops.
+  - [Documentation](https://docs.coderabbit.ai/) | [CLI Reference & Guide](../resources/cheat-sheets/coderabbit-code-review.md)
 - **[agent-qa](https://vostride.com)** - Self-improving QA agent for natural-language web and mobile regression tests with persistent test memory
   - [GitHub](https://github.com/vostride/agent-qa) | [npm Package](https://www.npmjs.com/package/agent-qa)
 - **[PromptFoo](https://www.promptfoo.dev/)** - Test and evaluate LLM outputs systematically
@@ -92,7 +94,7 @@ Utilities, CLI tools, and integrations to enhance your Agentic AI development wo
 - **[Humanloop](https://humanloop.com/)** - LLM application development platform (2026)
   - [Documentation](https://humanloop.com/docs) | [Examples](https://humanloop.com/examples)
 
-## 🔧 CLI Tools
+## ðŸ”§ CLI Tools
 
 ### Agent Development CLIs
 ```bash
@@ -166,7 +168,7 @@ pip install httpx requests-toolbelt
 pip install postman-cli  # API testing
 ```
 
-## 🔌 Integrations
+## ðŸ”Œ Integrations
 
 ### IDE Extensions
 - **[GitHub Copilot](https://github.com/features/copilot)** - AI pair programmer for VS Code, JetBrains, Neovim
@@ -206,7 +208,7 @@ pip install postman-cli  # API testing
 - **[Qdrant](https://qdrant.tech/)** - Vector similarity search engine
   - [Python Client](https://github.com/qdrant/qdrant-client) | [Documentation](https://qdrant.tech/documentation/)
 
-## 📊 Monitoring and Analytics
+## ðŸ“Š Monitoring and Analytics
 
 ### Agent Performance Monitoring
 - **[LangSmith](https://smith.langchain.com/)** - Comprehensive LLM application monitoring
@@ -242,7 +244,7 @@ pip install postman-cli  # API testing
 - **[DataDog](https://www.datadoghq.com/)** - Infrastructure and application monitoring
   - [LLM Observability](https://docs.datadoghq.com/llm_observability/) | [Python SDK](https://github.com/DataDog/dd-trace-py)
 
-## 🚀 Deployment Tools
+## ðŸš€ Deployment Tools
 
 ### Container Solutions
 - **[Docker](https://www.docker.com/)** - Containerization platform
@@ -293,7 +295,7 @@ pip install postman-cli  # API testing
 - **[Jenkins](https://www.jenkins.io/)** - Automation server
   - [AI/ML Plugins](https://plugins.jenkins.io/machine-learning/) | [Pipeline Examples](https://github.com/jenkinsci/pipeline-examples)
 
-## 🔐 Security and Compliance
+## ðŸ” Security and Compliance
 
 ### Security Tools
 - **[OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)** - Security risks for LLM applications
@@ -337,7 +339,7 @@ pip install postman-cli  # API testing
 - **[Fluentd](https://www.fluentd.org/)** - Data collection and logging
   - [Documentation](https://docs.fluentd.org/) | [AI Monitoring Plugins](https://www.fluentd.org/plugins)
 
-## 📱 Mobile and Web Tools
+## ðŸ“± Mobile and Web Tools
 
 ### Web Interfaces & Demos
 - **[Streamlit](https://streamlit.io/)** - Create web apps for AI agents

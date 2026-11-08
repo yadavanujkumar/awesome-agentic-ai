@@ -2,7 +2,7 @@
 
 Curated collection of actively maintained resources for learning, building, and evaluating Agentic AI systems.
 
-## 📚 Academic Papers
+## ðŸ“š Academic Papers
 
 ### Foundational Papers
 - [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
@@ -27,7 +27,7 @@ Curated collection of actively maintained resources for learning, building, and 
 - [Papers With Code: Multi-Agent RL](https://paperswithcode.com/task/multi-agent-reinforcement-learning)
 - [Google Scholar](https://scholar.google.com/)
 
-## 📝 Cheat Sheets
+## ðŸ“ Cheat Sheets
 
 - [Agent Architecture Patterns](cheat-sheets/agent-patterns.md)
 - [Framework Comparison](cheat-sheets/framework-comparison.md)
@@ -37,14 +37,15 @@ Curated collection of actively maintained resources for learning, building, and 
 - [2026 Agent Patterns and Architectures](cheat-sheets/agent-patterns-2026.md)
 - [Enterprise Deployment Guide 2026](cheat-sheets/enterprise-deployment-2026.md)
 - [March 2026 Model Selection Guide](cheat-sheets/model-selection-march-2026.md)
+- [CodeRabbit AI Code Review & Agentic Workflows](cheat-sheets/coderabbit-code-review.md)
 
-## 🗺️ Learning Roadmaps
+## ðŸ—ºï¸ Learning Roadmaps
 
 - [Beginner Roadmap](roadmaps/beginner.md)
 - [Intermediate Roadmap](roadmaps/intermediate.md)
 - [Expert Roadmap](roadmaps/expert.md)
 
-## 📖 Recommended Books
+## ðŸ“– Recommended Books
 
 ### Technical Foundations
 - [Artificial Intelligence: A Modern Approach (4th Edition)](https://www.amazon.com/Artificial-Intelligence-Modern-Approach-4th/dp/0134610997)
@@ -57,7 +58,7 @@ Curated collection of actively maintained resources for learning, building, and 
 - [Hands-On Large Language Models](https://www.amazon.com/Hands-Large-Language-Models-Understanding/dp/1098150952)
 - [Designing Machine Learning Systems](https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/)
 
-## 🎥 Video Resources
+## ðŸŽ¥ Video Resources
 
 ### Research and Paper Reviews
 - [Two Minute Papers](https://www.youtube.com/@TwoMinutePapers)
@@ -76,7 +77,7 @@ Curated collection of actively maintained resources for learning, building, and 
 - [Berkeley CS285](https://www.youtube.com/playlist?list=PL_iWQOsE6TfXxKgI1GgyV1B_Xa0DxE5eH)
 - [MIT 6.034 Artificial Intelligence](https://www.youtube.com/playlist?list=PLUl4u3cNGP63gFHB6xb-kVBiQHYe_4hSi)
 
-## 🌐 Blogs and Websites
+## ðŸŒ Blogs and Websites
 
 ### Model & Platform Updates
 - [OpenAI News](https://openai.com/news/)
@@ -98,7 +99,7 @@ Curated collection of actively maintained resources for learning, building, and 
 - [The Gradient](https://thegradient.pub/)
 - [MIT Technology Review: AI](https://www.technologyreview.com/topic/artificial-intelligence/)
 
-## 📊 Datasets
+## ðŸ“Š Datasets
 
 ### Agent Training Environments
 - [WebShop](https://webshop-pnlp.github.io/)
@@ -120,7 +121,7 @@ Curated collection of actively maintained resources for learning, building, and 
 - [WikiSQL](https://github.com/salesforce/WikiSQL)
 - [SQuAD](https://rajpurkar.github.io/SQuAD-explorer/)
 
-## 🏆 Competitions and Challenges
+## ðŸ† Competitions and Challenges
 
 ### Academic and Research Competitions
 - [NeurIPS Competitions](https://neurips.cc/Conferences)
@@ -136,7 +137,7 @@ Curated collection of actively maintained resources for learning, building, and 
 - [RoboCup](https://www.robocup.org/)
 - [AIcrowd Challenges](https://www.aicrowd.com/challenges)
 
-## 🚀 Emerging Technologies & Trends
+## ðŸš€ Emerging Technologies & Trends
 
 ### Agent Protocols and Standards
 - [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
@@ -159,10 +160,10 @@ Curated collection of actively maintained resources for learning, building, and 
 - [Arize Phoenix](https://phoenix.arize.com/)
 - [Helicone](https://www.helicone.ai/)
 
-## 🎓 Certification Programs & Learning Paths
+## ðŸŽ“ Certification Programs & Learning Paths
 
 ### Cloud and Platform Certifications
-- [AWS Certified Machine Learning – Specialty](https://aws.amazon.com/certification/certified-machine-learning-specialty/)
+- [AWS Certified Machine Learning â€“ Specialty](https://aws.amazon.com/certification/certified-machine-learning-specialty/)
 - [Google Cloud Professional ML Engineer](https://cloud.google.com/certification/machine-learning-engineer)
 - [Microsoft Azure AI Engineer Associate](https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/)
 
@@ -173,7 +174,7 @@ Curated collection of actively maintained resources for learning, building, and 
 - [OpenAI Developers Resources](https://developers.openai.com/resources/)
 - [Anthropic Courses](https://github.com/anthropics/courses)
 
-## 🎙️ Podcasts & Audio Content
+## ðŸŽ™ï¸ Podcasts & Audio Content
 
 ### Research and Industry Podcasts
 - [The TWIML AI Podcast](https://twimlai.com/podcast/)
@@ -186,7 +187,7 @@ Curated collection of actively maintained resources for learning, building, and 
 - [The Changelog Podcast](https://changelog.com/podcast)
 - [Talk Python To Me](https://talkpython.fm/)
 
-## 🔧 Development Tools & IDEs
+## ðŸ”§ Development Tools & IDEs
 
 ### AI-Enhanced Development Environments
 - [GitHub Copilot](https://github.com/features/copilot)
@@ -210,7 +211,7 @@ Curated collection of actively maintained resources for learning, building, and 
 - [Arize Phoenix](https://phoenix.arize.com/)
 - [Braintrust](https://www.braintrustdata.com/)
 
-## 🌍 International Communities & Events
+## ðŸŒ International Communities & Events
 
 ### Conferences
 - [NeurIPS](https://neurips.cc/)

@@ -10,23 +10,23 @@ echo "================================================="
 
 # Check if Python is installed
 if ! command -v python3 &> /dev/null; then
-    echo "❌ Python 3 is required but not installed. Please install Python 3.8 or higher."
+    echo "❌ Python 3 is required but not installed. Please install Python 3.10 or higher."
     exit 1
 fi
 
-# Check Python version
-python_version=$(python3 --version | cut -d' ' -f2 | cut -d'.' -f1,2)
-required_version="3.8"
-
-if [ "$(printf '%s\n' "$required_version" "$python_version" | sort -V | head -n1)" != "$required_version" ]; then
-    echo "❌ Python 3.8 or higher is required. Current version: $python_version"
+# Check Python version (requires Python 3.10+)
+if ! python3 -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>/dev/null; then
+    echo "❌ Python 3.10 or higher is required."
     exit 1
 fi
 
+python_version=$(python3 --version 2>&1 | cut -d' ' -f2)
 echo "✅ Python $python_version detected"
 
 # Create project directory
-read -p "Enter project name (default: my-agentic-ai-project): " project_name
+if [ -t 0 ]; then
+    read -p "Enter project name (default: my-agentic-ai-project): " project_name
+fi
 project_name=${project_name:-my-agentic-ai-project}
 
 if [ -d "$project_name" ]; then
@@ -50,29 +50,20 @@ pip install --upgrade pip
 
 # Install core packages
 echo "📦 Installing core AI agent packages..."
-pip install langchain
-pip install langchain-community
-pip install langchain-openai
-pip install autogen-agentchat
+pip install langchain langchain-community langchain-openai
+pip install pyautogen
 pip install crewai
-pip install llamaindex
-pip install openai
-pip install anthropic
+pip install llama-index
+pip install pydantic pydantic-ai
+pip install openai anthropic
 
 # Install development tools
 echo "🛠️ Installing development tools..."
-pip install streamlit
-pip install gradio
-pip install chainlit
-pip install jupyter
-pip install langsmith
-pip install python-dotenv
+pip install streamlit gradio chainlit jupyter langsmith python-dotenv
 
-# Install optional monitoring tools
-echo "📊 Installing monitoring and debugging tools..."
-pip install wandb
-pip install rich
-pip install loguru
+# Install optional monitoring & safety tools
+echo "📊 Installing monitoring and utility tools..."
+pip install wandb rich loguru simpleeval
 
 # Create basic project structure
 echo "🏗️ Creating project structure..."
@@ -100,7 +91,7 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 LANGCHAIN_PROJECT=your_project_name
 
 # Agent Configuration
-DEFAULT_MODEL=gpt-3.5-turbo
+DEFAULT_MODEL=gpt-4o-mini
 TEMPERATURE=0.7
 MAX_TOKENS=1000
 EOF
@@ -114,9 +105,9 @@ cat > .gitignore << 'EOF'
 
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
 .Python
 build/
 develop-eggs/
@@ -138,6 +129,7 @@ wheels/
 venv/
 env/
 ENV/
+.venv/
 
 # IDE
 .vscode/
@@ -158,12 +150,14 @@ data/
 *.csv
 *.json
 *.pkl
+*.sqlite
 
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# Weights & Biases
+# Weights & Biases / Monitoring
 wandb/
+.agentops/
 EOF
 
 # Create requirements.txt
@@ -173,67 +167,79 @@ pip freeze > requirements.txt
 # Create basic example files
 echo "📝 Creating example files..."
 
-# Simple LangChain example
+# Safe LangChain example
 cat > examples/simple_langchain_agent.py << 'EOF'
 """
 Simple LangChain Agent Example
-A basic agent that can answer questions and perform calculations.
+A safe agent that can answer questions and perform arithmetic calculations.
 """
 
+import ast
+import operator
 import os
 from dotenv import load_dotenv
-from langchain.agents import initialize_agent, Tool
-from langchain.llms import OpenAI
+from langchain_core.tools import tool
+from langchain_openai import ChatOpenAI
 
 # Load environment variables
 load_dotenv()
 
+SAFE_OPERATORS = {
+    ast.Add: operator.add,
+    ast.Sub: operator.sub,
+    ast.Mult: operator.mul,
+    ast.Div: operator.truediv,
+    ast.Pow: operator.pow,
+    ast.USub: operator.neg,
+}
+
+def safe_math_eval(node):
+    """Safely evaluates an AST math expression without using dangerous eval()"""
+    if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
+        return node.value
+    elif isinstance(node, ast.BinOp) and type(node.op) in SAFE_OPERATORS:
+        left = safe_math_eval(node.left)
+        right = safe_math_eval(node.right)
+        return SAFE_OPERATORS[type(node.op)](left, right)
+    elif isinstance(node, ast.UnaryOp) and type(node.op) in SAFE_OPERATORS:
+        return SAFE_OPERATORS[type(node.op)](safe_math_eval(node.operand))
+    raise ValueError(f"Unsupported math operation: {type(node).__name__}")
+
+@tool
 def calculator(expression: str) -> str:
-    """Simple calculator function"""
+    """Useful for mathematical calculations. Input must be a valid math expression like '25 * 4 + 10'."""
     try:
-        result = eval(expression)
+        parsed = ast.parse(expression.strip(), mode='eval')
+        result = safe_math_eval(parsed.body)
         return f"The result is: {result}"
     except Exception as e:
         return f"Error in calculation: {str(e)}"
 
 def main():
-    # Check if API key is set
     if not os.getenv("OPENAI_API_KEY"):
         print("❌ Please set your OPENAI_API_KEY in the .env file")
         return
     
-    # Create tools
-    tools = [
-        Tool(
-            name="Calculator",
-            func=calculator,
-            description="Useful for mathematical calculations. Input should be a mathematical expression."
-        )
-    ]
+    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+    llm_with_tools = llm.bind_tools([calculator])
     
-    # Initialize LLM
-    llm = OpenAI(temperature=0)
-    
-    # Create agent
-    agent = initialize_agent(
-        tools=tools,
-        llm=llm,
-        agent="zero-shot-react-description",
-        verbose=True
-    )
-    
-    # Example queries
     queries = [
         "What is 25 * 4 + 10?",
-        "Calculate the square root of 144",
-        "What is 20% of 150?"
+        "Calculate 12 ** 2",
+        "What is 150 * 0.2?"
     ]
     
     for query in queries:
-        print(f"\n🤖 Agent Query: {query}")
+        print(f"\n🤖 Query: {query}")
         try:
-            result = agent.run(query)
-            print(f"📝 Agent Response: {result}")
+            ai_msg = llm_with_tools.invoke(query)
+            if ai_msg.tool_calls:
+                for tool_call in ai_msg.tool_calls:
+                    if tool_call["name"] == "calculator":
+                        tool_output = calculator.invoke(tool_call["args"])
+                        print(f"🔧 Tool Output: {tool_output}")
+            else:
+                print(f"📝 Response: {ai_msg.content}")
         except Exception as e:
             print(f"❌ Error: {str(e)}")
 
@@ -245,7 +251,7 @@ EOF
 cat > examples/simple_autogen_chat.py << 'EOF'
 """
 Simple AutoGen Multi-Agent Example
-Two agents having a conversation to solve a problem.
+Two agents having a conversation to solve a problem using pyautogen.
 """
 
 import os
@@ -256,27 +262,23 @@ import autogen
 load_dotenv()
 
 def main():
-    # Check if API key is set
     if not os.getenv("OPENAI_API_KEY"):
         print("❌ Please set your OPENAI_API_KEY in the .env file")
         return
     
-    # Configuration for the LLM
     config_list = [
         {
-            "model": "gpt-3.5-turbo",
+            "model": "gpt-4o-mini",
             "api_key": os.getenv("OPENAI_API_KEY")
         }
     ]
     
-    # Create assistant agent
     assistant = autogen.AssistantAgent(
         name="Assistant",
         system_message="You are a helpful AI assistant skilled in problem-solving and analysis.",
         llm_config={"config_list": config_list}
     )
     
-    # Create user proxy agent
     user_proxy = autogen.UserProxyAgent(
         name="User",
         human_input_mode="NEVER",
@@ -284,11 +286,10 @@ def main():
         code_execution_config=False
     )
     
-    # Start conversation
     print("🤖 Starting AutoGen conversation...")
     user_proxy.initiate_chat(
         assistant,
-        message="Help me create a plan for learning AI agents. I want to understand the key concepts and practical implementation steps."
+        message="Help me create a brief 3-step plan for learning AI agents."
     )
 
 if __name__ == "__main__":
@@ -306,63 +307,47 @@ import os
 from dotenv import load_dotenv
 from crewai import Agent, Task, Crew
 
-# Load environment variables
 load_dotenv()
 
 def main():
-    # Check if API key is set
     if not os.getenv("OPENAI_API_KEY"):
         print("❌ Please set your OPENAI_API_KEY in the .env file")
         return
     
-    # Create researcher agent
     researcher = Agent(
         role='Research Analyst',
-        goal='Gather comprehensive information on AI agent frameworks',
-        backstory="""You are an expert research analyst with deep knowledge of AI technologies.
-        You excel at finding relevant information and identifying key trends.""",
+        goal='Gather concise information on modern AI agent frameworks',
+        backstory="Expert research analyst specializing in AI agent frameworks.",
         verbose=True
     )
     
-    # Create writer agent
     writer = Agent(
         role='Content Writer',
-        goal='Create engaging and informative content based on research',
-        backstory="""You are a skilled technical writer who can transform complex research
-        into clear, actionable content for developers and practitioners.""",
+        goal='Create engaging and actionable summary based on research',
+        backstory="Technical writer who synthesizes research into practical guides.",
         verbose=True
     )
     
-    # Create research task
     research_task = Task(
-        description="""Research the top 3 AI agent frameworks (LangChain, AutoGen, CrewAI).
-        For each framework, identify:
-        1. Key features and capabilities
-        2. Best use cases
-        3. Getting started steps
-        4. Pros and cons""",
+        description="Identify key features of LangGraph, AutoGen, and CrewAI.",
+        expected_output="A bulleted summary of key features for each framework.",
         agent=researcher
     )
     
-    # Create writing task
     writing_task = Task(
-        description="""Based on the research findings, write a comprehensive comparison guide
-        that helps developers choose the right AI agent framework for their project.
-        Include practical examples and recommendations.""",
+        description="Write a 1-paragraph summary helping developers choose between them.",
+        expected_output="A concise recommendation paragraph for developers.",
         agent=writer
     )
     
-    # Create crew
     crew = Crew(
         agents=[researcher, writer],
         tasks=[research_task, writing_task],
-        verbose=2
+        verbose=True
     )
     
-    # Execute the crew
     print("🤖 Starting CrewAI team execution...")
     result = crew.kickoff()
-    
     print("\n" + "="*50)
     print("📝 Final Result:")
     print("="*50)
@@ -383,7 +368,6 @@ import os
 import streamlit as st
 from dotenv import load_dotenv
 
-# Load environment variables
 load_dotenv()
 
 st.set_page_config(
@@ -395,47 +379,39 @@ st.set_page_config(
 st.title("🤖 AI Agent Demo")
 st.write("Interactive demonstration of AI agents")
 
-# Sidebar for configuration
 st.sidebar.header("Configuration")
 api_key = st.sidebar.text_input("OpenAI API Key", type="password", value=os.getenv("OPENAI_API_KEY", ""))
-model = st.sidebar.selectbox("Model", ["gpt-3.5-turbo", "gpt-4"])
+model = st.sidebar.selectbox("Model", ["gpt-4o-mini", "gpt-4o"])
 temperature = st.sidebar.slider("Temperature", 0.0, 1.0, 0.7)
 
-# Main interface
 if api_key:
     st.success("✅ API Key configured")
     
-    # Chat interface
     if "messages" not in st.session_state:
         st.session_state.messages = []
     
-    # Display chat messages
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
     
-    # Chat input
     if prompt := st.chat_input("Ask your AI agent..."):
-        # Add user message
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
         
-        # Add assistant response (placeholder)
         with st.chat_message("assistant"):
-            response = f"This is a demo response to: {prompt}"
+            response = f"Echo Agent Response (Model: {model}): {prompt}"
             st.markdown(response)
             st.session_state.messages.append({"role": "assistant", "content": response})
 else:
     st.warning("⚠️ Please configure your OpenAI API key in the sidebar")
-    
+
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 🚀 Quick Start")
 st.sidebar.markdown("1. Enter your OpenAI API key")
 st.sidebar.markdown("2. Choose your model settings")
 st.sidebar.markdown("3. Start chatting with the agent")
 
-# Footer
 st.markdown("---")
 st.markdown("Built with ❤️ using Streamlit and AI agents")
 EOF
@@ -444,7 +420,7 @@ EOF
 cat > README.md << 'EOF'
 # My Agentic AI Project
 
-Welcome to your AI agent development environment! This project is set up with all the essential tools and frameworks for building intelligent agents.
+Welcome to your AI agent development environment! This project is set up with modern tools and frameworks for building intelligent agents.
 
 ## 🚀 Quick Start
 
@@ -461,7 +437,7 @@ Welcome to your AI agent development environment! This project is set up with al
 
 3. **Run example agents:**
    ```bash
-   # Simple LangChain agent
+   # Safe LangChain agent with arithmetic tool
    python examples/simple_langchain_agent.py
    
    # AutoGen multi-agent conversation
@@ -494,28 +470,12 @@ my-agentic-ai-project/
 
 ## 🛠️ Installed Frameworks
 
-- **LangChain**: For general LLM applications and tool integration
+- **LangChain**: For LLM tool calling and workflows
 - **AutoGen**: For multi-agent conversations and collaboration
 - **CrewAI**: For role-based agent teams
-- **LlamaIndex**: For data indexing and knowledge bases
-- **Streamlit**: For building web interfaces
-- **Gradio**: For creating demos
-- **Jupyter**: For interactive development
-
-## 📚 Next Steps
-
-1. Explore the [Awesome Agentic AI repository](https://github.com/yadavanujkumar/awesome-agentic-ai) for comprehensive guides
-2. Check out the [cheat sheets](https://github.com/yadavanujkumar/awesome-agentic-ai/tree/main/resources/cheat-sheets) for best practices
-3. Join the community discussions and contribute your own examples
-
-## 🤝 Contributing
-
-Feel free to add your own agents, tools, and examples to this project. Share your innovations with the community!
-
-## 📞 Support
-
-- GitHub Issues: [Report bugs or request features](https://github.com/yadavanujkumar/awesome-agentic-ai/issues)
-- Discussions: [Join community discussions](https://github.com/yadavanujkumar/awesome-agentic-ai/discussions)
+- **PydanticAI**: For type-safe agent schemas
+- **LlamaIndex**: For data indexing and knowledge retrieval
+- **Streamlit**: For rapid web interfaces
 
 Happy building! 🤖✨
 EOF
@@ -536,7 +496,5 @@ echo "4. Edit .env with your API keys"
 echo "5. python examples/simple_langchain_agent.py"
 echo ""
 echo "📚 Documentation: https://github.com/yadavanujkumar/awesome-agentic-ai"
-echo "🎥 Video tutorials: https://github.com/yadavanujkumar/awesome-agentic-ai/tree/main/resources#-video-resources"
-echo "📋 Cheat sheets: https://github.com/yadavanujkumar/awesome-agentic-ai/tree/main/resources/cheat-sheets"
 echo ""
 echo "Happy coding! 🤖✨"
