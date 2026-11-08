@@ -2,7 +2,10 @@
 <html lang="en" class="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#2563eb">
   <title>Awesome Agentic AI &mdash; Open World 3D Multiverse &amp; Git Docs Hub</title>
   <!-- Tailwind CSS & Three.js CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -88,59 +91,73 @@
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
     .dark ::-webkit-scrollbar-thumb { background: #1e293b; }
     ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+    /* Mobile Touch Ergonomics & Safe Areas */
+    .touch-none {
+      touch-action: none !important;
+      -webkit-touch-callout: none !important;
+      -webkit-user-select: none !important;
+      user-select: none !important;
+    }
+    @supports (padding: env(safe-area-inset-bottom)) {
+      .safe-pb { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+    }
   </style>
 </head>
-<body class="h-screen w-screen flex flex-col select-none">
+<body class="h-screen w-screen flex flex-col select-none touch-none overflow-hidden">
 
   <!-- ========================================================================= -->
-  <!-- TOP GLOBAL HEADER -->
+  <!-- TOP GLOBAL HEADER (Responsive on iPhone & Android) -->
   <!-- ========================================================================= -->
-  <header class="h-14 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101c] px-4 flex items-center justify-between shrink-0 z-50 transition-colors">
-    <div class="flex items-center gap-3">
-      <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center font-mono font-bold text-sm text-white shadow-md shadow-blue-500/20">A</div>
+  <header class="h-13 sm:h-14 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101c] px-2 sm:px-4 flex items-center justify-between shrink-0 z-50 transition-colors gap-1 sm:gap-2">
+    <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+      <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center font-mono font-bold text-xs sm:text-sm text-white shadow-md shadow-blue-500/20">A</div>
       <div>
-        <div class="flex items-center gap-2">
-          <h1 class="font-bold text-sm text-slate-900 dark:text-white tracking-tight leading-none">Awesome Agentic AI</h1>
-          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-semibold">Multiverse Open World</span>
+        <div class="flex items-center gap-1.5">
+          <h1 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white tracking-tight leading-none">
+            <span class="sm:hidden">Agentic AI</span>
+            <span class="hidden sm:inline">Awesome Agentic AI</span>
+          </h1>
+          <span class="hidden lg:inline text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-semibold">Multiverse Open World</span>
         </div>
-        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">4 Themed Worlds &bull; 28 Knowledge Landmarks &bull; Git Docs Hub</p>
+        <p class="hidden md:block text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">4 Themed Worlds &bull; 28 Knowledge Landmarks &bull; Git Docs Hub</p>
       </div>
     </div>
 
     <!-- Mode Selector Tabs -->
-    <div class="flex items-center bg-slate-100 dark:bg-[#131929] p-1 rounded-xl border border-slate-200 dark:border-slate-800 gap-1">
-      <button onclick="switchView('game')" id="tab-game" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-blue-600 text-blue-600 dark:text-white shadow-sm flex items-center gap-1.5 transition-all">
-        <span>&#x1F30E; 3D Multiverse</span>
+    <div class="flex items-center bg-slate-100 dark:bg-[#131929] p-0.5 sm:p-1 rounded-xl border border-slate-200 dark:border-slate-800 gap-0.5 sm:gap-1 text-[11px] sm:text-xs">
+      <button onclick="switchView('game')" id="tab-game" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold bg-white dark:bg-blue-600 text-blue-600 dark:text-white shadow-sm flex items-center gap-1 transition-all" title="3D Open World">
+        <span>🌐</span><span class="hidden xs:inline">3D</span>
       </button>
-      <button onclick="switchView('mindmap')" id="tab-mindmap" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 transition-all">
-        <span>&#x1F333; Mindmap Tree</span>
+      <button onclick="switchView('mindmap')" id="tab-mindmap" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 transition-all" title="Mindmap Knowledge Tree">
+        <span>🌳</span><span class="hidden xs:inline">Tree</span>
       </button>
-      <button onclick="switchView('docs')" id="tab-docs" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 transition-all">
-        <span>&#x1F4DA; Git Docs Hub</span>
+      <button onclick="switchView('docs')" id="tab-docs" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 transition-all" title="Git Docs Hub">
+        <span>📚</span><span class="hidden xs:inline">Docs</span>
       </button>
-      <button onclick="switchView('matrix')" id="tab-matrix" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 transition-all hidden md:flex">
-        <span>&#x26A1; Frameworks (40+)</span>
+      <button onclick="switchView('matrix')" id="tab-matrix" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 transition-all hidden sm:flex" title="40+ Frameworks Matrix">
+        <span>⚡</span><span class="hidden md:inline">40+</span>
       </button>
     </div>
 
     <!-- World Switcher & Actions -->
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-1 sm:gap-2 shrink-0">
       <!-- 4 Selectable Worlds Switcher (Always visible!) -->
-      <div class="flex items-center bg-slate-100 dark:bg-[#131929] p-0.5 rounded-lg border border-slate-200 dark:border-slate-800 text-[11px] font-mono">
-        <button onclick="switchWorld('island')" id="wbtn-island" class="px-2 py-1 rounded bg-blue-600 text-white font-semibold transition" title="Silicon Island">🏝️<span class="hidden sm:inline ml-1">Island</span></button>
-        <button onclick="switchWorld('city')" id="wbtn-city" class="px-2 py-1 rounded text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition" title="Cyber City">🏙️<span class="hidden sm:inline ml-1">City</span></button>
-        <button onclick="switchWorld('mars')" id="wbtn-mars" class="px-2 py-1 rounded text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition" title="Mars Colony">🚀<span class="hidden sm:inline ml-1">Mars</span></button>
-        <button onclick="switchWorld('alpine')" id="wbtn-alpine" class="px-2 py-1 rounded text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition" title="Alpine Pass">🏔️<span class="hidden sm:inline ml-1">Alpine</span></button>
+      <div class="flex items-center bg-slate-100 dark:bg-[#131929] p-0.5 rounded-lg border border-slate-200 dark:border-slate-800 text-[10px] sm:text-[11px] font-mono">
+        <button onclick="switchWorld('island')" id="wbtn-island" class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded bg-blue-600 text-white font-semibold transition" title="Silicon Island">🏝️<span class="hidden md:inline ml-0.5">Island</span></button>
+        <button onclick="switchWorld('city')" id="wbtn-city" class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition" title="Cyber City">🏙️<span class="hidden md:inline ml-0.5">City</span></button>
+        <button onclick="switchWorld('mars')" id="wbtn-mars" class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition" title="Mars Colony">🚀<span class="hidden md:inline ml-0.5">Mars</span></button>
+        <button onclick="switchWorld('alpine')" id="wbtn-alpine" class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition" title="Alpine Pass">🏔️<span class="hidden md:inline ml-0.5">Alpine</span></button>
       </div>
 
       <!-- Theme Switcher Button -->
-      <button onclick="toggleTheme()" id="btn-theme-toggle" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 dark:bg-[#151b2b] dark:hover:bg-[#1f273d] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-800 flex items-center gap-1.5 transition-all">
+      <button onclick="toggleTheme()" id="btn-theme-toggle" class="p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 dark:bg-[#151b2b] dark:hover:bg-[#1f273d] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-800 flex items-center gap-1 transition-all">
         <span id="theme-icon">&#x2600;&#xFE0F;</span>
       </button>
 
-      <a href="https://github.com/yadavanujkumar/awesome-agentic-ai" target="_blank" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-900 hover:bg-slate-800 text-white dark:bg-[#151b2b] dark:hover:bg-[#1f273d] dark:text-slate-200 border border-slate-800 dark:border-slate-800 flex items-center gap-1.5 transition-all">
+      <a href="https://github.com/yadavanujkumar/awesome-agentic-ai" target="_blank" class="hidden md:flex px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-900 hover:bg-slate-800 text-white dark:bg-[#151b2b] dark:hover:bg-[#1f273d] dark:text-slate-200 border border-slate-800 dark:border-slate-800 items-center gap-1.5 transition-all">
         <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        <span class="hidden md:inline">GitHub</span>
+        <span>GitHub</span>
       </a>
     </div>
   </header>
@@ -244,22 +261,51 @@
     </div>
 
     <!-- Proximity Interaction Banner (Appears when near any landmark) -->
-    <div id="proximity-banner" class="absolute bottom-8 left-1/2 -translate-x-1/2 hud-glass px-6 py-4 border-blue-500/50 shadow-2xl flex items-center gap-4 transition-all duration-300 opacity-0 pointer-events-none translate-y-6 z-40 max-w-lg w-[92%] sm:w-auto">
-      <div class="w-4 h-4 rounded-full bg-blue-600 dark:bg-cyan-400 animate-ping shrink-0"></div>
-      <div class="flex-1">
-        <div id="proximity-title" class="font-bold text-slate-900 dark:text-white text-xs font-mono uppercase tracking-wide">KNOWLEDGE LANDMARK NEARBY</div>
-        <div class="text-[11px] text-slate-600 dark:text-slate-300">Press <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-blue-950 border border-slate-300 dark:border-blue-500 text-blue-600 dark:text-white font-mono text-[10px] font-bold">[Space]</kbd> or <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-blue-950 border border-slate-300 dark:border-blue-500 text-blue-600 dark:text-white font-mono text-[10px] font-bold">[E]</kbd> to unlock details.</div>
+    <div id="proximity-banner" class="absolute bottom-28 sm:bottom-8 left-1/2 -translate-x-1/2 hud-glass px-5 sm:px-6 py-3.5 sm:py-4 border-blue-500/50 shadow-2xl flex items-center gap-3.5 sm:gap-4 transition-all duration-300 opacity-0 pointer-events-none translate-y-6 z-40 max-w-lg w-[92%] sm:w-auto">
+      <div class="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-blue-600 dark:bg-cyan-400 animate-ping shrink-0"></div>
+      <div class="flex-1 min-w-0">
+        <div id="proximity-title" class="font-bold text-slate-900 dark:text-white text-xs font-mono uppercase tracking-wide truncate">KNOWLEDGE LANDMARK NEARBY</div>
+        <div class="text-[10px] sm:text-[11px] text-slate-600 dark:text-slate-300">Tap <strong class="text-blue-600 dark:text-cyan-400 font-bold">Open Knowledge</strong> or press <kbd class="px-1 py-0.5 rounded bg-slate-100 dark:bg-blue-950 border text-[10px]">[E]</kbd></div>
       </div>
-      <button onclick="triggerCurrentChest()" class="pointer-events-auto px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold font-mono shadow-md transition-transform active:scale-95">Open Knowledge</button>
+      <button onclick="triggerCurrentChest()" class="pointer-events-auto shrink-0 px-3.5 sm:px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold font-mono shadow-md transition-transform active:scale-95">Open</button>
     </div>
 
-    <!-- Mobile Touch D-Pad (Bottom Right) -->
-    <div class="absolute bottom-6 right-6 flex flex-col items-center gap-1.5 sm:hidden z-30">
-      <button id="ctrl-up" class="w-12 h-12 rounded-2xl bg-white/90 dark:bg-slate-800/90 active:bg-blue-600 active:text-white text-slate-800 dark:text-white flex items-center justify-center font-bold text-xl border border-slate-300 dark:border-slate-700 shadow-xl">&uarr;</button>
-      <div class="flex gap-2">
-        <button id="ctrl-left" class="w-12 h-12 rounded-2xl bg-white/90 dark:bg-slate-800/90 active:bg-blue-600 active:text-white text-slate-800 dark:text-white flex items-center justify-center font-bold text-xl border border-slate-300 dark:border-slate-700 shadow-xl">&larr;</button>
-        <button id="ctrl-down" class="w-12 h-12 rounded-2xl bg-white/90 dark:bg-slate-800/90 active:bg-blue-600 active:text-white text-slate-800 dark:text-white flex items-center justify-center font-bold text-xl border border-slate-300 dark:border-slate-700 shadow-xl">&darr;</button>
-        <button id="ctrl-right" class="w-12 h-12 rounded-2xl bg-white/90 dark:bg-slate-800/90 active:bg-blue-600 active:text-white text-slate-800 dark:text-white flex items-center justify-center font-bold text-xl border border-slate-300 dark:border-slate-700 shadow-xl">&rarr;</button>
+    <!-- MOBILE ERGONOMIC DRIVING COCKPIT (Dual-Thumb Controls on Phones) -->
+    <div id="mobile-driving-cockpit" class="absolute inset-x-0 bottom-0 pointer-events-none z-30 pb-3 sm:pb-6 px-3 sm:px-6 flex items-end justify-between select-none touch-none sm:hidden">
+      <!-- LEFT THUMB: Ergonomic Steering Pads -->
+      <div class="pointer-events-auto flex items-center gap-2">
+        <button id="btn-touch-left" class="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-blue-600 text-white border border-white/20 active:border-white/80 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
+          <span class="text-xl font-bold leading-none">&#x25C0;</span>
+          <span class="text-[8px] font-mono tracking-wider uppercase text-slate-300 mt-0.5 font-bold">LEFT</span>
+        </button>
+        <button id="btn-touch-right" class="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-blue-600 text-white border border-white/20 active:border-white/80 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
+          <span class="text-xl font-bold leading-none">&#x25B6;</span>
+          <span class="text-[8px] font-mono tracking-wider uppercase text-slate-300 mt-0.5 font-bold">RIGHT</span>
+        </button>
+      </div>
+
+      <!-- CENTER: Quick Landmark Interaction & Camera View -->
+      <div class="pointer-events-auto flex flex-col items-center gap-1.5 mb-1">
+        <!-- Floating Inspect Button (Shows when near landmark) -->
+        <button id="btn-touch-inspect" onclick="triggerCurrentChest()" class="hidden px-3.5 py-1.5 rounded-full bg-emerald-600 active:bg-emerald-500 text-white font-mono text-[11px] font-bold shadow-xl border border-emerald-400 animate-pulse active:scale-95 transition-all">
+          &#x1F50D; INSPECT
+        </button>
+        <!-- Camera Mode Quick Toggle -->
+        <button id="btn-touch-cam" onclick="cycleCameraMode()" class="px-3 py-1 rounded-full bg-slate-900/80 text-slate-200 border border-white/20 active:bg-slate-800 text-[10px] font-mono backdrop-blur-md shadow-md active:scale-95">
+          &#x1F4F7; <span id="mobile-cam-label">CHASE</span>
+        </button>
+      </div>
+
+      <!-- RIGHT THUMB: Drive (Gas) & Brake (Reverse) Pedals -->
+      <div class="pointer-events-auto flex items-end gap-2">
+        <button id="btn-touch-brake" class="w-13 h-13 p-2.5 rounded-2xl bg-red-950/85 active:bg-red-600 text-white border border-red-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
+          <span class="text-base font-bold leading-none">&#x25BC;</span>
+          <span class="text-[8px] font-mono tracking-wider uppercase text-red-200 mt-0.5 font-bold">REV</span>
+        </button>
+        <button id="btn-touch-gas" class="w-16 h-16 p-3 rounded-2xl bg-gradient-to-t from-blue-700 to-cyan-500 active:from-blue-600 active:to-emerald-400 text-white border border-cyan-300/50 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
+          <span class="text-2xl font-black leading-none">&#x25B2;</span>
+          <span class="text-[9px] font-mono font-bold tracking-wider uppercase text-white mt-0.5">GAS</span>
+        </button>
       </div>
     </div>
   </section>
@@ -268,39 +314,50 @@
   <!-- VIEW 2: INTERACTIVE MINDMAP & KNOWLEDGE TREE -->
   <!-- ========================================================================= -->
   <section id="view-mindmap" class="flex-1 w-full h-full flex flex-col lg:flex-row overflow-hidden hidden bg-slate-50 dark:bg-[#07090f]">
-    <div class="w-full lg:w-1/2 h-1/2 lg:h-full relative border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 flex flex-col bg-white dark:bg-[#07090f]">
+    <!-- Mobile Sub-Tab Segmented Switcher -->
+    <div class="lg:hidden p-2 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101c] flex items-center justify-between shrink-0">
+      <div class="flex items-center bg-slate-100 dark:bg-[#131929] p-0.5 rounded-lg border border-slate-200 dark:border-slate-800 text-xs font-mono">
+        <button onclick="switchMindmapMobileTab('graph')" id="mm-tab-graph" class="px-3 py-1 rounded-md bg-blue-600 text-white font-bold transition">🕸️ Graph</button>
+        <button onclick="switchMindmapMobileTab('tree')" id="mm-tab-tree" class="px-3 py-1 rounded-md text-slate-600 dark:text-slate-400 font-bold transition">🌲 Knowledge Tree</button>
+      </div>
+      <span class="text-[10px] text-slate-500 font-mono">28 Core Modules</span>
+    </div>
+
+    <!-- Graph Panel -->
+    <div id="mindmap-graph-pane" class="w-full lg:w-1/2 h-full relative border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-slate-800 flex flex-col bg-white dark:bg-[#07090f]">
       <div class="p-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between shrink-0">
         <div class="flex items-center gap-2">
           <span class="text-xs font-mono font-bold text-blue-600 dark:text-cyan-400">&#x1F310; INTERACTIVE GRAPH</span>
-          <span class="text-[10px] text-slate-500 font-mono">(Drag nodes with mouse)</span>
+          <span class="text-[10px] text-slate-500 font-mono hidden sm:inline">(Touch or drag nodes)</span>
         </div>
         <button onclick="resetGraphPhysics()" class="px-2.5 py-1 rounded-md bg-white dark:bg-[#151b2b] hover:bg-slate-100 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">Reset Graph</button>
       </div>
       <div class="flex-1 relative overflow-hidden" id="mindmap-canvas-container">
-        <canvas id="mindmap-canvas" class="w-full h-full block"></canvas>
+        <canvas id="mindmap-canvas" class="w-full h-full block touch-none"></canvas>
       </div>
     </div>
 
-    <div class="w-full lg:w-1/2 h-1/2 lg:h-full flex flex-col bg-slate-50 dark:bg-[#0a0d17] overflow-hidden">
-      <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101c] flex items-center justify-between shrink-0">
+    <!-- Tree Panel -->
+    <div id="mindmap-tree-pane" class="w-full lg:w-1/2 h-full flex flex-col bg-slate-50 dark:bg-[#0a0d17] overflow-hidden hidden lg:flex">
+      <div class="p-3 sm:p-4 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101c] flex items-center justify-between shrink-0">
         <div>
-          <h2 class="text-sm font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+          <h2 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
             <span>&#x1F333; Hierarchical Knowledge Tree</span>
             <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 font-semibold">28 Modules</span>
           </h2>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Explore structured branches matching repository modules.</p>
+          <p class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Explore structured branches matching repository modules.</p>
         </div>
-        <div class="flex gap-2">
-          <button onclick="expandAllTree(true)" class="px-2.5 py-1 text-xs font-mono rounded-lg bg-white dark:bg-[#151b2b] border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:text-white transition">Expand All</button>
-          <button onclick="expandAllTree(false)" class="px-2.5 py-1 text-xs font-mono rounded-lg bg-white dark:bg-[#151b2b] border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:text-white transition">Collapse All</button>
+        <div class="flex gap-1.5 sm:gap-2">
+          <button onclick="expandAllTree(true)" class="px-2 sm:px-2.5 py-1 text-[11px] font-mono rounded-lg bg-white dark:bg-[#151b2b] border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:text-white transition">Expand</button>
+          <button onclick="expandAllTree(false)" class="px-2 sm:px-2.5 py-1 text-[11px] font-mono rounded-lg bg-white dark:bg-[#151b2b] border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:text-white transition">Collapse</button>
         </div>
       </div>
 
-      <div class="p-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0e121e]">
+      <div class="p-2.5 sm:p-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0e121e]">
         <input type="text" id="tree-search" oninput="filterTree(this.value)" placeholder="Filter knowledge tree branches..." class="w-full bg-slate-50 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 font-mono outline-none focus:border-blue-500">
       </div>
 
-      <div id="tree-content-container" class="flex-1 overflow-y-auto p-5 space-y-4 font-mono text-xs">
+      <div id="tree-content-container" class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 font-mono text-xs">
         <!-- Rendered dynamically -->
       </div>
     </div>
@@ -309,8 +366,17 @@
   <!-- ========================================================================= -->
   <!-- VIEW 3: FULL GIT DOCUMENTATION HUB -->
   <!-- ========================================================================= -->
-  <section id="view-docs" class="flex-1 w-full h-full flex overflow-hidden hidden bg-slate-50 dark:bg-[#080a10]">
-    <aside class="w-80 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101c] flex flex-col shrink-0 overflow-hidden">
+  <section id="view-docs" class="flex-1 w-full h-full flex flex-col md:flex-row overflow-hidden hidden bg-slate-50 dark:bg-[#080a10]">
+    <!-- Mobile Doc Selector Header -->
+    <div class="md:hidden p-2.5 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101c] flex items-center justify-between shrink-0">
+      <button onclick="toggleMobileDocsSidebar()" class="px-3 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-mono text-xs font-semibold flex items-center gap-2">
+        <span>☰</span> <span id="mobile-doc-selector-label">Browse 28 Git Modules</span>
+      </button>
+      <span class="text-[10px] text-slate-500 font-mono">28 Runbooks</span>
+    </div>
+
+    <!-- Sidebar with Chapter List -->
+    <aside id="docs-sidebar" class="w-full md:w-80 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101c] flex flex-col shrink-0 overflow-hidden hidden md:flex">
       <div class="p-3 border-b border-slate-200 dark:border-slate-800">
         <input type="text" id="docs-sidebar-search" oninput="filterDocsList(this.value)" placeholder="Filter git documentation..." class="w-full bg-slate-50 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 font-mono outline-none focus:border-blue-500">
       </div>
@@ -319,7 +385,7 @@
       </div>
     </aside>
 
-    <main class="flex-1 overflow-y-auto p-6 lg:p-10">
+    <main id="docs-main-content" class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-10">
       <div class="max-w-4xl mx-auto space-y-6" id="docs-reader-container">
         <!-- Content injected dynamically -->
       </div>
@@ -329,53 +395,53 @@
   <!-- ========================================================================= -->
   <!-- VIEW 4: FRAMEWORK MATRIX (INTERACTIVE GRID) -->
   <!-- ========================================================================= -->
-  <section id="view-matrix" class="flex-1 w-full h-full overflow-y-auto p-6 lg:p-10 hidden bg-slate-50 dark:bg-[#080a10]">
+  <section id="view-matrix" class="flex-1 w-full h-full overflow-y-auto p-4 sm:p-6 lg:p-10 hidden bg-slate-50 dark:bg-[#080a10]">
     <div class="max-w-6xl mx-auto space-y-6">
       <div class="border-b border-slate-200 dark:border-slate-800 pb-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
             <span>&#x26A1; 40+ Production Agent Frameworks</span>
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-semibold">November 2026 Evaluation</span>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 font-semibold hidden sm:inline">November 2026</span>
           </h2>
           <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Benchmarked against state persistence, MCP tool integration, type safety, and multi-agent coordination.</p>
         </div>
-        <div class="flex flex-wrap gap-1.5 font-mono text-xs" id="matrix-filter-buttons">
-          <button onclick="filterMatrix('all')" class="matrix-filter-btn px-3 py-1 rounded-lg bg-blue-600 text-white font-medium" data-cat="all">All (40+)</button>
-          <button onclick="filterMatrix('orchestration')" class="matrix-filter-btn px-3 py-1 rounded-lg bg-white dark:bg-[#151b2b] hover:bg-slate-100 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800" data-cat="orchestration">Orchestration</button>
-          <button onclick="filterMatrix('multi-agent')" class="matrix-filter-btn px-3 py-1 rounded-lg bg-white dark:bg-[#151b2b] hover:bg-slate-100 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800" data-cat="multi-agent">Multi-Agent</button>
-          <button onclick="filterMatrix('typesafe')" class="matrix-filter-btn px-3 py-1 rounded-lg bg-white dark:bg-[#151b2b] hover:bg-slate-100 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800" data-cat="typesafe">Type-Safe</button>
-          <button onclick="filterMatrix('cloud')" class="matrix-filter-btn px-3 py-1 rounded-lg bg-white dark:bg-[#151b2b] hover:bg-slate-100 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800" data-cat="cloud">Cloud / Enterprise</button>
+        <div class="flex flex-wrap gap-1 font-mono text-[11px] sm:text-xs" id="matrix-filter-buttons">
+          <button onclick="filterMatrix('all')" class="matrix-filter-btn px-2.5 sm:px-3 py-1 rounded-lg bg-blue-600 text-white font-medium" data-cat="all">All (40+)</button>
+          <button onclick="filterMatrix('orchestration')" class="matrix-filter-btn px-2.5 sm:px-3 py-1 rounded-lg bg-white dark:bg-[#151b2b] hover:bg-slate-100 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800" data-cat="orchestration">Orchestration</button>
+          <button onclick="filterMatrix('multi-agent')" class="matrix-filter-btn px-2.5 sm:px-3 py-1 rounded-lg bg-white dark:bg-[#151b2b] hover:bg-slate-100 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800" data-cat="multi-agent">Multi-Agent</button>
+          <button onclick="filterMatrix('typesafe')" class="matrix-filter-btn px-2.5 sm:px-3 py-1 rounded-lg bg-white dark:bg-[#151b2b] hover:bg-slate-100 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800" data-cat="typesafe">Type-Safe</button>
+          <button onclick="filterMatrix('cloud')" class="matrix-filter-btn px-2.5 sm:px-3 py-1 rounded-lg bg-white dark:bg-[#151b2b] hover:bg-slate-100 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800" data-cat="cloud">Cloud</button>
         </div>
       </div>
 
-      <div id="frameworks-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div id="frameworks-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         <!-- Rendered dynamically -->
       </div>
     </div>
   </section>
 
   <!-- ========================================================================= -->
-  <!-- KNOWLEDGE CHEST INSPECTION MODAL -->
+  <!-- KNOWLEDGE CHEST INSPECTION MODAL (Mobile Bottom Sheet / Desktop Modal) -->
   <!-- ========================================================================= -->
-  <div id="knowledge-modal" class="fixed inset-0 bg-slate-900/40 dark:bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-    <div class="card-surface max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl border-blue-500/40">
-      <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
-          <span id="modal-badge" class="px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-cyan-950 text-blue-800 dark:text-cyan-300 font-mono text-[10px] border border-blue-200 dark:border-cyan-800 font-bold uppercase">LANDMARK DISCOVERED</span>
-          <h3 id="modal-title" class="font-bold text-slate-900 dark:text-white text-base">Knowledge Title</h3>
+  <div id="knowledge-modal" class="fixed inset-0 bg-slate-900/60 dark:bg-black/85 backdrop-blur-md z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 hidden transition-all">
+    <div class="card-surface w-full sm:max-w-3xl max-h-[92vh] sm:max-h-[85vh] flex flex-col overflow-hidden shadow-2xl border-blue-500/40 rounded-t-3xl sm:rounded-2xl">
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2 min-w-0">
+          <span id="modal-badge" class="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-cyan-950 text-blue-800 dark:text-cyan-300 font-mono text-[9px] sm:text-[10px] border border-blue-200 dark:border-cyan-800 font-bold uppercase shrink-0">LANDMARK</span>
+          <h3 id="modal-title" class="font-bold text-slate-900 dark:text-white text-sm sm:text-base truncate">Knowledge Title</h3>
         </div>
-        <button onclick="closeKnowledgeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-2xl font-bold leading-none p-1">&times;</button>
+        <button onclick="closeKnowledgeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-2xl font-bold leading-none p-1.5 shrink-0">&times;</button>
       </div>
 
-      <div id="modal-body" class="p-6 overflow-y-auto space-y-4 text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
+      <div id="modal-body" class="p-4 sm:p-6 overflow-y-auto space-y-4 text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
         <!-- Injected -->
       </div>
 
-      <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between font-mono text-xs">
-        <span class="text-slate-500 text-[11px]">Git Universe Specification</span>
-        <div class="flex gap-2">
-          <button onclick="closeKnowledgeModal()" class="px-3.5 py-1.5 rounded-lg bg-white dark:bg-[#151b2b] text-slate-700 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-800">Resume Driving</button>
-          <button onclick="openInDocsFromModal()" class="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium shadow-md">Open Full Git Runbook &rarr;</button>
+      <div class="p-3 sm:p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between font-mono text-xs shrink-0 safe-pb">
+        <span class="text-slate-500 text-[10px] hidden sm:inline">Git Universe Specification</span>
+        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+          <button onclick="closeKnowledgeModal()" class="px-3 py-1.5 rounded-lg bg-white dark:bg-[#151b2b] text-slate-700 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-800 text-xs">Close</button>
+          <button onclick="openInDocsFromModal()" class="px-3.5 sm:px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium shadow-md text-xs">Read Full Runbook &rarr;</button>
         </div>
       </div>
     </div>
@@ -875,6 +941,35 @@
       }
     }
 
+    function switchMindmapMobileTab(tab) {
+      const graphPane = document.getElementById('mindmap-graph-pane');
+      const treePane = document.getElementById('mindmap-tree-pane');
+      const tabGraph = document.getElementById('mm-tab-graph');
+      const tabTree = document.getElementById('mm-tab-tree');
+      if (!graphPane || !treePane) return;
+
+      if (tab === 'graph') {
+        graphPane.classList.remove('hidden');
+        treePane.classList.add('hidden');
+        treePane.classList.remove('flex');
+        if (tabGraph) tabGraph.className = "px-3 py-1 rounded-md bg-blue-600 text-white font-bold transition";
+        if (tabTree) tabTree.className = "px-3 py-1 rounded-md text-slate-600 dark:text-slate-400 font-bold transition";
+      } else {
+        graphPane.classList.add('hidden');
+        treePane.classList.remove('hidden');
+        treePane.classList.add('flex');
+        if (tabTree) tabTree.className = "px-3 py-1 rounded-md bg-blue-600 text-white font-bold transition";
+        if (tabGraph) tabGraph.className = "px-3 py-1 rounded-md text-slate-600 dark:text-slate-400 font-bold transition";
+      }
+    }
+
+    function toggleMobileDocsSidebar() {
+      const sidebar = document.getElementById('docs-sidebar');
+      if (sidebar) {
+        sidebar.classList.toggle('hidden');
+      }
+    }
+
     // =========================================================================
     // 5. MINDMAP & TREE ENGINE
     // =========================================================================
@@ -992,6 +1087,34 @@
         graphDragNode = null;
       });
 
+      // Mobile touch interactions for knowledge graph
+      graphCanvas.addEventListener('touchstart', e => {
+        if (e.touches.length !== 1) return;
+        const rect = graphCanvas.getBoundingClientRect();
+        const mx = e.touches[0].clientX - rect.left - graphCanvas.width / 2;
+        const my = e.touches[0].clientY - rect.top - graphCanvas.height / 2;
+        graphNodes.forEach(n => {
+          const dist = Math.hypot(mx - n.x, my - n.y);
+          if (dist < n.r + 14) {
+            graphDragNode = n;
+            offsetX = mx - n.x;
+            offsetY = my - n.y;
+          }
+        });
+      }, { passive: true });
+
+      window.addEventListener('touchmove', e => {
+        if (!graphDragNode || e.touches.length !== 1) return;
+        const rect = graphCanvas.getBoundingClientRect();
+        graphDragNode.x = e.touches[0].clientX - rect.left - graphCanvas.width / 2 - offsetX;
+        graphDragNode.y = e.touches[0].clientY - rect.top - graphCanvas.height / 2 - offsetY;
+      }, { passive: true });
+
+      window.addEventListener('touchend', () => {
+        if (graphDragNode) openKnowledgeModal(graphDragNode.docId);
+        graphDragNode = null;
+      });
+
       if (!graphAnimId) animateGraph();
     }
 
@@ -1074,6 +1197,13 @@
     function loadDocById(docId) {
       const doc = repoDocs.find(d => d.id === docId);
       if (!doc) return;
+
+      const mobileLabel = document.getElementById('mobile-doc-selector-label');
+      if (mobileLabel) mobileLabel.innerText = doc.title;
+      if (window.innerWidth < 768) {
+        const sidebar = document.getElementById('docs-sidebar');
+        if (sidebar) sidebar.classList.add('hidden');
+      }
 
       document.querySelectorAll('.doc-sidebar-btn').forEach(btn => {
         btn.classList.remove('bg-blue-50', 'dark:bg-blue-600/20', 'text-blue-600', 'dark:text-blue-400', 'font-medium', 'border', 'border-blue-200', 'dark:border-blue-500/40');
@@ -1290,6 +1420,9 @@
 
     function setCameraMode(mode) {
       cameraMode = mode;
+      const camLabel = document.getElementById('mobile-cam-label');
+      if (camLabel) camLabel.innerText = mode.toUpperCase();
+
       ['chase', 'hood', 'drone', 'orbit'].forEach(m => {
         const btn = document.getElementById('cam-btn-' + m);
         if (btn) {
@@ -1297,6 +1430,12 @@
           else btn.className = "px-1.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300";
         }
       });
+    }
+
+    function cycleCameraMode() {
+      const modes = ['chase', 'hood', 'drone', 'orbit'];
+      const nextIdx = (modes.indexOf(cameraMode) + 1) % modes.length;
+      setCameraMode(modes[nextIdx]);
     }
 
     function resetCameraAngle() {
@@ -2039,20 +2178,53 @@
       if (c) activeKeys[c] = false;
     });
 
-    const bindTouchControl = (btnId, keyName) => {
-      const el = document.getElementById(btnId);
-      if (!el) return;
-      el.addEventListener('pointerdown', () => { activeKeys[keyName] = true; initAudio(); });
-      el.addEventListener('pointerup', () => { activeKeys[keyName] = false; });
-      el.addEventListener('pointerleave', () => { activeKeys[keyName] = false; });
-    };
-    bindTouchControl('ctrl-up', 'w');
-    bindTouchControl('ctrl-down', 's');
-    bindTouchControl('ctrl-left', 'a');
-    bindTouchControl('ctrl-right', 'd');
+    function triggerCurrentChest() {
+      if (currentNearbyWaypoint) {
+        openKnowledgeModal(currentNearbyWaypoint.docId);
+      }
+    }
+
+    function setupMobileTouchControls() {
+      const bind = (id, key) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        const start = (e) => {
+          if (e.cancelable) e.preventDefault();
+          activeKeys[key] = true;
+          initAudio();
+          if (navigator.vibrate) {
+            try { navigator.vibrate(15); } catch (_) {}
+          }
+        };
+        const end = (e) => {
+          if (e.cancelable) e.preventDefault();
+          activeKeys[key] = false;
+        };
+
+        el.addEventListener('touchstart', start, { passive: false });
+        el.addEventListener('touchend', end, { passive: false });
+        el.addEventListener('touchcancel', end, { passive: false });
+        el.addEventListener('pointerdown', () => { activeKeys[key] = true; initAudio(); });
+        el.addEventListener('pointerup', () => { activeKeys[key] = false; });
+        el.addEventListener('pointerleave', () => { activeKeys[key] = false; });
+      };
+
+      bind('btn-touch-left', 'a');
+      bind('btn-touch-right', 'd');
+      bind('btn-touch-gas', 'w');
+      bind('btn-touch-brake', 's');
+
+      // Legacy fallback bindings
+      bind('ctrl-up', 'w');
+      bind('ctrl-down', 's');
+      bind('ctrl-left', 'a');
+      bind('ctrl-right', 'd');
+    }
 
     function setupCameraInteractions(canvas) {
       let isDragging = false, prevX = 0, prevY = 0;
+      let initialPinchDist = null;
 
       canvas.addEventListener('mousedown', e => {
         isDragging = true;
@@ -2083,21 +2255,46 @@
       canvas.addEventListener('touchstart', e => {
         if (e.touches.length === 1) {
           isDragging = true;
+          initialPinchDist = null;
           prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
+        } else if (e.touches.length === 2) {
+          isDragging = false;
+          initialPinchDist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
         }
       }, { passive: true });
 
       canvas.addEventListener('touchmove', e => {
-        if (!isDragging || e.touches.length !== 1) return;
-        const dx = e.touches[0].clientX - prevX;
-        const dy = e.touches[0].clientY - prevY;
-        prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
+        if (e.touches.length === 1 && isDragging) {
+          const dx = e.touches[0].clientX - prevX;
+          const dy = e.touches[0].clientY - prevY;
+          prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
 
-        orbitYaw -= dx * 0.007;
-        orbitPitch = Math.max(0.06, Math.min(1.35, orbitPitch + dy * 0.007));
+          orbitYaw -= dx * 0.007;
+          orbitPitch = Math.max(0.06, Math.min(1.35, orbitPitch + dy * 0.007));
+        } else if (e.touches.length === 2 && initialPinchDist) {
+          const currentDist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          const pinchDiff = initialPinchDist - currentDist;
+          orbitDistance = Math.max(5, Math.min(45, orbitDistance + pinchDiff * 0.08));
+          initialPinchDist = currentDist;
+        }
       }, { passive: true });
 
-      canvas.addEventListener('touchend', () => { isDragging = false; });
+      canvas.addEventListener('touchend', e => {
+        if (e.touches.length === 0) {
+          isDragging = false;
+          initialPinchDist = null;
+        } else if (e.touches.length === 1) {
+          isDragging = true;
+          initialPinchDist = null;
+          prevX = e.touches[0].clientX; prevY = e.touches[0].clientY;
+        }
+      });
     }
 
     // =========================================================================
@@ -2317,10 +2514,12 @@
       });
 
       const banner = document.getElementById('proximity-banner');
+      const mobileInspectBtn = document.getElementById('btn-touch-inspect');
       if (foundNearby) {
         currentNearbyWaypoint = foundNearby;
         document.getElementById('proximity-title').innerText = "DISCOVERED: " + foundNearby.label.toUpperCase();
         banner.classList.remove('opacity-0', 'translate-y-6', 'pointer-events-none');
+        if (mobileInspectBtn) mobileInspectBtn.classList.remove('hidden');
 
         if (!foundNearby.discovered) {
           foundNearby.discovered = true;
@@ -2333,24 +2532,35 @@
       } else {
         currentNearbyWaypoint = null;
         banner.classList.add('opacity-0', 'translate-y-6', 'pointer-events-none');
+        if (mobileInspectBtn) mobileInspectBtn.classList.add('hidden');
       }
 
       updateRadar();
       renderer.render(scene, camera);
     }
 
-    window.addEventListener('resize', () => {
+    function handleResize() {
       const wrapper = document.getElementById('canvas-3d-wrapper');
       if (!wrapper || !camera || !renderer) return;
       const w = wrapper.clientWidth, h = wrapper.clientHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
+    }
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(handleResize, 200);
     });
 
     window.addEventListener('DOMContentLoaded', () => {
       applyTheme(currentTheme);
       init3DWorld();
+      setupMobileTouchControls();
+      if (window.innerWidth < 768) {
+        hudCollapsed = true;
+        updateHUDDisplay();
+      }
       switchView('game');
     });
   </script>
