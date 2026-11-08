@@ -3,750 +3,831 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awesome Agentic AI — Open Knowledge Base & Architecture Hub</title>
+  <title>Awesome Agentic AI — Architecture Hub, Docs & Interactive Graph</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     :root {
       --bg: #090a0f;
-      --surface: #10121a;
-      --surface-elevated: #161924;
-      --border: #232736;
-      --border-focus: #3b82f6;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --text-tertiary: #64748b;
-      --accent: #2563eb;
-      --accent-hover: #1d4ed8;
-      --accent-subtle: rgba(37, 99, 235, 0.12);
-      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sidebar: #0d0f17;
+      --surface: #121520;
+      --surface-elevated: #1a1e2d;
+      --border: #232738;
+      --border-subtle: #191c28;
+      --accent: #3b82f6;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
-      background-color: var(--bg);
-      color: var(--text-primary);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 32px 32px, 32px 32px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
-
-    .font-mono {
-      font-family: var(--font-mono);
-    }
-
-    .surface-card {
-      background-color: var(--surface);
+    .font-mono { font-family: var(--font-mono); }
+    .bento-card {
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
-
-    .surface-card:hover {
-      border-color: #333a4d;
+    .bento-card:hover {
+      border-color: #3b82f6;
     }
-
-    .nav-tab {
-      color: var(--text-secondary);
-      border-bottom: 2px solid transparent;
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      transition: all 0.12s ease;
+    }
+    .nav-item:hover {
+      color: var(--text);
+      background: #171b26;
+    }
+    .nav-item.active {
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.12);
+      font-weight: 500;
+    }
+    .pill-btn {
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      background: #121520;
+      color: var(--text-muted);
       transition: all 0.15s ease;
     }
-
-    .nav-tab:hover {
-      color: var(--text-primary);
+    .pill-btn:hover, .pill-btn.active {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #3b82f6;
     }
-
-    .nav-tab.active {
-      color: #60a5fa;
-      border-bottom-color: #3b82f6;
-    }
-
-    .code-block {
-      background-color: #0b0d13;
-      border: 1px solid #1a1e2b;
-      font-family: var(--font-mono);
-    }
-
-    /* Scrollbars */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #090a0f;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #232736;
-      border-radius: 3px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #333a4d;
-    }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #262b3d; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3b435e; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased">
+<body class="h-screen flex flex-col overflow-hidden text-sm">
 
-  <!-- Top Navbar -->
-  <header class="sticky top-0 z-50 border-b border-[#232736] bg-[#090a0f]/90 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
-      <div class="flex items-center space-x-4">
-        <!-- Logo Icon -->
-        <a href="#" class="flex items-center gap-2.5 text-white font-semibold text-sm">
-          <div class="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-white">
-            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
-          </div>
-          <span>Awesome Agentic AI</span>
-        </a>
-        <span class="text-xs px-2 py-0.5 rounded bg-[#1e2333] text-slate-400 font-mono border border-slate-800">November 2026</span>
+  <!-- Global Header -->
+  <header class="h-14 border-b border-[#232738] bg-[#0d0f17] px-5 flex items-center justify-between shrink-0 z-40">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2.5 font-semibold text-white">
+        <div class="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-xs font-mono font-bold">A</div>
+        <span class="tracking-tight">Awesome Agentic AI</span>
       </div>
+      <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#171b26] text-slate-400 border border-[#232738]">Nov 2026 Spec</span>
+    </div>
 
-      <!-- Navigation Links -->
-      <nav class="hidden md:flex items-center space-x-6 text-xs font-medium">
-        <button onclick="switchTab('overview')" class="nav-tab active py-4" id="tab-overview">Overview</button>
-        <button onclick="switchTab('simulator')" class="nav-tab py-4" id="tab-simulator">Agent Sandbox</button>
-        <button onclick="switchTab('frameworks')" class="nav-tab py-4" id="tab-frameworks">Framework Matrix</button>
-        <button onclick="switchTab('architecture')" class="nav-tab py-4" id="tab-architecture">Architecture & MCP</button>
-        <button onclick="switchTab('roadmaps')" class="nav-tab py-4" id="tab-roadmaps">Roadmaps</button>
-        <button onclick="switchTab('tools')" class="nav-tab py-4" id="tab-tools">Runbooks</button>
-      </nav>
+    <!-- Mode Switcher (Docs vs Mindmap vs Bento) -->
+    <div class="flex items-center bg-[#121520] p-1 rounded-lg border border-[#232738] gap-1">
+      <button onclick="setViewMode('bento')" id="btn-mode-bento" class="px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition">Bento Explorer</button>
+      <button onclick="setViewMode('graph')" id="btn-mode-graph" class="px-3 py-1 rounded text-xs font-medium text-slate-400 hover:text-white transition">Interactive Mindmap</button>
+      <button onclick="setViewMode('docs')" id="btn-mode-docs" class="px-3 py-1 rounded text-xs font-medium text-slate-400 hover:text-white transition">Docs Portal</button>
+    </div>
 
-      <!-- Right Action Bar -->
-      <div class="flex items-center gap-3">
-        <a href="https://github.com/yadavanujkumar/awesome-agentic-ai" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-medium bg-[#161924] hover:bg-[#1f2433] text-slate-200 border border-[#232736] transition">
-          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          <span>GitHub</span>
-          <span class="text-[10px] text-slate-400 pl-1 border-l border-slate-700 font-mono">1.2k</span>
-        </a>
+    <!-- Quick Search & GitHub -->
+    <div class="flex items-center gap-3">
+      <div class="relative hidden sm:block">
+        <input type="text" id="global-search" oninput="handleGlobalSearch()" placeholder="Search frameworks, papers, MCP..." class="w-60 bg-[#121520] border border-[#232738] rounded-md px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 outline-none focus:border-blue-500 font-mono">
+        <span class="absolute right-2.5 top-2 text-[10px] font-mono text-slate-500 border border-slate-700 rounded px-1">⌘K</span>
       </div>
+      <a href="https://github.com/yadavanujkumar/awesome-agentic-ai" target="_blank" class="px-3 py-1.5 rounded text-xs font-medium bg-[#171b26] hover:bg-[#1e2332] text-slate-200 border border-[#232738] flex items-center gap-1.5 transition">
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
     </div>
   </header>
 
-  <!-- Main Workspace -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-6 py-8 space-y-10">
+  <!-- Split View Shell -->
+  <div class="flex-1 flex overflow-hidden">
 
-    <!-- ==================== VIEW 1: OVERVIEW ==================== -->
-    <section id="view-overview" class="tab-content space-y-8">
-      
-      <!-- Developer Hero -->
-      <div class="border-b border-[#232736] pb-8 pt-4">
-        <div class="max-w-4xl space-y-4">
-          <div class="flex items-center gap-2 text-xs font-mono text-blue-400">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-            AGENTIC AI ARCHITECTURE & PATTERNS SPECIFICATION
-          </div>
-          <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-white leading-tight">
-            The Open Runtime & Knowledge Base for Autonomous Agents
-          </h1>
-          <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-            Curated architectural blueprints, production benchmarks, type-safe schemas, and self-healing review pipelines across LangGraph, CrewAI, PydanticAI, MCP, and CodeRabbit.
-          </p>
+    <!-- Left Collapsible Sidebar (Mintlify Style) -->
+    <aside class="w-64 border-r border-[#232738] bg-[#0d0f17] flex flex-col shrink-0 overflow-y-auto p-4 space-y-6">
+      <!-- Section: Navigation -->
+      <div class="space-y-1">
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">Views</div>
+        <button onclick="setViewMode('bento')" class="nav-item w-full text-left" id="side-bento">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Bento Grid Explorer</span>
+        </button>
+        <button onclick="setViewMode('graph')" class="nav-item w-full text-left" id="side-graph">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v6m0 6v6M3 12h6m6 0h6"/></svg>
+          <span>Visual Mindmap Graph</span>
+        </button>
+        <button onclick="setViewMode('docs')" class="nav-item w-full text-left" id="side-docs">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>Documentation Portal</span>
+        </button>
+      </div>
 
-          <!-- Quick Copy Terminal Line -->
-          <div class="pt-2 flex flex-wrap items-center gap-3">
-            <div class="flex items-center bg-[#10121a] border border-[#232736] rounded px-3 py-2 font-mono text-xs text-slate-300">
-              <span class="text-slate-500 mr-2">$</span>
-              <span id="clone-cmd">git clone https://github.com/yadavanujkumar/awesome-agentic-ai.git</span>
-              <button onclick="copyCloneCmd()" class="ml-3 text-slate-400 hover:text-white transition" title="Copy command">
-                <svg id="copy-icon" class="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      <!-- Section: Architecture & Protocols -->
+      <div class="space-y-1">
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">Architectures & Protocols</div>
+        <button onclick="showDocSection('mcp')" class="nav-item w-full text-left">Model Context Protocol (MCP)</button>
+        <button onclick="showDocSection('coderabbit')" class="nav-item w-full text-left">CodeRabbit SWE Autofix</button>
+        <button onclick="showDocSection('swarm')" class="nav-item w-full text-left">Multi-Agent Swarm (Planner/Worker)</button>
+        <button onclick="showDocSection('typesafe')" class="nav-item w-full text-left">PydanticAI Type Safety</button>
+      </div>
+
+      <!-- Section: Framework Matrix -->
+      <div class="space-y-1">
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">Top Frameworks</div>
+        <button onclick="filterBento('LangGraph')" class="nav-item w-full text-left justify-between">
+          <span>LangGraph</span> <span class="text-[10px] font-mono text-slate-500">Stateful</span>
+        </button>
+        <button onclick="filterBento('CrewAI')" class="nav-item w-full text-left justify-between">
+          <span>CrewAI</span> <span class="text-[10px] font-mono text-slate-500">Role-Based</span>
+        </button>
+        <button onclick="filterBento('PydanticAI')" class="nav-item w-full text-left justify-between">
+          <span>PydanticAI</span> <span class="text-[10px] font-mono text-slate-500">Type-Safe</span>
+        </button>
+        <button onclick="filterBento('Google ADK')" class="nav-item w-full text-left justify-between">
+          <span>Google ADK</span> <span class="text-[10px] font-mono text-slate-500">Enterprise</span>
+        </button>
+        <button onclick="filterBento('Microsoft Agent')" class="nav-item w-full text-left justify-between">
+          <span>MS Agent Framework</span> <span class="text-[10px] font-mono text-slate-500">AutoGen v2</span>
+        </button>
+      </div>
+
+      <!-- Section: Runbooks & Codebases -->
+      <div class="space-y-1">
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">Starter Codebases</div>
+        <button onclick="loadCodebaseDemo('personal')" class="nav-item w-full text-left">examples/personal-assistant</button>
+        <button onclick="loadCodebaseDemo('coding')" class="nav-item w-full text-left">examples/coding-agent</button>
+        <button onclick="loadCodebaseDemo('research')" class="nav-item w-full text-left">examples/research-agent</button>
+        <button onclick="loadCodebaseDemo('collab')" class="nav-item w-full text-left">examples/multi-agent-collab</button>
+      </div>
+
+      <!-- Repository Quick Stats -->
+      <div class="p-3 bg-[#121520] border border-[#232738] rounded-lg text-xs space-y-2 mt-auto">
+        <div class="text-[11px] font-mono text-slate-400">REPO SPECIFICATION</div>
+        <div class="flex justify-between text-slate-300"><span>Frameworks:</span> <span class="font-mono text-white font-bold">40+</span></div>
+        <div class="flex justify-between text-slate-300"><span>Papers:</span> <span class="font-mono text-white font-bold">140+</span></div>
+        <div class="flex justify-between text-slate-300"><span>Cheat Sheets:</span> <span class="font-mono text-white font-bold">9</span></div>
+        <div class="flex justify-between text-slate-300"><span>Codebases:</span> <span class="font-mono text-white font-bold">4</span></div>
+      </div>
+    </aside>
+
+
+    <!-- Main Viewport Area -->
+    <main class="flex-1 overflow-y-auto bg-[#090a0f] relative" id="viewport">
+
+      <!-- ==================== VIEW MODE 1: BENTO-BOX EXPLORER ==================== -->
+      <div id="mode-bento-container" class="p-6 max-w-7xl mx-auto space-y-6">
+        
+        <!-- Bento Header Row -->
+        <div class="grid lg:grid-cols-12 gap-5">
+          <!-- Hero Bento (8 cols) -->
+          <div class="lg:col-span-8 bento-card p-6 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-[#121520] to-[#171c2c]">
+            <div class="space-y-3">
+              <div class="flex items-center gap-2 text-xs font-mono text-blue-400">
+                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                <span>NOVEMBER 2026 PRODUCTION RUNTIME SPECIFICATION</span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-white leading-snug">
+                Architectures, Schemas & Protocols for Production Agentic AI
+              </h1>
+              <p class="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
+                A unified developer knowledge hub covering durable state machines (LangGraph), type-safe schemas (PydanticAI), open tool standards (MCP), and self-healing automated review loops (CodeRabbit).
+              </p>
+            </div>
+            
+            <div class="pt-5 flex flex-wrap items-center gap-3">
+              <div class="flex items-center bg-[#0a0c13] border border-[#232738] rounded px-3 py-1.5 font-mono text-xs text-slate-300">
+                <span class="text-slate-500 mr-2">$</span>
+                <span id="bento-clone">git clone https://github.com/yadavanujkumar/awesome-agentic-ai.git</span>
+                <button onclick="copyBentoClone()" class="ml-3 text-slate-400 hover:text-white" title="Copy">
+                  <svg id="bento-copy-icon" class="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                </button>
+              </div>
+              <button onclick="setViewMode('graph')" class="px-3.5 py-1.5 rounded text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white transition flex items-center gap-1.5">
+                <span>Open Visual Mindmap</span> &rarr;
               </button>
             </div>
-            <button onclick="switchTab('simulator')" class="px-4 py-2 rounded text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white transition flex items-center gap-2">
-              <span>Launch Agent Sandbox</span>
-              <span>&rarr;</span>
+          </div>
+
+          <!-- Quick Stat Bento (4 cols) -->
+          <div class="lg:col-span-4 grid grid-cols-2 gap-3">
+            <div class="bento-card p-4 flex flex-col justify-center">
+              <span class="text-[11px] font-mono text-slate-400">FRAMEWORKS</span>
+              <span class="text-2xl font-semibold text-white mt-1">40+</span>
+              <span class="text-[11px] text-slate-500 mt-0.5">LangGraph, Crew, ADK</span>
+            </div>
+            <div class="bento-card p-4 flex flex-col justify-center">
+              <span class="text-[11px] font-mono text-slate-400">PAPERS</span>
+              <span class="text-2xl font-semibold text-white mt-1">140+</span>
+              <span class="text-[11px] text-slate-500 mt-0.5">ReAct, Reflexion, A2A</span>
+            </div>
+            <div class="bento-card p-4 flex flex-col justify-center">
+              <span class="text-[11px] font-mono text-slate-400">CODEBASES</span>
+              <span class="text-2xl font-semibold text-white mt-1">4 Ready</span>
+              <span class="text-[11px] text-slate-500 mt-0.5">Tested & Runnable</span>
+            </div>
+            <div class="bento-card p-4 flex flex-col justify-center">
+              <span class="text-[11px] font-mono text-slate-400">RUNBOOKS</span>
+              <span class="text-2xl font-semibold text-white mt-1">9 Guides</span>
+              <span class="text-[11px] text-slate-500 mt-0.5">CodeRabbit, Deploy</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento Row 2: Interactive Sandbox & Terminal -->
+        <div class="grid lg:grid-cols-12 gap-5">
+          <!-- Terminal Sandbox (7 cols) -->
+          <div class="lg:col-span-7 bento-card p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-[#232738] pb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <span class="text-xs font-mono font-medium text-slate-200">INTERACTIVE AGENT EXECUTION TRACE</span>
+              </div>
+              <select id="sim-agent-select" onchange="updateSimAgent()" class="bg-[#0b0d13] text-xs border border-[#232738] rounded px-2.5 py-1 text-slate-300 font-mono outline-none">
+                <option value="personal">Personal Assistant (Tool Router)</option>
+                <option value="coding">Coding Agent (CodeRabbit AST Review)</option>
+                <option value="research">Research Agent (Synthesis & Citation)</option>
+                <option value="collab">Multi-Agent Swarm (Planner/Worker/Reviewer)</option>
+              </select>
+            </div>
+
+            <!-- Terminal Stream -->
+            <div id="sim-trace-stream" class="bg-[#08090e] border border-[#1a1e2b] rounded-md p-3.5 font-mono text-xs text-slate-300 space-y-2 max-h-56 overflow-y-auto">
+              <div class="text-slate-500">// Select a prompt preset and click 'Execute'.</div>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex items-center gap-2">
+              <input type="text" id="sim-prompt-input" value="Schedule a meeting with John tomorrow at 2 PM" class="flex-1 bg-[#0b0d13] border border-[#232738] rounded px-3 py-1.5 text-xs text-white font-mono outline-none focus:border-blue-500">
+              <button onclick="runBentoSim()" id="sim-exec-btn" class="px-4 py-1.5 rounded text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white font-mono transition">
+                Execute
+              </button>
+            </div>
+          </div>
+
+          <!-- Architecture & Protocol Spotlight Bento (5 cols) -->
+          <div class="lg:col-span-5 bento-card p-5 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono text-blue-400">SPECIFICATION: MODEL CONTEXT PROTOCOL (MCP)</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/40 text-blue-300 border border-blue-800">2026 STANDARD</span>
+              </div>
+              <h3 class="text-base font-semibold text-white">Open Standard for Tool & Data Discovery</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                MCP establishes an open JSON-RPC 2.0 contract between host AI apps and sandboxed execution servers. Replaces fragile bespoke tool wrappers with universal capability negotiation.
+              </p>
+            </div>
+
+            <!-- Mini Protocol Pipeline -->
+            <div class="p-3 bg-[#0a0c13] border border-[#1d2232] rounded font-mono text-[11px] text-slate-300 space-y-1.5">
+              <div class="text-blue-400 font-semibold">[Host Agent] &harr; JSON-RPC 2.0</div>
+              <div class="text-slate-500 pl-3 border-l border-slate-700">
+                <div>&bull; tools/list (Discover schemas)</div>
+                <div>&bull; resources/read (Extract prompt context)</div>
+                <div>&bull; tools/call (Execute safely in sandbox)</div>
+              </div>
+              <div class="text-emerald-400 font-semibold">&rarr; [MCP Server] (Postgres, Files, GitHub, Jira)</div>
+            </div>
+
+            <button onclick="showDocSection('mcp')" class="text-xs text-blue-400 hover:underline font-mono text-left">
+              Read complete MCP specification &rarr;
             </button>
-            <button onclick="switchTab('frameworks')" class="px-4 py-2 rounded text-xs font-medium bg-[#161924] hover:bg-[#1f2433] text-slate-300 border border-[#232736] transition">
-              Compare Frameworks
-            </button>
           </div>
         </div>
+
+        <!-- Bento Row 3: Framework Comparison Matrix -->
+        <div class="bento-card p-5 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#232738] pb-3">
+            <div>
+              <h3 class="text-base font-semibold text-white">Agent Framework Comparison Matrix</h3>
+              <p class="text-xs text-slate-400">Detailed production evaluation of leading runtimes.</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="filterFwCategory('all')" class="pill-btn active" id="fw-pill-all">All</button>
+              <button onclick="filterFwCategory('Stateful Graph')" class="pill-btn" id="fw-pill-stateful">Stateful Graph</button>
+              <button onclick="filterFwCategory('Role-Based')" class="pill-btn" id="fw-pill-role">Role-Based</button>
+              <button onclick="filterFwCategory('Type-Safe')" class="pill-btn" id="fw-pill-typesafe">Type-Safe</button>
+              <button onclick="filterFwCategory('RAG')" class="pill-btn" id="fw-pill-rag">Document RAG</button>
+            </div>
+          </div>
+
+          <!-- Cards Grid -->
+          <div id="fw-bento-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
       </div>
 
-      <!-- Compact Technical Metrics -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="surface-card p-4">
-          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Frameworks Evaluated</div>
-          <div class="text-2xl font-semibold text-white mt-1">40+</div>
-          <p class="text-xs text-slate-500 mt-1">LangGraph, CrewAI, PydanticAI, ADK</p>
-        </div>
-        <div class="surface-card p-4">
-          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Research Literature</div>
-          <div class="text-2xl font-semibold text-white mt-1">140+ Papers</div>
-          <p class="text-xs text-slate-500 mt-1">ReAct, Toolformer, Reflexion, A2A</p>
-        </div>
-        <div class="surface-card p-4">
-          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Runnable Implementations</div>
-          <div class="text-2xl font-semibold text-white mt-1">4 Projects</div>
-          <p class="text-xs text-slate-500 mt-1">SWE Agent, Assistant, Research, Swarm</p>
-        </div>
-        <div class="surface-card p-4">
-          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Production Cheat Sheets</div>
-          <div class="text-2xl font-semibold text-white mt-1">9 Runbooks</div>
-          <p class="text-xs text-slate-500 mt-1">CodeRabbit Review, Protocols, Deploy</p>
-        </div>
-      </div>
 
-      <!-- Feature Capabilities Grid -->
-      <div class="grid md:grid-cols-3 gap-5">
-        <div class="surface-card p-5 space-y-3 cursor-pointer group" onclick="switchTab('simulator')">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono text-blue-400">SPEC: RUNTIME</span>
-            <span class="text-slate-500 group-hover:text-blue-400 transition">&rarr;</span>
-          </div>
-          <h3 class="text-sm font-semibold text-white">Full Executable Starter Code</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Production agent code bases with isolated tools, conversation state memory, unit tests, and CLI entry points.</p>
-        </div>
-
-        <div class="surface-card p-5 space-y-3 cursor-pointer group" onclick="switchTab('architecture')">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono text-indigo-400">SPEC: PROTOCOL</span>
-            <span class="text-slate-500 group-hover:text-indigo-400 transition">&rarr;</span>
-          </div>
-          <h3 class="text-sm font-semibold text-white">Model Context Protocol (MCP)</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">JSON-RPC 2.0 open client/server specifications replacing brittle ad-hoc tool bindings with secure discovery.</p>
-        </div>
-
-        <div class="surface-card p-5 space-y-3 cursor-pointer group" onclick="switchTab('tools')">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono text-emerald-400">SPEC: VERIFICATION</span>
-            <span class="text-slate-500 group-hover:text-emerald-400 transition">&rarr;</span>
-          </div>
-          <h3 class="text-sm font-semibold text-white">Self-Healing CodeRabbit Review</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Autonomous coding loops parsing machine-readable NDJSON review findings to automatically remediate security flaws.</p>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ==================== VIEW 2: AGENT SANDBOX ==================== -->
-    <section id="view-simulator" class="tab-content hidden space-y-6">
-      <div class="border-b border-[#232736] pb-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <h2 class="text-lg font-semibold text-white">Agent Execution Sandbox</h2>
-            <p class="text-xs text-slate-400">Step through the real agent architectures implemented in the repository.</p>
+      <!-- ==================== VIEW MODE 2: INTERACTIVE MINDMAP GRAPH ==================== -->
+      <div id="mode-graph-container" class="h-full flex flex-col hidden">
+        <!-- Canvas Toolbar -->
+        <div class="h-10 border-b border-[#232738] bg-[#0d0f17] px-4 flex items-center justify-between text-xs text-slate-400 font-mono shrink-0">
+          <div class="flex items-center gap-3">
+            <span>INTERACTIVE KNOWLEDGE GRAPH</span>
+            <span class="text-slate-600">&bull;</span>
+            <span class="text-[11px] text-slate-500">Click & Drag Nodes &bull; Click Node for Inspector</span>
           </div>
           <div class="flex items-center gap-2">
-            <label class="text-xs text-slate-400 font-mono">Architecture:</label>
-            <select id="agent-type-select" onchange="onAgentTypeChange()" class="bg-[#10121a] text-xs border border-[#232736] rounded px-3 py-1.5 text-white outline-none focus:border-blue-500">
-              <option value="personal">Personal Assistant (Tool Routing & Memory)</option>
-              <option value="coding">Coding Agent (Devin + CodeRabbit AST Review)</option>
-              <option value="research">Research Agent (Decomposition & Synthesis)</option>
-              <option value="collab">Multi-Agent Swarm (Planner/Worker/Reviewer)</option>
-              <option value="typesafe">PydanticAI (Type-Safe Customer Service)</option>
-            </select>
+            <button onclick="resetGraphPhysics()" class="px-2.5 py-1 rounded bg-[#161924] hover:bg-[#1f2433] text-slate-300 border border-[#232738]">Reset Nodes</button>
           </div>
         </div>
-      </div>
 
-      <div class="grid lg:grid-cols-12 gap-6 items-start">
-        <!-- Configuration Side (5 cols) -->
-        <div class="lg:col-span-5 surface-card p-5 space-y-4">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-mono text-slate-400">INPUT SPECIFICATION</span>
-            <span id="agent-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/30 text-blue-400 border border-blue-800">PERSONAL ASSISTANT</span>
-          </div>
+        <div class="flex-1 flex overflow-hidden relative">
+          <!-- Graph Canvas -->
+          <canvas id="mindmap-canvas" class="flex-1 w-full h-full bg-[#07080c] cursor-grab active:cursor-grabbing"></canvas>
 
-          <div>
-            <label class="text-xs text-slate-400 block mb-1.5 font-medium">Select Preset Scenario</label>
-            <div id="preset-buttons" class="flex flex-wrap gap-1.5"></div>
-          </div>
-
-          <div>
-            <label class="text-xs text-slate-400 block mb-1.5 font-medium">Input Query / Prompt</label>
-            <textarea id="agent-prompt-input" rows="4" class="w-full bg-[#0b0d13] border border-[#232736] rounded p-3 text-xs text-slate-200 focus:border-blue-500 outline-none resize-none font-mono"></textarea>
-          </div>
-
-          <div class="p-3 bg-[#0b0d13] border border-[#1a1e2b] rounded text-xs space-y-1 font-mono text-slate-400">
-            <div class="flex justify-between">
-              <span>Execution Runtime:</span>
-              <span class="text-slate-200">Local AST Sandbox</span>
+          <!-- Node Inspector Drawer (Right) -->
+          <div id="node-inspector" class="w-80 border-l border-[#232738] bg-[#0d0f17] p-5 flex flex-col justify-between hidden z-20 overflow-y-auto">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span id="inspect-category" class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/30 text-blue-400 border border-blue-800">CATEGORY</span>
+                <button onclick="closeInspector()" class="text-slate-500 hover:text-white">&times;</button>
+              </div>
+              <h3 id="inspect-title" class="text-lg font-semibold text-white">Node Details</h3>
+              <p id="inspect-desc" class="text-xs text-slate-300 leading-relaxed">Description goes here.</p>
+              
+              <div class="p-3 bg-[#121520] border border-[#232738] rounded text-xs space-y-2">
+                <div class="text-[11px] font-mono text-slate-400">CONNECTED NODES</div>
+                <div id="inspect-connections" class="flex flex-wrap gap-1 text-[11px] font-mono"></div>
+              </div>
             </div>
-            <div class="flex justify-between">
-              <span>Security Guard:</span>
-              <span class="text-emerald-400">ast.parse Safe (No eval)</span>
-            </div>
-          </div>
 
-          <button onclick="runAgentSimulation()" id="run-agent-btn" class="w-full py-2.5 rounded bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs transition flex items-center justify-center gap-2">
-            <span>Execute Run</span>
-            <span id="run-spinner" class="hidden animate-spin">⟳</span>
-          </button>
-        </div>
-
-        <!-- Terminal Output Side (7 cols) -->
-        <div class="lg:col-span-7 surface-card p-5 space-y-4">
-          <div class="flex items-center justify-between border-b border-[#232736] pb-3">
-            <div class="flex items-center gap-2">
-              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
-              <span class="text-xs font-mono text-slate-300">STDOUT & AGENT TRACE STREAM</span>
-            </div>
-            <button onclick="clearTrace()" class="text-xs text-slate-500 hover:text-slate-300 font-mono">Clear</button>
-          </div>
-
-          <!-- Console Terminal -->
-          <div id="agent-trace-container" class="code-block rounded p-4 text-xs space-y-2 overflow-y-auto max-h-[320px] min-h-[220px]">
-            <div class="text-slate-500 font-mono">// Ready. Choose an input and execute the run.</div>
-          </div>
-
-          <!-- Final Response Box -->
-          <div id="final-output-card" class="surface-card p-4 border-blue-500/40 hidden space-y-2">
-            <div class="text-[11px] font-mono text-blue-400 uppercase tracking-wider">Final Deliverable / Synthesized Output</div>
-            <div id="final-output-text" class="text-xs text-slate-300 leading-relaxed font-sans"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== VIEW 3: FRAMEWORKS ==================== -->
-    <section id="view-frameworks" class="tab-content hidden space-y-6">
-      <div class="border-b border-[#232736] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <h2 class="text-lg font-semibold text-white">Agent Framework Evaluation Matrix</h2>
-          <p class="text-xs text-slate-400">Direct architecture-level comparison for 2026 production builds.</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <input type="text" id="framework-search" oninput="filterFrameworks()" placeholder="Filter by name, use case, tags..." class="bg-[#10121a] text-xs border border-[#232736] rounded px-3 py-1.5 text-white w-64 outline-none focus:border-blue-500 font-mono">
-        </div>
-      </div>
-
-      <!-- Framework Table -->
-      <div class="overflow-x-auto border border-[#232736] rounded">
-        <table class="w-full text-left border-collapse text-xs">
-          <thead>
-            <tr class="border-b border-[#232736] bg-[#10121a] font-mono text-slate-400">
-              <th class="p-3">Framework</th>
-              <th class="p-3">Core Specialty</th>
-              <th class="p-3">Complexity</th>
-              <th class="p-3">Multi-Agent</th>
-              <th class="p-3">2026 Production Verdict</th>
-              <th class="p-3 text-right">Reference</th>
-            </tr>
-          </thead>
-          <tbody id="framework-tbody" class="divide-y divide-[#232736] bg-[#090a0f]">
-            <!-- Injected by JS -->
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ==================== VIEW 4: ARCHITECTURE & MCP ==================== -->
-    <section id="view-architecture" class="tab-content hidden space-y-6">
-      <div class="border-b border-[#232736] pb-4">
-        <h2 class="text-lg font-semibold text-white">Architectural Protocols & Design Flows</h2>
-        <p class="text-xs text-slate-400">Standardized patterns governing modern tool calling, review cycles, and multi-agent systems.</p>
-      </div>
-
-      <div class="grid lg:grid-cols-2 gap-6">
-        <!-- MCP Blueprint -->
-        <div class="surface-card p-5 space-y-4">
-          <div class="flex items-center justify-between border-b border-[#232736] pb-3">
-            <span class="text-xs font-mono text-blue-400">PROTOCOL: MODEL CONTEXT PROTOCOL (MCP)</span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/30 text-blue-400 border border-blue-800">JSON-RPC 2.0</span>
-          </div>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Eliminates proprietary tool wrappers. Standardizes how an AI Host process discovers and accesses tools, file systems, and enterprise data via explicit protocol boundaries.
-          </p>
-          <div class="code-block p-4 rounded text-xs space-y-2 text-slate-300">
-            <div class="text-blue-400 font-bold">[ Host Environment / Agent Runtime ]</div>
-            <div class="pl-4 border-l border-slate-700 text-slate-400 space-y-1">
-              <div>&darr; <code>tools/list</code> &mdash; Dynamic capability discovery</div>
-              <div>&darr; <code>resources/read</code> &mdash; Contextual data ingestion</div>
-              <div>&darr; <code>tools/call</code> &mdash; Guardrailed execution</div>
-            </div>
-            <div class="text-emerald-400 font-bold">[ MCP Server Instances ] (Files, DBs, GitHub, APIs)</div>
-          </div>
-        </div>
-
-        <!-- CodeRabbit Loop -->
-        <div class="surface-card p-5 space-y-4">
-          <div class="flex items-center justify-between border-b border-[#232736] pb-3">
-            <span class="text-xs font-mono text-emerald-400">PIPELINE: CODERABBIT AUTONOMOUS SWE LOOP</span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-900/30 text-emerald-400 border border-emerald-800">SELF-HEALING</span>
-          </div>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Devin / SWE-bench pattern: The coding agent generates initial edits, executes <code>coderabbit review --agent</code> to parse machine-readable NDJSON, and auto-applies targeted patches before submitting a PR.
-          </p>
-          <div class="code-block p-4 rounded text-xs space-y-2 text-slate-300">
-            <div class="text-slate-400">1. Agent implements target feature branch</div>
-            <div class="text-amber-400">2. CLI Review: <code>coderabbit review --agent --uncommitted</code></div>
-            <div class="text-purple-400">3. Ingest NDJSON: Filter Critical (RCE/eval) & Major errors</div>
-            <div class="text-blue-400">4. Apply automated remediation + AST syntax verify</div>
-            <div class="text-emerald-400">5. Clean verification & automated PR merge ready</div>
-          </div>
-        </div>
-
-        <!-- Multi-Agent Orchestration -->
-        <div class="surface-card p-5 space-y-4 lg:col-span-2">
-          <div class="flex items-center justify-between border-b border-[#232736] pb-3">
-            <span class="text-xs font-mono text-purple-400">TOPOLOGY: HIERARCHICAL MULTI-AGENT COLLABORATION</span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-900/30 text-purple-400 border border-purple-800">examples/multi-agent-collab</span>
-          </div>
-          <div class="grid md:grid-cols-3 gap-4">
-            <div class="p-4 bg-[#0b0d13] border border-[#1a1e2b] rounded space-y-1.5">
-              <span class="text-xs font-mono text-purple-400">ROLE 1: PLANNER</span>
-              <h4 class="text-sm font-semibold text-white">Objective Decomposition</h4>
-              <p class="text-xs text-slate-400 leading-relaxed">Breaks macro prompts into structured, DAG-ordered task units with explicit acceptance criteria.</p>
-            </div>
-            <div class="p-4 bg-[#0b0d13] border border-[#1a1e2b] rounded space-y-1.5">
-              <span class="text-xs font-mono text-blue-400">ROLE 2: WORKER</span>
-              <h4 class="text-sm font-semibold text-white">Execution & Tool Invocation</h4>
-              <p class="text-xs text-slate-400 leading-relaxed">Runs sandboxed code, queries external APIs, and produces verifiable step deliverables.</p>
-            </div>
-            <div class="p-4 bg-[#0b0d13] border border-[#1a1e2b] rounded space-y-1.5">
-              <span class="text-xs font-mono text-emerald-400">ROLE 3: REVIEWER</span>
-              <h4 class="text-sm font-semibold text-white">Quality Gate & Validation</h4>
-              <p class="text-xs text-slate-400 leading-relaxed">Verifies deliverables against specification before allowing transition to next phase.</p>
+            <div class="pt-4 border-t border-[#232738]">
+              <a id="inspect-link" href="#" target="_blank" class="block w-full py-2 text-center rounded bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium font-mono transition">
+                Open Official Docs &rarr;
+              </a>
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ==================== VIEW 5: ROADMAPS ==================== -->
-    <section id="view-roadmaps" class="tab-content hidden space-y-6">
-      <div class="border-b border-[#232736] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <h2 class="text-lg font-semibold text-white">Agent Engineering Roadmaps</h2>
-          <p class="text-xs text-slate-400">Structured progression modules for practitioners.</p>
-        </div>
-        <div class="flex gap-1.5 bg-[#10121a] p-1 border border-[#232736] rounded">
-          <button onclick="switchRoadmap('beginner')" id="btn-road-beginner" class="px-3 py-1 text-xs font-medium rounded bg-blue-600 text-white">Beginner</button>
-          <button onclick="switchRoadmap('intermediate')" id="btn-road-intermediate" class="px-3 py-1 text-xs font-medium rounded text-slate-400 hover:text-white">Intermediate</button>
-          <button onclick="switchRoadmap('expert')" id="btn-road-expert" class="px-3 py-1 text-xs font-medium rounded text-slate-400 hover:text-white">Expert</button>
-        </div>
+
+      <!-- ==================== VIEW MODE 3: DOCS & CHEAT SHEETS PORTAL ==================== -->
+      <div id="mode-docs-container" class="p-8 max-w-4xl mx-auto space-y-8 hidden">
+        <!-- Rendered Documentation Sections -->
+        <article id="doc-content-body" class="space-y-6 text-slate-300 leading-relaxed">
+          <!-- Dynamic Content Loaded by JS -->
+        </article>
       </div>
 
-      <div id="roadmap-timeline" class="space-y-3"></div>
-    </section>
+    </main>
+  </div>
 
-    <!-- ==================== VIEW 6: RUNBOOKS ==================== -->
-    <section id="view-tools" class="tab-content hidden space-y-6">
-      <div class="border-b border-[#232736] pb-4">
-        <h2 class="text-lg font-semibold text-white">Cheat Sheets & Production Runbooks</h2>
-        <p class="text-xs text-slate-400">Direct technical documentation shipped in this repository.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-4">
-        <div class="surface-card p-5 space-y-2.5">
-          <span class="text-[10px] font-mono text-blue-400">SECURITY & VERIFICATION</span>
-          <h3 class="text-sm font-semibold text-white">CodeRabbit Code Review Runbook</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Machine-readable CLI workflows, severity schemas (critical to info), and GitHub Actions configuration.</p>
-          <a href="resources/cheat-sheets/coderabbit-code-review.md" class="text-xs text-blue-400 hover:underline block pt-1 font-mono">View Runbook &rarr;</a>
-        </div>
-        <div class="surface-card p-5 space-y-2.5">
-          <span class="text-[10px] font-mono text-indigo-400">DEPLOYMENT & SCALE</span>
-          <h3 class="text-sm font-semibold text-white">Enterprise Deployment Guide</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Production patterns, SLA guarantees, token optimization, secrets governance, and enterprise platforms.</p>
-          <a href="resources/cheat-sheets/enterprise-deployment-2026.md" class="text-xs text-indigo-400 hover:underline block pt-1 font-mono">View Runbook &rarr;</a>
-        </div>
-        <div class="surface-card p-5 space-y-2.5">
-          <span class="text-[10px] font-mono text-emerald-400">INTEROPERABILITY</span>
-          <h3 class="text-sm font-semibold text-white">Tool Integration & MCP Schemas</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Safe function calling, Model Context Protocol schemas, error handlers, and permission boundary patterns.</p>
-          <a href="resources/cheat-sheets/tool-integration.md" class="text-xs text-emerald-400 hover:underline block pt-1 font-mono">View Runbook &rarr;</a>
-        </div>
-        <div class="surface-card p-5 space-y-2.5">
-          <span class="text-[10px] font-mono text-purple-400">COMMUNICATION</span>
-          <h3 class="text-sm font-semibold text-white">Agent-to-Agent (A2A) Protocols</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Cross-agent interaction standards, blackboard architectures, negotiation protocols, and consensus mechanisms.</p>
-          <a href="resources/cheat-sheets/communication-protocols.md" class="text-xs text-purple-400 hover:underline block pt-1 font-mono">View Runbook &rarr;</a>
-        </div>
-        <div class="surface-card p-5 space-y-2.5">
-          <span class="text-[10px] font-mono text-amber-400">ENVIRONMENT</span>
-          <h3 class="text-sm font-semibold text-white">Setup Scripts (Bash & PowerShell)</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Automated setup scripts for Linux/macOS (<code>setup.sh</code>) and native Windows PowerShell (<code>setup.ps1</code>).</p>
-          <a href="scripts/setup.ps1" class="text-xs text-amber-400 hover:underline block pt-1 font-mono">View Script &rarr;</a>
-        </div>
-        <div class="surface-card p-5 space-y-2.5">
-          <span class="text-[10px] font-mono text-rose-400">CREDENTIALS</span>
-          <h3 class="text-sm font-semibold text-white">Master .env.example Specification</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Complete configuration template covering LLM keys, Vector DBs, Redis cache, and observability backends.</p>
-          <a href="examples/agent-patterns-2026/.env.example" class="text-xs text-rose-400 hover:underline block pt-1 font-mono">View .env.example &rarr;</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="border-t border-[#232736] bg-[#090a0f] py-6 px-6 text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
-      <div>Awesome Agentic AI &bull; MIT License &bull; Curated by Anuj Kumar Yadav</div>
-      <div class="flex items-center space-x-4">
-        <a href="https://github.com/yadavanujkumar/awesome-agentic-ai" target="_blank" class="hover:text-slate-300">GitHub</a>
-        <a href="CONTRIBUTING.md" class="hover:text-slate-300">Contributing</a>
-        <a href="LICENSE" class="hover:text-slate-300">License</a>
-      </div>
-    </div>
-  </footer>
-
+  <!-- Application Logic -->
   <script>
-    function switchTab(tabId) {
-      document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+    // View Switching
+    let currentView = 'bento';
 
-      const activeBtn = document.getElementById(`tab-${tabId}`);
-      const activeView = document.getElementById(`view-${tabId}`);
-      if (activeBtn) activeBtn.classList.add('active');
-      if (activeView) activeView.classList.remove('hidden');
+    function setViewMode(mode) {
+      currentView = mode;
+      
+      document.querySelectorAll('#mode-bento-container, #mode-graph-container, #mode-docs-container').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('#btn-mode-bento, #btn-mode-graph, #btn-mode-docs').forEach(b => {
+        b.className = "px-3 py-1 rounded text-xs font-medium text-slate-400 hover:text-white transition";
+      });
+      document.querySelectorAll('#side-bento, #side-graph, #side-docs').forEach(b => b.classList.remove('active'));
+
+      if (mode === 'bento') {
+        document.getElementById('mode-bento-container').classList.remove('hidden');
+        document.getElementById('btn-mode-bento').className = "px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition";
+        document.getElementById('side-bento').classList.add('active');
+      } else if (mode === 'graph') {
+        document.getElementById('mode-graph-container').classList.remove('hidden');
+        document.getElementById('btn-mode-graph').className = "px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition";
+        document.getElementById('side-graph').classList.add('active');
+        resizeCanvas();
+      } else if (mode === 'docs') {
+        document.getElementById('mode-docs-container').classList.remove('hidden');
+        document.getElementById('btn-mode-docs').className = "px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition";
+        document.getElementById('side-docs').classList.add('active');
+        if (!document.getElementById('doc-content-body').innerHTML.trim()) {
+          showDocSection('mcp');
+        }
+      }
     }
 
-    function copyCloneCmd() {
-      const text = document.getElementById('clone-cmd').innerText;
+    function copyBentoClone() {
+      const text = document.getElementById('bento-clone').innerText;
       navigator.clipboard.writeText(text).then(() => {
-        const icon = document.getElementById('copy-icon');
+        const icon = document.getElementById('bento-copy-icon');
         icon.classList.add('text-emerald-400');
         setTimeout(() => icon.classList.remove('text-emerald-400'), 1500);
       });
     }
 
-    const agentPresets = {
-      personal: [
-        { label: "Calendar Sync", prompt: "Schedule a quarterly review sync with the engineering team tomorrow at 2:00 PM" },
-        { label: "Email Draft", prompt: "Draft a follow-up email confirming delivery of the revised API specifications" },
-        { label: "Task Queue", prompt: "Add task: Run security regression suite against auth endpoints before deployment" }
-      ],
-      coding: [
-        { label: "Generate Flask API", prompt: "Generate a user management REST API in Python with input validation" },
-        { label: "Trigger Code Review", prompt: "Review code: def compute(x): return eval(x) with debug=True" }
-      ],
-      research: [
-        { label: "MCP Enterprise Impact", prompt: "Synthesize current enterprise benchmarks and architecture of Model Context Protocol (MCP)" },
-        { label: "Multi-Agent Benchmarks", prompt: "Research empirical performance trade-offs between LangGraph and CrewAI" }
-      ],
-      collab: [
-        { label: "Swarm Deployment", prompt: "Coordinate planner, worker, and reviewer to implement a secure rate-limiting middleware" }
-      ],
-      typesafe: [
-        { label: "Double Billing Ticket", prompt: "I was double billed for my subscription this month. Customer ID: CUST_991" },
-        { label: "Data Export Timeout", prompt: "The export tool fails with memory timeout when processing files > 50MB. Customer ID: CUST_882" }
-      ]
-    };
+    // Framework Catalog Data
+    const frameworks = [
+      { name: "LangGraph", category: "Stateful Graph", desc: "Explicit graph orchestration with persistence, checkpointing, and human-in-the-loop.", complexity: "Medium", url: "https://github.com/langchain-ai/langgraph" },
+      { name: "CrewAI", category: "Role-Based", desc: "Production crews, task delegation, structured memory, and business flows.", complexity: "Low", url: "https://github.com/crewAIInc/crewAI" },
+      { name: "PydanticAI", category: "Type-Safe", desc: "Type-safe Python agents and structured outputs using Pydantic v2 schemas.", complexity: "Low", url: "https://github.com/pydantic/pydantic-ai" },
+      { name: "Google ADK", category: "Enterprise", desc: "Code-first multi-language framework for Gemini Enterprise and cloud agents.", complexity: "Medium", url: "https://adk.dev/" },
+      { name: "MS Agent Framework", category: "Enterprise", desc: "Successor to AutoGen & Semantic Kernel with enterprise state and filters.", complexity: "Medium", url: "https://learn.microsoft.com/en-us/agent-framework/" },
+      { name: "LlamaIndex Workflows", category: "RAG", desc: "Document ingestion, event-driven pipelines, and hybrid vector retrieval.", complexity: "Medium", url: "https://github.com/run-llama/llama_index" },
+      { name: "OpenAI Agents SDK", category: "Native", desc: "Official runtime for handoffs, guardrails, and tool calling with tracing.", complexity: "Low", url: "https://github.com/openai/openai-agents-python" },
+      { name: "Smolagents", category: "Minimal", desc: "Hugging Face framework for lightweight local code agents and open models.", complexity: "Low", url: "https://github.com/huggingface/smolagents" },
+      { name: "DSPy", category: "LM Compiler", desc: "Optimizes LM prompts and pipelines programmatically via evaluation feedback.", complexity: "High", url: "https://github.com/stanfordnlp/dspy" }
+    ];
 
-    function onAgentTypeChange() {
-      const type = document.getElementById('agent-type-select').value;
-      const badge = document.getElementById('agent-badge');
-      const presetContainer = document.getElementById('preset-buttons');
-      const promptInput = document.getElementById('agent-prompt-input');
-
-      badge.textContent = type.toUpperCase() + " AGENT";
-      presetContainer.innerHTML = '';
-      const presets = agentPresets[type] || [];
-      presets.forEach((p, idx) => {
-        const btn = document.createElement('button');
-        btn.className = "px-2 py-1 rounded bg-[#161924] hover:bg-[#1f2433] text-[11px] text-slate-300 border border-[#232736] transition font-mono";
-        btn.textContent = p.label;
-        btn.onclick = () => { promptInput.value = p.prompt; };
-        presetContainer.appendChild(btn);
-        if (idx === 0) promptInput.value = p.prompt;
+    function renderBentoFrameworks(list) {
+      const container = document.getElementById('fw-bento-grid');
+      container.innerHTML = '';
+      list.forEach(fw => {
+        const card = document.createElement('div');
+        card.className = "p-4 bg-[#0d0f17] border border-[#1e2334] rounded-lg space-y-2.5 hover:border-blue-500/50 transition";
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <h4 class="font-mono font-bold text-white text-xs">${fw.name}</h4>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#161924] text-blue-400 border border-[#232738]">${fw.category}</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed">${fw.desc}</p>
+          <div class="pt-2 border-t border-[#181c2a] flex items-center justify-between text-[10px] font-mono text-slate-500">
+            <span>Complexity: <strong class="text-slate-300">${fw.complexity}</strong></span>
+            <a href="${fw.url}" target="_blank" class="text-blue-400 hover:underline">Docs &rarr;</a>
+          </div>
+        `;
+        container.appendChild(card);
       });
     }
 
-    async function runAgentSimulation() {
-      const type = document.getElementById('agent-type-select').value;
-      const prompt = document.getElementById('agent-prompt-input').value.trim();
-      const traceContainer = document.getElementById('agent-trace-container');
-      const outputCard = document.getElementById('final-output-card');
-      const outputText = document.getElementById('final-output-text');
-      const spinner = document.getElementById('run-spinner');
+    function filterFwCategory(cat) {
+      document.querySelectorAll('[id^="fw-pill-"]').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`fw-pill-${cat.toLowerCase().replace(' ', '')}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (cat === 'all') {
+        renderBentoFrameworks(frameworks);
+      } else {
+        renderBentoFrameworks(frameworks.filter(f => f.category === cat));
+      }
+    }
+
+    function filterBento(name) {
+      setViewMode('bento');
+      const filtered = frameworks.filter(f => f.name.toLowerCase().includes(name.toLowerCase()));
+      renderBentoFrameworks(filtered);
+      window.scrollTo({ top: 500, behavior: 'smooth' });
+    }
+
+    // Interactive Terminal Simulation
+    const presets = {
+      personal: "Schedule team design sync tomorrow at 10 AM",
+      coding: "Generate Flask API with input validation and run CodeRabbit review",
+      research: "Synthesize Model Context Protocol benchmarks across production deployments",
+      collab: "Deploy microservice using Planner, Worker, and Reviewer swarm"
+    };
+
+    function updateSimAgent() {
+      const type = document.getElementById('sim-agent-select').value;
+      document.getElementById('sim-prompt-input').value = presets[type] || "";
+    }
+
+    async function runBentoSim() {
+      const type = document.getElementById('sim-agent-select').value;
+      const prompt = document.getElementById('sim-prompt-input').value.trim();
+      const stream = document.getElementById('sim-trace-stream');
+      const btn = document.getElementById('sim-exec-btn');
 
       if (!prompt) return;
 
-      spinner.classList.remove('hidden');
-      traceContainer.innerHTML = '';
-      outputCard.classList.add('hidden');
+      btn.disabled = true;
+      btn.innerText = "Running...";
+      stream.innerHTML = '';
 
-      function appendLog(level, message, code = null) {
-        const row = document.createElement('div');
-        row.className = "font-mono text-xs space-y-1";
-        
-        let badgeColor = "text-blue-400";
-        if (level === "WARN") badgeColor = "text-amber-400";
-        if (level === "SECURITY") badgeColor = "text-rose-400";
-        if (level === "TOOL") badgeColor = "text-emerald-400";
-        if (level === "SUCCESS") badgeColor = "text-emerald-400";
-
-        row.innerHTML = `<span class="${badgeColor} font-bold">[${level}]</span> <span class="text-slate-300">${message}</span>`;
-        if (code) {
-          const codeEl = document.createElement('pre');
-          codeEl.className = "p-2 bg-[#08090d] border border-[#1e2333] rounded text-[11px] text-slate-400 overflow-x-auto";
-          codeEl.textContent = code;
-          row.appendChild(codeEl);
-        }
-        traceContainer.appendChild(row);
-        traceContainer.scrollTop = traceContainer.scrollHeight;
+      function log(level, msg) {
+        const d = document.createElement('div');
+        let col = "text-blue-400";
+        if (level === "TOOL") col = "text-emerald-400";
+        if (level === "SECURITY") col = "text-rose-400";
+        if (level === "SUCCESS") col = "text-emerald-400";
+        d.innerHTML = `<span class="${col} font-bold">[${level}]</span> <span class="text-slate-300">${msg}</span>`;
+        stream.appendChild(d);
+        stream.scrollTop = stream.scrollHeight;
       }
 
-      appendLog("INFO", `Ingesting input prompt: "${prompt}"`);
-      await new Promise(r => setTimeout(r, 350));
+      log("INGEST", `Processing task prompt: "${prompt}"`);
+      await new Promise(r => setTimeout(r, 400));
 
       if (type === "personal") {
-        appendLog("ROUTER", "Evaluating intent classifier against registered tools (calendar, email, tasks, search).");
+        log("ROUTER", "Evaluating intent classifier against registered tools (calendar, email, tasks).");
         await new Promise(r => setTimeout(r, 450));
-
-        appendLog("TOOL", "Routing execution to CalendarTool.schedule_event(start_time='Tomorrow 14:00')");
+        log("TOOL", "Invoked CalendarTool.schedule_event(start_time='Tomorrow 10:00 AM')");
         await new Promise(r => setTimeout(r, 400));
-
-        appendLog("STATE", "Appended message to ConversationMemory. Session state: 1 active event recorded.");
+        log("STATE", "ConversationMemory updated with 1 scheduled meeting checkpoint.");
         await new Promise(r => setTimeout(r, 300));
-
-        appendLog("SUCCESS", "Pipeline completed successfully with 0 errors.");
-        outputCard.classList.remove('hidden');
-        outputText.innerHTML = `<strong>Calendar Booking Confirmed:</strong> Successfully scheduled meeting for <em>"${prompt}"</em> at 2:00 PM tomorrow. Checkpoint saved to memory.`;
-      }
-      else if (type === "coding") {
-        appendLog("GEN", "Synthesizing Python REST microservice using Flask specification.");
+        log("SUCCESS", "Event booked & confirmation dispatched.");
+      } else if (type === "coding") {
+        log("GEN", "Generated Flask REST microservice with user routes.");
         await new Promise(r => setTimeout(r, 500));
-
-        appendLog("AST", "Running abstract syntax tree validation with ast.parse (no arbitrary eval).");
+        log("AST", "Parsing AST tree with ast.parse to confirm syntax validity.");
+        await new Promise(r => setTimeout(r, 400));
+        log("SECURITY", "CodeRabbit CLI review: 0 Critical, 0 Major vulnerabilities found.");
+        await new Promise(r => setTimeout(r, 400));
+        log("SUCCESS", "Code verification passed with clean review.");
+      } else if (type === "research") {
+        log("DECOMPOSE", "Generated 3 sub-hypotheses for empirical literature search.");
+        await new Promise(r => setTimeout(r, 500));
+        log("RETRIEVE", "Extracted citations from arXiv (cs.AI) and RFC protocol drafts.");
         await new Promise(r => setTimeout(r, 450));
-
-        appendLog("SECURITY", "CodeRabbit CLI Review (--agent): Scanned for RCE (eval), SQLi, debug mode, bare except.");
-        await new Promise(r => setTimeout(r, 400));
-
-        appendLog("SUCCESS", "0 Critical, 0 Major findings. Code passed PEP 8 compliance.");
-        outputCard.classList.remove('hidden');
-        outputText.innerHTML = `<code>from flask import Flask, jsonify\napp = Flask(__name__)\n\n@app.route('/api/users', methods=['GET'])\ndef get_users(): return jsonify({'users': []}), 200</code><br><br><strong>CodeRabbit Automated Review:</strong> Passed AST verification cleanly.`;
-      }
-      else if (type === "research") {
-        appendLog("PLANNER", "Decomposed query into 3 research hypotheses and literature targets.");
+        log("SUCCESS", "Generated structured synthesis with verified source citations.");
+      } else {
+        log("PLANNER", "Decomposed task into DAG dependencies for 3 specialized agents.");
         await new Promise(r => setTimeout(r, 450));
-
-        appendLog("RETRIEVER", "Extracted 3 empirical citations from arXiv (cs.AI, cs.MA) and protocol RFCs.");
-        await new Promise(r => setTimeout(r, 500));
-
-        appendLog("SYNTHESIS", "Synthesizing structured Markdown deliverable with inline citation references.");
-        await new Promise(r => setTimeout(r, 400));
-
-        outputCard.classList.remove('hidden');
-        outputText.innerHTML = `<strong>Research Synthesis:</strong> Evaluated Model Context Protocol (MCP) in multi-agent enterprise architectures. Demonstrated measurable reduction in latency and runtime failures when replacing legacy custom function wrappers with JSON-RPC standards.`;
-      }
-      else if (type === "collab") {
-        appendLog("PLANNER", "Generated 3-step DAG dependency: (1) Ingestion, (2) Execution, (3) Quality Gate.");
-        await new Promise(r => setTimeout(r, 400));
-
-        appendLog("WORKER", "Worker Agent completed Step 1 and Step 2 task contracts.");
-        await new Promise(r => setTimeout(r, 500));
-
-        appendLog("REVIEWER", "Reviewer Agent audited deliverable against test suites: 100% tests passed.");
-        await new Promise(r => setTimeout(r, 400));
-
-        outputCard.classList.remove('hidden');
-        outputText.innerHTML = `<strong>Multi-Agent Swarm Deliverable:</strong> Planner, Worker, and Reviewer agents synchronized state and approved production release.`;
-      }
-      else {
-        appendLog("SCHEMA", "Validating typed CustomerQuery schema via Pydantic v2 constraints.");
-        await new Promise(r => setTimeout(r, 400));
-
-        appendLog("INFERENCE", "Agent emitted validated CustomerResponse with typed confidence score 0.96.");
-        await new Promise(r => setTimeout(r, 400));
-
-        outputCard.classList.remove('hidden');
-        outputText.innerHTML = `<strong>PydanticAI Schema Response:</strong> <code>confidence_score=0.96</code>, <code>escalation_required=False</code>.<br>Response delivered adhering to company guidelines.`;
+        log("WORKER", "Worker Agent completed implementation units.");
+        await new Promise(r => setTimeout(r, 450));
+        log("REVIEWER", "Reviewer Agent audited outputs against safety criteria.");
+        await new Promise(r => setTimeout(r, 350));
+        log("SUCCESS", "Swarm achieved consensus on deliverable.");
       }
 
-      spinner.classList.add('hidden');
+      btn.disabled = false;
+      btn.innerText = "Execute";
     }
 
-    function clearTrace() {
-      document.getElementById('agent-trace-container').innerHTML = '<div class="text-slate-500 font-mono">// Console cleared. Ready.</div>';
-      document.getElementById('final-output-card').classList.add('hidden');
-    }
-
-    const frameworkList = [
-      { name: "LangGraph", specialty: "Durable stateful graphs, checkpointing & interrupts", complexity: "Medium", multiAgent: "Native", verdict: "Production Default for Complex Flows", url: "https://github.com/langchain-ai/langgraph" },
-      { name: "CrewAI", specialty: "Role-based teams & business process automation", complexity: "Low", multiAgent: "Native", verdict: "Best for Fast Multi-Agent Prototyping", url: "https://github.com/crewAIInc/crewAI" },
-      { name: "PydanticAI", specialty: "Strict schema validation & type-safe Python agents", complexity: "Low", multiAgent: "Partial", verdict: "Recommended for Structured I/O & APIs", url: "https://github.com/pydantic/pydantic-ai" },
-      { name: "Google ADK", specialty: "Code-first multi-language enterprise agents", complexity: "Medium", multiAgent: "Native", verdict: "Best for Gemini Enterprise & Multi-Language", url: "https://adk.dev/" },
-      { name: "Microsoft Agent Framework", specialty: "Successor to AutoGen & Semantic Kernel", complexity: "Medium", multiAgent: "Native", verdict: "Enterprise Standard for Azure & .NET/Py", url: "https://learn.microsoft.com/en-us/agent-framework/" },
-      { name: "LlamaIndex Workflows", specialty: "Event-driven document ingestion & RAG pipelines", complexity: "Medium", multiAgent: "Supported", verdict: "Gold Standard for Document-Heavy Retrieval", url: "https://github.com/run-llama/llama_index" },
-      { name: "Smolagents", specialty: "Lightweight local code-first agents by Hugging Face", complexity: "Low", multiAgent: "Basic", verdict: "Excellent for Open Weights & Local Testing", url: "https://github.com/huggingface/smolagents" },
-      { name: "DSPy", specialty: "Programmatic LM optimization & prompt compilers", complexity: "High", multiAgent: "Limited", verdict: "Best for Systematic Metric Optimization", url: "https://github.com/stanfordnlp/dspy" },
-      { name: "OpenAI Agents SDK", specialty: "High-level runtime for handoffs, tracing & tools", complexity: "Low", multiAgent: "Native", verdict: "First Choice for Pure OpenAI Deployments", url: "https://github.com/openai/openai-agents-python" }
-    ];
-
-    function renderFrameworks(list) {
-      const tbody = document.getElementById('framework-tbody');
-      tbody.innerHTML = '';
-      list.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.className = "hover:bg-[#10121a] transition";
-        tr.innerHTML = `
-          <td class="p-3 font-semibold text-white font-mono">${item.name}</td>
-          <td class="p-3 text-slate-300">${item.specialty}</td>
-          <td class="p-3 font-mono text-slate-400">${item.complexity}</td>
-          <td class="p-3 font-mono text-blue-400">${item.multiAgent}</td>
-          <td class="p-3 text-slate-400">${item.verdict}</td>
-          <td class="p-3 text-right font-mono"><a href="${item.url}" target="_blank" class="text-blue-400 hover:underline">Docs &rarr;</a></td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function filterFrameworks() {
-      const q = document.getElementById('framework-search').value.toLowerCase();
-      const filtered = frameworkList.filter(f => f.name.toLowerCase().includes(q) || f.specialty.toLowerCase().includes(q) || f.verdict.toLowerCase().includes(q));
-      renderFrameworks(filtered);
-    }
-
-    const roadmaps = {
-      beginner: [
-        { week: "Weeks 1–2", title: "Foundations & Environment", desc: "LLM primitives, Python 3.10+ virtual environments, API credential isolation, and token budgeting." },
-        { week: "Weeks 3–4", title: "First Tool-Calling Agent", desc: "LangChain tool calling, AST-safe calculators (no dangerous eval), and conversation memory buffers." },
-        { week: "Weeks 5–6", title: "Safety, Testing & Deployment", desc: "Docker containerization with curl healthchecks, Streamlit interfaces, and unit testing." }
-      ],
-      intermediate: [
-        { week: "Weeks 1–3", title: "Multi-Agent Architectures", desc: "Planner-Worker-Reviewer topologies, blackboard communication patterns, and state machines." },
-        { week: "Weeks 4–5", title: "Advanced Tool Integration & MCP", desc: "Model Context Protocol (MCP) clients/servers, dynamic tool discovery, and hybrid retrieval." },
-        { week: "Weeks 6–8", title: "Production Observability & Tracing", desc: "LangSmith, AgentOps, distributed tracing, rate limiters, and session persistence." }
-      ],
-      expert: [
-        { week: "Weeks 1–4", title: "Autonomous SWE & Self-Healing", desc: "SWE-bench workflows, automated CodeRabbit PR review loops, and multi-file patching." },
-        { week: "Weeks 5–8", title: "Enterprise Governance & Security", desc: "Air-gapped deployment, SOC2 compliance, audit logs, and hardware isolation sandboxes." },
-        { week: "Weeks 9–12", title: "Novel Architectures & Research", desc: "Agent-to-Agent (A2A) protocol extensions, hierarchical tree-of-thought, and novel consensus models." }
-      ]
+    // Docs Section Content
+    const docSections = {
+      mcp: `
+        <div class="space-y-4">
+          <div class="flex items-center gap-2 text-xs font-mono text-blue-400">
+            <span>PROTOCOL SPECIFICATION</span> &bull; <span>OPEN STANDARD</span>
+          </div>
+          <h1 class="text-2xl font-bold text-white">Model Context Protocol (MCP)</h1>
+          <p class="text-slate-400 text-sm">
+            Model Context Protocol (MCP) is an open standard that standardizes how artificial intelligence agents discover, authenticate with, and consume external tools, database resources, and enterprise systems via JSON-RPC 2.0.
+          </p>
+          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2">
+            <div class="text-blue-400 font-bold">// MCP Standard Methods</div>
+            <div>&bull; <strong class="text-white">tools/list</strong>: Enumerates JSON schemas for all available sandboxed functions.</div>
+            <div>&bull; <strong class="text-white">tools/call</strong>: Invokes a specific tool with parameter validation.</div>
+            <div>&bull; <strong class="text-white">resources/read</strong>: Ingests documents, database schemas, or repo context.</div>
+          </div>
+          <h2 class="text-lg font-semibold text-white pt-4">Reference Architecture</h2>
+          <p class="text-slate-400 text-xs">
+            Instead of exposing raw API keys or ad-hoc Python function decorators, an agent communicates with an MCP Client process over standard I/O (stdio) or Server-Sent Events (SSE). The client negotiates capabilities with independent MCP servers, preserving a clean security boundary.
+          </p>
+        </div>
+      `,
+      coderabbit: `
+        <div class="space-y-4">
+          <div class="flex items-center gap-2 text-xs font-mono text-emerald-400">
+            <span>VERIFICATION RUNBOOK</span> &bull; <span>SELF-HEALING SWE</span>
+          </div>
+          <h1 class="text-2xl font-bold text-white">CodeRabbit Autonomous Review Workflow</h1>
+          <p class="text-slate-400 text-sm">
+            Autonomous software engineering agents (SWE-bench bots) require automated, machine-readable code review before opening PRs. CodeRabbit provides structured NDJSON outputs designed specifically for AI agent loops.
+          </p>
+          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2">
+            <div class="text-emerald-400 font-bold">$ coderabbit review --agent --uncommitted</div>
+            <div class="text-slate-400">Outputs machine-readable NDJSON stream categorized into:</div>
+            <div>&bull; <span class="text-rose-400 font-bold">critical</span>: RCE (eval/exec), SQL injection, credential leaks.</div>
+            <div>&bull; <span class="text-amber-400 font-bold">major</span>: Unhandled exceptions, broken API contracts.</div>
+            <div>&bull; <span class="text-blue-400 font-bold">minor</span>: Anti-patterns, bare except, missing type hints.</div>
+          </div>
+        </div>
+      `,
+      swarm: `
+        <div class="space-y-4">
+          <div class="flex items-center gap-2 text-xs font-mono text-purple-400">
+            <span>MULTI-AGENT TOPOLOGY</span> &bull; <span>SWARM COORDINATION</span>
+          </div>
+          <h1 class="text-2xl font-bold text-white">Hierarchical Multi-Agent Collaboration</h1>
+          <p class="text-slate-400 text-sm">
+            Implemented in <code>examples/multi-agent-collab</code>: Separates agent responsibilities into a structured Planner &rarr; Worker &rarr; Reviewer pipeline to avoid hallucinations and unbounded execution loops.
+          </p>
+        </div>
+      `,
+      typesafe: `
+        <div class="space-y-4">
+          <div class="flex items-center gap-2 text-xs font-mono text-blue-400">
+            <span>SCHEMA INTEGRITY</span> &bull; <span>PYDANTIC v2</span>
+          </div>
+          <h1 class="text-2xl font-bold text-white">Type-Safe Agents with PydanticAI</h1>
+          <p class="text-slate-400 text-sm">
+            Implemented in <code>examples/agent-patterns-2026/type_safe_agents/customer_service.py</code>: Strict validation of both user query structures and agent output payloads.
+          </p>
+        </div>
+      `
     };
 
-    function switchRoadmap(level) {
-      ['beginner', 'intermediate', 'expert'].forEach(l => {
-        const btn = document.getElementById(`btn-road-${l}`);
-        if (btn) {
-          if (l === level) {
-            btn.className = "px-3 py-1 text-xs font-medium rounded bg-blue-600 text-white";
-          } else {
-            btn.className = "px-3 py-1 text-xs font-medium rounded text-slate-400 hover:text-white";
-          }
-        }
+    function showDocSection(key) {
+      setViewMode('docs');
+      document.getElementById('doc-content-body').innerHTML = docSections[key] || docSections['mcp'];
+    }
+
+    function loadCodebaseDemo(codebase) {
+      setViewMode('bento');
+      const sel = document.getElementById('sim-agent-select');
+      sel.value = codebase;
+      updateSimAgent();
+      window.scrollTo({ top: 300, behavior: 'smooth' });
+    }
+
+    // Global Search Handler
+    function handleGlobalSearch() {
+      const q = document.getElementById('global-search').value.toLowerCase().trim();
+      if (!q) {
+        renderBentoFrameworks(frameworks);
+        return;
+      }
+      setViewMode('bento');
+      const filtered = frameworks.filter(f => f.name.toLowerCase().includes(q) || f.desc.toLowerCase().includes(q) || f.category.toLowerCase().includes(q));
+      renderBentoFrameworks(filtered);
+    }
+
+    // ==========================================
+    // INTERACTIVE KNOWLEDGE GRAPH ENGINE (CANVAS)
+    // ==========================================
+    const canvas = document.getElementById('mindmap-canvas');
+    const ctx = canvas.getContext('2d');
+
+    const graphNodes = [
+      // Core Runtimes
+      { id: "langgraph", label: "LangGraph", cat: "Framework", x: 250, y: 200, color: "#3b82f6", desc: "Durable stateful agent graphs, checkpointing, and human interrupts.", link: "https://github.com/langchain-ai/langgraph" },
+      { name: "crewai", id: "crewai", label: "CrewAI", cat: "Framework", x: 180, y: 320, color: "#3b82f6", desc: "Role-based agent teams and structured business process flows.", link: "https://crewai.com" },
+      { id: "pydanticai", label: "PydanticAI", cat: "Framework", x: 380, y: 280, color: "#3b82f6", desc: "Type-safe agent development and strict schema validation.", link: "https://ai.pydantic.dev" },
+      { id: "adk", label: "Google ADK", cat: "Framework", x: 290, y: 390, color: "#3b82f6", desc: "Code-first enterprise framework for Gemini and cloud systems.", link: "https://adk.dev" },
+      
+      // Protocols
+      { id: "mcp", label: "Model Context Protocol", cat: "Protocol", x: 480, y: 160, color: "#8b5cf6", desc: "Open JSON-RPC 2.0 standard for connecting models to tools and context.", link: "https://modelcontextprotocol.io" },
+      { id: "a2a", label: "Agent-to-Agent (A2A)", cat: "Protocol", x: 560, y: 280, color: "#8b5cf6", desc: "Interoperability specifications for cross-vendor multi-agent handoffs.", link: "https://github.com/a2aproject/A2A" },
+      
+      // Verification & Review
+      { id: "coderabbit", label: "CodeRabbit Review", cat: "Verification", x: 620, y: 400, color: "#10b981", desc: "AI-first automated PR code review and autonomous self-healing loops.", link: "https://coderabbit.ai" },
+      { id: "langsmith", label: "LangSmith Tracing", cat: "Observability", x: 140, y: 100, color: "#10b981", desc: "Production tracing, debugging, and prompt evaluation.", link: "https://smith.langchain.com" },
+      { id: "ast_safe", label: "AST Sandboxing", cat: "Security", x: 440, y: 460, color: "#10b981", desc: "Abstract Syntax Tree safe evaluation eliminating arbitrary code execution.", link: "#" },
+
+      // In-Repo Projects
+      { id: "personal_ast", label: "Personal Assistant", cat: "Project", x: 100, y: 240, color: "#f43f5e", desc: "Multi-tool assistant with calendar, email triage, and conversation memory.", link: "examples/personal-assistant" },
+      { id: "coding_agent", label: "Coding Agent", cat: "Project", x: 740, y: 320, color: "#f43f5e", desc: "Devin-style SWE agent with automated CodeRabbit review integration.", link: "examples/coding-agent" },
+      { id: "swarm", label: "Collab Swarm", cat: "Project", x: 340, y: 100, color: "#f43f5e", desc: "Hierarchical Planner-Worker-Reviewer multi-agent collaboration.", link: "examples/multi-agent-collab" }
+    ];
+
+    const graphEdges = [
+      { from: "langgraph", to: "mcp" },
+      { from: "langgraph", to: "langsmith" },
+      { from: "pydanticai", to: "mcp" },
+      { from: "pydanticai", to: "ast_safe" },
+      { from: "crewai", to: "swarm" },
+      { from: "adk", to: "mcp" },
+      { from: "mcp", to: "a2a" },
+      { from: "coding_agent", to: "coderabbit" },
+      { from: "coding_agent", to: "ast_safe" },
+      { from: "personal_ast", to: "langgraph" },
+      { from: "swarm", to: "a2a" }
+    ];
+
+    let dragNode = null;
+    let hoveredNode = null;
+    let selectedNode = null;
+    let offset = { x: 0, y: 0 };
+
+    function resizeCanvas() {
+      const parent = canvas.parentElement;
+      canvas.width = parent.clientWidth;
+      canvas.height = parent.clientHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+
+    function drawGraph() {
+      if (currentView !== 'graph') return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw Edges
+      graphEdges.forEach(edge => {
+        const source = graphNodes.find(n => n.id === edge.from);
+        const target = graphNodes.find(n => n.id === edge.to);
+        if (!source || !target) return;
+
+        ctx.beginPath();
+        ctx.moveTo(source.x, source.y);
+        ctx.lineTo(target.x, target.y);
+        ctx.strokeStyle = (selectedNode && (selectedNode.id === source.id || selectedNode.id === target.id)) 
+          ? "rgba(59, 130, 246, 0.8)" 
+          : "rgba(35, 39, 56, 0.9)";
+        ctx.lineWidth = (selectedNode && (selectedNode.id === source.id || selectedNode.id === target.id)) ? 2 : 1;
+        ctx.stroke();
       });
 
-      const container = document.getElementById('roadmap-timeline');
-      container.innerHTML = '';
-      (roadmaps[level] || []).forEach(item => {
-        const row = document.createElement('div');
-        row.className = "surface-card p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3";
-        row.innerHTML = `
-          <div class="flex items-start gap-3">
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-[#161924] text-blue-400 border border-[#232736]">${item.week}</span>
-            <div>
-              <h4 class="text-xs font-semibold text-white">${item.title}</h4>
-              <p class="text-xs text-slate-400 mt-0.5">${item.desc}</p>
-            </div>
-          </div>
-          <span class="text-[11px] font-mono text-slate-500 self-end sm:self-center">Module Verified</span>
-        `;
-        container.appendChild(row);
+      // Draw Nodes
+      graphNodes.forEach(node => {
+        const isHovered = hoveredNode && hoveredNode.id === node.id;
+        const isSelected = selectedNode && selectedNode.id === node.id;
+        const radius = isSelected ? 22 : (isHovered ? 20 : 16);
+
+        // Node Glow
+        if (isSelected || isHovered) {
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, radius + 6, 0, Math.PI * 2);
+          ctx.fillStyle = node.color + "33";
+          ctx.fill();
+        }
+
+        // Node Circle
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = node.color;
+        ctx.fill();
+        ctx.strokeStyle = isSelected ? "#ffffff" : "#0d0f17";
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+
+        // Label
+        ctx.font = "11px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+        ctx.fillStyle = isSelected ? "#ffffff" : "#94a3b8";
+        ctx.textAlign = "center";
+        ctx.fillText(node.label, node.x, node.y + radius + 14);
+      });
+
+      requestAnimationFrame(drawGraph);
+    }
+
+    function getNodeAt(x, y) {
+      return graphNodes.find(n => {
+        const dx = n.x - x;
+        const dy = n.y - y;
+        return Math.sqrt(dx * dx + dy * dy) < 24;
       });
     }
 
+    canvas.addEventListener('mousedown', e => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const node = getNodeAt(x, y);
+      if (node) {
+        dragNode = node;
+        selectedNode = node;
+        inspectNode(node);
+      }
+    });
+
+    canvas.addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      if (dragNode) {
+        dragNode.x = x;
+        dragNode.y = y;
+      } else {
+        hoveredNode = getNodeAt(x, y);
+        canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
+      }
+    });
+
+    window.addEventListener('mouseup', () => { dragNode = null; });
+
+    function inspectNode(node) {
+      const drawer = document.getElementById('node-inspector');
+      drawer.classList.remove('hidden');
+
+      document.getElementById('inspect-category').innerText = node.cat.toUpperCase();
+      document.getElementById('inspect-title').innerText = node.label;
+      document.getElementById('inspect-desc').innerText = node.desc;
+      document.getElementById('inspect-link').href = node.link;
+
+      const connEl = document.getElementById('inspect-connections');
+      connEl.innerHTML = '';
+      const conns = graphEdges
+        .filter(e => e.from === node.id || e.to === node.id)
+        .map(e => (e.from === node.id ? e.to : e.from));
+
+      conns.forEach(cid => {
+        const cnode = graphNodes.find(n => n.id === cid);
+        if (cnode) {
+          const pill = document.createElement('span');
+          pill.className = "px-2 py-0.5 rounded bg-[#161924] text-slate-300 border border-[#232738]";
+          pill.innerText = cnode.label;
+          connEl.appendChild(pill);
+        }
+      });
+    }
+
+    function closeInspector() {
+      document.getElementById('node-inspector').classList.add('hidden');
+      selectedNode = null;
+    }
+
+    function resetGraphPhysics() {
+      graphNodes.forEach((n, idx) => {
+        n.x = 120 + (idx % 4) * 160 + (Math.random() * 20);
+        n.y = 100 + Math.floor(idx / 4) * 130 + (Math.random() * 20);
+      });
+    }
+
+    // Init
     window.addEventListener('DOMContentLoaded', () => {
-      onAgentTypeChange();
-      renderFrameworks(frameworkList);
-      switchRoadmap('beginner');
+      renderBentoFrameworks(frameworks);
+      updateSimAgent();
+      resizeCanvas();
+      drawGraph();
     });
   </script>
 </body>
