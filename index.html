@@ -3,918 +3,1413 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awesome Agentic AI — Architecture Hub, Docs & Interactive Graph</title>
-  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <title>Awesome Agentic AI &mdash; 3D Gamified Cyber World, Mindmap &amp; Git Docs Hub</title>
+  <!-- Tailwind CSS & Three.js CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            darkBg: '#080a10',
+            darkPanel: '#0e121e',
+            darkElevated: '#151b2b',
+            darkBorder: '#1f273d',
+            neonBlue: '#3b82f6',
+            neonCyan: '#06b6d4',
+            neonPurple: '#8b5cf6',
+            neonGreen: '#10b981',
+            neonAmber: '#f59e0b',
+            neonRose: '#f43f5e'
+          }
+        }
+      }
+    };
+  </script>
   <style>
     :root {
-      --bg: #090a0f;
-      --sidebar: #0d0f17;
-      --surface: #121520;
-      --surface-elevated: #1a1e2d;
-      --border: #232738;
-      --border-subtle: #191c28;
+      --bg: #080a10;
+      --panel: #0e121e;
+      --elevated: #151b2b;
+      --border: #1f273d;
       --accent: #3b82f6;
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
       --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
     * { box-sizing: border-box; }
     body {
-      background: var(--bg);
-      color: var(--text);
+      background-color: var(--bg);
+      color: #f1f5f9;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
     }
     .font-mono { font-family: var(--font-mono); }
-    .bento-card {
-      background: var(--surface);
+    .card-surface {
+      background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 10px;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      transition: all 0.2s ease;
     }
-    .bento-card:hover {
-      border-color: #3b82f6;
+    .card-surface:hover {
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
     }
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.4rem 0.65rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      transition: all 0.12s ease;
+    .tree-branch {
+      border-left: 2px solid #1f273d;
+      margin-left: 1.25rem;
+      padding-left: 0.75rem;
     }
-    .nav-item:hover {
-      color: var(--text);
-      background: #171b26;
+    .hud-glass {
+      background: rgba(14, 18, 30, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
     }
-    .nav-item.active {
-      color: #93c5fd;
-      background: rgba(59, 130, 246, 0.15);
-      font-weight: 500;
-    }
-    .pill-btn {
-      padding: 0.25rem 0.6rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      border: 1px solid var(--border);
-      background: #121520;
-      color: var(--text-muted);
-      transition: all 0.15s ease;
-    }
-    .pill-btn:hover, .pill-btn.active {
-      background: #2563eb;
-      color: #ffffff;
-      border-color: #3b82f6;
-    }
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: #262b3d; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #3b435e; }
+    ::-webkit-scrollbar-thumb { background: #1f273d; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2f3b5c; }
+    pre code {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+    .callout-box {
+      border-left: 4px solid #3b82f6;
+      background: rgba(59, 130, 246, 0.08);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+    }
+    .callout-box.warn {
+      border-left-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.08);
+    }
+    .callout-box.success {
+      border-left-color: #10b981;
+      background: rgba(16, 185, 129, 0.08);
+    }
   </style>
 </head>
-<body class="h-screen flex flex-col overflow-hidden text-sm">
+<body class="h-screen w-screen flex flex-col bg-[#080a10] text-slate-100 select-none">
 
-  <!-- Global Header -->
-  <header class="h-14 border-b border-[#232738] bg-[#0d0f17] px-5 flex items-center justify-between shrink-0 z-40">
-    <div class="flex items-center gap-4">
-      <div class="flex items-center gap-2.5 font-semibold text-white">
-        <div class="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-xs font-mono font-bold">A</div>
-        <span class="tracking-tight">Awesome Agentic AI</span>
-      </div>
-      <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-[#171b26] text-slate-400 border border-[#232738]">Nov 2026 Spec</span>
-    </div>
-
-    <!-- Mode Switcher (Docs vs Mindmap vs Bento) -->
-    <div class="flex items-center bg-[#121520] p-1 rounded-lg border border-[#232738] gap-1">
-      <button onclick="setViewMode('bento')" id="btn-mode-bento" class="px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition">Bento Explorer</button>
-      <button onclick="setViewMode('graph')" id="btn-mode-graph" class="px-3 py-1 rounded text-xs font-medium text-slate-400 hover:text-white transition">Interactive Mindmap</button>
-      <button onclick="setViewMode('docs')" id="btn-mode-docs" class="px-3 py-1 rounded text-xs font-medium text-slate-400 hover:text-white transition">Docs Portal</button>
-    </div>
-
-    <!-- Quick Search & GitHub -->
+  <!-- ========================================================================= -->
+  <!-- TOP NAVIGATION HEADER -->
+  <!-- ========================================================================= -->
+  <header class="h-14 border-b border-[#1f273d] bg-[#0c101c] px-4 flex items-center justify-between shrink-0 z-50">
     <div class="flex items-center gap-3">
-      <div class="relative hidden sm:block">
-        <input type="text" id="global-search" oninput="handleGlobalSearch()" placeholder="Search frameworks, papers, MCP..." class="w-60 bg-[#121520] border border-[#232738] rounded-md px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 outline-none focus:border-blue-500 font-mono">
-        <span class="absolute right-2.5 top-2 text-[10px] font-mono text-slate-500 border border-slate-700 rounded px-1">⌘K</span>
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center font-mono font-bold text-sm text-white shadow-lg shadow-blue-500/20">A</div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="font-bold text-sm text-white tracking-tight leading-none">Awesome Agentic AI</h1>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950/70 border border-blue-800 text-blue-300">Nov 8, 2026 Spec</span>
+        </div>
+        <p class="text-[10px] text-slate-400 font-mono mt-0.5">3D Cyber World &bull; Interactive Mindmap &bull; Complete Git Docs Hub</p>
       </div>
-      <a href="https://github.com/yadavanujkumar/awesome-agentic-ai" target="_blank" class="px-3 py-1.5 rounded text-xs font-medium bg-[#171b26] hover:bg-[#1e2332] text-slate-200 border border-[#232738] flex items-center gap-1.5 transition">
+    </div>
+
+    <!-- Mode Selector Tabs -->
+    <div class="flex items-center bg-[#131929] p-1 rounded-lg border border-[#1f273d] gap-1 shadow-inner">
+      <button onclick="switchView('game')" id="tab-game" class="px-3.5 py-1.5 rounded-md text-xs font-semibold bg-blue-600 text-white flex items-center gap-2 transition-all shadow-sm">
+        <span>&#x1F3AE; 3D Cyber Rover</span>
+      </button>
+      <button onclick="switchView('mindmap')" id="tab-mindmap" class="px-3.5 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white flex items-center gap-2 transition-all">
+        <span>&#x1F333; Mindmap Tree</span>
+      </button>
+      <button onclick="switchView('docs')" id="tab-docs" class="px-3.5 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white flex items-center gap-2 transition-all">
+        <span>&#x1F4DA; Git Docs Hub</span>
+      </button>
+      <button onclick="switchView('matrix')" id="tab-matrix" class="px-3.5 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white flex items-center gap-2 transition-all hidden md:flex">
+        <span>&#x26A1; Framework Matrix</span>
+      </button>
+    </div>
+
+    <!-- Quick Search & External Links -->
+    <div class="flex items-center gap-2.5">
+      <div class="relative hidden sm:block">
+        <input type="text" id="omni-search" oninput="handleOmniSearch(this.value)" placeholder="Search 40+ frameworks, papers, MCP..." class="w-60 bg-[#131929] border border-[#1f273d] rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 outline-none focus:border-blue-500 font-mono transition-all">
+        <svg class="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      </div>
+      <a href="https://github.com/yadavanujkumar/awesome-agentic-ai" target="_blank" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-[#151b2b] hover:bg-[#1d263d] text-slate-200 border border-[#1f273d] flex items-center gap-1.5 transition-all">
         <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        <span>GitHub</span>
+        <span class="hidden md:inline">GitHub</span>
       </a>
     </div>
   </header>
 
-  <!-- Split View Shell -->
-  <div class="flex-1 flex overflow-hidden">
+  <!-- ========================================================================= -->
+  <!-- VIEW 1: 3D GAMIFIED CYBER WORLD -->
+  <!-- ========================================================================= -->
+  <section id="view-game" class="flex-1 w-full h-full relative overflow-hidden">
+    <!-- WebGL Canvas Wrapper -->
+    <div id="canvas-3d-wrapper" class="w-full h-full relative">
+      <canvas id="game-canvas" class="w-full h-full block cursor-grab active:cursor-grabbing"></canvas>
+    </div>
 
-    <!-- Left Collapsible Sidebar -->
-    <aside class="w-64 border-r border-[#232738] bg-[#0d0f17] flex flex-col shrink-0 overflow-y-auto p-4 space-y-5">
-      <!-- Section: Navigation -->
-      <div class="space-y-1">
-        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">View Mode</div>
-        <button onclick="setViewMode('bento')" class="nav-item w-full text-left" id="side-bento">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          <span>Bento Grid Explorer</span>
-        </button>
-        <button onclick="setViewMode('graph')" class="nav-item w-full text-left" id="side-graph">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v6m0 6v6M3 12h6m6 0h6"/></svg>
-          <span>Visual Mindmap Graph</span>
-        </button>
-        <button onclick="setViewMode('docs')" class="nav-item w-full text-left" id="side-docs">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          <span>Documentation Portal</span>
-        </button>
+    <!-- HUD Overlay: Top Left Controls & Discovery Status -->
+    <div class="absolute top-4 left-4 hud-glass p-3.5 space-y-2.5 pointer-events-none text-xs max-w-xs shadow-xl">
+      <div class="flex items-center justify-between border-b border-white/10 pb-1.5">
+        <span class="text-[11px] font-mono text-cyan-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+          CYBER ROVER HUD
+        </span>
+        <button onclick="toggleSound()" class="pointer-events-auto text-[10px] text-slate-400 hover:text-white font-mono px-1.5 py-0.5 rounded bg-[#1f273d]" id="btn-sound">&#x1F50A; SFX ON</button>
       </div>
 
-      <!-- Section: Architecture & Protocols -->
-      <div class="space-y-1">
-        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">Architecture Runbooks</div>
-        <button onclick="showDocSection('mcp')" class="nav-item w-full text-left">Model Context Protocol (MCP)</button>
-        <button onclick="showDocSection('coderabbit')" class="nav-item w-full text-left">CodeRabbit SWE Autofix</button>
-        <button onclick="showDocSection('swarm')" class="nav-item w-full text-left">Multi-Agent Swarm</button>
-        <button onclick="showDocSection('typesafe')" class="nav-item w-full text-left">PydanticAI Type Safety</button>
-        <button onclick="showDocSection('papers')" class="nav-item w-full text-left">Academic Papers (140+)</button>
+      <div class="text-slate-300 font-mono space-y-1 text-[11px]">
+        <div>&bull; <strong class="text-white">Arrow Keys / WASD</strong>: Drive &amp; Steer Rover</div>
+        <div>&bull; <strong class="text-white">Space / [E]</strong>: Inspect Nearby Knowledge Chest</div>
       </div>
 
-      <!-- Section: Framework Matrix -->
-      <div class="space-y-1">
-        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">Top Frameworks</div>
-        <button onclick="filterBento('LangGraph')" class="nav-item w-full text-left justify-between">
-          <span>LangGraph</span> <span class="text-[10px] font-mono text-slate-500">Stateful</span>
-        </button>
-        <button onclick="filterBento('CrewAI')" class="nav-item w-full text-left justify-between">
-          <span>CrewAI</span> <span class="text-[10px] font-mono text-slate-500">Role-Based</span>
-        </button>
-        <button onclick="filterBento('PydanticAI')" class="nav-item w-full text-left justify-between">
-          <span>PydanticAI</span> <span class="text-[10px] font-mono text-slate-500">Type-Safe</span>
-        </button>
-        <button onclick="filterBento('Google ADK')" class="nav-item w-full text-left justify-between">
-          <span>Google ADK</span> <span class="text-[10px] font-mono text-slate-500">Enterprise</span>
-        </button>
-        <button onclick="filterBento('Microsoft Agent')" class="nav-item w-full text-left justify-between">
-          <span>MS Agent Framework</span> <span class="text-[10px] font-mono text-slate-500">AutoGen v2</span>
-        </button>
+      <div class="pt-1.5 border-t border-white/10 flex items-center justify-between text-[11px] font-mono">
+        <span class="text-slate-400">Waypoints Discovered:</span>
+        <span id="discovered-counter" class="text-emerald-400 font-bold">0 / 8 Explored</span>
       </div>
 
-      <!-- Section: Starter Codebases -->
-      <div class="space-y-1">
-        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">Starter Codebases</div>
-        <button onclick="loadCodebaseDemo('personal')" class="nav-item w-full text-left">examples/personal-assistant</button>
-        <button onclick="loadCodebaseDemo('coding')" class="nav-item w-full text-left">examples/coding-agent</button>
-        <button onclick="loadCodebaseDemo('research')" class="nav-item w-full text-left">examples/research-agent</button>
-        <button onclick="loadCodebaseDemo('collab')" class="nav-item w-full text-left">examples/multi-agent-collab</button>
+      <!-- Quick Teleport Shortcuts -->
+      <div class="pt-1 pointer-events-auto">
+        <div class="text-[10px] font-mono text-slate-400 mb-1">Quick Teleport:</div>
+        <div class="flex flex-wrap gap-1 font-mono text-[10px]">
+          <button onclick="teleportTo('frameworks-matrix')" class="px-2 py-0.5 rounded bg-blue-900/50 hover:bg-blue-600 text-blue-200 border border-blue-700/60 transition">Citadel</button>
+          <button onclick="teleportTo('mcp-protocol')" class="px-2 py-0.5 rounded bg-purple-900/50 hover:bg-purple-600 text-purple-200 border border-purple-700/60 transition">MCP</button>
+          <button onclick="teleportTo('coderabbit-review')" class="px-2 py-0.5 rounded bg-emerald-900/50 hover:bg-emerald-600 text-emerald-200 border border-emerald-700/60 transition">CodeRabbit</button>
+          <button onclick="teleportTo('academic-papers')" class="px-2 py-0.5 rounded bg-amber-900/50 hover:bg-amber-600 text-amber-200 border border-amber-700/60 transition">Papers</button>
+          <button onclick="teleportTo('starter-labs')" class="px-2 py-0.5 rounded bg-rose-900/50 hover:bg-rose-600 text-rose-200 border border-rose-700/60 transition">Labs</button>
+          <button onclick="teleportTo('mastery-roadmaps')" class="px-2 py-0.5 rounded bg-cyan-900/50 hover:bg-cyan-600 text-cyan-200 border border-cyan-700/60 transition">Roadmaps</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUD Overlay: Top Right Mini-Map Radar -->
+    <div class="absolute top-4 right-4 hud-glass p-3 text-xs space-y-1.5 hidden sm:block shadow-xl">
+      <div class="flex items-center justify-between text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+        <span>Planetary Radar</span>
+        <span class="text-cyan-400 font-bold" id="radar-coords">X:0 Z:0</span>
+      </div>
+      <div class="w-36 h-36 bg-[#07090f] border border-[#1f273d] rounded-lg relative overflow-hidden" id="radar-container">
+        <!-- Radar Grid Lines & Sweep -->
+        <div class="absolute inset-0 bg-[radial-gradient(#1f273d_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="absolute inset-0 rounded-full border border-blue-900/40 m-2"></div>
+        <div class="absolute inset-0 rounded-full border border-blue-900/20 m-6"></div>
+        <div class="absolute left-1/2 top-0 bottom-0 w-[1px] bg-blue-900/30 -translate-x-1/2"></div>
+        <div class="absolute top-1/2 left-0 right-0 h-[1px] bg-blue-900/30 -translate-y-1/2"></div>
+        <!-- Player blip -->
+        <div id="radar-player" class="w-3 h-3 rounded-full bg-cyan-400 absolute -translate-x-1/2 -translate-y-1/2 shadow-lg shadow-cyan-400 flex items-center justify-center transition-transform duration-75">
+          <div class="w-0.5 h-1.5 bg-black rounded-full mb-1"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Proximity Interaction Banner (Appears when near chests) -->
+    <div id="proximity-banner" class="absolute bottom-8 left-1/2 -translate-x-1/2 hud-glass px-6 py-3.5 border-cyan-500/50 shadow-2xl flex items-center gap-4 transition-all duration-300 opacity-0 pointer-events-none translate-y-6 z-40 max-w-lg w-[90%] sm:w-auto">
+      <div class="w-4 h-4 rounded-full bg-cyan-400 animate-ping shrink-0"></div>
+      <div class="flex-1">
+        <div id="proximity-title" class="font-bold text-white text-xs font-mono uppercase tracking-wide">APPROACHING KNOWLEDGE CHEST</div>
+        <div class="text-[11px] text-slate-300">Press <kbd class="px-1.5 py-0.5 rounded bg-blue-950 border border-blue-500 text-white font-mono text-[10px] font-bold">[Space]</kbd> or <kbd class="px-1.5 py-0.5 rounded bg-blue-950 border border-blue-500 text-white font-mono text-[10px] font-bold">[E]</kbd> to unlock details.</div>
+      </div>
+      <button onclick="triggerCurrentChest()" class="pointer-events-auto px-4 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-semibold font-mono shadow-lg transition-transform active:scale-95">Open Chest</button>
+    </div>
+
+    <!-- On-screen Touch D-Pad for Mobile/Mouse users (Bottom Right) -->
+    <div class="absolute bottom-6 right-6 flex flex-col items-center gap-1.5 sm:hidden z-30">
+      <button id="ctrl-up" class="w-12 h-12 rounded-xl bg-slate-800/90 active:bg-blue-600 text-white flex items-center justify-center font-bold text-xl border border-slate-700 shadow-lg">&uarr;</button>
+      <div class="flex gap-2">
+        <button id="ctrl-left" class="w-12 h-12 rounded-xl bg-slate-800/90 active:bg-blue-600 text-white flex items-center justify-center font-bold text-xl border border-slate-700 shadow-lg">&larr;</button>
+        <button id="ctrl-down" class="w-12 h-12 rounded-xl bg-slate-800/90 active:bg-blue-600 text-white flex items-center justify-center font-bold text-xl border border-slate-700 shadow-lg">&darr;</button>
+        <button id="ctrl-right" class="w-12 h-12 rounded-xl bg-slate-800/90 active:bg-blue-600 text-white flex items-center justify-center font-bold text-xl border border-slate-700 shadow-lg">&rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 2: INTERACTIVE MINDMAP & KNOWLEDGE TREE -->
+  <!-- ========================================================================= -->
+  <section id="view-mindmap" class="flex-1 w-full h-full flex flex-col lg:flex-row overflow-hidden hidden">
+    <!-- Sub-View Left: Interactive Canvas Mindmap Graph -->
+    <div class="w-full lg:w-1/2 h-1/2 lg:h-full relative border-b lg:border-b-0 lg:border-r border-[#1f273d] flex flex-col bg-[#07090f]">
+      <div class="p-3 border-b border-[#1f273d] bg-[#0c101c] flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-mono font-bold text-cyan-400">&#x1F310; INTERACTIVE GRAPH</span>
+          <span class="text-[10px] text-slate-400 font-mono">(Click &amp; Drag Nodes)</span>
+        </div>
+        <div class="flex gap-1.5 font-mono text-[10px]">
+          <button onclick="resetGraphPhysics()" class="px-2 py-0.5 rounded bg-[#151b2b] hover:bg-[#1f273d] text-slate-300 border border-[#1f273d]">Reset Graph</button>
+        </div>
+      </div>
+      <div class="flex-1 relative overflow-hidden" id="mindmap-canvas-container">
+        <canvas id="mindmap-canvas" class="w-full h-full block"></canvas>
+      </div>
+    </div>
+
+    <!-- Sub-View Right: Expandable Hierarchical Mindmap Tree -->
+    <div class="w-full lg:w-1/2 h-1/2 lg:h-full flex flex-col bg-[#0a0d17] overflow-hidden">
+      <div class="p-4 border-b border-[#1f273d] bg-[#0c101c] flex items-center justify-between shrink-0">
+        <div>
+          <h2 class="text-sm font-bold text-white tracking-tight flex items-center gap-2">
+            <span>&#x1F333; Hierarchical Knowledge Tree</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/70 border border-emerald-800 text-emerald-300">Complete Taxonomy</span>
+          </h2>
+          <p class="text-[11px] text-slate-400 mt-0.5">Explore the categorized modules from the repository.</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="expandAllTree(true)" class="px-2.5 py-1 text-xs font-mono rounded bg-[#151b2b] border border-[#1f273d] text-slate-300 hover:text-white transition">Expand All</button>
+          <button onclick="expandAllTree(false)" class="px-2.5 py-1 text-xs font-mono rounded bg-[#151b2b] border border-[#1f273d] text-slate-300 hover:text-white transition">Collapse All</button>
+        </div>
       </div>
 
-      <!-- Repository Quick Stats -->
-      <div class="p-3 bg-[#121520] border border-[#232738] rounded-lg text-xs space-y-1.5 mt-auto">
-        <div class="text-[11px] font-mono text-slate-400">SPECIFICATION</div>
-        <div class="flex justify-between text-slate-300"><span>Frameworks:</span> <span class="font-mono text-white font-bold">40+</span></div>
-        <div class="flex justify-between text-slate-300"><span>Papers:</span> <span class="font-mono text-white font-bold">140+</span></div>
-        <div class="flex justify-between text-slate-300"><span>Cheat Sheets:</span> <span class="font-mono text-white font-bold">9</span></div>
-        <div class="flex justify-between text-slate-300"><span>Codebases:</span> <span class="font-mono text-white font-bold">4</span></div>
+      <!-- Tree Filter Search -->
+      <div class="p-3 border-b border-[#1f273d] bg-[#0e121e]">
+        <input type="text" id="tree-search" oninput="filterTree(this.value)" placeholder="Filter knowledge tree branches..." class="w-full bg-[#131929] border border-[#1f273d] rounded-md px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 font-mono outline-none focus:border-cyan-500">
+      </div>
+
+      <!-- Tree Nodes Container -->
+      <div id="tree-content-container" class="flex-1 overflow-y-auto p-5 space-y-4 font-mono text-xs">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 3: FULL GIT DOCUMENTATION HUB -->
+  <!-- ========================================================================= -->
+  <section id="view-docs" class="flex-1 w-full h-full flex overflow-hidden hidden">
+    <!-- Left Navigation Sidebar -->
+    <aside class="w-80 border-r border-[#1f273d] bg-[#0c101c] flex flex-col shrink-0 overflow-hidden">
+      <!-- Search inside docs -->
+      <div class="p-3 border-b border-[#1f273d]">
+        <input type="text" id="docs-sidebar-search" oninput="filterDocsList(this.value)" placeholder="Filter git documentation..." class="w-full bg-[#131929] border border-[#1f273d] rounded-lg px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 font-mono outline-none focus:border-blue-500">
+      </div>
+
+      <!-- Nav Items List -->
+      <div id="docs-nav-list" class="flex-1 overflow-y-auto p-3 space-y-5">
+        <!-- Rendered dynamically -->
       </div>
     </aside>
 
-
-    <!-- Main Viewport Area -->
-    <main class="flex-1 overflow-y-auto bg-[#090a0f] relative" id="viewport">
-
-      <!-- ==================== VIEW MODE 1: BENTO-BOX EXPLORER ==================== -->
-      <div id="mode-bento-container" class="p-6 max-w-7xl mx-auto space-y-6">
-        
-        <!-- Bento Header Row -->
-        <div class="grid lg:grid-cols-12 gap-5">
-          <!-- Hero Bento (8 cols) -->
-          <div class="lg:col-span-8 bento-card p-6 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-[#121520] to-[#171c2c]">
-            <div class="space-y-3">
-              <div class="flex items-center gap-2 text-xs font-mono text-blue-400">
-                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                <span>NOVEMBER 2026 RUNTIME SPECIFICATION</span>
-              </div>
-              <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-white leading-snug">
-                Architectures, Schemas & Protocols for Production Agentic AI
-              </h1>
-              <p class="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed">
-                A unified developer knowledge hub covering durable state machines (LangGraph), type-safe schemas (PydanticAI), open tool standards (MCP), and self-healing automated review loops (CodeRabbit).
-              </p>
-            </div>
-            
-            <div class="pt-5 flex flex-wrap items-center gap-3">
-              <div class="flex items-center bg-[#0a0c13] border border-[#232738] rounded px-3 py-1.5 font-mono text-xs text-slate-300">
-                <span class="text-slate-500 mr-2">$</span>
-                <span id="bento-clone">git clone https://github.com/yadavanujkumar/awesome-agentic-ai.git</span>
-                <button onclick="copyBentoClone()" class="ml-3 text-slate-400 hover:text-white" title="Copy">
-                  <svg id="bento-copy-icon" class="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-                </button>
-              </div>
-              <button onclick="setViewMode('graph')" class="px-3.5 py-1.5 rounded text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white transition flex items-center gap-1.5">
-                <span>Open Visual Mindmap</span> &rarr;
-              </button>
-            </div>
-          </div>
-
-          <!-- Quick Stat Bento (4 cols) -->
-          <div class="lg:col-span-4 grid grid-cols-2 gap-3">
-            <div class="bento-card p-4 flex flex-col justify-center">
-              <span class="text-[11px] font-mono text-slate-400">FRAMEWORKS</span>
-              <span class="text-2xl font-semibold text-white mt-1">40+</span>
-              <span class="text-[11px] text-slate-500 mt-0.5">LangGraph, Crew, ADK</span>
-            </div>
-            <div class="bento-card p-4 flex flex-col justify-center">
-              <span class="text-[11px] font-mono text-slate-400">PAPERS</span>
-              <span class="text-2xl font-semibold text-white mt-1">140+</span>
-              <span class="text-[11px] text-slate-500 mt-0.5">ReAct, Reflexion, A2A</span>
-            </div>
-            <div class="bento-card p-4 flex flex-col justify-center">
-              <span class="text-[11px] font-mono text-slate-400">CODEBASES</span>
-              <span class="text-2xl font-semibold text-white mt-1">4 Ready</span>
-              <span class="text-[11px] text-slate-500 mt-0.5">Tested & Runnable</span>
-            </div>
-            <div class="bento-card p-4 flex flex-col justify-center">
-              <span class="text-[11px] font-mono text-slate-400">RUNBOOKS</span>
-              <span class="text-2xl font-semibold text-white mt-1">9 Guides</span>
-              <span class="text-[11px] text-slate-500 mt-0.5">CodeRabbit, Deploy</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bento Row 2: Interactive Sandbox & Terminal -->
-        <div class="grid lg:grid-cols-12 gap-5">
-          <!-- Terminal Sandbox (7 cols) -->
-          <div class="lg:col-span-7 bento-card p-5 space-y-4">
-            <div class="flex items-center justify-between border-b border-[#232738] pb-3">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                <span class="text-xs font-mono font-medium text-slate-200">INTERACTIVE AGENT EXECUTION TRACE</span>
-              </div>
-              <select id="sim-agent-select" onchange="updateSimAgent()" class="bg-[#0b0d13] text-xs border border-[#232738] rounded px-2.5 py-1 text-slate-300 font-mono outline-none">
-                <option value="personal">Personal Assistant (Tool Router)</option>
-                <option value="coding">Coding Agent (CodeRabbit AST Review)</option>
-                <option value="research">Research Agent (Synthesis & Citation)</option>
-                <option value="collab">Multi-Agent Swarm (Planner/Worker/Reviewer)</option>
-              </select>
-            </div>
-
-            <!-- Terminal Stream -->
-            <div id="sim-trace-stream" class="bg-[#08090e] border border-[#1a1e2b] rounded-md p-3.5 font-mono text-xs text-slate-300 space-y-2 max-h-56 overflow-y-auto">
-              <div class="text-slate-500">// Select a prompt preset and click 'Execute'.</div>
-            </div>
-
-            <!-- Controls -->
-            <div class="flex items-center gap-2">
-              <input type="text" id="sim-prompt-input" value="Schedule a meeting with John tomorrow at 2 PM" class="flex-1 bg-[#0b0d13] border border-[#232738] rounded px-3 py-1.5 text-xs text-white font-mono outline-none focus:border-blue-500">
-              <button onclick="runBentoSim()" id="sim-exec-btn" class="px-4 py-1.5 rounded text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white font-mono transition">
-                Execute
-              </button>
-            </div>
-          </div>
-
-          <!-- Architecture & Protocol Spotlight Bento (5 cols) -->
-          <div class="lg:col-span-5 bento-card p-5 flex flex-col justify-between space-y-4">
-            <div class="space-y-3">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-mono text-blue-400">SPECIFICATION: MODEL CONTEXT PROTOCOL (MCP)</span>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/40 text-blue-300 border border-blue-800">2026 STANDARD</span>
-              </div>
-              <h3 class="text-base font-semibold text-white">Open Standard for Tool & Data Discovery</h3>
-              <p class="text-xs text-slate-400 leading-relaxed">
-                MCP establishes an open JSON-RPC 2.0 contract between host AI apps and sandboxed execution servers. Replaces fragile bespoke tool wrappers with universal capability negotiation.
-              </p>
-            </div>
-
-            <!-- Mini Protocol Pipeline -->
-            <div class="p-3 bg-[#0a0c13] border border-[#1d2232] rounded font-mono text-[11px] text-slate-300 space-y-1.5">
-              <div class="text-blue-400 font-semibold">[Host Agent] &harr; JSON-RPC 2.0</div>
-              <div class="text-slate-500 pl-3 border-l border-slate-700">
-                <div>&bull; tools/list (Discover schemas)</div>
-                <div>&bull; resources/read (Extract prompt context)</div>
-                <div>&bull; tools/call (Execute safely in sandbox)</div>
-              </div>
-              <div class="text-emerald-400 font-semibold">&rarr; [MCP Server] (Postgres, Files, GitHub, Jira)</div>
-            </div>
-
-            <button onclick="showDocSection('mcp')" class="text-xs text-blue-400 hover:underline font-mono text-left">
-              Read complete MCP specification &rarr;
-            </button>
-          </div>
-        </div>
-
-        <!-- Bento Row 3: Framework Comparison Matrix -->
-        <div class="bento-card p-5 space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#232738] pb-3">
-            <div>
-              <h3 class="text-base font-semibold text-white">Agent Framework Comparison Matrix</h3>
-              <p class="text-xs text-slate-400">Detailed production evaluation of leading runtimes.</p>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              <button onclick="filterFwCategory('all')" class="pill-btn active" id="fw-pill-all">All</button>
-              <button onclick="filterFwCategory('Stateful Graph')" class="pill-btn" id="fw-pill-stateful">Stateful Graph</button>
-              <button onclick="filterFwCategory('Role-Based')" class="pill-btn" id="fw-pill-role">Role-Based</button>
-              <button onclick="filterFwCategory('Type-Safe')" class="pill-btn" id="fw-pill-typesafe">Type-Safe</button>
-              <button onclick="filterFwCategory('RAG')" class="pill-btn" id="fw-pill-rag">Document RAG</button>
-            </div>
-          </div>
-
-          <!-- Cards Grid -->
-          <div id="fw-bento-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-            <!-- Injected by JS -->
-          </div>
-        </div>
-
+    <!-- Main Reader Area -->
+    <main class="flex-1 overflow-y-auto bg-[#080a10] p-6 lg:p-10">
+      <div class="max-w-4xl mx-auto space-y-6" id="docs-reader-container">
+        <!-- Content injected dynamically -->
       </div>
-
-
-      <!-- ==================== VIEW MODE 2: INTERACTIVE MINDMAP GRAPH ==================== -->
-      <div id="mode-graph-container" class="h-full flex flex-col hidden relative">
-        <!-- Canvas Toolbar -->
-        <div class="h-10 border-b border-[#232738] bg-[#0d0f17] px-4 flex items-center justify-between text-xs text-slate-400 font-mono shrink-0">
-          <div class="flex items-center gap-3">
-            <span class="text-slate-200">INTERACTIVE KNOWLEDGE GRAPH</span>
-            <span class="text-slate-600">&bull;</span>
-            <span class="text-[11px] text-slate-500">Drag nodes &bull; Click to inspect &bull; Scroll to pan</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <button onclick="resetGraphPhysics()" class="px-2.5 py-1 rounded bg-[#161924] hover:bg-[#1f2433] text-slate-300 border border-[#232738]">Reset Layout</button>
-          </div>
-        </div>
-
-        <div class="flex-1 flex overflow-hidden relative">
-          <!-- Graph Canvas -->
-          <canvas id="mindmap-canvas" class="flex-1 w-full h-full bg-[#08090e] cursor-grab active:cursor-grabbing block"></canvas>
-
-          <!-- Node Inspector Drawer (Right) -->
-          <div id="node-inspector" class="w-80 border-l border-[#232738] bg-[#0d0f17] p-5 flex flex-col justify-between hidden z-20 overflow-y-auto">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between">
-                <span id="inspect-category" class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/30 text-blue-400 border border-blue-800">CATEGORY</span>
-                <button onclick="closeInspector()" class="text-slate-500 hover:text-white text-base">&times;</button>
-              </div>
-              <h3 id="inspect-title" class="text-lg font-semibold text-white">Node Details</h3>
-              <p id="inspect-desc" class="text-xs text-slate-300 leading-relaxed">Description goes here.</p>
-              
-              <div class="p-3 bg-[#121520] border border-[#232738] rounded text-xs space-y-2">
-                <div class="text-[11px] font-mono text-slate-400">CONNECTED DEPENDENCIES</div>
-                <div id="inspect-connections" class="flex flex-wrap gap-1 text-[11px] font-mono"></div>
-              </div>
-            </div>
-
-            <div class="pt-4 border-t border-[#232738]">
-              <a id="inspect-link" href="#" target="_blank" class="block w-full py-2 text-center rounded bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium font-mono transition">
-                Open Official Docs &rarr;
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- ==================== VIEW MODE 3: DOCS & CHEAT SHEETS PORTAL ==================== -->
-      <div id="mode-docs-container" class="p-8 max-w-4xl mx-auto space-y-8 hidden">
-        <article id="doc-content-body" class="space-y-6 text-slate-300 leading-relaxed">
-          <!-- Populated directly by showDocSection -->
-        </article>
-      </div>
-
     </main>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 4: FRAMEWORK MATRIX (INTERACTIVE GRID) -->
+  <!-- ========================================================================= -->
+  <section id="view-matrix" class="flex-1 w-full h-full overflow-y-auto p-6 lg:p-10 hidden bg-[#080a10]">
+    <div class="max-w-6xl mx-auto space-y-6">
+      <div class="border-b border-[#1f273d] pb-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+            <span>&#x26A1; 40+ Production Agent Frameworks</span>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-blue-950/70 border border-blue-800 text-blue-300">November 2026 Evaluation</span>
+          </h2>
+          <p class="text-xs text-slate-400 mt-1">Benchmarked against state graph persistence, MCP tool integration, type safety, and multi-agent coordination.</p>
+        </div>
+        <!-- Filter chips -->
+        <div class="flex flex-wrap gap-1.5 font-mono text-xs" id="matrix-filter-buttons">
+          <button onclick="filterMatrix('all')" class="matrix-filter-btn px-3 py-1 rounded bg-blue-600 text-white font-medium" data-cat="all">All (40+)</button>
+          <button onclick="filterMatrix('orchestration')" class="matrix-filter-btn px-3 py-1 rounded bg-[#151b2b] hover:bg-[#1f273d] text-slate-300" data-cat="orchestration">Orchestration</button>
+          <button onclick="filterMatrix('multi-agent')" class="matrix-filter-btn px-3 py-1 rounded bg-[#151b2b] hover:bg-[#1f273d] text-slate-300" data-cat="multi-agent">Multi-Agent</button>
+          <button onclick="filterMatrix('typesafe')" class="matrix-filter-btn px-3 py-1 rounded bg-[#151b2b] hover:bg-[#1f273d] text-slate-300" data-cat="typesafe">Type-Safe</button>
+          <button onclick="filterMatrix('cloud')" class="matrix-filter-btn px-3 py-1 rounded bg-[#151b2b] hover:bg-[#1f273d] text-slate-300" data-cat="cloud">Cloud / Enterprise</button>
+        </div>
+      </div>
+
+      <!-- Matrix Grid -->
+      <div id="frameworks-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- KNOWLEDGE CHEST INSPECTION MODAL -->
+  <!-- ========================================================================= -->
+  <div id="knowledge-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="card-surface max-w-3xl w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl border-cyan-500/40 animate-in fade-in zoom-in-95 duration-200">
+      <div class="p-4 border-b border-[#1f273d] bg-[#0c101c] flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <span id="modal-badge" class="px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-300 font-mono text-[10px] border border-cyan-800 font-bold uppercase">WAYPOINT DISCOVERED</span>
+          <h3 id="modal-title" class="font-bold text-white text-base">Knowledge Title</h3>
+        </div>
+        <button onclick="closeKnowledgeModal()" class="text-slate-400 hover:text-white text-2xl font-bold leading-none p-1">&times;</button>
+      </div>
+
+      <div id="modal-body" class="p-6 overflow-y-auto space-y-4 text-xs text-slate-300 leading-relaxed font-sans">
+        <!-- Injected -->
+      </div>
+
+      <div class="p-4 border-t border-[#1f273d] bg-[#0c101c] flex items-center justify-between font-mono text-xs">
+        <span class="text-slate-400 text-[11px]">Recorded into Universe Specification</span>
+        <div class="flex gap-2">
+          <button onclick="closeKnowledgeModal()" class="px-3.5 py-1.5 rounded-lg bg-[#151b2b] text-slate-300 hover:text-white border border-[#1f273d]">Resume Driving</button>
+          <button onclick="openInDocsFromModal()" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-medium shadow-md">Open Full Git Runbook &rarr;</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Application Logic -->
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT: REPOSITORY KNOWLEDGE STORE & ENGINES -->
+  <!-- ========================================================================= -->
   <script>
-    // View Switching Logic
-    let currentView = 'bento';
-    let graphAnimId = null;
-
-    function setViewMode(mode) {
-      currentView = mode;
-      
-      // Hide all main containers
-      document.getElementById('mode-bento-container').classList.add('hidden');
-      document.getElementById('mode-graph-container').classList.add('hidden');
-      document.getElementById('mode-docs-container').classList.add('hidden');
-
-      // Update top buttons
-      document.querySelectorAll('#btn-mode-bento, #btn-mode-graph, #btn-mode-docs').forEach(b => {
-        b.className = "px-3 py-1 rounded text-xs font-medium text-slate-400 hover:text-white transition";
-      });
-
-      // Update side nav
-      document.querySelectorAll('#side-bento, #side-graph, #side-docs').forEach(b => b.classList.remove('active'));
-
-      if (mode === 'bento') {
-        document.getElementById('mode-bento-container').classList.remove('hidden');
-        document.getElementById('btn-mode-bento').className = "px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition";
-        document.getElementById('side-bento').classList.add('active');
-        if (graphAnimId) cancelAnimationFrame(graphAnimId);
-      } 
-      else if (mode === 'graph') {
-        const container = document.getElementById('mode-graph-container');
-        container.classList.remove('hidden');
-        document.getElementById('btn-mode-graph').className = "px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition";
-        document.getElementById('side-graph').classList.add('active');
-        
-        // Ensure canvas has real dimensions after container becomes visible
-        setTimeout(() => {
-          resizeCanvas();
-          startGraphAnimation();
-        }, 30);
-      } 
-      else if (mode === 'docs') {
-        document.getElementById('mode-docs-container').classList.remove('hidden');
-        document.getElementById('btn-mode-docs').className = "px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition";
-        document.getElementById('side-docs').classList.add('active');
-        if (graphAnimId) cancelAnimationFrame(graphAnimId);
-
-        // Pre-fill documentation if empty
-        const body = document.getElementById('doc-content-body');
-        if (!body.innerHTML || body.innerHTML.trim() === '') {
-          body.innerHTML = docSections['mcp'];
-        }
+    // =========================================================================
+    // 1. REPOSITORY MASTER DATA STORE (ALL REAL GIT CONTENT)
+    // =========================================================================
+    const repoDocs = [
+      {
+        id: "frameworks-matrix",
+        category: "Frameworks & Architecture",
+        title: "Agent Frameworks Ecosystem (40+ Evaluated)",
+        badge: "FRAMEWORKS",
+        summary: "Comprehensive evaluation matrix covering LangGraph, CrewAI, AutoGen, PydanticAI, Google ADK, and MS Agent Framework.",
+        gitPath: "frameworks/README.md",
+        content: `
+          <div class="space-y-4">
+            <p>The 2026 agent ecosystem has matured from fragile single-prompt scripts to durable, stateful, type-safe execution runtimes. Below are the key architectures supported in the repository:</p>
+            <div class="grid sm:grid-cols-2 gap-3 font-mono text-xs">
+              <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+                <div class="text-blue-400 font-bold text-sm">1. LangGraph</div>
+                <div class="text-slate-300 mt-1">Durable state machine built on cyclic graph computation. Features built-in persistence, time-travel debugging, and explicit human-in-the-loop interrupts.</div>
+                <div class="text-[10px] text-cyan-400 mt-2">Best for: Enterprise workflows requiring deterministic state checkpoints.</div>
+              </div>
+              <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+                <div class="text-emerald-400 font-bold text-sm">2. CrewAI</div>
+                <div class="text-slate-300 mt-1">Role-based autonomous agents mimicking team structures. Features automated task delegation, hierarchical crews, and process flows.</div>
+                <div class="text-[10px] text-cyan-400 mt-2">Best for: Collaborative research, content generation, and multi-step business pipelines.</div>
+              </div>
+              <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+                <div class="text-purple-400 font-bold text-sm">3. PydanticAI</div>
+                <div class="text-slate-300 mt-1">Python-native agent framework built directly on Pydantic v2. Provides strict schema validation, type safety, and structured output guarantees.</div>
+                <div class="text-[10px] text-cyan-400 mt-2">Best for: Production API services requiring guaranteed structured JSON schemas.</div>
+              </div>
+              <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+                <div class="text-amber-400 font-bold text-sm">4. Google ADK &amp; Vertex AI</div>
+                <div class="text-slate-300 mt-1">Code-first multi-language agent platform spanning Python, Go, Java, and TypeScript. Native integration with Gemini models and Google Cloud IAM.</div>
+                <div class="text-[10px] text-cyan-400 mt-2">Best for: Cloud-scale enterprise deployments with Google Cloud infrastructure.</div>
+              </div>
+            </div>
+            <div class="callout-box mt-4">
+              <strong class="text-white">Repository Implementation:</strong> See complete code examples in <code>examples/agent-patterns-2026/type_safe_agents/customer_service.py</code>.
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "mcp-protocol",
+        category: "Protocols & Standards",
+        title: "Model Context Protocol (MCP) Specification",
+        badge: "PROTOCOL",
+        summary: "Universal open standard replacing brittle custom wrappers with JSON-RPC 2.0 client-server communication.",
+        gitPath: "resources/cheat-sheets/communication-protocols.md",
+        content: `
+          <div class="space-y-4">
+            <p>The <strong>Model Context Protocol (MCP)</strong> has become the universal standard for AI agents to discover tools, inspect resources, and safely invoke external systems without custom bespoke code for each tool.</p>
+            <div class="p-4 bg-[#101422] border border-[#1f273d] rounded-lg font-mono text-xs space-y-2">
+              <div class="text-cyan-400 font-bold">// MCP JSON-RPC 2.0 Core Primitives:</div>
+              <div><strong class="text-white">tools/list</strong>: Returns JSON schemas of all sandboxed functions available to the agent.</div>
+              <div><strong class="text-white">tools/call</strong>: Invokes a specific function with validated parameters.</div>
+              <div><strong class="text-white">resources/list &amp; resources/read</strong>: Safe read-only ingestion of file system nodes, databases, or memory context.</div>
+              <div><strong class="text-white">prompts/list &amp; prompts/get</strong>: Standardized dynamic prompt templates with parameter injection.</div>
+            </div>
+            <div class="callout-box">
+              <strong class="text-white">Agent-to-Agent (A2A) Protocol:</strong> When independent agents coordinate across runtimes, they utilize A2A task envelopes containing <code>conversation_id</code>, <code>intent</code>, and structured task results.
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "coderabbit-review",
+        category: "Verification & Quality",
+        title: "CodeRabbit SWE Verification & Automated PR Reviews",
+        badge: "CODE REVIEW",
+        summary: "Autonomous code verification, machine-readable NDJSON review streaming, and self-healing fix cycles.",
+        gitPath: "resources/cheat-sheets/coderabbit-code-review.md",
+        content: `
+          <div class="space-y-4">
+            <p>Devin and SWE-bench autonomous workflows depend on automated code review to audit code before pull requests are created. Integrating <strong>CodeRabbit</strong> enables a continuous self-healing feedback loop:</p>
+            <div class="p-4 bg-[#101422] border border-[#1f273d] rounded-lg font-mono text-xs space-y-2">
+              <div class="text-emerald-400 font-bold">$ coderabbit review --agent --uncommitted</div>
+              <div>&bull; <span class="text-rose-400 font-bold">critical</span>: Arbitrary code execution (eval/exec), SQL injections, credential leaks.</div>
+              <div>&bull; <span class="text-amber-400 font-bold">major</span>: Unhandled edge cases, broken API contracts, resource leaks.</div>
+              <div>&bull; <span class="text-blue-400 font-bold">minor</span>: Anti-patterns, bare excepts, missing type annotations.</div>
+            </div>
+            <p class="text-slate-300">The coding agent parses the NDJSON stream from CodeRabbit, applies fixes targeted to the flagged file and line ranges, and verifies resolution before opening a GitHub PR.</p>
+          </div>
+        `
+      },
+      {
+        id: "academic-papers",
+        category: "Academic Literature",
+        title: "140+ Academic Research Papers (arXiv Catalog)",
+        badge: "RESEARCH",
+        summary: "Curated research papers spanning reasoning loops, tool use, multi-agent coordination, and memory architectures.",
+        gitPath: "README.md",
+        content: `
+          <div class="space-y-3 font-mono text-xs">
+            <p class="font-sans text-slate-300">Key foundational and frontier literature included in the repository:</p>
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <a href="https://arxiv.org/abs/2210.03629" target="_blank" class="text-blue-400 hover:underline font-bold">ReAct: Synergizing Reasoning and Acting in Language Models &rarr;</a>
+              <div class="text-slate-400 text-[11px] mt-1">Interleaves reasoning thoughts and tool actions for dynamic problem solving.</div>
+            </div>
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <a href="https://arxiv.org/abs/2302.04761" target="_blank" class="text-blue-400 hover:underline font-bold">Toolformer: Language Models Can Teach Themselves to Use Tools &rarr;</a>
+              <div class="text-slate-400 text-[11px] mt-1">Enables self-supervised learning of API calls and execution parameters.</div>
+            </div>
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <a href="https://arxiv.org/abs/2303.11366" target="_blank" class="text-blue-400 hover:underline font-bold">Reflexion: Language Agents with Verbal Reinforcement Learning &rarr;</a>
+              <div class="text-slate-400 text-[11px] mt-1">Dynamic memory and self-reflective feedback to evaluate mistakes and correct future trajectories.</div>
+            </div>
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <a href="https://arxiv.org/abs/2308.08155" target="_blank" class="text-blue-400 hover:underline font-bold">MetaGPT: Meta Programming for Multi-Agent Collaborative Framework &rarr;</a>
+              <div class="text-slate-400 text-[11px] mt-1">Standard Operating Procedures (SOPs) encoded into multi-agent software development teams.</div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "starter-labs",
+        category: "Runnable Projects",
+        title: "4 Executable Starter Codebases",
+        badge: "STARTER LABS",
+        summary: "Production-ready, thoroughly tested starter templates complete with CLI entry points and unit tests.",
+        gitPath: "examples/README.md",
+        content: `
+          <div class="space-y-3 font-mono text-xs">
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <div class="text-white font-bold text-sm">1. Personal Assistant (examples/personal-assistant)</div>
+              <div class="text-slate-300 mt-1">Multi-tool productivity assistant with CalendarTool, EmailTool, TaskTool, SearchTool, and ConversationMemory.</div>
+              <div class="text-cyan-400 text-[11px] mt-1">Run: <code>python examples/basic_usage.py</code></div>
+            </div>
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <div class="text-white font-bold text-sm">2. SWE Coding Agent (examples/coding-agent)</div>
+              <div class="text-slate-300 mt-1">Autonomous coding assistant with AST syntax validation, safe diff application, and CodeRabbit review feedback.</div>
+              <div class="text-cyan-400 text-[11px] mt-1">Run: <code>python examples/run_coding_agent.py</code></div>
+            </div>
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <div class="text-white font-bold text-sm">3. Research Agent (examples/research-agent)</div>
+              <div class="text-slate-300 mt-1">Decomposes complex research questions, queries multiple sources, extracts evidence, and synthesizes structured summaries with citations.</div>
+              <div class="text-cyan-400 text-[11px] mt-1">Run: <code>python examples/run_research_agent.py</code></div>
+            </div>
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <div class="text-white font-bold text-sm">4. Multi-Agent Swarm (examples/multi-agent-collab)</div>
+              <div class="text-slate-300 mt-1">Hierarchical multi-agent collaboration with a Planner, Worker, and Reviewer coordinating via structured message envelopes.</div>
+              <div class="text-cyan-400 text-[11px] mt-1">Run: <code>python examples/run_collaboration.py</code></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "mastery-roadmaps",
+        category: "Learning Roadmaps",
+        title: "Mastery Roadmaps (Beginner to Expert)",
+        badge: "ROADMAPS",
+        summary: "Phased engineering curricula guiding developers through agent construction, state management, and production operations.",
+        gitPath: "resources/roadmaps/complete-roadmap.md",
+        content: `
+          <div class="space-y-3 font-sans text-xs">
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <div class="text-emerald-400 font-mono font-bold text-sm">&#x1F331; Beginner Track (Weeks 1–6)</div>
+              <div class="text-slate-300 mt-1">Prompt engineering primitives, ReAct loop mechanics, AST-safe calculators (zero-eval), tool calling schemas, and basic Docker containers.</div>
+            </div>
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <div class="text-cyan-400 font-mono font-bold text-sm">&#x26A1; Intermediate Track (Weeks 1–8)</div>
+              <div class="text-slate-300 mt-1">LangGraph state graphs, Model Context Protocol (MCP), Redis memory stores, AgentOps telemetry, and human-in-the-loop checkpoints.</div>
+            </div>
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <div class="text-purple-400 font-mono font-bold text-sm">&#x1F680; Expert Track (Weeks 1–12)</div>
+              <div class="text-slate-300 mt-1">Autonomous SWE bots, automated CodeRabbit PR workflows, SOC2 compliance, circuit breakers, semantic caching, and distributed multi-agent swarms.</div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "enterprise-deployment",
+        category: "Cheat Sheets & Guides",
+        title: "Enterprise AI Agent Deployment (2026 Production)",
+        badge: "ENTERPRISE",
+        summary: "Operational guide covering Docker containerization, Kubernetes manifests, LangSmith tracing, and rate-limiting guardrails.",
+        gitPath: "resources/cheat-sheets/enterprise-deployment-2026.md",
+        content: `
+          <div class="space-y-4">
+            <p>Deploying production agents requires strict operational isolation, observability, and defensive controls:</p>
+            <div class="p-4 bg-[#101422] border border-[#1f273d] rounded-lg font-mono text-xs space-y-2">
+              <div class="text-blue-400 font-bold"># Production Guardrails Architecture:</div>
+              <div>&bull; <strong class="text-white">Circuit Breakers</strong>: Maximum turns per task (e.g. max 15 steps) to prevent runaway billing.</div>
+              <div>&bull; <strong class="text-white">Sandboxed Execution</strong>: Tools executed in ephemeral Docker containers or gVisor sandboxes.</div>
+              <div>&bull; <strong class="text-white">AST-Safe Parsing</strong>: Strictly forbidden to use <code>eval()</code> or <code>exec()</code> on untrusted agent outputs.</div>
+              <div>&bull; <strong class="text-white">Distributed Tracing</strong>: End-to-end telemetry via OpenTelemetry, LangSmith, and AgentOps.</div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: "setup-scripts",
+        category: "Tooling & Setup",
+        title: "Cross-Platform Environment Setup Scripts",
+        badge: "SETUP",
+        summary: "Automated scripts for Windows PowerShell and Linux/macOS Bash to prepare Python virtual environments.",
+        gitPath: "scripts/setup.ps1",
+        content: `
+          <div class="space-y-3 font-mono text-xs">
+            <p class="font-sans text-slate-300">Execute automated setup in your workspace:</p>
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <div class="text-cyan-400 font-bold mb-1"># Windows PowerShell:</div>
+              <div class="text-white bg-[#07090f] p-2 rounded border border-[#1f273d]">.\\scripts\\setup.ps1</div>
+            </div>
+            <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg">
+              <div class="text-emerald-400 font-bold mb-1"># Linux / macOS Bash:</div>
+              <div class="text-white bg-[#07090f] p-2 rounded border border-[#1f273d]">bash ./scripts/setup.sh</div>
+            </div>
+          </div>
+        `
       }
-    }
-
-    function copyBentoClone() {
-      const text = document.getElementById('bento-clone').innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        const icon = document.getElementById('bento-copy-icon');
-        icon.classList.add('text-emerald-400');
-        setTimeout(() => icon.classList.remove('text-emerald-400'), 1500);
-      });
-    }
-
-    // Framework Catalog Data
-    const frameworks = [
-      { name: "LangGraph", category: "Stateful Graph", desc: "Explicit graph orchestration with persistence, checkpointing, and human-in-the-loop.", complexity: "Medium", url: "https://github.com/langchain-ai/langgraph" },
-      { name: "CrewAI", category: "Role-Based", desc: "Production crews, task delegation, structured memory, and business flows.", complexity: "Low", url: "https://github.com/crewAIInc/crewAI" },
-      { name: "PydanticAI", category: "Type-Safe", desc: "Type-safe Python agents and structured outputs using Pydantic v2 schemas.", complexity: "Low", url: "https://github.com/pydantic/pydantic-ai" },
-      { name: "Google ADK", category: "Enterprise", desc: "Code-first multi-language framework for Gemini Enterprise and cloud agents.", complexity: "Medium", url: "https://adk.dev/" },
-      { name: "MS Agent Framework", category: "Enterprise", desc: "Successor to AutoGen & Semantic Kernel with enterprise state and filters.", complexity: "Medium", url: "https://learn.microsoft.com/en-us/agent-framework/" },
-      { name: "LlamaIndex Workflows", category: "RAG", desc: "Document ingestion, event-driven pipelines, and hybrid vector retrieval.", complexity: "Medium", url: "https://github.com/run-llama/llama_index" },
-      { name: "OpenAI Agents SDK", category: "Native", desc: "Official runtime for handoffs, guardrails, and tool calling with tracing.", complexity: "Low", url: "https://github.com/openai/openai-agents-python" },
-      { name: "Smolagents", category: "Minimal", desc: "Hugging Face framework for lightweight local code agents and open models.", complexity: "Low", url: "https://github.com/huggingface/smolagents" },
-      { name: "DSPy", category: "LM Compiler", desc: "Optimizes LM prompts and pipelines programmatically via evaluation feedback.", complexity: "High", url: "https://github.com/stanfordnlp/dspy" }
     ];
 
-    function renderBentoFrameworks(list) {
-      const container = document.getElementById('fw-bento-grid');
-      container.innerHTML = '';
-      list.forEach(fw => {
-        const card = document.createElement('div');
-        card.className = "p-4 bg-[#0d0f17] border border-[#1e2334] rounded-lg space-y-2.5 hover:border-blue-500/50 transition";
-        card.innerHTML = `
-          <div class="flex items-center justify-between">
-            <h4 class="font-mono font-bold text-white text-xs">${fw.name}</h4>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#161924] text-blue-400 border border-[#232738]">${fw.category}</span>
+    // 40+ Frameworks Matrix Data
+    const frameworksData = [
+      { name: "LangGraph", cat: "orchestration", desc: "Stateful cyclic graph orchestration with checkpoint persistence & human-in-the-loop control.", lang: "Python / JS", stars: "18k+", badge: "Enterprise Ready" },
+      { name: "CrewAI", cat: "multi-agent", desc: "Role-playing autonomous agent teams with task delegation and hierarchical processes.", lang: "Python", stars: "24k+", badge: "Team Collab" },
+      { name: "PydanticAI", cat: "typesafe", desc: "Type-safe agent development with schema validation built on Pydantic v2.", lang: "Python", stars: "7k+", badge: "Type-Safe" },
+      { name: "Google ADK", cat: "cloud", desc: "Multi-language code-first enterprise agent platform across Python, Go, Java, and TypeScript.", lang: "Polyglot", stars: "Official", badge: "Google Cloud" },
+      { name: "Microsoft Agent Framework", cat: "cloud", desc: "Enterprise successor to AutoGen & Semantic Kernel with unified telemetry and state.", lang: "Python / C#", stars: "Official", badge: "Microsoft" },
+      { name: "LlamaIndex Workflows", cat: "orchestration", desc: "Event-driven asynchronous agent pipelines optimized for multimodal RAG.", lang: "Python / TS", stars: "36k+", badge: "RAG Power" },
+      { name: "AutoGen", cat: "multi-agent", desc: "Conversational agent multi-turn dialogue patterns with asynchronous messaging.", lang: "Python", stars: "33k+", badge: "Multi-Agent" },
+      { name: "Smolagents", cat: "typesafe", desc: "Hugging Face code-first agent framework executing actions in Python scripts.", lang: "Python", stars: "12k+", badge: "Lightweight" },
+      { name: "MetaGPT", cat: "multi-agent", desc: "Multi-agent framework assigning human role SOPs (Product Manager, Architect, Engineer).", lang: "Python", stars: "45k+", badge: "SOPs" },
+      { name: "ChatDev", cat: "multi-agent", desc: "Virtual software development company simulator driven by communicating LLMs.", lang: "Python", stars: "25k+", badge: "Software Dev" },
+      { name: "Camel", cat: "multi-agent", desc: "Communicative agents for mind exploration and autonomous role-playing cooperation.", lang: "Python", stars: "6k+", badge: "Role Play" },
+      { name: "Semantic Kernel", cat: "cloud", desc: "Enterprise SDK integrating LLMs with conventional programming languages.", lang: "C# / Python / Java", stars: "22k+", badge: "Enterprise" }
+    ];
+
+    // =========================================================================
+    // 2. VIEW SWITCHER
+    // =========================================================================
+    let currentActiveView = 'game';
+
+    function switchView(viewName) {
+      currentActiveView = viewName;
+      // Hide all views
+      ['game', 'mindmap', 'docs', 'matrix'].forEach(v => {
+        const el = document.getElementById('view-' + v);
+        const tab = document.getElementById('tab-' + v);
+        if (el) el.classList.add('hidden');
+        if (tab) {
+          tab.className = "px-3.5 py-1.5 rounded-md text-xs font-semibold text-slate-400 hover:text-white transition-all";
+        }
+      });
+
+      // Show target view
+      const targetEl = document.getElementById('view-' + viewName);
+      const targetTab = document.getElementById('tab-' + viewName);
+      if (targetEl) targetEl.classList.remove('hidden');
+      if (targetTab) {
+        targetTab.className = "px-3.5 py-1.5 rounded-md text-xs font-semibold bg-blue-600 text-white transition-all shadow-sm";
+      }
+
+      // Trigger lazy renders
+      if (viewName === 'mindmap') {
+        renderMindmapTree();
+        startMindmapGraph();
+      } else if (viewName === 'docs') {
+        renderDocsSidebar();
+        if (!document.getElementById('docs-reader-container').innerHTML.trim()) {
+          loadDocById('frameworks-matrix');
+        }
+      } else if (viewName === 'matrix') {
+        renderFrameworksGrid(frameworksData);
+      }
+    }
+
+    // =========================================================================
+    // 3. MINDMAP & TREE ENGINE
+    // =========================================================================
+    const treeData = [
+      {
+        id: "t-fw",
+        title: "Agent Frameworks Ecosystem",
+        icon: "&#x1F9E9;",
+        desc: "Durable state graphs, multi-agent crews, and type-safe runtimes.",
+        children: [
+          { title: "LangGraph: Cyclic state graph orchestration with persistence & checkpoints", docId: "frameworks-matrix" },
+          { title: "CrewAI: Role-based teams and autonomous task delegation", docId: "frameworks-matrix" },
+          { title: "PydanticAI: Strict Pydantic v2 schema validation & type safety", docId: "frameworks-matrix" },
+          { title: "Google ADK: Cloud-scale enterprise agent platform", docId: "frameworks-matrix" },
+          { title: "MS Agent Framework: Unified enterprise AutoGen & Semantic Kernel successor", docId: "frameworks-matrix" }
+        ]
+      },
+      {
+        id: "t-proto",
+        title: "Protocols & Interoperability",
+        icon: "&#x1F50C;",
+        desc: "Open JSON-RPC 2.0 communication standards replacing custom API wrappers.",
+        children: [
+          { title: "Model Context Protocol (MCP): tools/list, tools/call, resources/read", docId: "mcp-protocol" },
+          { title: "Agent-to-Agent (A2A): Task delegation envelopes with conversation_id", docId: "mcp-protocol" },
+          { title: "Streaming JSON-RPC: Real-time asynchronous tool outputs over WebSockets", docId: "mcp-protocol" }
+        ]
+      },
+      {
+        id: "t-verif",
+        title: "Verification, Code Review & Safety",
+        icon: "&#x1F6E1;",
+        desc: "Continuous automated review loops and zero-eval execution guarantees.",
+        children: [
+          { title: "CodeRabbit CLI Review: Machine-readable NDJSON stream for agents", docId: "coderabbit-review" },
+          { title: "Autonomous Autofix Loop: Generate -> Review -> Fix -> Verify cycle", docId: "coderabbit-review" },
+          { title: "AST Expression Sandboxing: Mathematical evaluation eliminating eval() vulnerabilities", docId: "enterprise-deployment" },
+          { title: "SOC2 Compliance & Guardrails: Circuit breakers, rate limits, and audit logs", docId: "enterprise-deployment" }
+        ]
+      },
+      {
+        id: "t-labs",
+        title: "4 Runnable Starter Codebases",
+        icon: "&#x1F4BB;",
+        desc: "Complete, production-tested agent starters with unit tests.",
+        children: [
+          { title: "examples/personal-assistant: Multi-tool assistant with calendar, email, tasks", docId: "starter-labs" },
+          { title: "examples/coding-agent: Self-healing SWE coding bot with CodeRabbit review", docId: "starter-labs" },
+          { title: "examples/research-agent: Query decomposition & evidence synthesis", docId: "starter-labs" },
+          { title: "examples/multi-agent-collab: Hierarchical Planner, Worker, Reviewer swarm", docId: "starter-labs" }
+        ]
+      },
+      {
+        id: "t-roadmaps",
+        title: "Mastery Roadmaps",
+        icon: "&#x1F5FA;",
+        desc: "Phased engineering curricula from beginner primitives to distributed multi-agent systems.",
+        children: [
+          { title: "Beginner Track (Weeks 1–6): LLM primitives, ReAct loop, AST calculators, Docker", docId: "mastery-roadmaps" },
+          { title: "Intermediate Track (Weeks 1–8): LangGraph, Model Context Protocol, Redis memory", docId: "mastery-roadmaps" },
+          { title: "Expert Track (Weeks 1–12): Autonomous SWE bots, automated CodeRabbit PRs, SOC2", docId: "mastery-roadmaps" }
+        ]
+      }
+    ];
+
+    function renderMindmapTree() {
+      const container = document.getElementById('tree-content-container');
+      container.innerHTML = treeData.map(node => `
+        <div class="card-surface p-4 rounded-xl tree-card" data-title="${node.title.toLowerCase()}">
+          <div class="flex items-center justify-between cursor-pointer" onclick="toggleTreeBranch('${node.id}')">
+            <div class="flex items-center gap-2.5">
+              <span class="text-base">${node.icon}</span>
+              <strong class="text-white text-xs tracking-tight">${node.title}</strong>
+            </div>
+            <span id="arrow-${node.id}" class="text-slate-400 font-mono text-[10px] bg-[#151b2b] px-2 py-0.5 rounded border border-[#1f273d]">&#x25BC;</span>
           </div>
-          <p class="text-[11px] text-slate-400 leading-relaxed">${fw.desc}</p>
-          <div class="pt-2 border-t border-[#181c2a] flex items-center justify-between text-[10px] font-mono text-slate-500">
-            <span>Complexity: <strong class="text-slate-300">${fw.complexity}</strong></span>
-            <a href="${fw.url}" target="_blank" class="text-blue-400 hover:underline">Docs &rarr;</a>
+          <p class="text-[11px] text-slate-400 mt-1 pl-7">${node.desc}</p>
+          <div id="${node.id}" class="tree-branch mt-3 space-y-2 text-slate-300">
+            ${node.children.map(ch => `
+              <div class="flex items-start gap-2 hover:text-white cursor-pointer group" onclick="switchView('docs'); loadDocById('${ch.docId}');">
+                <span class="text-cyan-400 mt-0.5">&bull;</span>
+                <span class="group-hover:underline text-[11px] leading-relaxed">${ch.title}</span>
+              </div>
+            `).join('')}
           </div>
-        `;
-        container.appendChild(card);
+        </div>
+      `).join('');
+    }
+
+    function toggleTreeBranch(id) {
+      const el = document.getElementById(id);
+      const arr = document.getElementById('arrow-' + id);
+      if (el) {
+        el.classList.toggle('hidden');
+        if (arr) arr.innerHTML = el.classList.contains('hidden') ? '&#x25B6;' : '&#x25BC;';
+      }
+    }
+
+    function expandAllTree(expand) {
+      treeData.forEach(node => {
+        const el = document.getElementById(node.id);
+        const arr = document.getElementById('arrow-' + node.id);
+        if (el) {
+          if (expand) {
+            el.classList.remove('hidden');
+            if (arr) arr.innerHTML = '&#x25BC;';
+          } else {
+            el.classList.add('hidden');
+            if (arr) arr.innerHTML = '&#x25B6;';
+          }
+        }
       });
     }
 
-    function filterFwCategory(cat) {
-      document.querySelectorAll('[id^="fw-pill-"]').forEach(b => b.classList.remove('active'));
-      const activeBtn = document.getElementById(`fw-pill-${cat.toLowerCase().replace(' ', '')}`);
-      if (activeBtn) activeBtn.classList.add('active');
-
-      if (cat === 'all') {
-        renderBentoFrameworks(frameworks);
-      } else {
-        renderBentoFrameworks(frameworks.filter(f => f.category === cat));
-      }
-    }
-
-    function filterBento(name) {
-      setViewMode('bento');
-      const filtered = frameworks.filter(f => f.name.toLowerCase().includes(name.toLowerCase()));
-      renderBentoFrameworks(filtered);
-      window.scrollTo({ top: 500, behavior: 'smooth' });
-    }
-
-    // Interactive Terminal Simulation
-    const presets = {
-      personal: "Schedule team design sync tomorrow at 10 AM",
-      coding: "Generate Flask API with input validation and run CodeRabbit review",
-      research: "Synthesize Model Context Protocol benchmarks across production deployments",
-      collab: "Deploy microservice using Planner, Worker, and Reviewer swarm"
-    };
-
-    function updateSimAgent() {
-      const type = document.getElementById('sim-agent-select').value;
-      document.getElementById('sim-prompt-input').value = presets[type] || "";
-    }
-
-    async function runBentoSim() {
-      const type = document.getElementById('sim-agent-select').value;
-      const prompt = document.getElementById('sim-prompt-input').value.trim();
-      const stream = document.getElementById('sim-trace-stream');
-      const btn = document.getElementById('sim-exec-btn');
-
-      if (!prompt) return;
-
-      btn.disabled = true;
-      btn.innerText = "Running...";
-      stream.innerHTML = '';
-
-      function log(level, msg) {
-        const d = document.createElement('div');
-        let col = "text-blue-400";
-        if (level === "TOOL") col = "text-emerald-400";
-        if (level === "SECURITY") col = "text-rose-400";
-        if (level === "SUCCESS") col = "text-emerald-400";
-        d.innerHTML = `<span class="${col} font-bold">[${level}]</span> <span class="text-slate-300">${msg}</span>`;
-        stream.appendChild(d);
-        stream.scrollTop = stream.scrollHeight;
-      }
-
-      log("INGEST", `Processing task prompt: "${prompt}"`);
-      await new Promise(r => setTimeout(r, 400));
-
-      if (type === "personal") {
-        log("ROUTER", "Evaluating intent classifier against registered tools (calendar, email, tasks).");
-        await new Promise(r => setTimeout(r, 450));
-        log("TOOL", "Invoked CalendarTool.schedule_event(start_time='Tomorrow 10:00 AM')");
-        await new Promise(r => setTimeout(r, 400));
-        log("STATE", "ConversationMemory updated with 1 scheduled meeting checkpoint.");
-        await new Promise(r => setTimeout(r, 300));
-        log("SUCCESS", "Event booked & confirmation dispatched.");
-      } else if (type === "coding") {
-        log("GEN", "Generated Flask REST microservice with user routes.");
-        await new Promise(r => setTimeout(r, 500));
-        log("AST", "Parsing AST tree with ast.parse to confirm syntax validity.");
-        await new Promise(r => setTimeout(r, 400));
-        log("SECURITY", "CodeRabbit CLI review: 0 Critical, 0 Major vulnerabilities found.");
-        await new Promise(r => setTimeout(r, 400));
-        log("SUCCESS", "Code verification passed with clean review.");
-      } else if (type === "research") {
-        log("DECOMPOSE", "Generated 3 sub-hypotheses for empirical literature search.");
-        await new Promise(r => setTimeout(r, 500));
-        log("RETRIEVE", "Extracted citations from arXiv (cs.AI) and RFC protocol drafts.");
-        await new Promise(r => setTimeout(r, 450));
-        log("SUCCESS", "Generated structured synthesis with verified source citations.");
-      } else {
-        log("PLANNER", "Decomposed task into DAG dependencies for 3 specialized agents.");
-        await new Promise(r => setTimeout(r, 450));
-        log("WORKER", "Worker Agent completed implementation units.");
-        await new Promise(r => setTimeout(r, 450));
-        log("REVIEWER", "Reviewer Agent audited outputs against safety criteria.");
-        await new Promise(r => setTimeout(r, 350));
-        log("SUCCESS", "Swarm achieved consensus on deliverable.");
-      }
-
-      btn.disabled = false;
-      btn.innerText = "Execute";
-    }
-
-    // Docs Section Content
-    const docSections = {
-      mcp: `
-        <div class="space-y-5">
-          <div class="flex items-center gap-2 text-xs font-mono text-blue-400">
-            <span>PROTOCOL SPECIFICATION</span> &bull; <span>OPEN STANDARD</span>
-          </div>
-          <h1 class="text-3xl font-bold text-white tracking-tight">Model Context Protocol (MCP)</h1>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Model Context Protocol (MCP) is an open standard that standardizes how artificial intelligence agents discover, authenticate with, and consume external tools, database resources, and enterprise systems via JSON-RPC 2.0.
-          </p>
-          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2.5">
-            <div class="text-blue-400 font-bold">// MCP Standard Methods</div>
-            <div>&bull; <strong class="text-white">tools/list</strong>: Enumerates JSON schemas for all available sandboxed functions.</div>
-            <div>&bull; <strong class="text-white">tools/call</strong>: Invokes a specific tool with parameter validation.</div>
-            <div>&bull; <strong class="text-white">resources/read</strong>: Ingests documents, database schemas, or repo context.</div>
-          </div>
-          <h2 class="text-lg font-semibold text-white pt-2">Reference Architecture</h2>
-          <p class="text-slate-400 text-xs leading-relaxed">
-            Instead of exposing raw API keys or ad-hoc Python function decorators, an agent communicates with an MCP Client process over standard I/O (stdio) or Server-Sent Events (SSE). The client negotiates capabilities with independent MCP servers, preserving a clean security boundary.
-          </p>
-        </div>
-      `,
-      coderabbit: `
-        <div class="space-y-5">
-          <div class="flex items-center gap-2 text-xs font-mono text-emerald-400">
-            <span>VERIFICATION RUNBOOK</span> &bull; <span>SELF-HEALING SWE</span>
-          </div>
-          <h1 class="text-3xl font-bold text-white tracking-tight">CodeRabbit Autonomous Review Workflow</h1>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Autonomous software engineering agents (SWE-bench bots) require automated, machine-readable code review before opening PRs. CodeRabbit provides structured NDJSON outputs designed specifically for AI agent loops.
-          </p>
-          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2.5">
-            <div class="text-emerald-400 font-bold">$ coderabbit review --agent --uncommitted</div>
-            <div class="text-slate-400">Outputs machine-readable NDJSON stream categorized into:</div>
-            <div>&bull; <span class="text-rose-400 font-bold">critical</span>: RCE (eval/exec), SQL injection, credential leaks.</div>
-            <div>&bull; <span class="text-amber-400 font-bold">major</span>: Unhandled exceptions, broken API contracts.</div>
-            <div>&bull; <span class="text-blue-400 font-bold">minor</span>: Anti-patterns, bare except, missing type hints.</div>
-          </div>
-        </div>
-      `,
-      swarm: `
-        <div class="space-y-5">
-          <div class="flex items-center gap-2 text-xs font-mono text-purple-400">
-            <span>MULTI-AGENT TOPOLOGY</span> &bull; <span>SWARM COORDINATION</span>
-          </div>
-          <h1 class="text-3xl font-bold text-white tracking-tight">Hierarchical Multi-Agent Collaboration</h1>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Implemented in <code>examples/multi-agent-collab</code>: Separates agent responsibilities into a structured Planner &rarr; Worker &rarr; Reviewer pipeline to avoid hallucinations and unbounded execution loops.
-          </p>
-          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2">
-            <div>1. <strong class="text-white">PlannerAgent</strong>: Deconstructs macro prompts into structured task DAGs.</div>
-            <div>2. <strong class="text-white">WorkerAgent</strong>: Executes individual steps using sandboxed tool calls.</div>
-            <div>3. <strong class="text-white">ReviewerAgent</strong>: Audits outputs against criteria before allowing transition.</div>
-          </div>
-        </div>
-      `,
-      typesafe: `
-        <div class="space-y-5">
-          <div class="flex items-center gap-2 text-xs font-mono text-blue-400">
-            <span>SCHEMA INTEGRITY</span> &bull; <span>PYDANTIC v2</span>
-          </div>
-          <h1 class="text-3xl font-bold text-white tracking-tight">Type-Safe Agents with PydanticAI</h1>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Implemented in <code>examples/agent-patterns-2026/type_safe_agents/customer_service.py</code>: Strict validation of both user query structures and agent output payloads.
-          </p>
-          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2">
-            <div>&bull; <code>CustomerQuery</code>: customer_id, query_type, message (min_length=10), priority.</div>
-            <div>&bull; <code>CustomerResponse</code>: response_text, confidence_score (0.0-1.0), suggested_actions.</div>
-          </div>
-        </div>
-      `,
-      papers: `
-        <div class="space-y-5">
-          <div class="flex items-center gap-2 text-xs font-mono text-indigo-400">
-            <span>ACADEMIC LITERATURE</span> &bull; <span>140+ PAPERS</span>
-          </div>
-          <h1 class="text-3xl font-bold text-white tracking-tight">Curated Agentic AI Research Papers</h1>
-          <div class="space-y-3 pt-2">
-            <div class="p-3 bg-[#0b0d13] border border-[#232738] rounded text-xs space-y-1">
-              <div class="font-bold text-white"><a href="https://arxiv.org/abs/2210.03629" target="_blank" class="text-blue-400 hover:underline">ReAct: Synergizing Reasoning and Acting in Language Models</a></div>
-              <p class="text-slate-400">Interleaves reasoning traces and action steps for dynamic task solving.</p>
-            </div>
-            <div class="p-3 bg-[#0b0d13] border border-[#232738] rounded text-xs space-y-1">
-              <div class="font-bold text-white"><a href="https://arxiv.org/abs/2302.04761" target="_blank" class="text-blue-400 hover:underline">Toolformer: Language Models Can Teach Themselves to Use Tools</a></div>
-              <p class="text-slate-400">Self-supervised learning enabling models to determine when and how to call external APIs.</p>
-            </div>
-            <div class="p-3 bg-[#0b0d13] border border-[#232738] rounded text-xs space-y-1">
-              <div class="font-bold text-white"><a href="https://arxiv.org/abs/2303.11366" target="_blank" class="text-blue-400 hover:underline">Reflexion: Language Agents with Verbal Reinforcement Learning</a></div>
-              <p class="text-slate-400">Equips agents with dynamic memory and self-reflective evaluation to learn from mistakes.</p>
-            </div>
-          </div>
-        </div>
-      `
-    };
-
-    function showDocSection(key) {
-      // Direct render without recursive viewmode call
-      const body = document.getElementById('doc-content-body');
-      body.innerHTML = docSections[key] || docSections['mcp'];
-      
-      // Update view directly
-      document.getElementById('mode-bento-container').classList.add('hidden');
-      document.getElementById('mode-graph-container').classList.add('hidden');
-      document.getElementById('mode-docs-container').classList.remove('hidden');
-
-      document.querySelectorAll('#btn-mode-bento, #btn-mode-graph, #btn-mode-docs').forEach(b => {
-        b.className = "px-3 py-1 rounded text-xs font-medium text-slate-400 hover:text-white transition";
+    function filterTree(q) {
+      const query = q.toLowerCase().trim();
+      document.querySelectorAll('.tree-card').forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(query) ? 'block' : 'none';
       });
-      document.getElementById('btn-mode-docs').className = "px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition";
-
-      document.querySelectorAll('#side-bento, #side-graph, #side-docs').forEach(b => b.classList.remove('active'));
-      document.getElementById('side-docs').classList.add('active');
-
-      if (graphAnimId) cancelAnimationFrame(graphAnimId);
-      currentView = 'docs';
     }
 
-    function loadCodebaseDemo(codebase) {
-      setViewMode('bento');
-      const sel = document.getElementById('sim-agent-select');
-      sel.value = codebase;
-      updateSimAgent();
-      window.scrollTo({ top: 300, behavior: 'smooth' });
-    }
-
-    // Global Search Handler
-    function handleGlobalSearch() {
-      const q = document.getElementById('global-search').value.toLowerCase().trim();
-      if (!q) {
-        renderBentoFrameworks(frameworks);
-        return;
-      }
-      setViewMode('bento');
-      const filtered = frameworks.filter(f => f.name.toLowerCase().includes(q) || f.desc.toLowerCase().includes(q) || f.category.toLowerCase().includes(q));
-      renderBentoFrameworks(filtered);
-    }
-
-    // ==========================================
-    // INTERACTIVE KNOWLEDGE GRAPH ENGINE (CANVAS)
-    // ==========================================
-    const canvas = document.getElementById('mindmap-canvas');
-    const ctx = canvas.getContext('2d');
-
+    // =========================================================================
+    // 4. INTERACTIVE CANVAS GRAPH ENGINE (PHYSICS & DRAGGING)
+    // =========================================================================
     const graphNodes = [
-      { id: "langgraph", label: "LangGraph", cat: "Framework", x: 280, y: 180, color: "#3b82f6", desc: "Durable stateful agent graphs, checkpointing, and human interrupts.", link: "https://github.com/langchain-ai/langgraph" },
-      { id: "crewai", label: "CrewAI", cat: "Framework", x: 180, y: 300, color: "#3b82f6", desc: "Role-based agent teams and structured business process flows.", link: "https://crewai.com" },
-      { id: "pydanticai", label: "PydanticAI", cat: "Framework", x: 420, y: 260, color: "#3b82f6", desc: "Type-safe agent development and strict schema validation.", link: "https://ai.pydantic.dev" },
-      { id: "adk", label: "Google ADK", cat: "Framework", x: 300, y: 380, color: "#3b82f6", desc: "Code-first enterprise framework for Gemini and cloud systems.", link: "https://adk.dev" },
-      
-      { id: "mcp", label: "Model Context Protocol", cat: "Protocol", x: 500, y: 150, color: "#8b5cf6", desc: "Open JSON-RPC 2.0 standard for connecting models to tools and context.", link: "https://modelcontextprotocol.io" },
-      { id: "a2a", label: "Agent-to-Agent (A2A)", cat: "Protocol", x: 620, y: 240, color: "#8b5cf6", desc: "Interoperability specifications for cross-vendor multi-agent handoffs.", link: "https://github.com/a2aproject/A2A" },
-      
-      { id: "coderabbit", label: "CodeRabbit Review", cat: "Verification", x: 650, y: 380, color: "#10b981", desc: "AI-first automated PR code review and autonomous self-healing loops.", link: "https://coderabbit.ai" },
-      { id: "langsmith", label: "LangSmith Tracing", cat: "Observability", x: 160, y: 120, color: "#10b981", desc: "Production tracing, debugging, and prompt evaluation.", link: "https://smith.langchain.com" },
-      { id: "ast_safe", label: "AST Sandboxing", cat: "Security", x: 480, y: 420, color: "#10b981", desc: "Abstract Syntax Tree safe evaluation eliminating arbitrary code execution.", link: "#" },
-
-      { id: "personal_ast", label: "Personal Assistant", cat: "Project", x: 100, y: 220, color: "#f43f5e", desc: "Multi-tool assistant with calendar, email triage, and conversation memory.", link: "examples/personal-assistant" },
-      { id: "coding_agent", label: "Coding Agent", cat: "Project", x: 760, y: 300, color: "#f43f5e", desc: "Devin-style SWE agent with automated CodeRabbit review integration.", link: "examples/coding-agent" },
-      { id: "swarm", label: "Collab Swarm", cat: "Project", x: 360, y: 90, color: "#f43f5e", desc: "Hierarchical Planner-Worker-Reviewer multi-agent collaboration.", link: "examples/multi-agent-collab" }
+      { id: "core", label: "Agentic AI Universe", x: 0, y: 0, vx: 0, vy: 0, r: 24, color: "#3b82f6", docId: "frameworks-matrix" },
+      { id: "fw", label: "Frameworks (40+)", x: -120, y: -80, vx: 0, vy: 0, r: 18, color: "#60a5fa", docId: "frameworks-matrix" },
+      { id: "mcp", label: "MCP Protocol", x: 120, y: -80, vx: 0, vy: 0, r: 18, color: "#8b5cf6", docId: "mcp-protocol" },
+      { id: "cr", label: "CodeRabbit Review", x: 140, y: 70, vx: 0, vy: 0, r: 18, color: "#10b981", docId: "coderabbit-review" },
+      { id: "labs", label: "4 Starter Labs", x: -140, y: 70, vx: 0, vy: 0, r: 18, color: "#f43f5e", docId: "starter-labs" },
+      { id: "road", label: "Mastery Roadmaps", x: 0, y: 130, vx: 0, vy: 0, r: 18, color: "#06b6d4", docId: "mastery-roadmaps" },
+      { id: "papers", label: "140+ arXiv Papers", x: 0, y: -130, vx: 0, vy: 0, r: 18, color: "#f59e0b", docId: "academic-papers" }
     ];
 
     const graphEdges = [
-      { from: "langgraph", to: "mcp" },
-      { from: "langgraph", to: "langsmith" },
-      { from: "pydanticai", to: "mcp" },
-      { from: "pydanticai", to: "ast_safe" },
-      { from: "crewai", to: "swarm" },
-      { from: "adk", to: "mcp" },
-      { from: "mcp", to: "a2a" },
-      { from: "coding_agent", to: "coderabbit" },
-      { from: "coding_agent", to: "ast_safe" },
-      { from: "personal_ast", to: "langgraph" },
-      { from: "swarm", to: "a2a" }
+      { from: "core", to: "fw" },
+      { from: "core", to: "mcp" },
+      { from: "core", to: "cr" },
+      { from: "core", to: "labs" },
+      { from: "core", to: "road" },
+      { from: "core", to: "papers" },
+      { from: "fw", to: "labs" },
+      { from: "mcp", to: "fw" },
+      { from: "cr", to: "labs" }
     ];
 
-    let dragNode = null;
-    let hoveredNode = null;
-    let selectedNode = null;
+    let graphCanvas, graphCtx;
+    let graphDragNode = null;
+    let graphAnimId = null;
 
-    function resizeCanvas() {
-      const container = document.getElementById('mode-graph-container');
-      const rect = container.getBoundingClientRect();
-      canvas.width = Math.max(rect.width || 800, 600);
-      canvas.height = Math.max((rect.height - 40) || 500, 400);
+    function startMindmapGraph() {
+      const container = document.getElementById('mindmap-canvas-container');
+      graphCanvas = document.getElementById('mindmap-canvas');
+      if (!graphCanvas || !container) return;
+      graphCtx = graphCanvas.getContext('2d');
 
-      // Reposition nodes relative to canvas center if first run
-      const cx = canvas.width / 2;
-      const cy = canvas.height / 2;
-      if (!canvas.dataset.centered) {
-        canvas.dataset.centered = "true";
-        graphNodes.forEach((n, idx) => {
-          const angle = (idx / graphNodes.length) * Math.PI * 2;
-          const radius = 180 + (idx % 2) * 60;
-          n.x = cx + Math.cos(angle) * radius;
-          n.y = cy + Math.sin(angle) * radius;
+      const resize = () => {
+        graphCanvas.width = container.clientWidth;
+        graphCanvas.height = container.clientHeight;
+      };
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Mouse drag listeners
+      let offsetX = 0, offsetY = 0;
+      graphCanvas.addEventListener('mousedown', e => {
+        const rect = graphCanvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left - graphCanvas.width / 2;
+        const my = e.clientY - rect.top - graphCanvas.height / 2;
+        graphNodes.forEach(n => {
+          const dist = Math.hypot(mx - n.x, my - n.y);
+          if (dist < n.r + 5) {
+            graphDragNode = n;
+            offsetX = mx - n.x;
+            offsetY = my - n.y;
+          }
         });
-      }
-    }
+      });
 
-    function startGraphAnimation() {
-      if (graphAnimId) cancelAnimationFrame(graphAnimId);
+      window.addEventListener('mousemove', e => {
+        if (!graphDragNode) return;
+        const rect = graphCanvas.getBoundingClientRect();
+        graphDragNode.x = e.clientX - rect.left - graphCanvas.width / 2 - offsetX;
+        graphDragNode.y = e.clientY - rect.top - graphCanvas.height / 2 - offsetY;
+      });
 
-      function loop() {
-        if (currentView === 'graph') {
-          drawGraphFrame();
-          graphAnimId = requestAnimationFrame(loop);
+      window.addEventListener('mouseup', () => {
+        if (graphDragNode) {
+          openKnowledgeModal(graphDragNode.docId);
         }
+        graphDragNode = null;
+      });
+
+      if (!graphAnimId) {
+        animateGraph();
       }
-      loop();
-    }
-
-    function drawGraphFrame() {
-      if (!canvas.width || !canvas.height) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw Edges
-      graphEdges.forEach(edge => {
-        const source = graphNodes.find(n => n.id === edge.from);
-        const target = graphNodes.find(n => n.id === edge.to);
-        if (!source || !target) return;
-
-        ctx.beginPath();
-        ctx.moveTo(source.x, source.y);
-        ctx.lineTo(target.x, target.y);
-        const isActive = selectedNode && (selectedNode.id === source.id || selectedNode.id === target.id);
-        ctx.strokeStyle = isActive ? "rgba(59, 130, 246, 0.8)" : "rgba(35, 39, 56, 0.85)";
-        ctx.lineWidth = isActive ? 2 : 1;
-        ctx.stroke();
-      });
-
-      // Draw Nodes
-      graphNodes.forEach(node => {
-        const isHovered = hoveredNode && hoveredNode.id === node.id;
-        const isSelected = selectedNode && selectedNode.id === node.id;
-        const radius = isSelected ? 22 : (isHovered ? 20 : 16);
-
-        // Glow
-        if (isSelected || isHovered) {
-          ctx.beginPath();
-          ctx.arc(node.x, node.y, radius + 8, 0, Math.PI * 2);
-          ctx.fillStyle = node.color + "33";
-          ctx.fill();
-        }
-
-        // Body
-        ctx.beginPath();
-        ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = node.color;
-        ctx.fill();
-        ctx.strokeStyle = isSelected ? "#ffffff" : "#0d0f17";
-        ctx.lineWidth = 2.5;
-        ctx.stroke();
-
-        // Label
-        ctx.font = "11px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
-        ctx.fillStyle = isSelected ? "#ffffff" : "#94a3b8";
-        ctx.textAlign = "center";
-        ctx.fillText(node.label, node.x, node.y + radius + 14);
-      });
-    }
-
-    function getNodeAt(x, y) {
-      return graphNodes.find(n => {
-        const dx = n.x - x;
-        const dy = n.y - y;
-        return Math.sqrt(dx * dx + dy * dy) < 26;
-      });
-    }
-
-    canvas.addEventListener('mousedown', e => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const node = getNodeAt(x, y);
-      if (node) {
-        dragNode = node;
-        selectedNode = node;
-        inspectNode(node);
-      }
-    });
-
-    canvas.addEventListener('mousemove', e => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      if (dragNode) {
-        dragNode.x = x;
-        dragNode.y = y;
-      } else {
-        hoveredNode = getNodeAt(x, y);
-        canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
-      }
-    });
-
-    window.addEventListener('mouseup', () => { dragNode = null; });
-
-    function inspectNode(node) {
-      const drawer = document.getElementById('node-inspector');
-      drawer.classList.remove('hidden');
-
-      document.getElementById('inspect-category').innerText = node.cat.toUpperCase();
-      document.getElementById('inspect-title').innerText = node.label;
-      document.getElementById('inspect-desc').innerText = node.desc;
-      document.getElementById('inspect-link').href = node.link;
-
-      const connEl = document.getElementById('inspect-connections');
-      connEl.innerHTML = '';
-      const conns = graphEdges
-        .filter(e => e.from === node.id || e.to === node.id)
-        .map(e => (e.from === node.id ? e.to : e.from));
-
-      conns.forEach(cid => {
-        const cnode = graphNodes.find(n => n.id === cid);
-        if (cnode) {
-          const pill = document.createElement('span');
-          pill.className = "px-2 py-0.5 rounded bg-[#161924] text-slate-300 border border-[#232738]";
-          pill.innerText = cnode.label;
-          connEl.appendChild(pill);
-        }
-      });
-    }
-
-    function closeInspector() {
-      document.getElementById('node-inspector').classList.add('hidden');
-      selectedNode = null;
     }
 
     function resetGraphPhysics() {
-      canvas.dataset.centered = "";
-      resizeCanvas();
+      graphNodes[0].x = 0; graphNodes[0].y = 0;
+      graphNodes[1].x = -120; graphNodes[1].y = -80;
+      graphNodes[2].x = 120; graphNodes[2].y = -80;
+      graphNodes[3].x = 140; graphNodes[3].y = 70;
+      graphNodes[4].x = -140; graphNodes[4].y = 70;
+      graphNodes[5].x = 0; graphNodes[5].y = 130;
+      graphNodes[6].x = 0; graphNodes[6].y = -130;
     }
 
-    window.addEventListener('resize', () => {
-      if (currentView === 'graph') {
-        resizeCanvas();
+    function animateGraph() {
+      graphAnimId = requestAnimationFrame(animateGraph);
+      if (currentActiveView !== 'mindmap' || !graphCtx) return;
+
+      const w = graphCanvas.width;
+      const h = graphCanvas.height;
+      graphCtx.clearRect(0, 0, w, h);
+
+      graphCtx.save();
+      graphCtx.translate(w / 2, h / 2);
+
+      // Draw Edges
+      graphEdges.forEach(e => {
+        const n1 = graphNodes.find(n => n.id === e.from);
+        const n2 = graphNodes.find(n => n.id === e.to);
+        if (!n1 || !n2) return;
+        graphCtx.beginPath();
+        graphCtx.moveTo(n1.x, n1.y);
+        graphCtx.lineTo(n2.x, n2.y);
+        graphCtx.strokeStyle = 'rgba(59, 130, 246, 0.25)';
+        graphCtx.lineWidth = 1.5;
+        graphCtx.stroke();
+      });
+
+      // Draw Nodes
+      graphNodes.forEach(n => {
+        // Outer glow
+        graphCtx.beginPath();
+        graphCtx.arc(n.x, n.y, n.r + 4, 0, Math.PI * 2);
+        graphCtx.fillStyle = n.color + '22';
+        graphCtx.fill();
+
+        // Core Circle
+        graphCtx.beginPath();
+        graphCtx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        graphCtx.fillStyle = n.color;
+        graphCtx.fill();
+        graphCtx.strokeStyle = '#ffffff';
+        graphCtx.lineWidth = 1.5;
+        graphCtx.stroke();
+
+        // Label
+        graphCtx.font = "bold 10px ui-monospace, monospace";
+        graphCtx.fillStyle = "#f1f5f9";
+        graphCtx.textAlign = "center";
+        graphCtx.fillText(n.label, n.x, n.y + n.r + 13);
+      });
+
+      graphCtx.restore();
+    }
+
+    // =========================================================================
+    // 5. FULL GIT DOCS ENGINE
+    // =========================================================================
+    function renderDocsSidebar() {
+      const container = document.getElementById('docs-nav-list');
+      const grouped = {};
+      repoDocs.forEach(doc => {
+        if (!grouped[doc.category]) grouped[doc.category] = [];
+        grouped[doc.category].push(doc);
+      });
+
+      container.innerHTML = Object.keys(grouped).map(cat => `
+        <div class="space-y-1">
+          <div class="text-[10px] font-mono text-slate-500 uppercase tracking-wider px-2 font-bold">${cat}</div>
+          ${grouped[cat].map(doc => `
+            <button onclick="loadDocById('${doc.id}')" id="doc-btn-${doc.id}" class="doc-sidebar-btn w-full text-left px-2.5 py-1.5 rounded-lg text-xs text-slate-300 hover:bg-[#151b2b] hover:text-white transition-all flex items-center justify-between group">
+              <span class="truncate">${doc.title}</span>
+              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-[#101422] text-slate-500 group-hover:text-cyan-400 border border-[#1f273d]">${doc.badge}</span>
+            </button>
+          `).join('')}
+        </div>
+      `).join('');
+    }
+
+    function loadDocById(docId) {
+      const doc = repoDocs.find(d => d.id === docId);
+      if (!doc) return;
+
+      document.querySelectorAll('.doc-sidebar-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600/20', 'text-blue-400', 'font-medium', 'border', 'border-blue-500/40');
+      });
+      const activeBtn = document.getElementById('doc-btn-' + docId);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-blue-600/20', 'text-blue-400', 'font-medium', 'border', 'border-blue-500/40');
+      }
+
+      const reader = document.getElementById('docs-reader-container');
+      reader.innerHTML = `
+        <article class="space-y-6 animate-in fade-in duration-150">
+          <div class="border-b border-[#1f273d] pb-5">
+            <div class="flex items-center gap-2 font-mono text-xs text-cyan-400 mb-2">
+              <span>GIT REPOSITORY FILE</span> &bull; <code>${doc.gitPath}</code>
+            </div>
+            <h1 class="text-2xl lg:text-3xl font-bold text-white tracking-tight">${doc.title}</h1>
+            <p class="text-xs text-slate-400 mt-2 font-mono">${doc.summary}</p>
+          </div>
+          <div class="text-slate-300 text-sm leading-relaxed space-y-4">
+            ${doc.content}
+          </div>
+        </article>
+      `;
+    }
+
+    function filterDocsList(q) {
+      const query = q.toLowerCase().trim();
+      document.querySelectorAll('.doc-sidebar-btn').forEach(btn => {
+        btn.style.display = btn.innerText.toLowerCase().includes(query) ? 'flex' : 'none';
+      });
+    }
+
+    // =========================================================================
+    // 6. FRAMEWORK MATRIX RENDERER
+    // =========================================================================
+    function renderFrameworksGrid(list) {
+      const grid = document.getElementById('frameworks-grid');
+      grid.innerHTML = list.map(fw => `
+        <div class="card-surface p-4 rounded-xl flex flex-col justify-between space-y-3">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-white text-sm tracking-tight">${fw.name}</span>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950/70 border border-blue-800 text-blue-300">${fw.badge}</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2 leading-relaxed">${fw.desc}</p>
+          </div>
+          <div class="pt-3 border-t border-[#1f273d] flex items-center justify-between text-[11px] font-mono text-slate-400">
+            <span>Lang: <strong class="text-slate-200">${fw.lang}</strong></span>
+            <span>Stars: <strong class="text-cyan-400">${fw.stars}</strong></span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterMatrix(cat) {
+      document.querySelectorAll('.matrix-filter-btn').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = "matrix-filter-btn px-3 py-1 rounded bg-blue-600 text-white font-medium";
+        } else {
+          btn.className = "matrix-filter-btn px-3 py-1 rounded bg-[#151b2b] hover:bg-[#1f273d] text-slate-300";
+        }
+      });
+      if (cat === 'all') {
+        renderFrameworksGrid(frameworksData);
+      } else {
+        renderFrameworksGrid(frameworksData.filter(f => f.cat === cat));
+      }
+    }
+
+    // =========================================================================
+    // 7. OMNI SEARCH
+    // =========================================================================
+    function handleOmniSearch(query) {
+      const q = query.toLowerCase().trim();
+      if (!q) return;
+      switchView('docs');
+      const matched = repoDocs.find(d => d.title.toLowerCase().includes(q) || d.summary.toLowerCase().includes(q) || d.content.toLowerCase().includes(q));
+      if (matched) {
+        loadDocById(matched.id);
+      }
+    }
+
+    // =========================================================================
+    // 8. KNOWLEDGE MODAL CONTROLS
+    // =========================================================================
+    let currentModalDocId = null;
+
+    function openKnowledgeModal(docId) {
+      const doc = repoDocs.find(d => d.id === docId);
+      if (!doc) return;
+      currentModalDocId = docId;
+      document.getElementById('modal-badge').innerText = doc.badge;
+      document.getElementById('modal-title').innerText = doc.title;
+      document.getElementById('modal-body').innerHTML = `
+        <div class="p-3 bg-[#101422] border border-[#1f273d] rounded-lg font-mono text-xs text-cyan-300">
+          ${doc.summary}
+        </div>
+        <div class="pt-2 space-y-3">
+          ${doc.content}
+        </div>
+      `;
+      document.getElementById('knowledge-modal').classList.remove('hidden');
+      playTone(600, 'sine', 0.15);
+    }
+
+    function closeKnowledgeModal() {
+      document.getElementById('knowledge-modal').classList.add('hidden');
+    }
+
+    function openInDocsFromModal() {
+      closeKnowledgeModal();
+      switchView('docs');
+      if (currentModalDocId) {
+        loadDocById(currentModalDocId);
+      }
+    }
+
+    function triggerCurrentChest() {
+      if (currentNearbyWaypoint) {
+        openKnowledgeModal(currentNearbyWaypoint.docId);
+      }
+    }
+
+    // =========================================================================
+    // 9. WEB AUDIO SYNTHESIZER (ZERO EXTERNAL SOUND ASSETS)
+    // =========================================================================
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playTone(freq, type = 'sine', duration = 0.1) {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('btn-sound').innerHTML = soundEnabled ? '&#x1F50A; SFX ON' : '&#x1F507; SFX OFF';
+    }
+
+    // =========================================================================
+    // 10. 3D GAMIFIED CYBER WORLD ENGINE (THREE.JS CYBER ROVER)
+    // =========================================================================
+    const waypoints = [
+      { docId: "frameworks-matrix", label: "Agent Frameworks Citadel", color: 0x3b82f6, x: 0, z: -45, discovered: false },
+      { docId: "mcp-protocol", label: "Model Context Protocol (MCP)", color: 0x8b5cf6, x: 42, z: -25, discovered: false },
+      { docId: "coderabbit-review", label: "CodeRabbit Verification Vault", color: 0x10b981, x: 42, z: 25, discovered: false },
+      { docId: "academic-papers", label: "Academic Research Library (140+)", color: 0xf59e0b, x: -42, z: 25, discovered: false },
+      { docId: "starter-labs", label: "Executable Codebases Lab", color: 0xf43f5e, x: -42, z: -25, discovered: false },
+      { docId: "mastery-roadmaps", label: "Mastery Roadmaps Station", color: 0x06b6d4, x: 0, z: 45, discovered: false },
+      { docId: "enterprise-deployment", label: "Enterprise Security Fortress", color: 0xef4444, x: 24, z: 0, discovered: false },
+      { docId: "setup-scripts", label: "Setup Scripts & AST Sandbox", color: 0x10b981, x: -24, z: 0, discovered: false }
+    ];
+
+    let currentNearbyWaypoint = null;
+    let discoveredTotal = 0;
+
+    // Three.js State
+    let scene, camera, renderer;
+    let roverGroup;
+    const waypointMeshes = [];
+
+    // Rover Physics
+    const roverState = {
+      x: 0,
+      z: 0,
+      angle: 0,
+      speed: 0,
+      maxSpeed: 0.85,
+      accel: 0.035,
+      friction: 0.94,
+      turnSpeed: 0.042
+    };
+
+    const keys = {
+      ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false,
+      KeyW: false, KeyS: false, KeyA: false, KeyD: false
+    };
+
+    function init3DWorld() {
+      const container = document.getElementById('canvas-3d-wrapper');
+      const canvas = document.getElementById('game-canvas');
+      const width = container.clientWidth || window.innerWidth;
+      const height = container.clientHeight || (window.innerHeight - 56);
+
+      // Scene
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x080a10);
+      scene.fog = new THREE.FogExp2(0x080a10, 0.016);
+
+      // Camera
+      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+      camera.position.set(0, 22, 34);
+
+      // Renderer
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, powerPreference: "high-performance" });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Lighting
+      const ambient = new THREE.AmbientLight(0xffffff, 0.45);
+      scene.add(ambient);
+
+      const dirLight = new THREE.DirectionalLight(0x60a5fa, 0.8);
+      dirLight.position.set(20, 50, 20);
+      scene.add(dirLight);
+
+      // Cyber Grid Floor
+      const grid = new THREE.GridHelper(180, 45, 0x1f273d, 0x111624);
+      grid.position.y = -0.01;
+      scene.add(grid);
+
+      // Build Vehicle & Map Waypoints
+      buildCyberRover();
+      buildMapWaypoints();
+      setupRadarMarkers();
+
+      // Start Game Loop
+      animateGameLoop();
+    }
+
+    function buildCyberRover() {
+      roverGroup = new THREE.Group();
+
+      // Main Chassis
+      const bodyGeo = new THREE.BoxGeometry(2.4, 0.75, 4.0);
+      const bodyMat = new THREE.MeshLambertMaterial({ color: 0x161d2e });
+      const body = new THREE.Mesh(bodyGeo, bodyMat);
+      body.position.y = 0.75;
+      roverGroup.add(body);
+
+      // Cabin / Windshield (Glowing Cyan)
+      const cabGeo = new THREE.BoxGeometry(1.8, 0.65, 2.2);
+      const cabMat = new THREE.MeshLambertMaterial({ color: 0x06b6d4 });
+      const cab = new THREE.Mesh(cabGeo, cabMat);
+      cab.position.set(0, 1.35, -0.2);
+      roverGroup.add(cab);
+
+      // Front Headlights
+      const lightL = new THREE.SpotLight(0x67e8f9, 3, 25, Math.PI / 6, 0.5);
+      lightL.position.set(-0.8, 0.8, -1.9);
+      lightL.target.position.set(-0.8, 0, -15);
+      roverGroup.add(lightL);
+      roverGroup.add(lightL.target);
+
+      const lightR = new THREE.SpotLight(0x67e8f9, 3, 25, Math.PI / 6, 0.5);
+      lightR.position.set(0.8, 0.8, -1.9);
+      lightR.target.position.set(0.8, 0, -15);
+      roverGroup.add(lightR);
+      roverGroup.add(lightR.target);
+
+      // 4 Wheels
+      const wheelGeo = new THREE.CylinderGeometry(0.5, 0.5, 0.45, 12);
+      const wheelMat = new THREE.MeshLambertMaterial({ color: 0x0a0d14 });
+      wheelGeo.rotateZ(Math.PI / 2);
+
+      const wPositions = [
+        [-1.3, 0.5, 1.2],
+        [1.3, 0.5, 1.2],
+        [-1.3, 0.5, -1.2],
+        [1.3, 0.5, -1.2]
+      ];
+      wPositions.forEach(pos => {
+        const wheel = new THREE.Mesh(wheelGeo, wheelMat);
+        wheel.position.set(pos[0], pos[1], pos[2]);
+        roverGroup.add(wheel);
+      });
+
+      scene.add(roverGroup);
+    }
+
+    function buildMapWaypoints() {
+      waypoints.forEach(wp => {
+        const group = new THREE.Group();
+        group.position.set(wp.x, 0, wp.z);
+
+        // Ground Target Ring
+        const ringGeo = new THREE.RingGeometry(2.8, 3.4, 32);
+        ringGeo.rotateX(-Math.PI / 2);
+        const ringMat = new THREE.MeshBasicMaterial({ color: wp.color, side: THREE.DoubleSide });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.position.y = 0.05;
+        group.add(ring);
+
+        // Tech Chest / Monolith Base
+        const baseGeo = new THREE.BoxGeometry(2.5, 1.8, 2.5);
+        const baseMat = new THREE.MeshLambertMaterial({ color: 0x161d2e });
+        const base = new THREE.Mesh(baseGeo, baseMat);
+        base.position.y = 0.9;
+        group.add(base);
+
+        // Glowing Floating Octahedron Core
+        const coreGeo = new THREE.OctahedronGeometry(0.8);
+        const coreMat = new THREE.MeshBasicMaterial({ color: wp.color });
+        const core = new THREE.Mesh(coreGeo, coreMat);
+        core.position.y = 3.0;
+        group.add(core);
+
+        // Procedural Cyber Tree next to Chest
+        const treeTrunkGeo = new THREE.CylinderGeometry(0.3, 0.4, 3.5, 8);
+        const treeTrunkMat = new THREE.MeshLambertMaterial({ color: 0x1f293d });
+        const treeTrunk = new THREE.Mesh(treeTrunkGeo, treeTrunkMat);
+        treeTrunk.position.set(3.5, 1.75, 0);
+        group.add(treeTrunk);
+
+        const treeFoliageGeo = new THREE.ConeGeometry(1.8, 3.0, 6);
+        const treeFoliageMat = new THREE.MeshLambertMaterial({ color: wp.color });
+        const treeFoliage = new THREE.Mesh(treeFoliageGeo, treeFoliageMat);
+        treeFoliage.position.set(3.5, 4.0, 0);
+        group.add(treeFoliage);
+
+        group.userData = { coreMesh: core, wpData: wp };
+        scene.add(group);
+        waypointMeshes.push(group);
+      });
+    }
+
+    function setupRadarMarkers() {
+      const radar = document.getElementById('radar-container');
+      waypoints.forEach(wp => {
+        const blip = document.createElement('div');
+        blip.className = "w-2.5 h-2.5 rounded-full absolute -translate-x-1/2 -translate-y-1/2 shadow-md";
+        blip.style.backgroundColor = '#' + wp.color.toString(16).padStart(6, '0');
+        // Map (-55, +55) to (0, 144px)
+        const rx = ((wp.x + 55) / 110) * 144;
+        const rz = ((wp.z + 55) / 110) * 144;
+        blip.style.left = rx + 'px';
+        blip.style.top = rz + 'px';
+        radar.appendChild(blip);
+      });
+    }
+
+    function updateRadar() {
+      const playerBlip = document.getElementById('radar-player');
+      const rx = ((roverState.x + 55) / 110) * 144;
+      const rz = ((roverState.z + 55) / 110) * 144;
+      playerBlip.style.left = Math.max(4, Math.min(140, rx)) + 'px';
+      playerBlip.style.top = Math.max(4, Math.min(140, rz)) + 'px';
+      playerBlip.style.transform = `translate(-50%, -50%) rotate(${roverState.angle}rad)`;
+      document.getElementById('radar-coords').innerText = `X:${Math.round(roverState.x)} Z:${Math.round(roverState.z)}`;
+    }
+
+    function teleportTo(docId) {
+      const wp = waypoints.find(w => w.docId === docId);
+      if (!wp) return;
+      roverState.x = wp.x;
+      roverState.z = wp.z + 6;
+      roverState.speed = 0;
+      roverState.angle = 0;
+      playTone(520, 'sine', 0.2);
+    }
+
+    // Controls Listeners
+    window.addEventListener('keydown', e => {
+      if (keys.hasOwnProperty(e.code)) {
+        keys[e.code] = true;
+        initAudio();
+      }
+      if (e.code === 'KeyE' || e.code === 'Space') {
+        if (currentNearbyWaypoint) {
+          openKnowledgeModal(currentNearbyWaypoint.docId);
+        }
       }
     });
 
-    // Init
+    window.addEventListener('keyup', e => {
+      if (keys.hasOwnProperty(e.code)) keys[e.code] = false;
+    });
+
+    // Touch D-Pad bindings
+    const bindTouchControl = (btnId, keyCode) => {
+      const el = document.getElementById(btnId);
+      if (!el) return;
+      el.addEventListener('pointerdown', () => { keys[keyCode] = true; initAudio(); });
+      el.addEventListener('pointerup', () => { keys[keyCode] = false; });
+      el.addEventListener('pointerleave', () => { keys[keyCode] = false; });
+    };
+    bindTouchControl('ctrl-up', 'KeyW');
+    bindTouchControl('ctrl-down', 'KeyS');
+    bindTouchControl('ctrl-left', 'KeyA');
+    bindTouchControl('ctrl-right', 'KeyD');
+
+    function animateGameLoop() {
+      requestAnimationFrame(animateGameLoop);
+      if (currentActiveView !== 'game') return;
+
+      // Acceleration / Deceleration
+      if (keys.ArrowUp || keys.KeyW) {
+        roverState.speed = Math.min(roverState.speed + roverState.accel, roverState.maxSpeed);
+        if (Math.random() < 0.1) playTone(120, 'triangle', 0.05);
+      } else if (keys.ArrowDown || keys.KeyS) {
+        roverState.speed = Math.max(roverState.speed - roverState.accel, -roverState.maxSpeed * 0.5);
+      } else {
+        roverState.speed *= roverState.friction;
+      }
+
+      // Steering
+      if (Math.abs(roverState.speed) > 0.01) {
+        const dir = roverState.speed > 0 ? 1 : -1;
+        if (keys.ArrowLeft || keys.KeyA) roverState.angle += roverState.turnSpeed * dir;
+        if (keys.ArrowRight || keys.KeyD) roverState.angle -= roverState.turnSpeed * dir;
+      }
+
+      // Position update
+      roverState.x -= Math.sin(roverState.angle) * roverState.speed;
+      roverState.z -= Math.cos(roverState.angle) * roverState.speed;
+
+      // Clamping within world boundaries
+      roverState.x = Math.max(-50, Math.min(50, roverState.x));
+      roverState.z = Math.max(-50, Math.min(50, roverState.z));
+
+      // Rover Mesh sync
+      roverGroup.position.set(roverState.x, 0, roverState.z);
+      roverGroup.rotation.y = roverState.angle;
+
+      // Smooth Follow Camera
+      const camOffset = new THREE.Vector3(
+        Math.sin(roverState.angle) * 18,
+        14,
+        Math.cos(roverState.angle) * 18
+      );
+      camera.position.x += (roverGroup.position.x + camOffset.x - camera.position.x) * 0.08;
+      camera.position.y += (camOffset.y - camera.position.y) * 0.08;
+      camera.position.z += (roverGroup.position.z + camOffset.z - camera.position.z) * 0.08;
+      camera.lookAt(roverGroup.position.x, 1.2, roverGroup.position.z);
+
+      // Waypoint Crystals Animation & Proximity
+      let foundNearby = null;
+      waypointMeshes.forEach(mesh => {
+        mesh.userData.coreMesh.rotation.y += 0.025;
+        mesh.userData.coreMesh.rotation.x += 0.012;
+
+        const dist = Math.hypot(roverState.x - mesh.position.x, roverState.z - mesh.position.z);
+        if (dist < 6.8) {
+          foundNearby = mesh.userData.wpData;
+        }
+      });
+
+      // Update Proximity HUD
+      const banner = document.getElementById('proximity-banner');
+      if (foundNearby) {
+        currentNearbyWaypoint = foundNearby;
+        document.getElementById('proximity-title').innerText = "DISCOVERED: " + foundNearby.label.toUpperCase();
+        banner.classList.remove('opacity-0', 'translate-y-6', 'pointer-events-none');
+
+        if (!foundNearby.discovered) {
+          foundNearby.discovered = true;
+          discoveredTotal++;
+          document.getElementById('discovered-counter').innerText = `${discoveredTotal} / ${waypoints.length} Explored`;
+          playTone(440, 'sine', 0.2);
+        }
+      } else {
+        currentNearbyWaypoint = null;
+        banner.classList.add('opacity-0', 'translate-y-6', 'pointer-events-none');
+      }
+
+      // Update Radar
+      updateRadar();
+
+      renderer.render(scene, camera);
+    }
+
+    window.addEventListener('resize', () => {
+      const wrapper = document.getElementById('canvas-3d-wrapper');
+      if (!wrapper || !camera || !renderer) return;
+      const w = wrapper.clientWidth;
+      const h = wrapper.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    });
+
+    // =========================================================================
+    // 11. BOOTSTRAP ON LOAD
+    // =========================================================================
     window.addEventListener('DOMContentLoaded', () => {
-      renderBentoFrameworks(frameworks);
-      updateSimAgent();
+      init3DWorld();
+      switchView('game');
     });
   </script>
 </body>
