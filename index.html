@@ -38,7 +38,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.35rem 0.65rem;
+      padding: 0.4rem 0.65rem;
       border-radius: 6px;
       font-size: 0.8rem;
       color: var(--text-muted);
@@ -50,7 +50,7 @@
     }
     .nav-item.active {
       color: #93c5fd;
-      background: rgba(59, 130, 246, 0.12);
+      background: rgba(59, 130, 246, 0.15);
       font-weight: 500;
     }
     .pill-btn {
@@ -109,11 +109,11 @@
   <!-- Split View Shell -->
   <div class="flex-1 flex overflow-hidden">
 
-    <!-- Left Collapsible Sidebar (Mintlify Style) -->
-    <aside class="w-64 border-r border-[#232738] bg-[#0d0f17] flex flex-col shrink-0 overflow-y-auto p-4 space-y-6">
+    <!-- Left Collapsible Sidebar -->
+    <aside class="w-64 border-r border-[#232738] bg-[#0d0f17] flex flex-col shrink-0 overflow-y-auto p-4 space-y-5">
       <!-- Section: Navigation -->
       <div class="space-y-1">
-        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">Views</div>
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">View Mode</div>
         <button onclick="setViewMode('bento')" class="nav-item w-full text-left" id="side-bento">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           <span>Bento Grid Explorer</span>
@@ -130,11 +130,12 @@
 
       <!-- Section: Architecture & Protocols -->
       <div class="space-y-1">
-        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">Architectures & Protocols</div>
+        <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">Architecture Runbooks</div>
         <button onclick="showDocSection('mcp')" class="nav-item w-full text-left">Model Context Protocol (MCP)</button>
         <button onclick="showDocSection('coderabbit')" class="nav-item w-full text-left">CodeRabbit SWE Autofix</button>
-        <button onclick="showDocSection('swarm')" class="nav-item w-full text-left">Multi-Agent Swarm (Planner/Worker)</button>
+        <button onclick="showDocSection('swarm')" class="nav-item w-full text-left">Multi-Agent Swarm</button>
         <button onclick="showDocSection('typesafe')" class="nav-item w-full text-left">PydanticAI Type Safety</button>
+        <button onclick="showDocSection('papers')" class="nav-item w-full text-left">Academic Papers (140+)</button>
       </div>
 
       <!-- Section: Framework Matrix -->
@@ -157,7 +158,7 @@
         </button>
       </div>
 
-      <!-- Section: Runbooks & Codebases -->
+      <!-- Section: Starter Codebases -->
       <div class="space-y-1">
         <div class="text-[11px] font-mono text-slate-500 uppercase tracking-wider px-2 mb-1.5">Starter Codebases</div>
         <button onclick="loadCodebaseDemo('personal')" class="nav-item w-full text-left">examples/personal-assistant</button>
@@ -167,8 +168,8 @@
       </div>
 
       <!-- Repository Quick Stats -->
-      <div class="p-3 bg-[#121520] border border-[#232738] rounded-lg text-xs space-y-2 mt-auto">
-        <div class="text-[11px] font-mono text-slate-400">REPO SPECIFICATION</div>
+      <div class="p-3 bg-[#121520] border border-[#232738] rounded-lg text-xs space-y-1.5 mt-auto">
+        <div class="text-[11px] font-mono text-slate-400">SPECIFICATION</div>
         <div class="flex justify-between text-slate-300"><span>Frameworks:</span> <span class="font-mono text-white font-bold">40+</span></div>
         <div class="flex justify-between text-slate-300"><span>Papers:</span> <span class="font-mono text-white font-bold">140+</span></div>
         <div class="flex justify-between text-slate-300"><span>Cheat Sheets:</span> <span class="font-mono text-white font-bold">9</span></div>
@@ -190,7 +191,7 @@
             <div class="space-y-3">
               <div class="flex items-center gap-2 text-xs font-mono text-blue-400">
                 <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                <span>NOVEMBER 2026 PRODUCTION RUNTIME SPECIFICATION</span>
+                <span>NOVEMBER 2026 RUNTIME SPECIFICATION</span>
               </div>
               <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-white leading-snug">
                 Architectures, Schemas & Protocols for Production Agentic AI
@@ -326,35 +327,35 @@
 
 
       <!-- ==================== VIEW MODE 2: INTERACTIVE MINDMAP GRAPH ==================== -->
-      <div id="mode-graph-container" class="h-full flex flex-col hidden">
+      <div id="mode-graph-container" class="h-full flex flex-col hidden relative">
         <!-- Canvas Toolbar -->
         <div class="h-10 border-b border-[#232738] bg-[#0d0f17] px-4 flex items-center justify-between text-xs text-slate-400 font-mono shrink-0">
           <div class="flex items-center gap-3">
-            <span>INTERACTIVE KNOWLEDGE GRAPH</span>
+            <span class="text-slate-200">INTERACTIVE KNOWLEDGE GRAPH</span>
             <span class="text-slate-600">&bull;</span>
-            <span class="text-[11px] text-slate-500">Click & Drag Nodes &bull; Click Node for Inspector</span>
+            <span class="text-[11px] text-slate-500">Drag nodes &bull; Click to inspect &bull; Scroll to pan</span>
           </div>
           <div class="flex items-center gap-2">
-            <button onclick="resetGraphPhysics()" class="px-2.5 py-1 rounded bg-[#161924] hover:bg-[#1f2433] text-slate-300 border border-[#232738]">Reset Nodes</button>
+            <button onclick="resetGraphPhysics()" class="px-2.5 py-1 rounded bg-[#161924] hover:bg-[#1f2433] text-slate-300 border border-[#232738]">Reset Layout</button>
           </div>
         </div>
 
         <div class="flex-1 flex overflow-hidden relative">
           <!-- Graph Canvas -->
-          <canvas id="mindmap-canvas" class="flex-1 w-full h-full bg-[#07080c] cursor-grab active:cursor-grabbing"></canvas>
+          <canvas id="mindmap-canvas" class="flex-1 w-full h-full bg-[#08090e] cursor-grab active:cursor-grabbing block"></canvas>
 
           <!-- Node Inspector Drawer (Right) -->
           <div id="node-inspector" class="w-80 border-l border-[#232738] bg-[#0d0f17] p-5 flex flex-col justify-between hidden z-20 overflow-y-auto">
             <div class="space-y-4">
               <div class="flex items-center justify-between">
                 <span id="inspect-category" class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/30 text-blue-400 border border-blue-800">CATEGORY</span>
-                <button onclick="closeInspector()" class="text-slate-500 hover:text-white">&times;</button>
+                <button onclick="closeInspector()" class="text-slate-500 hover:text-white text-base">&times;</button>
               </div>
               <h3 id="inspect-title" class="text-lg font-semibold text-white">Node Details</h3>
               <p id="inspect-desc" class="text-xs text-slate-300 leading-relaxed">Description goes here.</p>
               
               <div class="p-3 bg-[#121520] border border-[#232738] rounded text-xs space-y-2">
-                <div class="text-[11px] font-mono text-slate-400">CONNECTED NODES</div>
+                <div class="text-[11px] font-mono text-slate-400">CONNECTED DEPENDENCIES</div>
                 <div id="inspect-connections" class="flex flex-wrap gap-1 text-[11px] font-mono"></div>
               </div>
             </div>
@@ -371,9 +372,8 @@
 
       <!-- ==================== VIEW MODE 3: DOCS & CHEAT SHEETS PORTAL ==================== -->
       <div id="mode-docs-container" class="p-8 max-w-4xl mx-auto space-y-8 hidden">
-        <!-- Rendered Documentation Sections -->
         <article id="doc-content-body" class="space-y-6 text-slate-300 leading-relaxed">
-          <!-- Dynamic Content Loaded by JS -->
+          <!-- Populated directly by showDocSection -->
         </article>
       </div>
 
@@ -382,33 +382,54 @@
 
   <!-- Application Logic -->
   <script>
-    // View Switching
+    // View Switching Logic
     let currentView = 'bento';
+    let graphAnimId = null;
 
     function setViewMode(mode) {
       currentView = mode;
       
-      document.querySelectorAll('#mode-bento-container, #mode-graph-container, #mode-docs-container').forEach(el => el.classList.add('hidden'));
+      // Hide all main containers
+      document.getElementById('mode-bento-container').classList.add('hidden');
+      document.getElementById('mode-graph-container').classList.add('hidden');
+      document.getElementById('mode-docs-container').classList.add('hidden');
+
+      // Update top buttons
       document.querySelectorAll('#btn-mode-bento, #btn-mode-graph, #btn-mode-docs').forEach(b => {
         b.className = "px-3 py-1 rounded text-xs font-medium text-slate-400 hover:text-white transition";
       });
+
+      // Update side nav
       document.querySelectorAll('#side-bento, #side-graph, #side-docs').forEach(b => b.classList.remove('active'));
 
       if (mode === 'bento') {
         document.getElementById('mode-bento-container').classList.remove('hidden');
         document.getElementById('btn-mode-bento').className = "px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition";
         document.getElementById('side-bento').classList.add('active');
-      } else if (mode === 'graph') {
-        document.getElementById('mode-graph-container').classList.remove('hidden');
+        if (graphAnimId) cancelAnimationFrame(graphAnimId);
+      } 
+      else if (mode === 'graph') {
+        const container = document.getElementById('mode-graph-container');
+        container.classList.remove('hidden');
         document.getElementById('btn-mode-graph').className = "px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition";
         document.getElementById('side-graph').classList.add('active');
-        resizeCanvas();
-      } else if (mode === 'docs') {
+        
+        // Ensure canvas has real dimensions after container becomes visible
+        setTimeout(() => {
+          resizeCanvas();
+          startGraphAnimation();
+        }, 30);
+      } 
+      else if (mode === 'docs') {
         document.getElementById('mode-docs-container').classList.remove('hidden');
         document.getElementById('btn-mode-docs').className = "px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition";
         document.getElementById('side-docs').classList.add('active');
-        if (!document.getElementById('doc-content-body').innerHTML.trim()) {
-          showDocSection('mcp');
+        if (graphAnimId) cancelAnimationFrame(graphAnimId);
+
+        // Pre-fill documentation if empty
+        const body = document.getElementById('doc-content-body');
+        if (!body.innerHTML || body.innerHTML.trim() === '') {
+          body.innerHTML = docSections['mcp'];
         }
       }
     }
@@ -553,36 +574,36 @@
     // Docs Section Content
     const docSections = {
       mcp: `
-        <div class="space-y-4">
+        <div class="space-y-5">
           <div class="flex items-center gap-2 text-xs font-mono text-blue-400">
             <span>PROTOCOL SPECIFICATION</span> &bull; <span>OPEN STANDARD</span>
           </div>
-          <h1 class="text-2xl font-bold text-white">Model Context Protocol (MCP)</h1>
-          <p class="text-slate-400 text-sm">
+          <h1 class="text-3xl font-bold text-white tracking-tight">Model Context Protocol (MCP)</h1>
+          <p class="text-slate-300 text-sm leading-relaxed">
             Model Context Protocol (MCP) is an open standard that standardizes how artificial intelligence agents discover, authenticate with, and consume external tools, database resources, and enterprise systems via JSON-RPC 2.0.
           </p>
-          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2">
+          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2.5">
             <div class="text-blue-400 font-bold">// MCP Standard Methods</div>
             <div>&bull; <strong class="text-white">tools/list</strong>: Enumerates JSON schemas for all available sandboxed functions.</div>
             <div>&bull; <strong class="text-white">tools/call</strong>: Invokes a specific tool with parameter validation.</div>
             <div>&bull; <strong class="text-white">resources/read</strong>: Ingests documents, database schemas, or repo context.</div>
           </div>
-          <h2 class="text-lg font-semibold text-white pt-4">Reference Architecture</h2>
-          <p class="text-slate-400 text-xs">
+          <h2 class="text-lg font-semibold text-white pt-2">Reference Architecture</h2>
+          <p class="text-slate-400 text-xs leading-relaxed">
             Instead of exposing raw API keys or ad-hoc Python function decorators, an agent communicates with an MCP Client process over standard I/O (stdio) or Server-Sent Events (SSE). The client negotiates capabilities with independent MCP servers, preserving a clean security boundary.
           </p>
         </div>
       `,
       coderabbit: `
-        <div class="space-y-4">
+        <div class="space-y-5">
           <div class="flex items-center gap-2 text-xs font-mono text-emerald-400">
             <span>VERIFICATION RUNBOOK</span> &bull; <span>SELF-HEALING SWE</span>
           </div>
-          <h1 class="text-2xl font-bold text-white">CodeRabbit Autonomous Review Workflow</h1>
-          <p class="text-slate-400 text-sm">
+          <h1 class="text-3xl font-bold text-white tracking-tight">CodeRabbit Autonomous Review Workflow</h1>
+          <p class="text-slate-300 text-sm leading-relaxed">
             Autonomous software engineering agents (SWE-bench bots) require automated, machine-readable code review before opening PRs. CodeRabbit provides structured NDJSON outputs designed specifically for AI agent loops.
           </p>
-          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2">
+          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2.5">
             <div class="text-emerald-400 font-bold">$ coderabbit review --agent --uncommitted</div>
             <div class="text-slate-400">Outputs machine-readable NDJSON stream categorized into:</div>
             <div>&bull; <span class="text-rose-400 font-bold">critical</span>: RCE (eval/exec), SQL injection, credential leaks.</div>
@@ -592,32 +613,80 @@
         </div>
       `,
       swarm: `
-        <div class="space-y-4">
+        <div class="space-y-5">
           <div class="flex items-center gap-2 text-xs font-mono text-purple-400">
             <span>MULTI-AGENT TOPOLOGY</span> &bull; <span>SWARM COORDINATION</span>
           </div>
-          <h1 class="text-2xl font-bold text-white">Hierarchical Multi-Agent Collaboration</h1>
-          <p class="text-slate-400 text-sm">
+          <h1 class="text-3xl font-bold text-white tracking-tight">Hierarchical Multi-Agent Collaboration</h1>
+          <p class="text-slate-300 text-sm leading-relaxed">
             Implemented in <code>examples/multi-agent-collab</code>: Separates agent responsibilities into a structured Planner &rarr; Worker &rarr; Reviewer pipeline to avoid hallucinations and unbounded execution loops.
           </p>
+          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2">
+            <div>1. <strong class="text-white">PlannerAgent</strong>: Deconstructs macro prompts into structured task DAGs.</div>
+            <div>2. <strong class="text-white">WorkerAgent</strong>: Executes individual steps using sandboxed tool calls.</div>
+            <div>3. <strong class="text-white">ReviewerAgent</strong>: Audits outputs against criteria before allowing transition.</div>
+          </div>
         </div>
       `,
       typesafe: `
-        <div class="space-y-4">
+        <div class="space-y-5">
           <div class="flex items-center gap-2 text-xs font-mono text-blue-400">
             <span>SCHEMA INTEGRITY</span> &bull; <span>PYDANTIC v2</span>
           </div>
-          <h1 class="text-2xl font-bold text-white">Type-Safe Agents with PydanticAI</h1>
-          <p class="text-slate-400 text-sm">
+          <h1 class="text-3xl font-bold text-white tracking-tight">Type-Safe Agents with PydanticAI</h1>
+          <p class="text-slate-300 text-sm leading-relaxed">
             Implemented in <code>examples/agent-patterns-2026/type_safe_agents/customer_service.py</code>: Strict validation of both user query structures and agent output payloads.
           </p>
+          <div class="p-4 bg-[#0b0d13] border border-[#232738] rounded-lg font-mono text-xs space-y-2">
+            <div>&bull; <code>CustomerQuery</code>: customer_id, query_type, message (min_length=10), priority.</div>
+            <div>&bull; <code>CustomerResponse</code>: response_text, confidence_score (0.0-1.0), suggested_actions.</div>
+          </div>
+        </div>
+      `,
+      papers: `
+        <div class="space-y-5">
+          <div class="flex items-center gap-2 text-xs font-mono text-indigo-400">
+            <span>ACADEMIC LITERATURE</span> &bull; <span>140+ PAPERS</span>
+          </div>
+          <h1 class="text-3xl font-bold text-white tracking-tight">Curated Agentic AI Research Papers</h1>
+          <div class="space-y-3 pt-2">
+            <div class="p-3 bg-[#0b0d13] border border-[#232738] rounded text-xs space-y-1">
+              <div class="font-bold text-white"><a href="https://arxiv.org/abs/2210.03629" target="_blank" class="text-blue-400 hover:underline">ReAct: Synergizing Reasoning and Acting in Language Models</a></div>
+              <p class="text-slate-400">Interleaves reasoning traces and action steps for dynamic task solving.</p>
+            </div>
+            <div class="p-3 bg-[#0b0d13] border border-[#232738] rounded text-xs space-y-1">
+              <div class="font-bold text-white"><a href="https://arxiv.org/abs/2302.04761" target="_blank" class="text-blue-400 hover:underline">Toolformer: Language Models Can Teach Themselves to Use Tools</a></div>
+              <p class="text-slate-400">Self-supervised learning enabling models to determine when and how to call external APIs.</p>
+            </div>
+            <div class="p-3 bg-[#0b0d13] border border-[#232738] rounded text-xs space-y-1">
+              <div class="font-bold text-white"><a href="https://arxiv.org/abs/2303.11366" target="_blank" class="text-blue-400 hover:underline">Reflexion: Language Agents with Verbal Reinforcement Learning</a></div>
+              <p class="text-slate-400">Equips agents with dynamic memory and self-reflective evaluation to learn from mistakes.</p>
+            </div>
+          </div>
         </div>
       `
     };
 
     function showDocSection(key) {
-      setViewMode('docs');
-      document.getElementById('doc-content-body').innerHTML = docSections[key] || docSections['mcp'];
+      // Direct render without recursive viewmode call
+      const body = document.getElementById('doc-content-body');
+      body.innerHTML = docSections[key] || docSections['mcp'];
+      
+      // Update view directly
+      document.getElementById('mode-bento-container').classList.add('hidden');
+      document.getElementById('mode-graph-container').classList.add('hidden');
+      document.getElementById('mode-docs-container').classList.remove('hidden');
+
+      document.querySelectorAll('#btn-mode-bento, #btn-mode-graph, #btn-mode-docs').forEach(b => {
+        b.className = "px-3 py-1 rounded text-xs font-medium text-slate-400 hover:text-white transition";
+      });
+      document.getElementById('btn-mode-docs').className = "px-3 py-1 rounded text-xs font-medium bg-blue-600 text-white transition";
+
+      document.querySelectorAll('#side-bento, #side-graph, #side-docs').forEach(b => b.classList.remove('active'));
+      document.getElementById('side-docs').classList.add('active');
+
+      if (graphAnimId) cancelAnimationFrame(graphAnimId);
+      currentView = 'docs';
     }
 
     function loadCodebaseDemo(codebase) {
@@ -647,25 +716,21 @@
     const ctx = canvas.getContext('2d');
 
     const graphNodes = [
-      // Core Runtimes
-      { id: "langgraph", label: "LangGraph", cat: "Framework", x: 250, y: 200, color: "#3b82f6", desc: "Durable stateful agent graphs, checkpointing, and human interrupts.", link: "https://github.com/langchain-ai/langgraph" },
-      { name: "crewai", id: "crewai", label: "CrewAI", cat: "Framework", x: 180, y: 320, color: "#3b82f6", desc: "Role-based agent teams and structured business process flows.", link: "https://crewai.com" },
-      { id: "pydanticai", label: "PydanticAI", cat: "Framework", x: 380, y: 280, color: "#3b82f6", desc: "Type-safe agent development and strict schema validation.", link: "https://ai.pydantic.dev" },
-      { id: "adk", label: "Google ADK", cat: "Framework", x: 290, y: 390, color: "#3b82f6", desc: "Code-first enterprise framework for Gemini and cloud systems.", link: "https://adk.dev" },
+      { id: "langgraph", label: "LangGraph", cat: "Framework", x: 280, y: 180, color: "#3b82f6", desc: "Durable stateful agent graphs, checkpointing, and human interrupts.", link: "https://github.com/langchain-ai/langgraph" },
+      { id: "crewai", label: "CrewAI", cat: "Framework", x: 180, y: 300, color: "#3b82f6", desc: "Role-based agent teams and structured business process flows.", link: "https://crewai.com" },
+      { id: "pydanticai", label: "PydanticAI", cat: "Framework", x: 420, y: 260, color: "#3b82f6", desc: "Type-safe agent development and strict schema validation.", link: "https://ai.pydantic.dev" },
+      { id: "adk", label: "Google ADK", cat: "Framework", x: 300, y: 380, color: "#3b82f6", desc: "Code-first enterprise framework for Gemini and cloud systems.", link: "https://adk.dev" },
       
-      // Protocols
-      { id: "mcp", label: "Model Context Protocol", cat: "Protocol", x: 480, y: 160, color: "#8b5cf6", desc: "Open JSON-RPC 2.0 standard for connecting models to tools and context.", link: "https://modelcontextprotocol.io" },
-      { id: "a2a", label: "Agent-to-Agent (A2A)", cat: "Protocol", x: 560, y: 280, color: "#8b5cf6", desc: "Interoperability specifications for cross-vendor multi-agent handoffs.", link: "https://github.com/a2aproject/A2A" },
+      { id: "mcp", label: "Model Context Protocol", cat: "Protocol", x: 500, y: 150, color: "#8b5cf6", desc: "Open JSON-RPC 2.0 standard for connecting models to tools and context.", link: "https://modelcontextprotocol.io" },
+      { id: "a2a", label: "Agent-to-Agent (A2A)", cat: "Protocol", x: 620, y: 240, color: "#8b5cf6", desc: "Interoperability specifications for cross-vendor multi-agent handoffs.", link: "https://github.com/a2aproject/A2A" },
       
-      // Verification & Review
-      { id: "coderabbit", label: "CodeRabbit Review", cat: "Verification", x: 620, y: 400, color: "#10b981", desc: "AI-first automated PR code review and autonomous self-healing loops.", link: "https://coderabbit.ai" },
-      { id: "langsmith", label: "LangSmith Tracing", cat: "Observability", x: 140, y: 100, color: "#10b981", desc: "Production tracing, debugging, and prompt evaluation.", link: "https://smith.langchain.com" },
-      { id: "ast_safe", label: "AST Sandboxing", cat: "Security", x: 440, y: 460, color: "#10b981", desc: "Abstract Syntax Tree safe evaluation eliminating arbitrary code execution.", link: "#" },
+      { id: "coderabbit", label: "CodeRabbit Review", cat: "Verification", x: 650, y: 380, color: "#10b981", desc: "AI-first automated PR code review and autonomous self-healing loops.", link: "https://coderabbit.ai" },
+      { id: "langsmith", label: "LangSmith Tracing", cat: "Observability", x: 160, y: 120, color: "#10b981", desc: "Production tracing, debugging, and prompt evaluation.", link: "https://smith.langchain.com" },
+      { id: "ast_safe", label: "AST Sandboxing", cat: "Security", x: 480, y: 420, color: "#10b981", desc: "Abstract Syntax Tree safe evaluation eliminating arbitrary code execution.", link: "#" },
 
-      // In-Repo Projects
-      { id: "personal_ast", label: "Personal Assistant", cat: "Project", x: 100, y: 240, color: "#f43f5e", desc: "Multi-tool assistant with calendar, email triage, and conversation memory.", link: "examples/personal-assistant" },
-      { id: "coding_agent", label: "Coding Agent", cat: "Project", x: 740, y: 320, color: "#f43f5e", desc: "Devin-style SWE agent with automated CodeRabbit review integration.", link: "examples/coding-agent" },
-      { id: "swarm", label: "Collab Swarm", cat: "Project", x: 340, y: 100, color: "#f43f5e", desc: "Hierarchical Planner-Worker-Reviewer multi-agent collaboration.", link: "examples/multi-agent-collab" }
+      { id: "personal_ast", label: "Personal Assistant", cat: "Project", x: 100, y: 220, color: "#f43f5e", desc: "Multi-tool assistant with calendar, email triage, and conversation memory.", link: "examples/personal-assistant" },
+      { id: "coding_agent", label: "Coding Agent", cat: "Project", x: 760, y: 300, color: "#f43f5e", desc: "Devin-style SWE agent with automated CodeRabbit review integration.", link: "examples/coding-agent" },
+      { id: "swarm", label: "Collab Swarm", cat: "Project", x: 360, y: 90, color: "#f43f5e", desc: "Hierarchical Planner-Worker-Reviewer multi-agent collaboration.", link: "examples/multi-agent-collab" }
     ];
 
     const graphEdges = [
@@ -685,18 +750,41 @@
     let dragNode = null;
     let hoveredNode = null;
     let selectedNode = null;
-    let offset = { x: 0, y: 0 };
 
     function resizeCanvas() {
-      const parent = canvas.parentElement;
-      canvas.width = parent.clientWidth;
-      canvas.height = parent.clientHeight;
+      const container = document.getElementById('mode-graph-container');
+      const rect = container.getBoundingClientRect();
+      canvas.width = Math.max(rect.width || 800, 600);
+      canvas.height = Math.max((rect.height - 40) || 500, 400);
+
+      // Reposition nodes relative to canvas center if first run
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      if (!canvas.dataset.centered) {
+        canvas.dataset.centered = "true";
+        graphNodes.forEach((n, idx) => {
+          const angle = (idx / graphNodes.length) * Math.PI * 2;
+          const radius = 180 + (idx % 2) * 60;
+          n.x = cx + Math.cos(angle) * radius;
+          n.y = cy + Math.sin(angle) * radius;
+        });
+      }
     }
 
-    window.addEventListener('resize', resizeCanvas);
+    function startGraphAnimation() {
+      if (graphAnimId) cancelAnimationFrame(graphAnimId);
 
-    function drawGraph() {
-      if (currentView !== 'graph') return;
+      function loop() {
+        if (currentView === 'graph') {
+          drawGraphFrame();
+          graphAnimId = requestAnimationFrame(loop);
+        }
+      }
+      loop();
+    }
+
+    function drawGraphFrame() {
+      if (!canvas.width || !canvas.height) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Draw Edges
@@ -708,10 +796,9 @@
         ctx.beginPath();
         ctx.moveTo(source.x, source.y);
         ctx.lineTo(target.x, target.y);
-        ctx.strokeStyle = (selectedNode && (selectedNode.id === source.id || selectedNode.id === target.id)) 
-          ? "rgba(59, 130, 246, 0.8)" 
-          : "rgba(35, 39, 56, 0.9)";
-        ctx.lineWidth = (selectedNode && (selectedNode.id === source.id || selectedNode.id === target.id)) ? 2 : 1;
+        const isActive = selectedNode && (selectedNode.id === source.id || selectedNode.id === target.id);
+        ctx.strokeStyle = isActive ? "rgba(59, 130, 246, 0.8)" : "rgba(35, 39, 56, 0.85)";
+        ctx.lineWidth = isActive ? 2 : 1;
         ctx.stroke();
       });
 
@@ -721,15 +808,15 @@
         const isSelected = selectedNode && selectedNode.id === node.id;
         const radius = isSelected ? 22 : (isHovered ? 20 : 16);
 
-        // Node Glow
+        // Glow
         if (isSelected || isHovered) {
           ctx.beginPath();
-          ctx.arc(node.x, node.y, radius + 6, 0, Math.PI * 2);
+          ctx.arc(node.x, node.y, radius + 8, 0, Math.PI * 2);
           ctx.fillStyle = node.color + "33";
           ctx.fill();
         }
 
-        // Node Circle
+        // Body
         ctx.beginPath();
         ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
         ctx.fillStyle = node.color;
@@ -744,15 +831,13 @@
         ctx.textAlign = "center";
         ctx.fillText(node.label, node.x, node.y + radius + 14);
       });
-
-      requestAnimationFrame(drawGraph);
     }
 
     function getNodeAt(x, y) {
       return graphNodes.find(n => {
         const dx = n.x - x;
         const dy = n.y - y;
-        return Math.sqrt(dx * dx + dy * dy) < 24;
+        return Math.sqrt(dx * dx + dy * dy) < 26;
       });
     }
 
@@ -816,18 +901,20 @@
     }
 
     function resetGraphPhysics() {
-      graphNodes.forEach((n, idx) => {
-        n.x = 120 + (idx % 4) * 160 + (Math.random() * 20);
-        n.y = 100 + Math.floor(idx / 4) * 130 + (Math.random() * 20);
-      });
+      canvas.dataset.centered = "";
+      resizeCanvas();
     }
+
+    window.addEventListener('resize', () => {
+      if (currentView === 'graph') {
+        resizeCanvas();
+      }
+    });
 
     // Init
     window.addEventListener('DOMContentLoaded', () => {
       renderBentoFrameworks(frameworks);
       updateSimAgent();
-      resizeCanvas();
-      drawGraph();
     });
   </script>
 </body>
