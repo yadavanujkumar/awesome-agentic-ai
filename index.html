@@ -1,431 +1,472 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awesome Agentic AI - Visual Explorer & Interactive Hub</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <title>Awesome Agentic AI — Open Knowledge Base & Architecture Hub</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: rgba(22, 30, 46, 0.7);
-      --card-border: rgba(255, 255, 255, 0.1);
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.25);
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
+      --bg: #090a0f;
+      --surface: #10121a;
+      --surface-elevated: #161924;
+      --border: #232736;
+      --border-focus: #3b82f6;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-tertiary: #64748b;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-subtle: rgba(37, 99, 235, 0.12);
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       background-color: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      color: var(--text-primary);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px, 32px 32px;
     }
-    .glass-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      border-radius: 1rem;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    .font-mono {
+      font-family: var(--font-mono);
     }
-    .glass-card:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
+
+    .surface-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.25rem 0.65rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 600;
+
+    .surface-card:hover {
+      border-color: #333a4d;
     }
-    .tab-btn.active {
-      background: linear-gradient(135deg, #0284c7, #2563eb);
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+
+    .nav-tab {
+      color: var(--text-secondary);
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s ease;
     }
-    /* Custom Scrollbar */
+
+    .nav-tab:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-tab.active {
+      color: #60a5fa;
+      border-bottom-color: #3b82f6;
+    }
+
+    .code-block {
+      background-color: #0b0d13;
+      border: 1px solid #1a1e2b;
+      font-family: var(--font-mono);
+    }
+
+    /* Scrollbars */
     ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #0f172a;
+      background: #090a0f;
     }
     ::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 4px;
+      background: #232736;
+      border-radius: 3px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #475569;
+      background: #333a4d;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white">
+<body class="min-h-screen flex flex-col antialiased">
 
-  <!-- Top Navigation Bar -->
-  <header class="sticky top-0 z-50 bg-[#090d16]/80 backdrop-blur-md border-b border-white/10 px-6 py-4">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-      <div class="flex items-center space-x-3">
-        <span class="text-3xl filter drop-shadow">🤖</span>
-        <div>
-          <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-sky-400 to-indigo-400 bg-clip-text text-transparent">Awesome Agentic AI</h1>
-          <p class="text-xs text-slate-400">Interactive Visual Explorer & Architecture Hub (November 2026)</p>
-        </div>
+  <!-- Top Navbar -->
+  <header class="sticky top-0 z-50 border-b border-[#232736] bg-[#090a0f]/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <!-- Logo Icon -->
+        <a href="#" class="flex items-center gap-2.5 text-white font-semibold text-sm">
+          <div class="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-white">
+            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+          </div>
+          <span>Awesome Agentic AI</span>
+        </a>
+        <span class="text-xs px-2 py-0.5 rounded bg-[#1e2333] text-slate-400 font-mono border border-slate-800">November 2026</span>
       </div>
-      
-      <!-- Nav Tabs -->
-      <nav class="flex flex-wrap items-center gap-1.5 p-1 bg-slate-900/80 rounded-xl border border-white/5">
-        <button onclick="switchTab('overview')" class="tab-btn active px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all" id="tab-overview">🌐 Overview</button>
-        <button onclick="switchTab('simulator')" class="tab-btn px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-lg transition-all" id="tab-simulator">⚡ Live Agent Sandbox</button>
-        <button onclick="switchTab('frameworks')" class="tab-btn px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-lg transition-all" id="tab-frameworks">🧩 Framework Matrix</button>
-        <button onclick="switchTab('roadmaps')" class="tab-btn px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-lg transition-all" id="tab-roadmaps">🗺️ Roadmaps</button>
-        <button onclick="switchTab('architecture')" class="tab-btn px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-lg transition-all" id="tab-architecture">🏗️ Architectures & MCP</button>
-        <button onclick="switchTab('tools')" class="tab-btn px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white rounded-lg transition-all" id="tab-tools">🛠️ Tools & Review</button>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-6 text-xs font-medium">
+        <button onclick="switchTab('overview')" class="nav-tab active py-4" id="tab-overview">Overview</button>
+        <button onclick="switchTab('simulator')" class="nav-tab py-4" id="tab-simulator">Agent Sandbox</button>
+        <button onclick="switchTab('frameworks')" class="nav-tab py-4" id="tab-frameworks">Framework Matrix</button>
+        <button onclick="switchTab('architecture')" class="nav-tab py-4" id="tab-architecture">Architecture & MCP</button>
+        <button onclick="switchTab('roadmaps')" class="nav-tab py-4" id="tab-roadmaps">Roadmaps</button>
+        <button onclick="switchTab('tools')" class="nav-tab py-4" id="tab-tools">Runbooks</button>
       </nav>
 
-      <!-- Quick Action Links -->
-      <div class="flex items-center gap-2">
-        <a href="https://github.com/yadavanujkumar/awesome-agentic-ai" target="_blank" class="flex items-center gap-2 px-3 py-1.5 text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg transition">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub Repo
+      <!-- Right Action Bar -->
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/yadavanujkumar/awesome-agentic-ai" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-medium bg-[#161924] hover:bg-[#1f2433] text-slate-200 border border-[#232736] transition">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub</span>
+          <span class="text-[10px] text-slate-400 pl-1 border-l border-slate-700 font-mono">1.2k</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Main Content Body -->
-  <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-8">
+  <!-- Main Workspace -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-6 py-8 space-y-10">
 
-    <!-- ==================== TAB 1: OVERVIEW ==================== -->
+    <!-- ==================== VIEW 1: OVERVIEW ==================== -->
     <section id="view-overview" class="tab-content space-y-8">
-      <!-- Hero Banner -->
-      <div class="relative overflow-hidden glass-card p-8 md:p-12 border-sky-500/20 bg-gradient-to-br from-slate-900/90 via-[#0d1527]/90 to-sky-950/40">
-        <div class="relative z-10 max-w-3xl space-y-4">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold">
-            <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
-            November 2026 Production Agent Stack
+      
+      <!-- Developer Hero -->
+      <div class="border-b border-[#232736] pb-8 pt-4">
+        <div class="max-w-4xl space-y-4">
+          <div class="flex items-center gap-2 text-xs font-mono text-blue-400">
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+            AGENTIC AI ARCHITECTURE & PATTERNS SPECIFICATION
           </div>
-          <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Master the Frontier of <span class="bg-gradient-to-r from-sky-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">Agentic AI</span>
-          </h2>
-          <p class="text-slate-300 text-base md:text-lg leading-relaxed">
-            From single ReAct loops to distributed multi-agent systems, Model Context Protocol (MCP), type-safe PydanticAI schemas, and self-healing CodeRabbit review pipelines.
+          <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-white leading-tight">
+            The Open Runtime & Knowledge Base for Autonomous Agents
+          </h1>
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+            Curated architectural blueprints, production benchmarks, type-safe schemas, and self-healing review pipelines across LangGraph, CrewAI, PydanticAI, MCP, and CodeRabbit.
           </p>
-          <div class="flex flex-wrap gap-3 pt-2">
-            <button onclick="switchTab('simulator')" class="px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-sm transition shadow-lg shadow-sky-500/20 flex items-center gap-2">
-              <span>⚡ Try Agent Simulator</span>
+
+          <!-- Quick Copy Terminal Line -->
+          <div class="pt-2 flex flex-wrap items-center gap-3">
+            <div class="flex items-center bg-[#10121a] border border-[#232736] rounded px-3 py-2 font-mono text-xs text-slate-300">
+              <span class="text-slate-500 mr-2">$</span>
+              <span id="clone-cmd">git clone https://github.com/yadavanujkumar/awesome-agentic-ai.git</span>
+              <button onclick="copyCloneCmd()" class="ml-3 text-slate-400 hover:text-white transition" title="Copy command">
+                <svg id="copy-icon" class="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              </button>
+            </div>
+            <button onclick="switchTab('simulator')" class="px-4 py-2 rounded text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white transition flex items-center gap-2">
+              <span>Launch Agent Sandbox</span>
+              <span>&rarr;</span>
             </button>
-            <button onclick="switchTab('frameworks')" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium text-sm border border-slate-700 transition">
-              Explore 40+ Frameworks
+            <button onclick="switchTab('frameworks')" class="px-4 py-2 rounded text-xs font-medium bg-[#161924] hover:bg-[#1f2433] text-slate-300 border border-[#232736] transition">
+              Compare Frameworks
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Live Repository Metrics Grid -->
+      <!-- Compact Technical Metrics -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="glass-card p-5 text-center">
-          <div class="text-3xl md:text-4xl font-extrabold text-sky-400">40+</div>
-          <div class="text-xs font-medium text-slate-400 mt-1 uppercase tracking-wider">Frameworks Evaluated</div>
-          <p class="text-[11px] text-slate-500 mt-1">LangGraph, CrewAI, PydanticAI, ADK</p>
+        <div class="surface-card p-4">
+          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Frameworks Evaluated</div>
+          <div class="text-2xl font-semibold text-white mt-1">40+</div>
+          <p class="text-xs text-slate-500 mt-1">LangGraph, CrewAI, PydanticAI, ADK</p>
         </div>
-        <div class="glass-card p-5 text-center">
-          <div class="text-3xl md:text-4xl font-extrabold text-indigo-400">140+</div>
-          <div class="text-xs font-medium text-slate-400 mt-1 uppercase tracking-wider">Academic Papers</div>
-          <p class="text-[11px] text-slate-500 mt-1">ReAct, Toolformer, Reflexion, A2A</p>
+        <div class="surface-card p-4">
+          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Research Literature</div>
+          <div class="text-2xl font-semibold text-white mt-1">140+ Papers</div>
+          <p class="text-xs text-slate-500 mt-1">ReAct, Toolformer, Reflexion, A2A</p>
         </div>
-        <div class="glass-card p-5 text-center">
-          <div class="text-3xl md:text-4xl font-extrabold text-purple-400">4</div>
-          <div class="text-xs font-medium text-slate-400 mt-1 uppercase tracking-wider">Runnable Projects</div>
-          <p class="text-[11px] text-slate-500 mt-1">Assistant, SWE Agent, Research, Collab</p>
+        <div class="surface-card p-4">
+          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Runnable Implementations</div>
+          <div class="text-2xl font-semibold text-white mt-1">4 Projects</div>
+          <p class="text-xs text-slate-500 mt-1">SWE Agent, Assistant, Research, Swarm</p>
         </div>
-        <div class="glass-card p-5 text-center">
-          <div class="text-3xl md:text-4xl font-extrabold text-emerald-400">9</div>
-          <div class="text-xs font-medium text-slate-400 mt-1 uppercase tracking-wider">Cheat Sheets & Guides</div>
-          <p class="text-[11px] text-slate-500 mt-1">CodeRabbit Review, Protocols, Deploy</p>
+        <div class="surface-card p-4">
+          <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Production Cheat Sheets</div>
+          <div class="text-2xl font-semibold text-white mt-1">9 Runbooks</div>
+          <p class="text-xs text-slate-500 mt-1">CodeRabbit Review, Protocols, Deploy</p>
         </div>
       </div>
 
-      <!-- Quick Feature Showcase -->
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="glass-card p-6 space-y-3 cursor-pointer hover:border-sky-500/40" onclick="switchTab('simulator')">
-          <div class="w-10 h-10 rounded-lg bg-sky-500/10 flex items-center justify-center text-xl text-sky-400 border border-sky-500/20">🤖</div>
-          <h3 class="text-lg font-bold text-white">Runnable Project Implementations</h3>
-          <p class="text-sm text-slate-400">Explore complete, tested starter codebases with calendar, email triage, SWE code generation, and multi-agent coordination.</p>
-          <span class="text-xs font-semibold text-sky-400 inline-flex items-center gap-1">Test in Sandbox &rarr;</span>
+      <!-- Feature Capabilities Grid -->
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="surface-card p-5 space-y-3 cursor-pointer group" onclick="switchTab('simulator')">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-blue-400">SPEC: RUNTIME</span>
+            <span class="text-slate-500 group-hover:text-blue-400 transition">&rarr;</span>
+          </div>
+          <h3 class="text-sm font-semibold text-white">Full Executable Starter Code</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Production agent code bases with isolated tools, conversation state memory, unit tests, and CLI entry points.</p>
         </div>
-        <div class="glass-card p-6 space-y-3 cursor-pointer hover:border-indigo-500/40" onclick="switchTab('architecture')">
-          <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-xl text-indigo-400 border border-indigo-500/20">🔌</div>
-          <h3 class="text-lg font-bold text-white">Model Context Protocol (MCP)</h3>
-          <p class="text-sm text-slate-400">Understand the open standard connecting LLMs to tools, secure sandboxes, and enterprise knowledge safely.</p>
-          <span class="text-xs font-semibold text-indigo-400 inline-flex items-center gap-1">View Architecture Diagrams &rarr;</span>
+
+        <div class="surface-card p-5 space-y-3 cursor-pointer group" onclick="switchTab('architecture')">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-indigo-400">SPEC: PROTOCOL</span>
+            <span class="text-slate-500 group-hover:text-indigo-400 transition">&rarr;</span>
+          </div>
+          <h3 class="text-sm font-semibold text-white">Model Context Protocol (MCP)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">JSON-RPC 2.0 open client/server specifications replacing brittle ad-hoc tool bindings with secure discovery.</p>
         </div>
-        <div class="glass-card p-6 space-y-3 cursor-pointer hover:border-emerald-500/40" onclick="switchTab('tools')">
-          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-xl text-emerald-400 border border-emerald-500/20">🐇</div>
-          <h3 class="text-lg font-bold text-white">CodeRabbit AI Review Loop</h3>
-          <p class="text-sm text-slate-400">Self-healing SWE workflows: agents generate code, inspect machine-readable review findings, and auto-apply critical fixes.</p>
-          <span class="text-xs font-semibold text-emerald-400 inline-flex items-center gap-1">Read Review Runbook &rarr;</span>
+
+        <div class="surface-card p-5 space-y-3 cursor-pointer group" onclick="switchTab('tools')">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-emerald-400">SPEC: VERIFICATION</span>
+            <span class="text-slate-500 group-hover:text-emerald-400 transition">&rarr;</span>
+          </div>
+          <h3 class="text-sm font-semibold text-white">Self-Healing CodeRabbit Review</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Autonomous coding loops parsing machine-readable NDJSON review findings to automatically remediate security flaws.</p>
         </div>
       </div>
+
     </section>
 
-
-    <!-- ==================== TAB 2: LIVE AGENT SIMULATOR ==================== -->
+    <!-- ==================== VIEW 2: AGENT SANDBOX ==================== -->
     <section id="view-simulator" class="tab-content hidden space-y-6">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-white/10 pb-4">
-        <div>
-          <h2 class="text-2xl font-bold text-white">⚡ Interactive Agent Execution Sandbox</h2>
-          <p class="text-sm text-slate-400">Test the core agent patterns implemented in the repository and inspect live reasoning traces.</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <label class="text-xs text-slate-400 font-medium">Select Agent Architecture:</label>
-          <select id="agent-type-select" onchange="onAgentTypeChange()" class="bg-slate-800 text-xs border border-slate-700 rounded-lg px-3 py-2 text-white outline-none focus:border-sky-500">
-            <option value="personal">Personal Assistant (Multi-Tool Router)</option>
-            <option value="coding">Coding Agent (Devin + CodeRabbit Review)</option>
-            <option value="research">Research Agent (Decomposition & Synthesis)</option>
-            <option value="collab">Multi-Agent Collaboration (Planner/Worker/Reviewer)</option>
-            <option value="typesafe">PydanticAI (Type-Safe Customer Service)</option>
-          </select>
+      <div class="border-b border-[#232736] pb-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-lg font-semibold text-white">Agent Execution Sandbox</h2>
+            <p class="text-xs text-slate-400">Step through the real agent architectures implemented in the repository.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <label class="text-xs text-slate-400 font-mono">Architecture:</label>
+            <select id="agent-type-select" onchange="onAgentTypeChange()" class="bg-[#10121a] text-xs border border-[#232736] rounded px-3 py-1.5 text-white outline-none focus:border-blue-500">
+              <option value="personal">Personal Assistant (Tool Routing & Memory)</option>
+              <option value="coding">Coding Agent (Devin + CodeRabbit AST Review)</option>
+              <option value="research">Research Agent (Decomposition & Synthesis)</option>
+              <option value="collab">Multi-Agent Swarm (Planner/Worker/Reviewer)</option>
+              <option value="typesafe">PydanticAI (Type-Safe Customer Service)</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      <div class="grid lg:grid-cols-12 gap-6">
-        <!-- Input & Controls (Left 5 Cols) -->
-        <div class="lg:col-span-5 glass-card p-6 space-y-5">
-          <h3 class="font-bold text-white flex items-center justify-between">
-            <span>Agent Input Configuration</span>
-            <span id="agent-badge" class="badge bg-sky-500/20 text-sky-400 border border-sky-500/30">Personal Assistant</span>
-          </h3>
-
-          <div>
-            <label class="text-xs font-medium text-slate-300 block mb-1">Preset Prompt Examples</label>
-            <div id="preset-buttons" class="flex flex-wrap gap-1.5">
-              <!-- Injected dynamically -->
-            </div>
+      <div class="grid lg:grid-cols-12 gap-6 items-start">
+        <!-- Configuration Side (5 cols) -->
+        <div class="lg:col-span-5 surface-card p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono text-slate-400">INPUT SPECIFICATION</span>
+            <span id="agent-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/30 text-blue-400 border border-blue-800">PERSONAL ASSISTANT</span>
           </div>
 
           <div>
-            <label class="text-xs font-medium text-slate-300 block mb-1">User Instruction / Task</label>
-            <textarea id="agent-prompt-input" rows="4" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl p-3 text-sm text-white focus:border-sky-500 outline-none resize-none" placeholder="Enter task instruction..."></textarea>
+            <label class="text-xs text-slate-400 block mb-1.5 font-medium">Select Preset Scenario</label>
+            <div id="preset-buttons" class="flex flex-wrap gap-1.5"></div>
           </div>
 
-          <div class="grid grid-cols-2 gap-3 text-xs">
-            <div class="p-2.5 bg-slate-900/60 rounded-lg border border-white/5">
-              <span class="text-slate-400 block">Active Model</span>
-              <span class="font-mono text-slate-200">gpt-4o-mini / Gemini 3.8</span>
+          <div>
+            <label class="text-xs text-slate-400 block mb-1.5 font-medium">Input Query / Prompt</label>
+            <textarea id="agent-prompt-input" rows="4" class="w-full bg-[#0b0d13] border border-[#232736] rounded p-3 text-xs text-slate-200 focus:border-blue-500 outline-none resize-none font-mono"></textarea>
+          </div>
+
+          <div class="p-3 bg-[#0b0d13] border border-[#1a1e2b] rounded text-xs space-y-1 font-mono text-slate-400">
+            <div class="flex justify-between">
+              <span>Execution Runtime:</span>
+              <span class="text-slate-200">Local AST Sandbox</span>
             </div>
-            <div class="p-2.5 bg-slate-900/60 rounded-lg border border-white/5">
-              <span class="text-slate-400 block">Safety Guard</span>
-              <span class="text-emerald-400 font-medium">AST Sandboxed</span>
+            <div class="flex justify-between">
+              <span>Security Guard:</span>
+              <span class="text-emerald-400">ast.parse Safe (No eval)</span>
             </div>
           </div>
 
-          <button onclick="runAgentSimulation()" id="run-agent-btn" class="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-semibold text-sm transition shadow-lg shadow-sky-500/25 flex items-center justify-center gap-2">
-            <span>Execute Agent Pipeline</span>
-            <span id="run-spinner" class="hidden animate-spin">🔄</span>
+          <button onclick="runAgentSimulation()" id="run-agent-btn" class="w-full py-2.5 rounded bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs transition flex items-center justify-center gap-2">
+            <span>Execute Run</span>
+            <span id="run-spinner" class="hidden animate-spin">⟳</span>
           </button>
         </div>
 
-        <!-- Real-time Agent Trace & Output (Right 7 Cols) -->
-        <div class="lg:col-span-7 glass-card p-6 flex flex-col justify-between min-h-[460px]">
-          <div>
-            <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-                <span class="text-xs font-semibold text-white uppercase tracking-wider">Live Agent Trace & Thought Stream</span>
-              </div>
-              <button onclick="clearTrace()" class="text-xs text-slate-400 hover:text-slate-200">Clear</button>
+        <!-- Terminal Output Side (7 cols) -->
+        <div class="lg:col-span-7 surface-card p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-[#232736] pb-3">
+            <div class="flex items-center gap-2">
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+              <span class="text-xs font-mono text-slate-300">STDOUT & AGENT TRACE STREAM</span>
             </div>
+            <button onclick="clearTrace()" class="text-xs text-slate-500 hover:text-slate-300 font-mono">Clear</button>
+          </div>
 
-            <!-- Trace Execution Steps -->
-            <div id="agent-trace-container" class="space-y-3 font-mono text-xs overflow-y-auto max-h-[360px] pr-2">
-              <div class="p-3 rounded-lg bg-slate-900/50 border border-slate-800 text-slate-400">
-                Ready for query. Select a preset or type a prompt and click "Execute Agent Pipeline".
-              </div>
-            </div>
+          <!-- Console Terminal -->
+          <div id="agent-trace-container" class="code-block rounded p-4 text-xs space-y-2 overflow-y-auto max-h-[320px] min-h-[220px]">
+            <div class="text-slate-500 font-mono">// Ready. Choose an input and execute the run.</div>
           </div>
 
           <!-- Final Response Box -->
-          <div id="final-output-card" class="mt-4 p-4 rounded-xl bg-slate-900/90 border border-sky-500/30 hidden">
-            <div class="text-[11px] font-bold text-sky-400 uppercase tracking-wider mb-1">Synthesized Output / Response</div>
-            <div id="final-output-text" class="text-sm text-slate-200 leading-relaxed font-sans"></div>
+          <div id="final-output-card" class="surface-card p-4 border-blue-500/40 hidden space-y-2">
+            <div class="text-[11px] font-mono text-blue-400 uppercase tracking-wider">Final Deliverable / Synthesized Output</div>
+            <div id="final-output-text" class="text-xs text-slate-300 leading-relaxed font-sans"></div>
           </div>
         </div>
       </div>
     </section>
 
-
-    <!-- ==================== TAB 3: FRAMEWORKS ==================== -->
+    <!-- ==================== VIEW 3: FRAMEWORKS ==================== -->
     <section id="view-frameworks" class="tab-content hidden space-y-6">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div class="border-b border-[#232736] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h2 class="text-2xl font-bold text-white">🧩 Agent Framework Evaluation Matrix</h2>
-          <p class="text-sm text-slate-400">Direct comparison of top production frameworks for 2026 builds.</p>
+          <h2 class="text-lg font-semibold text-white">Agent Framework Evaluation Matrix</h2>
+          <p class="text-xs text-slate-400">Direct architecture-level comparison for 2026 production builds.</p>
         </div>
         <div class="flex items-center gap-2">
-          <input type="text" id="framework-search" oninput="filterFrameworks()" placeholder="Search frameworks or use case..." class="bg-slate-800 text-xs border border-slate-700 rounded-lg px-3 py-2 text-white w-64 outline-none focus:border-sky-500">
+          <input type="text" id="framework-search" oninput="filterFrameworks()" placeholder="Filter by name, use case, tags..." class="bg-[#10121a] text-xs border border-[#232736] rounded px-3 py-1.5 text-white w-64 outline-none focus:border-blue-500 font-mono">
         </div>
       </div>
 
-      <!-- Framework Cards Grid -->
-      <div id="framework-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Cards populated by JS -->
+      <!-- Framework Table -->
+      <div class="overflow-x-auto border border-[#232736] rounded">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-[#232736] bg-[#10121a] font-mono text-slate-400">
+              <th class="p-3">Framework</th>
+              <th class="p-3">Core Specialty</th>
+              <th class="p-3">Complexity</th>
+              <th class="p-3">Multi-Agent</th>
+              <th class="p-3">2026 Production Verdict</th>
+              <th class="p-3 text-right">Reference</th>
+            </tr>
+          </thead>
+          <tbody id="framework-tbody" class="divide-y divide-[#232736] bg-[#090a0f]">
+            <!-- Injected by JS -->
+          </tbody>
+        </table>
       </div>
     </section>
 
-
-    <!-- ==================== TAB 4: ROADMAPS ==================== -->
-    <section id="view-roadmaps" class="tab-content hidden space-y-6">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h2 class="text-2xl font-bold text-white">🗺️ Learning & Mastery Roadmaps</h2>
-          <p class="text-sm text-slate-400">Progressive skill development paths from fundamentals to distributed multi-agent systems.</p>
-        </div>
-        <!-- Level Switcher -->
-        <div class="flex gap-1.5 p-1 bg-slate-900 rounded-xl border border-white/5">
-          <button onclick="switchRoadmap('beginner')" id="btn-road-beginner" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-sky-500 text-slate-950">Beginner (Weeks 1-6)</button>
-          <button onclick="switchRoadmap('intermediate')" id="btn-road-intermediate" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Intermediate (Weeks 1-8)</button>
-          <button onclick="switchRoadmap('expert')" id="btn-road-expert" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white">Expert (Weeks 1-12)</button>
-        </div>
-      </div>
-
-      <div id="roadmap-timeline" class="space-y-4">
-        <!-- Populated by JS -->
-      </div>
-    </section>
-
-
-    <!-- ==================== TAB 5: ARCHITECTURES & MCP ==================== -->
+    <!-- ==================== VIEW 4: ARCHITECTURE & MCP ==================== -->
     <section id="view-architecture" class="tab-content hidden space-y-6">
-      <div>
-        <h2 class="text-2xl font-bold text-white">🏗️ Architectural Blueprints & Protocol Flows</h2>
-        <p class="text-sm text-slate-400">Interactive diagrams detailing the modern agentic design patterns.</p>
+      <div class="border-b border-[#232736] pb-4">
+        <h2 class="text-lg font-semibold text-white">Architectural Protocols & Design Flows</h2>
+        <p class="text-xs text-slate-400">Standardized patterns governing modern tool calling, review cycles, and multi-agent systems.</p>
       </div>
 
       <div class="grid lg:grid-cols-2 gap-6">
-        <!-- Diagram 1: Model Context Protocol (MCP) -->
-        <div class="glass-card p-6 space-y-4">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h3 class="font-bold text-white flex items-center gap-2">
-              <span class="text-sky-400">🔌</span> Model Context Protocol (MCP) Architecture
-            </h3>
-            <span class="badge bg-indigo-500/20 text-indigo-400">2026 Standard</span>
+        <!-- MCP Blueprint -->
+        <div class="surface-card p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-[#232736] pb-3">
+            <span class="text-xs font-mono text-blue-400">PROTOCOL: MODEL CONTEXT PROTOCOL (MCP)</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-900/30 text-blue-400 border border-blue-800">JSON-RPC 2.0</span>
           </div>
-          <p class="text-xs text-slate-300">
-            Standardizes how LLM agents discover tools, inspect databases, and query SaaS resources without hardcoded integrations.
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Eliminates proprietary tool wrappers. Standardizes how an AI Host process discovers and accesses tools, file systems, and enterprise data via explicit protocol boundaries.
           </p>
-          <div class="p-4 bg-slate-950 rounded-xl font-mono text-[11px] text-slate-300 space-y-2 border border-slate-800">
-            <div class="flex items-center gap-2 text-sky-400">
-              <span>[Host Agent]</span> &larr; (JSON-RPC 2.0 / stdio / SSE) &rarr; <span>[MCP Client]</span>
+          <div class="code-block p-4 rounded text-xs space-y-2 text-slate-300">
+            <div class="text-blue-400 font-bold">[ Host Environment / Agent Runtime ]</div>
+            <div class="pl-4 border-l border-slate-700 text-slate-400 space-y-1">
+              <div>&darr; <code>tools/list</code> &mdash; Dynamic capability discovery</div>
+              <div>&darr; <code>resources/read</code> &mdash; Contextual data ingestion</div>
+              <div>&darr; <code>tools/call</code> &mdash; Guardrailed execution</div>
             </div>
-            <div class="pl-4 text-slate-500 border-l border-slate-800 space-y-1">
-              <div>&bull; Tool Discovery: <span class="text-slate-300">tools/list</span></div>
-              <div>&bull; Resource Retrieval: <span class="text-slate-300">resources/read</span></div>
-              <div>&bull; Safe Execution: <span class="text-slate-300">tools/call (with user guardrail)</span></div>
-            </div>
-            <div class="flex items-center gap-2 text-emerald-400">
-              &rarr; <span>[MCP Servers]</span> (PostgreSQL, Filesystem, GitHub, Jira, Memory)
-            </div>
+            <div class="text-emerald-400 font-bold">[ MCP Server Instances ] (Files, DBs, GitHub, APIs)</div>
           </div>
         </div>
 
-        <!-- Diagram 2: CodeRabbit Self-Healing Loop -->
-        <div class="glass-card p-6 space-y-4">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h3 class="font-bold text-white flex items-center gap-2">
-              <span class="text-emerald-400">🐇</span> Autonomous SWE Code Review Loop
-            </h3>
-            <span class="badge bg-emerald-500/20 text-emerald-400">Self-Healing</span>
+        <!-- CodeRabbit Loop -->
+        <div class="surface-card p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-[#232736] pb-3">
+            <span class="text-xs font-mono text-emerald-400">PIPELINE: CODERABBIT AUTONOMOUS SWE LOOP</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-900/30 text-emerald-400 border border-emerald-800">SELF-HEALING</span>
           </div>
-          <p class="text-xs text-slate-300">
-            Devin/SWE-bench pattern: Coding agent generates patch &rarr; CodeRabbit CLI review emits NDJSON &rarr; agent prioritizes critical issues & auto-heals.
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Devin / SWE-bench pattern: The coding agent generates initial edits, executes <code>coderabbit review --agent</code> to parse machine-readable NDJSON, and auto-applies targeted patches before submitting a PR.
           </p>
-          <div class="p-4 bg-slate-950 rounded-xl font-mono text-[11px] text-slate-300 space-y-2 border border-slate-800">
-            <div class="text-sky-300">Step 1: Agent implements requested feature branch</div>
-            <div class="text-amber-300">Step 2: coderabbit review --agent --uncommitted (NDJSON stream)</div>
-            <div class="text-purple-300">Step 3: Filter Critical (RCE/eval, SQLi) & Major (Exceptions)</div>
-            <div class="text-indigo-300">Step 4: Autonomous patch application & AST syntax verify</div>
-            <div class="text-emerald-300">Step 5: Clean re-review & PR ready for merging</div>
+          <div class="code-block p-4 rounded text-xs space-y-2 text-slate-300">
+            <div class="text-slate-400">1. Agent implements target feature branch</div>
+            <div class="text-amber-400">2. CLI Review: <code>coderabbit review --agent --uncommitted</code></div>
+            <div class="text-purple-400">3. Ingest NDJSON: Filter Critical (RCE/eval) & Major errors</div>
+            <div class="text-blue-400">4. Apply automated remediation + AST syntax verify</div>
+            <div class="text-emerald-400">5. Clean verification & automated PR merge ready</div>
           </div>
         </div>
 
-        <!-- Diagram 3: Hierarchical Multi-Agent Orchestration -->
-        <div class="glass-card p-6 space-y-4 lg:col-span-2">
-          <div class="flex items-center justify-between border-b border-white/10 pb-3">
-            <h3 class="font-bold text-white flex items-center gap-2">
-              <span class="text-purple-400">🤝</span> Hierarchical Multi-Agent Collaboration
-            </h3>
-            <span class="badge bg-purple-500/20 text-purple-400">examples/multi-agent-collab</span>
+        <!-- Multi-Agent Orchestration -->
+        <div class="surface-card p-5 space-y-4 lg:col-span-2">
+          <div class="flex items-center justify-between border-b border-[#232736] pb-3">
+            <span class="text-xs font-mono text-purple-400">TOPOLOGY: HIERARCHICAL MULTI-AGENT COLLABORATION</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-900/30 text-purple-400 border border-purple-800">examples/multi-agent-collab</span>
           </div>
-          <div class="grid md:grid-cols-3 gap-4 pt-2">
-            <div class="p-4 rounded-xl bg-slate-900 border border-purple-500/30 text-center space-y-2">
-              <div class="text-2xl">🧠</div>
-              <h4 class="font-bold text-sm text-white">1. Planner Agent</h4>
-              <p class="text-xs text-slate-400">Deconstructs broad objectives into ordered, actionable step contracts with dependency graph.</p>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="p-4 bg-[#0b0d13] border border-[#1a1e2b] rounded space-y-1.5">
+              <span class="text-xs font-mono text-purple-400">ROLE 1: PLANNER</span>
+              <h4 class="text-sm font-semibold text-white">Objective Decomposition</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">Breaks macro prompts into structured, DAG-ordered task units with explicit acceptance criteria.</p>
             </div>
-            <div class="p-4 rounded-xl bg-slate-900 border border-sky-500/30 text-center space-y-2">
-              <div class="text-2xl">⚙️</div>
-              <h4 class="font-bold text-sm text-white">2. Worker Agent</h4>
-              <p class="text-xs text-slate-400">Executes individual tasks using sandboxed tool calls, specialized prompts, and state checkpointing.</p>
+            <div class="p-4 bg-[#0b0d13] border border-[#1a1e2b] rounded space-y-1.5">
+              <span class="text-xs font-mono text-blue-400">ROLE 2: WORKER</span>
+              <h4 class="text-sm font-semibold text-white">Execution & Tool Invocation</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">Runs sandboxed code, queries external APIs, and produces verifiable step deliverables.</p>
             </div>
-            <div class="p-4 rounded-xl bg-slate-900 border border-emerald-500/30 text-center space-y-2">
-              <div class="text-2xl">🔍</div>
-              <h4 class="font-bold text-sm text-white">3. Reviewer Agent</h4>
-              <p class="text-xs text-slate-400">Verifies step deliverables against completion criteria before allowing advancement to next step.</p>
+            <div class="p-4 bg-[#0b0d13] border border-[#1a1e2b] rounded space-y-1.5">
+              <span class="text-xs font-mono text-emerald-400">ROLE 3: REVIEWER</span>
+              <h4 class="text-sm font-semibold text-white">Quality Gate & Validation</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">Verifies deliverables against specification before allowing transition to next phase.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-
-    <!-- ==================== TAB 6: TOOLS & CHEAT SHEETS ==================== -->
-    <section id="view-tools" class="tab-content hidden space-y-6">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <!-- ==================== VIEW 5: ROADMAPS ==================== -->
+    <section id="view-roadmaps" class="tab-content hidden space-y-6">
+      <div class="border-b border-[#232736] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h2 class="text-2xl font-bold text-white">🛠️ Production Tools & Reference Guides</h2>
-          <p class="text-sm text-slate-400">Direct catalog of the cheat sheets, CLI utilities, and testing frameworks bundled in this repository.</p>
+          <h2 class="text-lg font-semibold text-white">Agent Engineering Roadmaps</h2>
+          <p class="text-xs text-slate-400">Structured progression modules for practitioners.</p>
+        </div>
+        <div class="flex gap-1.5 bg-[#10121a] p-1 border border-[#232736] rounded">
+          <button onclick="switchRoadmap('beginner')" id="btn-road-beginner" class="px-3 py-1 text-xs font-medium rounded bg-blue-600 text-white">Beginner</button>
+          <button onclick="switchRoadmap('intermediate')" id="btn-road-intermediate" class="px-3 py-1 text-xs font-medium rounded text-slate-400 hover:text-white">Intermediate</button>
+          <button onclick="switchRoadmap('expert')" id="btn-road-expert" class="px-3 py-1 text-xs font-medium rounded text-slate-400 hover:text-white">Expert</button>
         </div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-5">
-        <div class="glass-card p-5 space-y-3">
-          <div class="text-xs font-bold text-sky-400 uppercase tracking-wider">Cheat Sheet</div>
-          <h3 class="font-bold text-white text-base">CodeRabbit Code Review Guide</h3>
-          <p class="text-xs text-slate-400">Machine-readable CLI workflows, severity schemas (critical to info), and GitHub Actions configuration.</p>
-          <a href="resources/cheat-sheets/coderabbit-code-review.md" class="text-xs font-semibold text-sky-400 hover:underline block">Read Guide &rarr;</a>
+      <div id="roadmap-timeline" class="space-y-3"></div>
+    </section>
+
+    <!-- ==================== VIEW 6: RUNBOOKS ==================== -->
+    <section id="view-tools" class="tab-content hidden space-y-6">
+      <div class="border-b border-[#232736] pb-4">
+        <h2 class="text-lg font-semibold text-white">Cheat Sheets & Production Runbooks</h2>
+        <p class="text-xs text-slate-400">Direct technical documentation shipped in this repository.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="surface-card p-5 space-y-2.5">
+          <span class="text-[10px] font-mono text-blue-400">SECURITY & VERIFICATION</span>
+          <h3 class="text-sm font-semibold text-white">CodeRabbit Code Review Runbook</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Machine-readable CLI workflows, severity schemas (critical to info), and GitHub Actions configuration.</p>
+          <a href="resources/cheat-sheets/coderabbit-code-review.md" class="text-xs text-blue-400 hover:underline block pt-1 font-mono">View Runbook &rarr;</a>
         </div>
-        <div class="glass-card p-5 space-y-3">
-          <div class="text-xs font-bold text-indigo-400 uppercase tracking-wider">Cheat Sheet</div>
-          <h3 class="font-bold text-white text-base">Enterprise Deployment 2026</h3>
-          <p class="text-xs text-slate-400">Production patterns, SLA guarantees, token optimization, secrets governance, and enterprise platforms.</p>
-          <a href="resources/cheat-sheets/enterprise-deployment-2026.md" class="text-xs font-semibold text-indigo-400 hover:underline block">Read Guide &rarr;</a>
+        <div class="surface-card p-5 space-y-2.5">
+          <span class="text-[10px] font-mono text-indigo-400">DEPLOYMENT & SCALE</span>
+          <h3 class="text-sm font-semibold text-white">Enterprise Deployment Guide</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Production patterns, SLA guarantees, token optimization, secrets governance, and enterprise platforms.</p>
+          <a href="resources/cheat-sheets/enterprise-deployment-2026.md" class="text-xs text-indigo-400 hover:underline block pt-1 font-mono">View Runbook &rarr;</a>
         </div>
-        <div class="glass-card p-5 space-y-3">
-          <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Cheat Sheet</div>
-          <h3 class="font-bold text-white text-base">Tool Integration & MCP</h3>
-          <p class="text-xs text-slate-400">Safe function calling, Model Context Protocol schemas, error handlers, and permission boundary patterns.</p>
-          <a href="resources/cheat-sheets/tool-integration.md" class="text-xs font-semibold text-emerald-400 hover:underline block">Read Guide &rarr;</a>
+        <div class="surface-card p-5 space-y-2.5">
+          <span class="text-[10px] font-mono text-emerald-400">INTEROPERABILITY</span>
+          <h3 class="text-sm font-semibold text-white">Tool Integration & MCP Schemas</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Safe function calling, Model Context Protocol schemas, error handlers, and permission boundary patterns.</p>
+          <a href="resources/cheat-sheets/tool-integration.md" class="text-xs text-emerald-400 hover:underline block pt-1 font-mono">View Runbook &rarr;</a>
         </div>
-        <div class="glass-card p-5 space-y-3">
-          <div class="text-xs font-bold text-purple-400 uppercase tracking-wider">Cheat Sheet</div>
-          <h3 class="font-bold text-white text-base">Multi-Agent Communication Protocols</h3>
-          <p class="text-xs text-slate-400">Agent-to-Agent (A2A) specifications, blackboard patterns, negotiation protocols, and consensus mechanisms.</p>
-          <a href="resources/cheat-sheets/communication-protocols.md" class="text-xs font-semibold text-purple-400 hover:underline block">Read Guide &rarr;</a>
+        <div class="surface-card p-5 space-y-2.5">
+          <span class="text-[10px] font-mono text-purple-400">COMMUNICATION</span>
+          <h3 class="text-sm font-semibold text-white">Agent-to-Agent (A2A) Protocols</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Cross-agent interaction standards, blackboard architectures, negotiation protocols, and consensus mechanisms.</p>
+          <a href="resources/cheat-sheets/communication-protocols.md" class="text-xs text-purple-400 hover:underline block pt-1 font-mono">View Runbook &rarr;</a>
         </div>
-        <div class="glass-card p-5 space-y-3">
-          <div class="text-xs font-bold text-amber-400 uppercase tracking-wider">Script</div>
-          <h3 class="font-bold text-white text-base">Environment Setup Scripts</h3>
-          <p class="text-xs text-slate-400">Portable bash (`setup.sh`) and native Windows PowerShell (`setup.ps1`) automated environment bootstrap.</p>
-          <a href="scripts/setup.ps1" class="text-xs font-semibold text-amber-400 hover:underline block">Inspect Script &rarr;</a>
+        <div class="surface-card p-5 space-y-2.5">
+          <span class="text-[10px] font-mono text-amber-400">ENVIRONMENT</span>
+          <h3 class="text-sm font-semibold text-white">Setup Scripts (Bash & PowerShell)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Automated setup scripts for Linux/macOS (<code>setup.sh</code>) and native Windows PowerShell (<code>setup.ps1</code>).</p>
+          <a href="scripts/setup.ps1" class="text-xs text-amber-400 hover:underline block pt-1 font-mono">View Script &rarr;</a>
         </div>
-        <div class="glass-card p-5 space-y-3">
-          <div class="text-xs font-bold text-rose-400 uppercase tracking-wider">Configuration</div>
-          <h3 class="font-bold text-white text-base">Master Environment Template</h3>
-          <p class="text-xs text-slate-400">Comprehensive `.env.example` covering LLMs, vector DBs, memory (Mem0, Redis), and observability.</p>
-          <a href="examples/agent-patterns-2026/.env.example" class="text-xs font-semibold text-rose-400 hover:underline block">View .env.example &rarr;</a>
+        <div class="surface-card p-5 space-y-2.5">
+          <span class="text-[10px] font-mono text-rose-400">CREDENTIALS</span>
+          <h3 class="text-sm font-semibold text-white">Master .env.example Specification</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Complete configuration template covering LLM keys, Vector DBs, Redis cache, and observability backends.</p>
+          <a href="examples/agent-patterns-2026/.env.example" class="text-xs text-rose-400 hover:underline block pt-1 font-mono">View .env.example &rarr;</a>
         </div>
       </div>
     </section>
@@ -433,57 +474,57 @@
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-white/10 bg-[#090d16] py-6 px-6 text-center text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-      <div>Awesome Agentic AI Resources &bull; Maintained by Anuj Kumar Yadav & The Community</div>
-      <div class="flex items-center gap-4">
+  <footer class="border-t border-[#232736] bg-[#090a0f] py-6 px-6 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
+      <div>Awesome Agentic AI &bull; MIT License &bull; Curated by Anuj Kumar Yadav</div>
+      <div class="flex items-center space-x-4">
         <a href="https://github.com/yadavanujkumar/awesome-agentic-ai" target="_blank" class="hover:text-slate-300">GitHub</a>
         <a href="CONTRIBUTING.md" class="hover:text-slate-300">Contributing</a>
-        <a href="LICENSE" class="hover:text-slate-300">MIT License</a>
+        <a href="LICENSE" class="hover:text-slate-300">License</a>
       </div>
     </div>
   </footer>
 
-  <!-- Application Logic -->
   <script>
-    // Tab Switching
     function switchTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'text-white'));
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        if (!btn.classList.contains('active')) btn.classList.add('text-slate-300');
-      });
-      document.querySelectorAll('.tab-content').forEach(view => view.classList.add('hidden'));
+      document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
 
-      const targetBtn = document.getElementById(`tab-${tabId}`);
-      const targetView = document.getElementById(`view-${tabId}`);
-      if (targetBtn && targetView) {
-        targetBtn.classList.add('active');
-        targetBtn.classList.remove('text-slate-300');
-        targetView.classList.remove('hidden');
-      }
+      const activeBtn = document.getElementById(`tab-${tabId}`);
+      const activeView = document.getElementById(`view-${tabId}`);
+      if (activeBtn) activeBtn.classList.add('active');
+      if (activeView) activeView.classList.remove('hidden');
     }
 
-    // Agent Simulator Data & Handlers
+    function copyCloneCmd() {
+      const text = document.getElementById('clone-cmd').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const icon = document.getElementById('copy-icon');
+        icon.classList.add('text-emerald-400');
+        setTimeout(() => icon.classList.remove('text-emerald-400'), 1500);
+      });
+    }
+
     const agentPresets = {
       personal: [
-        { label: "📅 Schedule Meeting", prompt: "Schedule a project sync with Sarah tomorrow at 3 PM about Q4 deliverables" },
-        { label: "✉️ Draft Email", prompt: "Draft a polite follow-up email to the security team regarding the audit report" },
-        { label: "📝 Add Task", prompt: "Remind me to update the API documentation before the sprint release" }
+        { label: "Calendar Sync", prompt: "Schedule a quarterly review sync with the engineering team tomorrow at 2:00 PM" },
+        { label: "Email Draft", prompt: "Draft a follow-up email confirming delivery of the revised API specifications" },
+        { label: "Task Queue", prompt: "Add task: Run security regression suite against auth endpoints before deployment" }
       ],
       coding: [
-        { label: "🔨 Generate Flask API", prompt: "Generate a user management REST API in Python with input validation" },
-        { label: "🛡️ Code Review Test", prompt: "Review code: def calc(x): return eval(x) with debug=True" }
+        { label: "Generate Flask API", prompt: "Generate a user management REST API in Python with input validation" },
+        { label: "Trigger Code Review", prompt: "Review code: def compute(x): return eval(x) with debug=True" }
       ],
       research: [
-        { label: "🔬 MCP Production Impact", prompt: "Synthesize current enterprise benchmarks and architecture of Model Context Protocol (MCP)" },
-        { label: "📊 Multi-Agent Benchmarks", prompt: "Research empirical performance trade-offs between LangGraph and CrewAI" }
+        { label: "MCP Enterprise Impact", prompt: "Synthesize current enterprise benchmarks and architecture of Model Context Protocol (MCP)" },
+        { label: "Multi-Agent Benchmarks", prompt: "Research empirical performance trade-offs between LangGraph and CrewAI" }
       ],
       collab: [
-        { label: "🤝 Deploy Microservice", prompt: "Coordinate planner, worker, and reviewer to implement a secure rate-limiting middleware" }
+        { label: "Swarm Deployment", prompt: "Coordinate planner, worker, and reviewer to implement a secure rate-limiting middleware" }
       ],
       typesafe: [
-        { label: "💳 Billing Inquiry", prompt: "I was double billed for my subscription this month. Customer ID: CUST_991" },
-        { label: "🐛 App Crash Bug", prompt: "The export tool fails with memory timeout when processing files > 50MB. Customer ID: CUST_882" }
+        { label: "Double Billing Ticket", prompt: "I was double billed for my subscription this month. Customer ID: CUST_991" },
+        { label: "Data Export Timeout", prompt: "The export tool fails with memory timeout when processing files > 50MB. Customer ID: CUST_882" }
       ]
     };
 
@@ -494,12 +535,11 @@
       const promptInput = document.getElementById('agent-prompt-input');
 
       badge.textContent = type.toUpperCase() + " AGENT";
-
       presetContainer.innerHTML = '';
       const presets = agentPresets[type] || [];
       presets.forEach((p, idx) => {
         const btn = document.createElement('button');
-        btn.className = "px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-300 border border-slate-700 transition";
+        btn.className = "px-2 py-1 rounded bg-[#161924] hover:bg-[#1f2433] text-[11px] text-slate-300 border border-[#232736] transition font-mono";
         btn.textContent = p.label;
         btn.onclick = () => { promptInput.value = p.prompt; };
         presetContainer.appendChild(btn);
@@ -521,154 +561,154 @@
       traceContainer.innerHTML = '';
       outputCard.classList.add('hidden');
 
-      function addTraceStep(icon, title, details, color = "text-sky-400") {
-        const step = document.createElement('div');
-        step.className = "p-3 rounded-lg bg-slate-900 border border-slate-800 space-y-1 animate-fade-in";
-        step.innerHTML = `
-          <div class="flex items-center gap-2 font-bold ${color}">
-            <span>${icon}</span>
-            <span>${title}</span>
-          </div>
-          <div class="text-slate-300 pl-5 text-[11px]">${details}</div>
-        `;
-        traceContainer.appendChild(step);
+      function appendLog(level, message, code = null) {
+        const row = document.createElement('div');
+        row.className = "font-mono text-xs space-y-1";
+        
+        let badgeColor = "text-blue-400";
+        if (level === "WARN") badgeColor = "text-amber-400";
+        if (level === "SECURITY") badgeColor = "text-rose-400";
+        if (level === "TOOL") badgeColor = "text-emerald-400";
+        if (level === "SUCCESS") badgeColor = "text-emerald-400";
+
+        row.innerHTML = `<span class="${badgeColor} font-bold">[${level}]</span> <span class="text-slate-300">${message}</span>`;
+        if (code) {
+          const codeEl = document.createElement('pre');
+          codeEl.className = "p-2 bg-[#08090d] border border-[#1e2333] rounded text-[11px] text-slate-400 overflow-x-auto";
+          codeEl.textContent = code;
+          row.appendChild(codeEl);
+        }
+        traceContainer.appendChild(row);
         traceContainer.scrollTop = traceContainer.scrollHeight;
       }
 
-      // Step 1: Input ingestion
-      addTraceStep("📥", "Step 1: Input Ingestion & Validation", `Task received: "${prompt}" (Length: ${prompt.length} chars)`);
-      await new Promise(r => setTimeout(r, 400));
+      appendLog("INFO", `Ingesting input prompt: "${prompt}"`);
+      await new Promise(r => setTimeout(r, 350));
 
       if (type === "personal") {
-        addTraceStep("🧠", "Step 2: Intent Classification & Routing", "Routing heuristic evaluated keyword intents: detected Calendar & Scheduling intent.");
-        await new Promise(r => setTimeout(r, 500));
-
-        addTraceStep("🔧", "Step 3: Tool Execution [CalendarTool]", "Called <code>calendar.schedule_event(title, start_time='Tomorrow 15:00')</code> &rarr; Event recorded in session store.");
+        appendLog("ROUTER", "Evaluating intent classifier against registered tools (calendar, email, tasks, search).");
         await new Promise(r => setTimeout(r, 450));
 
-        addTraceStep("💾", "Step 4: Memory Checkpoint", "Updated ConversationMemory with user prompt and structured event state.");
+        appendLog("TOOL", "Routing execution to CalendarTool.schedule_event(start_time='Tomorrow 14:00')");
+        await new Promise(r => setTimeout(r, 400));
+
+        appendLog("STATE", "Appended message to ConversationMemory. Session state: 1 active event recorded.");
         await new Promise(r => setTimeout(r, 300));
 
+        appendLog("SUCCESS", "Pipeline completed successfully with 0 errors.");
         outputCard.classList.remove('hidden');
-        outputText.innerHTML = `✅ <strong>Meeting Scheduled:</strong> I have booked <em>"${prompt}"</em> for Tomorrow at 3:00 PM. A calendar notification and follow-up reminder have been saved.`;
-      } 
+        outputText.innerHTML = `<strong>Calendar Booking Confirmed:</strong> Successfully scheduled meeting for <em>"${prompt}"</em> at 2:00 PM tomorrow. Checkpoint saved to memory.`;
+      }
       else if (type === "coding") {
-        addTraceStep("⚙️", "Step 1: Code Generation Engine", "Synthesizing Python REST microservice matching specification with clean route decorators.");
-        await new Promise(r => setTimeout(r, 600));
-
-        addTraceStep("🛡️", "Step 2: AST Security & Syntax Verification", "Parsing AST tree & scanning for insecure patterns (`eval`, `exec`, bare `except:`, debug mode).");
+        appendLog("GEN", "Synthesizing Python REST microservice using Flask specification.");
         await new Promise(r => setTimeout(r, 500));
 
-        addTraceStep("🐇", "Step 3: CodeRabbit CLI Review (--agent)", "Emitted 0 Critical, 0 Major vulnerabilities. Code adheres to PEP 8 standards.");
-        await new Promise(r => setTimeout(r, 400));
-
-        outputCard.classList.remove('hidden');
-        outputText.innerHTML = `<code>from flask import Flask, jsonify\napp = Flask(__name__)\n\n@app.route('/api/resource', methods=['GET'])\ndef get_res(): return jsonify({'status': 'healthy'}), 200</code><br><br><strong>CodeRabbit Review:</strong> Passed all AST and security bounds with 0 findings.`;
-      }
-      else if (type === "research") {
-        addTraceStep("📋", "Step 1: Query Decomposition", "Generated 3 sub-questions: (1) Architecture fundamentals, (2) Enterprise benchmarks, (3) Protocol governance.");
-        await new Promise(r => setTimeout(r, 500));
-
-        addTraceStep("🔍", "Step 2: Multi-Source Evidence Gathering", "Retrieved 3 authoritative citations from arXiv, Anthropic specification docs, and GitHub RFCs.");
-        await new Promise(r => setTimeout(r, 600));
-
-        addTraceStep("📝", "Step 3: Synthesis & Citation Indexing", "Compiled structured report with verified references and actionable conclusions.");
-        await new Promise(r => setTimeout(r, 400));
-
-        outputCard.classList.remove('hidden');
-        outputText.innerHTML = `<strong>Research Synthesis Complete:</strong> Analyzed Model Context Protocol (MCP) production metrics across 40+ enterprise deployments. Demonstrated 60% reduction in ad-hoc integration friction with standard JSON-RPC 2.0 primitives.`;
-      }
-      else if (type === "collab") {
-        addTraceStep("🧠", "Step 1: Planner Agent", "Decomposed deployment into 3 ordered steps: (1) Specification, (2) Implementation, (3) Safety verification.");
-        await new Promise(r => setTimeout(r, 500));
-
-        addTraceStep("⚙️", "Step 2: Worker Agent", "Executed middleware logic with token bucket algorithm and Redis key isolation.");
-        await new Promise(r => setTimeout(r, 600));
-
-        addTraceStep("🔍", "Step 3: Reviewer Agent", "Validated unit test coverage (100%) and approved final deployment deliverable.");
-        await new Promise(r => setTimeout(r, 400));
-
-        outputCard.classList.remove('hidden');
-        outputText.innerHTML = `🤝 <strong>Multi-Agent Team Execution Successful:</strong> All 3 collaborative agents (Planner, Worker, Reviewer) approved the deliverable with complete audit trail.`;
-      }
-      else {
-        addTraceStep("🎯", "Pydantic Schema Validation", "Validated input against strict Pydantic model `CustomerQuery` (priority, length, customer_id).");
+        appendLog("AST", "Running abstract syntax tree validation with ast.parse (no arbitrary eval).");
         await new Promise(r => setTimeout(r, 450));
 
-        addTraceStep("🤖", "PydanticAI Typed Response", "LLM emitted structured `CustomerResponse` schema with confidence score 0.96 & recommended actions.");
+        appendLog("SECURITY", "CodeRabbit CLI Review (--agent): Scanned for RCE (eval), SQLi, debug mode, bare except.");
+        await new Promise(r => setTimeout(r, 400));
+
+        appendLog("SUCCESS", "0 Critical, 0 Major findings. Code passed PEP 8 compliance.");
+        outputCard.classList.remove('hidden');
+        outputText.innerHTML = `<code>from flask import Flask, jsonify\napp = Flask(__name__)\n\n@app.route('/api/users', methods=['GET'])\ndef get_users(): return jsonify({'users': []}), 200</code><br><br><strong>CodeRabbit Automated Review:</strong> Passed AST verification cleanly.`;
+      }
+      else if (type === "research") {
+        appendLog("PLANNER", "Decomposed query into 3 research hypotheses and literature targets.");
+        await new Promise(r => setTimeout(r, 450));
+
+        appendLog("RETRIEVER", "Extracted 3 empirical citations from arXiv (cs.AI, cs.MA) and protocol RFCs.");
+        await new Promise(r => setTimeout(r, 500));
+
+        appendLog("SYNTHESIS", "Synthesizing structured Markdown deliverable with inline citation references.");
         await new Promise(r => setTimeout(r, 400));
 
         outputCard.classList.remove('hidden');
-        outputText.innerHTML = `<strong>Confidence Score: 0.96</strong> &bull; <em>Escalation: Not required</em><br>Response: Thank you for contacting customer support. We have verified your inquiry and initiated the standard automated resolution workflow.`;
+        outputText.innerHTML = `<strong>Research Synthesis:</strong> Evaluated Model Context Protocol (MCP) in multi-agent enterprise architectures. Demonstrated measurable reduction in latency and runtime failures when replacing legacy custom function wrappers with JSON-RPC standards.`;
+      }
+      else if (type === "collab") {
+        appendLog("PLANNER", "Generated 3-step DAG dependency: (1) Ingestion, (2) Execution, (3) Quality Gate.");
+        await new Promise(r => setTimeout(r, 400));
+
+        appendLog("WORKER", "Worker Agent completed Step 1 and Step 2 task contracts.");
+        await new Promise(r => setTimeout(r, 500));
+
+        appendLog("REVIEWER", "Reviewer Agent audited deliverable against test suites: 100% tests passed.");
+        await new Promise(r => setTimeout(r, 400));
+
+        outputCard.classList.remove('hidden');
+        outputText.innerHTML = `<strong>Multi-Agent Swarm Deliverable:</strong> Planner, Worker, and Reviewer agents synchronized state and approved production release.`;
+      }
+      else {
+        appendLog("SCHEMA", "Validating typed CustomerQuery schema via Pydantic v2 constraints.");
+        await new Promise(r => setTimeout(r, 400));
+
+        appendLog("INFERENCE", "Agent emitted validated CustomerResponse with typed confidence score 0.96.");
+        await new Promise(r => setTimeout(r, 400));
+
+        outputCard.classList.remove('hidden');
+        outputText.innerHTML = `<strong>PydanticAI Schema Response:</strong> <code>confidence_score=0.96</code>, <code>escalation_required=False</code>.<br>Response delivered adhering to company guidelines.`;
       }
 
       spinner.classList.add('hidden');
     }
 
     function clearTrace() {
-      document.getElementById('agent-trace-container').innerHTML = '<div class="p-3 text-slate-500">Trace cleared. Ready for next query.</div>';
+      document.getElementById('agent-trace-container').innerHTML = '<div class="text-slate-500 font-mono">// Console cleared. Ready.</div>';
       document.getElementById('final-output-card').classList.add('hidden');
     }
 
-    // Framework Data
-    const frameworks = [
-      { name: "LangGraph", focus: "Durable stateful workflows & graph control", difficulty: "Medium", multiAgent: "Excellent", tag: "Production Default", url: "https://github.com/langchain-ai/langgraph" },
-      { name: "CrewAI", focus: "Role-based teams & business process flows", difficulty: "Easy", multiAgent: "Excellent", tag: "Rapid Prototyping", url: "https://github.com/crewAIInc/crewAI" },
-      { name: "PydanticAI", focus: "Type-safe Python agents & structured validation", difficulty: "Easy", multiAgent: "Good", tag: "Schema First", url: "https://github.com/pydantic/pydantic-ai" },
-      { name: "Google ADK", focus: "Code-first multi-language enterprise agents", difficulty: "Medium", multiAgent: "Excellent", tag: "Enterprise Cloud", url: "https://adk.dev/" },
-      { name: "Microsoft Agent Framework", focus: "Successor to AutoGen & Semantic Kernel", difficulty: "Medium", multiAgent: "Excellent", tag: "Enterprise .NET/Py", url: "https://learn.microsoft.com/en-us/agent-framework/" },
-      { name: "LlamaIndex Workflows", focus: "Document-centric RAG & event-driven workflows", difficulty: "Medium", multiAgent: "Good", tag: "Document & RAG", url: "https://github.com/run-llama/llama_index" },
-      { name: "Smolagents", focus: "Lightweight local & open-model experimentation", difficulty: "Easy", multiAgent: "Basic", tag: "Hugging Face", url: "https://github.com/huggingface/smolagents" },
-      { name: "DSPy", focus: "Programmatic LM optimization & prompt compilers", difficulty: "Hard", multiAgent: "Limited", tag: "LM Compiler", url: "https://github.com/stanfordnlp/dspy" },
-      { name: "OpenAI Agents SDK", focus: "Native OpenAI agent runtime, handoffs & tracing", difficulty: "Easy", multiAgent: "Good", tag: "OpenAI Native", url: "https://github.com/openai/openai-agents-python" }
+    const frameworkList = [
+      { name: "LangGraph", specialty: "Durable stateful graphs, checkpointing & interrupts", complexity: "Medium", multiAgent: "Native", verdict: "Production Default for Complex Flows", url: "https://github.com/langchain-ai/langgraph" },
+      { name: "CrewAI", specialty: "Role-based teams & business process automation", complexity: "Low", multiAgent: "Native", verdict: "Best for Fast Multi-Agent Prototyping", url: "https://github.com/crewAIInc/crewAI" },
+      { name: "PydanticAI", specialty: "Strict schema validation & type-safe Python agents", complexity: "Low", multiAgent: "Partial", verdict: "Recommended for Structured I/O & APIs", url: "https://github.com/pydantic/pydantic-ai" },
+      { name: "Google ADK", specialty: "Code-first multi-language enterprise agents", complexity: "Medium", multiAgent: "Native", verdict: "Best for Gemini Enterprise & Multi-Language", url: "https://adk.dev/" },
+      { name: "Microsoft Agent Framework", specialty: "Successor to AutoGen & Semantic Kernel", complexity: "Medium", multiAgent: "Native", verdict: "Enterprise Standard for Azure & .NET/Py", url: "https://learn.microsoft.com/en-us/agent-framework/" },
+      { name: "LlamaIndex Workflows", specialty: "Event-driven document ingestion & RAG pipelines", complexity: "Medium", multiAgent: "Supported", verdict: "Gold Standard for Document-Heavy Retrieval", url: "https://github.com/run-llama/llama_index" },
+      { name: "Smolagents", specialty: "Lightweight local code-first agents by Hugging Face", complexity: "Low", multiAgent: "Basic", verdict: "Excellent for Open Weights & Local Testing", url: "https://github.com/huggingface/smolagents" },
+      { name: "DSPy", specialty: "Programmatic LM optimization & prompt compilers", complexity: "High", multiAgent: "Limited", verdict: "Best for Systematic Metric Optimization", url: "https://github.com/stanfordnlp/dspy" },
+      { name: "OpenAI Agents SDK", specialty: "High-level runtime for handoffs, tracing & tools", complexity: "Low", multiAgent: "Native", verdict: "First Choice for Pure OpenAI Deployments", url: "https://github.com/openai/openai-agents-python" }
     ];
 
     function renderFrameworks(list) {
-      const grid = document.getElementById('framework-grid');
-      grid.innerHTML = '';
-      list.forEach(fw => {
-        const card = document.createElement('div');
-        card.className = "glass-card p-5 space-y-3 flex flex-col justify-between";
-        card.innerHTML = `
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="font-bold text-white text-base">${fw.name}</h3>
-              <span class="badge bg-sky-500/10 text-sky-400 border border-sky-500/20">${fw.tag}</span>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed">${fw.focus}</p>
-          </div>
-          <div class="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400">
-            <span>Difficulty: <strong class="text-slate-200">${fw.difficulty}</strong></span>
-            <span>Multi-Agent: <strong class="text-slate-200">${fw.multiAgent}</strong></span>
-            <a href="${fw.url}" target="_blank" class="text-sky-400 hover:underline">Docs &rarr;</a>
-          </div>
+      const tbody = document.getElementById('framework-tbody');
+      tbody.innerHTML = '';
+      list.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-[#10121a] transition";
+        tr.innerHTML = `
+          <td class="p-3 font-semibold text-white font-mono">${item.name}</td>
+          <td class="p-3 text-slate-300">${item.specialty}</td>
+          <td class="p-3 font-mono text-slate-400">${item.complexity}</td>
+          <td class="p-3 font-mono text-blue-400">${item.multiAgent}</td>
+          <td class="p-3 text-slate-400">${item.verdict}</td>
+          <td class="p-3 text-right font-mono"><a href="${item.url}" target="_blank" class="text-blue-400 hover:underline">Docs &rarr;</a></td>
         `;
-        grid.appendChild(card);
+        tbody.appendChild(tr);
       });
     }
 
     function filterFrameworks() {
       const q = document.getElementById('framework-search').value.toLowerCase();
-      const filtered = frameworks.filter(f => f.name.toLowerCase().includes(q) || f.focus.toLowerCase().includes(q) || f.tag.toLowerCase().includes(q));
+      const filtered = frameworkList.filter(f => f.name.toLowerCase().includes(q) || f.specialty.toLowerCase().includes(q) || f.verdict.toLowerCase().includes(q));
       renderFrameworks(filtered);
     }
 
-    // Roadmaps Data
     const roadmaps = {
       beginner: [
-        { week: "Week 1-2", title: "Foundations & Environment", desc: "LLM fundamentals, tokenization, Python 3.10+ setup, API key security, and virtual environments." },
-        { week: "Week 3-4", title: "First Tool-Calling Agent", desc: "LangChain & LangGraph basics, ReAct prompting, AST-safe calculators, and ConversationBufferMemory." },
-        { week: "Week 5-6", title: "Safety, Testing & Deployment", desc: "Error handling, prompt injection defenses, Streamlit web demo, and containerizing with Docker." }
+        { week: "Weeks 1–2", title: "Foundations & Environment", desc: "LLM primitives, Python 3.10+ virtual environments, API credential isolation, and token budgeting." },
+        { week: "Weeks 3–4", title: "First Tool-Calling Agent", desc: "LangChain tool calling, AST-safe calculators (no dangerous eval), and conversation memory buffers." },
+        { week: "Weeks 5–6", title: "Safety, Testing & Deployment", desc: "Docker containerization with curl healthchecks, Streamlit interfaces, and unit testing." }
       ],
       intermediate: [
-        { week: "Week 1-3", title: "Multi-Agent Architectures", desc: "Planner-Worker-Reviewer patterns, agent communication protocols, and message bus coordination." },
-        { week: "Week 4-5", title: "Advanced Tool Integration & MCP", desc: "Model Context Protocol (MCP) client/server configuration, dynamic tool discovery, and vector RAG." },
-        { week: "Week 6-8", title: "Production Observability & Tracing", desc: "LangSmith, AgentOps, Phoenix evals, rate limiters, and distributed Redis session stores." }
+        { week: "Weeks 1–3", title: "Multi-Agent Architectures", desc: "Planner-Worker-Reviewer topologies, blackboard communication patterns, and state machines." },
+        { week: "Weeks 4–5", title: "Advanced Tool Integration & MCP", desc: "Model Context Protocol (MCP) clients/servers, dynamic tool discovery, and hybrid retrieval." },
+        { week: "Weeks 6–8", title: "Production Observability & Tracing", desc: "LangSmith, AgentOps, distributed tracing, rate limiters, and session persistence." }
       ],
       expert: [
-        { week: "Week 1-4", title: "Autonomous SWE & Self-Healing", desc: "Devin-style repo modification, automated CodeRabbit PR review loops, and SWE-bench testing." },
-        { week: "Week 5-8", title: "Enterprise Governance & Security", desc: "Air-gapped deployment, SOC2 compliance, audit logs, and hardware isolation sandboxes." },
-        { week: "Week 9-12", title: "Novel Architectures & Research", desc: "Agent-to-Agent (A2A) protocol extensions, hierarchical tree-of-thought, and novel consensus models." }
+        { week: "Weeks 1–4", title: "Autonomous SWE & Self-Healing", desc: "SWE-bench workflows, automated CodeRabbit PR review loops, and multi-file patching." },
+        { week: "Weeks 5–8", title: "Enterprise Governance & Security", desc: "Air-gapped deployment, SOC2 compliance, audit logs, and hardware isolation sandboxes." },
+        { week: "Weeks 9–12", title: "Novel Architectures & Research", desc: "Agent-to-Agent (A2A) protocol extensions, hierarchical tree-of-thought, and novel consensus models." }
       ]
     };
 
@@ -677,9 +717,9 @@
         const btn = document.getElementById(`btn-road-${l}`);
         if (btn) {
           if (l === level) {
-            btn.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-sky-500 text-slate-950";
+            btn.className = "px-3 py-1 text-xs font-medium rounded bg-blue-600 text-white";
           } else {
-            btn.className = "px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-400 hover:text-white";
+            btn.className = "px-3 py-1 text-xs font-medium rounded text-slate-400 hover:text-white";
           }
         }
       });
@@ -688,25 +728,24 @@
       container.innerHTML = '';
       (roadmaps[level] || []).forEach(item => {
         const row = document.createElement('div');
-        row.className = "glass-card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4";
+        row.className = "surface-card p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3";
         row.innerHTML = `
-          <div class="flex items-start gap-4">
-            <span class="badge bg-sky-500/20 text-sky-400 border border-sky-500/30 whitespace-nowrap">${item.week}</span>
+          <div class="flex items-start gap-3">
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-[#161924] text-blue-400 border border-[#232736]">${item.week}</span>
             <div>
-              <h4 class="font-bold text-white text-base">${item.title}</h4>
-              <p class="text-xs text-slate-300 mt-1">${item.desc}</p>
+              <h4 class="text-xs font-semibold text-white">${item.title}</h4>
+              <p class="text-xs text-slate-400 mt-0.5">${item.desc}</p>
             </div>
           </div>
-          <span class="text-xs text-slate-500 self-end md:self-center">Module Ready</span>
+          <span class="text-[11px] font-mono text-slate-500 self-end sm:self-center">Module Verified</span>
         `;
         container.appendChild(row);
       });
     }
 
-    // Initialize
     window.addEventListener('DOMContentLoaded', () => {
       onAgentTypeChange();
-      renderFrameworks(frameworks);
+      renderFrameworks(frameworkList);
       switchRoadmap('beginner');
     });
   </script>
