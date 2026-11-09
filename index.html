@@ -255,6 +255,28 @@
         <div class="text-[9px] text-slate-500 dark:text-slate-400 mt-1 font-mono">&bull; Drag mouse to look around &bull; Scroll to zoom</div>
       </div>
 
+      <!-- Time of Day & Dynamic Atmosphere -->
+      <div class="pt-2 border-t border-slate-200 dark:border-white/10 flex items-center justify-between font-mono text-[10px]">
+        <span class="text-slate-500">Lighting:</span>
+        <div class="flex items-center gap-1">
+          <button onclick="setWorldTime('day')" id="time-btn-day" class="px-1.5 py-0.5 rounded bg-blue-600 text-white font-semibold transition shadow-sm">☀️ Day</button>
+          <button onclick="setWorldTime('sunset')" id="time-btn-sunset" class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 transition">🌅 Sunset</button>
+          <button onclick="setWorldTime('night')" id="time-btn-night" class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 transition">🌙 Night</button>
+        </div>
+      </div>
+
+      <!-- Active GPS Turn-by-Turn Route Banner -->
+      <div id="hud-gps-banner" class="hidden p-2 rounded-xl bg-cyan-50/90 dark:bg-cyan-950/50 border border-cyan-300 dark:border-cyan-800 flex items-center justify-between font-mono text-[10px] shadow-sm">
+        <div class="flex items-center gap-1.5 truncate min-w-0">
+          <span class="text-cyan-500 animate-pulse text-xs shrink-0">📍</span>
+          <span id="hud-gps-dest" class="text-slate-900 dark:text-white font-bold truncate">NAV: LangGraph High-Rise</span>
+        </div>
+        <div class="flex items-center gap-1.5 shrink-0 ml-2">
+          <span id="hud-gps-dist" class="text-cyan-600 dark:text-cyan-400 font-bold">140m</span>
+          <button onclick="clearGPSTarget()" class="text-slate-400 hover:text-rose-500 text-sm font-bold leading-none p-0.5">&times;</button>
+        </div>
+      </div>
+
       <!-- Live Speedometer & Progress -->
       <div class="pt-1.5 border-t border-slate-200 dark:border-white/10 flex items-center justify-between font-mono text-[11px]">
         <div>Speed: <strong id="hud-speed" class="text-blue-600 dark:text-cyan-400 font-bold">0 km/h</strong></div>
@@ -346,6 +368,27 @@
           <span class="text-2xl font-black leading-none">&#x25B2;</span>
           <span class="text-[9px] font-mono font-bold tracking-wider uppercase text-white mt-0.5">GAS</span>
         </button>
+      </div>
+    </div>
+
+    <!-- IN-COCKPIT FPV DASHBOARD (Active in Hood/Cockpit camera mode) -->
+    <div id="fpv-dashboard" class="absolute bottom-6 left-1/2 -translate-x-1/2 hud-glass px-5 sm:px-7 py-3 border-cyan-500/40 shadow-2xl items-center gap-5 sm:gap-8 font-mono hidden z-20 pointer-events-none">
+      <div class="text-center">
+        <div class="text-[9px] text-slate-400">GEAR</div>
+        <div id="fpv-gear" class="text-lg sm:text-xl font-black text-cyan-400">D1</div>
+      </div>
+      <div class="w-32 sm:w-44 space-y-1">
+        <div class="flex justify-between text-[9px] text-slate-400">
+          <span>RPM x1000</span>
+          <span id="fpv-rpm-val" class="font-bold text-white">1.2</span>
+        </div>
+        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+          <div id="fpv-rpm-bar" class="h-full bg-gradient-to-r from-emerald-500 via-yellow-400 to-red-500 w-[15%] transition-all duration-75"></div>
+        </div>
+      </div>
+      <div class="text-center">
+        <div class="text-[9px] text-slate-400">SPEED</div>
+        <div id="fpv-speed" class="text-xl sm:text-2xl font-black text-white">0 <span class="text-xs font-normal text-slate-400">km/h</span></div>
       </div>
     </div>
   </section>
@@ -2066,7 +2109,14 @@
 
     function toggleSound() {
       soundEnabled = !soundEnabled;
-      document.getElementById('btn-sound').innerHTML = soundEnabled ? '&#x1F50A;' : '&#x1F507;';
+      const btn = document.getElementById('btn-sound');
+      if (btn) btn.innerHTML = soundEnabled ? '&#x1F50A;' : '&#x1F507;';
+      if (soundEnabled) {
+        initAudio();
+        startAmbientSoundscape(currentWorld, worldTimeMode);
+      } else {
+        stopAmbientSoundscape();
+      }
     }
 
     function toggleRadio() {
@@ -2133,6 +2183,133 @@
       if (!soundEnabled || Date.now() - lastSkidTime < 240) return;
       lastSkidTime = Date.now();
       playTone(120, 'sawtooth', 0.14);
+    }
+
+    // --- PROCEDURAL 3D ENVIRONMENTAL AUDIO SOUNDSCAPES ---
+    let ambientSoundNodes = null;
+
+    function stopAmbientSoundscape() {
+      if (ambientSoundNodes) {
+        try {
+          ambientSoundNodes.gain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.35);
+          setTimeout(() => {
+            if (ambientSoundNodes) {
+              ambientSoundNodes.sources.forEach(s => { try { s.stop(); s.disconnect(); } catch (_) {} });
+              ambientSoundNodes = null;
+            }
+          }, 400);
+        } catch (_) {
+          ambientSoundNodes = null;
+        }
+      }
+    }
+
+    function startAmbientSoundscape(worldId, timeMode) {
+      if (!soundEnabled) return;
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      stopAmbientSoundscape();
+
+      try {
+        const masterGain = audioCtx.createGain();
+        masterGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+        masterGain.gain.linearRampToValueAtTime(0.022, audioCtx.currentTime + 1.2);
+        masterGain.connect(audioCtx.destination);
+
+        const sources = [];
+
+        if (worldId === 'island') {
+          // Ocean Surf: low frequency swell with filter modulation (4.5s wave swell)
+          const osc = audioCtx.createOscillator();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(65, audioCtx.currentTime);
+
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(260, audioCtx.currentTime);
+
+          const lfo = audioCtx.createOscillator();
+          const lfoGain = audioCtx.createGain();
+          lfo.frequency.setValueAtTime(0.22, audioCtx.currentTime);
+          lfoGain.gain.setValueAtTime(160, audioCtx.currentTime);
+          lfo.connect(lfoGain);
+          lfoGain.connect(filter.frequency);
+
+          osc.connect(filter);
+          filter.connect(masterGain);
+          osc.start(); lfo.start();
+          sources.push(osc, lfo);
+
+        } else if (worldId === 'city') {
+          // Cyber Urban Drone: deep sub-bass 52Hz + resonant cyber hum
+          const subOsc = audioCtx.createOscillator();
+          subOsc.type = 'sawtooth';
+          subOsc.frequency.setValueAtTime(52, audioCtx.currentTime);
+
+          const subFilter = audioCtx.createBiquadFilter();
+          subFilter.type = 'lowpass';
+          subFilter.frequency.setValueAtTime(140, audioCtx.currentTime);
+
+          const midOsc = audioCtx.createOscillator();
+          midOsc.type = 'triangle';
+          midOsc.frequency.setValueAtTime(timeMode === 'night' ? 104 : 156, audioCtx.currentTime);
+
+          subOsc.connect(subFilter);
+          subFilter.connect(masterGain);
+          midOsc.connect(masterGain);
+          subOsc.start(); midOsc.start();
+          sources.push(subOsc, midOsc);
+
+        } else if (worldId === 'mars') {
+          // Martian Wind: resonant sweeping bandpass
+          const windOsc = audioCtx.createOscillator();
+          windOsc.type = 'triangle';
+          windOsc.frequency.setValueAtTime(110, audioCtx.currentTime);
+
+          const bandpass = audioCtx.createBiquadFilter();
+          bandpass.type = 'bandpass';
+          bandpass.Q.setValueAtTime(4.0, audioCtx.currentTime);
+          bandpass.frequency.setValueAtTime(420, audioCtx.currentTime);
+
+          const lfo = audioCtx.createOscillator();
+          const lfoGain = audioCtx.createGain();
+          lfo.frequency.setValueAtTime(0.15, audioCtx.currentTime);
+          lfoGain.gain.setValueAtTime(260, audioCtx.currentTime);
+          lfo.connect(lfoGain);
+          lfoGain.connect(bandpass.frequency);
+
+          windOsc.connect(bandpass);
+          bandpass.connect(masterGain);
+          windOsc.start(); lfo.start();
+          sources.push(windOsc, lfo);
+
+        } else {
+          // Alpine Mountain Breeze: crisp high filtered hum
+          const alpineOsc = audioCtx.createOscillator();
+          alpineOsc.type = 'sine';
+          alpineOsc.frequency.setValueAtTime(440, audioCtx.currentTime);
+
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'highpass';
+          filter.frequency.setValueAtTime(380, audioCtx.currentTime);
+
+          const lfo = audioCtx.createOscillator();
+          const lfoGain = audioCtx.createGain();
+          lfo.frequency.setValueAtTime(0.35, audioCtx.currentTime);
+          lfoGain.gain.setValueAtTime(40, audioCtx.currentTime);
+          lfo.connect(lfoGain);
+          lfoGain.connect(alpineOsc.frequency);
+
+          alpineOsc.connect(filter);
+          filter.connect(masterGain);
+          alpineOsc.start(); lfo.start();
+          sources.push(alpineOsc, lfo);
+        }
+
+        ambientSoundNodes = { gain: masterGain, sources: sources };
+      } catch (_) {}
     }
 
     // --- GARAGE & VEHICLE CUSTOMIZER ---
@@ -2670,7 +2847,7 @@ if __name__ == "__main__":
     const worldObstacles = [];
     let cameraShake = 0;
 
-    // Real Roadster Physics
+    // Real Roadster Physics & Weight Transfer
     const carState = {
       x: 0,
       z: 14,
@@ -2682,6 +2859,37 @@ if __name__ == "__main__":
       turnSpeed: 0.046,
       steeringAngle: 0
     };
+    let prevCarSpeed = 0;
+    let carChassisPitch = 0;
+    let carChassisRoll = 0;
+    let carChassisMeshGroup = null;
+    let nitroFlames = [];
+
+    // Day / Night Cycle & Dynamic Atmosphere
+    let worldTimeMode = 'day'; // 'day', 'sunset', 'night'
+    const streetlightsList = [];
+
+    // Weather Particle System
+    let weatherParticles = [];
+    let weatherParticlesGroup = null;
+
+    // Tire Skid Marks Ring Buffer
+    let skidMarksGroup = null;
+    const skidMarks = [];
+    let nextSkidIdx = 0;
+    const MAX_SKIDS = 120;
+
+    // Drift Smoke Particles Pool
+    const smokeParticles = [];
+
+    // Living World Civilian Traffic & Sky-Taxis
+    let civilianCars = [];
+    let skyTaxis = [];
+
+    // Holographic GPS Navigation Ribbon
+    let currentGPSTarget = null;
+    let gpsRibbonGroup = null;
+    const gpsRibbonSegments = [];
 
     // Camera Modes
     let cameraMode = 'chase';
@@ -2783,6 +2991,480 @@ if __name__ == "__main__":
       setTimeout(() => playTone(75, 'square', 0.14), 45);
     }
 
+    // =========================================================================
+    // TIME OF DAY & STREETLIGHTS ATMOSPHERE
+    // =========================================================================
+    function setWorldTime(mode) {
+      worldTimeMode = mode;
+      ['day', 'sunset', 'night'].forEach(m => {
+        const btn = document.getElementById('time-btn-' + m);
+        if (btn) {
+          if (m === mode) {
+            btn.className = "px-1.5 py-0.5 rounded bg-blue-600 text-white font-semibold transition shadow-sm";
+          } else {
+            btn.className = "px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 transition";
+          }
+        }
+      });
+      updateWorldAtmosphere();
+      updateStreetlightsAtmosphere();
+      startAmbientSoundscape(currentWorld, worldTimeMode);
+    }
+
+    function updateStreetlightsAtmosphere() {
+      const isNight = worldTimeMode === 'night';
+      const isSunset = worldTimeMode === 'sunset';
+      streetlightsList.forEach(sl => {
+        if (sl.lantern) {
+          sl.lantern.material.emissiveIntensity = isNight ? 2.2 : (isSunset ? 1.2 : 0.2);
+        }
+        if (sl.lightPool) {
+          sl.lightPool.material.opacity = isNight ? 0.32 : (isSunset ? 0.18 : 0.02);
+        }
+      });
+    }
+
+    // =========================================================================
+    // TIRE SKID MARKS RING BUFFER & DRIFT SMOKE
+    // =========================================================================
+    function initSkidMarksPool() {
+      if (skidMarksGroup && scene) scene.remove(skidMarksGroup);
+      skidMarksGroup = new THREE.Group();
+      skidMarks.length = 0;
+      nextSkidIdx = 0;
+
+      const skidMat = new THREE.MeshBasicMaterial({
+        color: 0x0f172a,
+        transparent: true,
+        opacity: 0.65,
+        depthWrite: false
+      });
+
+      for (let i = 0; i < MAX_SKIDS; i++) {
+        const quad = new THREE.Mesh(new THREE.PlaneGeometry(0.35, 1.2).rotateX(-Math.PI / 2), skidMat);
+        quad.visible = false;
+        skidMarksGroup.add(quad);
+        skidMarks.push(quad);
+      }
+      scene.add(skidMarksGroup);
+    }
+
+    function addTireSkidMark(x, z, angle) {
+      if (skidMarks.length === 0) return;
+      const quad = skidMarks[nextSkidIdx];
+      quad.position.set(x, 0.015, z);
+      quad.rotation.y = angle;
+      quad.visible = true;
+      nextSkidIdx = (nextSkidIdx + 1) % MAX_SKIDS;
+    }
+
+    function initSmokePool() {
+      smokeParticles.forEach(p => { if (p.mesh && p.mesh.parent) p.mesh.parent.remove(p.mesh); });
+      smokeParticles.length = 0;
+      const smokeMat = new THREE.MeshBasicMaterial({
+        color: 0xd1d5db,
+        transparent: true,
+        opacity: 0.45,
+        depthWrite: false
+      });
+      for (let i = 0; i < 28; i++) {
+        const s = new THREE.Mesh(new THREE.SphereGeometry(0.24, 4, 4), smokeMat);
+        s.visible = false;
+        scene.add(s);
+        smokeParticles.push({ mesh: s, vx: 0, vy: 0, vz: 0, life: 0, scale: 0.5 });
+      }
+    }
+
+    function spawnDriftSmoke(x, z) {
+      for (let i = 0; i < 2; i++) {
+        const p = smokeParticles.find(sp => sp.life <= 0);
+        if (!p) break;
+        p.mesh.position.set(x + (Math.random() - 0.5) * 0.4, 0.25, z + (Math.random() - 0.5) * 0.4);
+        p.mesh.visible = true;
+        p.vx = (Math.random() - 0.5) * 0.06;
+        p.vy = 0.035 + Math.random() * 0.03;
+        p.vz = (Math.random() - 0.5) * 0.06;
+        p.scale = 0.4;
+        p.life = 1.0;
+        p.mesh.scale.setScalar(p.scale);
+      }
+    }
+
+    function updateSmokeParticles() {
+      smokeParticles.forEach(p => {
+        if (p.life > 0) {
+          p.mesh.position.x += p.vx;
+          p.mesh.position.y += p.vy;
+          p.mesh.position.z += p.vz;
+          p.scale += 0.035;
+          p.life -= 0.045;
+          p.mesh.scale.setScalar(p.scale);
+          p.mesh.material.opacity = Math.max(0, p.life * 0.4);
+          if (p.life <= 0) p.mesh.visible = false;
+        }
+      });
+    }
+
+    // =========================================================================
+    // DYNAMIC WEATHER PARTICLES (RAIN, DUST, SNOW, BREEZE)
+    // =========================================================================
+    function initWeatherParticles(worldId) {
+      if (weatherParticlesGroup && scene) {
+        scene.remove(weatherParticlesGroup);
+      }
+      weatherParticlesGroup = new THREE.Group();
+      weatherParticles = [];
+
+      const count = 150;
+      let pGeo, pMat;
+
+      if (worldId === 'city') {
+        pGeo = new THREE.CylinderGeometry(0.04, 0.04, 1.4, 4);
+        pMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.65 });
+      } else if (worldId === 'mars') {
+        pGeo = new THREE.DodecahedronGeometry(0.18);
+        pMat = new THREE.MeshBasicMaterial({ color: 0xf97316, transparent: true, opacity: 0.6 });
+      } else if (worldId === 'alpine') {
+        pGeo = new THREE.DodecahedronGeometry(0.14);
+        pMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85 });
+      } else {
+        pGeo = new THREE.OctahedronGeometry(0.12);
+        pMat = new THREE.MeshBasicMaterial({ color: 0x67e8f9, transparent: true, opacity: 0.45 });
+      }
+
+      for (let i = 0; i < count; i++) {
+        const mesh = new THREE.Mesh(pGeo, pMat);
+        const px = (Math.random() - 0.5) * 80;
+        const py = Math.random() * 26 + 1;
+        const pz = (Math.random() - 0.5) * 80;
+        mesh.position.set(px, py, pz);
+        weatherParticlesGroup.add(mesh);
+
+        let vx = (Math.random() - 0.5) * 0.08;
+        let vy = worldId === 'city' ? -(0.9 + Math.random() * 0.7) : (worldId === 'alpine' ? -(0.14 + Math.random() * 0.12) : -(0.04 + Math.random() * 0.06));
+        let vz = worldId === 'mars' ? -(0.3 + Math.random() * 0.4) : (Math.random() - 0.5) * 0.08;
+
+        weatherParticles.push({
+          mesh: mesh,
+          relX: px,
+          y: py,
+          relZ: pz,
+          vx: vx,
+          vy: vy,
+          vz: vz,
+          seed: Math.random() * 100
+        });
+      }
+
+      scene.add(weatherParticlesGroup);
+    }
+
+    function updateWeatherParticles() {
+      if (!weatherParticlesGroup || weatherParticles.length === 0) return;
+      const time = Date.now() * 0.002;
+
+      weatherParticles.forEach(p => {
+        p.y += p.vy;
+        p.relX += p.vx + (currentWorld === 'alpine' ? Math.sin(time + p.seed) * 0.04 : 0);
+        p.relZ += p.vz;
+
+        if (p.y < 0.2) {
+          p.y = 24 + Math.random() * 4;
+          p.relX = (Math.random() - 0.5) * 80;
+          p.relZ = (Math.random() - 0.5) * 80;
+        }
+
+        if (p.relX > 40) p.relX -= 80;
+        if (p.relX < -40) p.relX += 80;
+        if (p.relZ > 40) p.relZ -= 80;
+        if (p.relZ < -40) p.relZ += 80;
+
+        p.mesh.position.set(carState.x + p.relX, p.y, carState.z + p.relZ);
+      });
+    }
+
+    // =========================================================================
+    // HOLOGRAPHIC GPS NAVIGATION RIBBON
+    // =========================================================================
+    function initGPSRibbonPool() {
+      if (gpsRibbonGroup && scene) scene.remove(gpsRibbonGroup);
+      gpsRibbonGroup = new THREE.Group();
+      gpsRibbonSegments.length = 0;
+
+      const ribbonMat = new THREE.MeshBasicMaterial({
+        color: 0x06b6d4,
+        transparent: true,
+        opacity: 0.75,
+        side: THREE.DoubleSide,
+        depthWrite: false
+      });
+
+      for (let i = 0; i < 28; i++) {
+        const seg = new THREE.Mesh(new THREE.ConeGeometry(0.7, 1.8, 3).rotateX(-Math.PI / 2), ribbonMat);
+        seg.visible = false;
+        gpsRibbonGroup.add(seg);
+        gpsRibbonSegments.push(seg);
+      }
+      scene.add(gpsRibbonGroup);
+    }
+
+    function setGPSTarget(docId) {
+      const wp = waypoints.find(w => w.docId === docId);
+      if (!wp) return;
+      currentGPSTarget = wp;
+
+      const banner = document.getElementById('hud-gps-banner');
+      const destEl = document.getElementById('hud-gps-dest');
+      if (banner) {
+        banner.classList.remove('hidden');
+        banner.classList.add('flex');
+      }
+      if (destEl) destEl.innerText = "NAV: " + wp.label;
+
+      playTone(660, 'sine', 0.18);
+      setTimeout(() => playTone(880, 'sine', 0.22), 120);
+    }
+
+    function clearGPSTarget() {
+      currentGPSTarget = null;
+      const banner = document.getElementById('hud-gps-banner');
+      if (banner) {
+        banner.classList.add('hidden');
+        banner.classList.remove('flex');
+      }
+      gpsRibbonSegments.forEach(s => s.visible = false);
+    }
+
+    function updateGPSRibbon() {
+      if (!currentGPSTarget || gpsRibbonSegments.length === 0) {
+        gpsRibbonSegments.forEach(s => s.visible = false);
+        return;
+      }
+
+      const dx = currentGPSTarget.x - carState.x;
+      const dz = currentGPSTarget.z - carState.z;
+      const totalDist = Math.hypot(dx, dz);
+
+      const distEl = document.getElementById('hud-gps-dist');
+      if (distEl) distEl.innerText = `${Math.round(totalDist)}m`;
+
+      if (totalDist < 8.5) {
+        const destEl = document.getElementById('hud-gps-dest');
+        if (destEl) destEl.innerHTML = `<span class="text-emerald-400 font-bold">🎯 ARRIVED AT ${currentGPSTarget.label.toUpperCase()}!</span>`;
+        return;
+      }
+
+      const numActive = Math.min(gpsRibbonSegments.length, Math.floor(totalDist / 5.5));
+      const targetAngle = Math.atan2(dx, dz);
+      const time = Date.now() * 0.006;
+
+      for (let i = 0; i < gpsRibbonSegments.length; i++) {
+        const seg = gpsRibbonSegments[i];
+        if (i < numActive) {
+          const t = (i + 1) / (numActive + 1);
+          seg.position.set(carState.x + dx * t, 0.04, carState.z + dz * t);
+          seg.rotation.y = targetAngle;
+          seg.visible = true;
+          seg.material.opacity = 0.4 + Math.sin(time - i * 0.4) * 0.35;
+        } else {
+          seg.visible = false;
+        }
+      }
+    }
+
+    // =========================================================================
+    // LIVING WORLD CIVILIAN TRAFFIC & ELEVATED SKY-TAXIS
+    // =========================================================================
+    function initCivilianTraffic(parentGroup) {
+      civilianCars.forEach(c => {
+        if (c.mesh && c.mesh.parent) c.mesh.parent.remove(c.mesh);
+      });
+      civilianCars = [];
+
+      const civDefs = [
+        { id: 'civ-1', name: 'Cyber Sedan', color: 0xf8fafc, route: 'north-south', x: 2.2, z: -170, dir: 1, speed: 0.32 },
+        { id: 'civ-2', name: 'Courier Van', color: 0xfbbf24, route: 'north-south', x: -2.2, z: 170, dir: -1, speed: 0.28 },
+        { id: 'civ-3', name: 'Electric Coupe', color: 0x14b8a6, route: 'east-west', x: -170, z: 2.2, dir: 1, speed: 0.34 },
+        { id: 'civ-4', name: 'Autonomous Taxi', color: 0xf97316, route: 'ring-cw', angle: 0, speed: 0.0028 }
+      ];
+
+      civDefs.forEach(def => {
+        const group = new THREE.Group();
+        const bodyMat = new THREE.MeshStandardMaterial({ color: def.color, roughness: 0.3, metalness: 0.6 });
+        const trimMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.5 });
+        const hlMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 0.8 });
+        const tlMat = new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0xdc2626, emissiveIntensity: 0.6 });
+
+        const body = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.55, 3.6), bodyMat);
+        body.position.y = 0.55; body.castShadow = true; group.add(body);
+
+        const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.45, 1.8), trimMat);
+        cabin.position.set(0, 1.0, 0.1); group.add(cabin);
+
+        const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.14, 0.1), hlMat); hlL.position.set(-0.6, 0.55, -1.82); group.add(hlL);
+        const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.14, 0.1), hlMat); hlR.position.set(0.6, 0.55, -1.82); group.add(hlR);
+        const tl = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.12, 0.1), tlMat); tl.position.set(0, 0.6, 1.82); group.add(tl);
+
+        const wheelMat = new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.9 });
+        const wheelPositions = [[-0.95, 0.35, -1.1], [0.95, 0.35, -1.1], [-0.95, 0.35, 1.1], [0.95, 0.35, 1.1]];
+        wheelPositions.forEach(([wx, wy, wz]) => {
+          const w = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.28, 12).rotateZ(Math.PI / 2), wheelMat);
+          w.position.set(wx, wy, wz); group.add(w);
+        });
+
+        if (def.route === 'ring-cw') {
+          group.position.set(Math.cos(def.angle) * 215, 0, Math.sin(def.angle) * 215);
+        } else {
+          group.position.set(def.x, 0, def.z);
+        }
+
+        parentGroup.add(group);
+        civilianCars.push({
+          mesh: group,
+          taillight: tl,
+          def: def,
+          x: group.position.x,
+          z: group.position.z,
+          currentSpeed: def.speed,
+          heading: 0,
+          honkCooldown: 0
+        });
+      });
+    }
+
+    function updateCivilianTraffic() {
+      civilianCars.forEach(civ => {
+        if (!civ.mesh) return;
+
+        const toPlayerX = carState.x - civ.x;
+        const toPlayerZ = carState.z - civ.z;
+        const distToPlayer = Math.hypot(toPlayerX, toPlayerZ);
+
+        let mustBrake = false;
+
+        if (civ.def.route === 'north-south') {
+          if (distToPlayer < 9.5 && Math.abs(toPlayerX) < 3.2 && (civ.def.dir * toPlayerZ > 0)) {
+            mustBrake = true;
+          }
+
+          if (mustBrake) {
+            civ.currentSpeed = Math.max(0, civ.currentSpeed - 0.04);
+            civ.taillight.material.emissiveIntensity = 2.0;
+            if (Date.now() - civ.honkCooldown > 2500 && soundEnabled) {
+              civ.honkCooldown = Date.now();
+              playTone(320, 'triangle', 0.12);
+            }
+          } else {
+            civ.currentSpeed = Math.min(civ.def.speed, civ.currentSpeed + 0.015);
+            civ.taillight.material.emissiveIntensity = 0.6;
+          }
+
+          civ.z += civ.def.dir * civ.currentSpeed;
+          if (civ.z > 200) civ.def.dir = -1;
+          if (civ.z < -200) civ.def.dir = 1;
+          civ.heading = civ.def.dir > 0 ? Math.PI : 0;
+
+        } else if (civ.def.route === 'east-west') {
+          if (distToPlayer < 9.5 && Math.abs(toPlayerZ) < 3.2 && (civ.def.dir * toPlayerX > 0)) {
+            mustBrake = true;
+          }
+
+          if (mustBrake) {
+            civ.currentSpeed = Math.max(0, civ.currentSpeed - 0.04);
+            civ.taillight.material.emissiveIntensity = 2.0;
+            if (Date.now() - civ.honkCooldown > 2500 && soundEnabled) {
+              civ.honkCooldown = Date.now();
+              playTone(340, 'triangle', 0.12);
+            }
+          } else {
+            civ.currentSpeed = Math.min(civ.def.speed, civ.currentSpeed + 0.015);
+            civ.taillight.material.emissiveIntensity = 0.6;
+          }
+
+          civ.x += civ.def.dir * civ.currentSpeed;
+          if (civ.x > 200) civ.def.dir = -1;
+          if (civ.x < -200) civ.def.dir = 1;
+          civ.heading = civ.def.dir > 0 ? -Math.PI / 2 : Math.PI / 2;
+
+        } else if (civ.def.route === 'ring-cw') {
+          civ.def.angle += civ.def.speed;
+          civ.x = Math.cos(civ.def.angle) * 215;
+          civ.z = Math.sin(civ.def.angle) * 215;
+          civ.heading = -civ.def.angle;
+        }
+
+        civ.mesh.position.set(civ.x, 0, civ.z);
+        civ.mesh.rotation.y = civ.heading;
+
+        if (distToPlayer < 2.5) {
+          const overlap = 2.5 - distToPlayer;
+          const nx = toPlayerX / (distToPlayer || 0.001);
+          const nz = toPlayerZ / (distToPlayer || 0.001);
+          carState.x += nx * overlap;
+          carState.z += nz * overlap;
+          carState.speed = -carState.speed * 0.45;
+          createCrashSparks(civ.x, civ.z);
+          triggerCollisionFeedback(0.5);
+        }
+      });
+    }
+
+    function initSkyTaxis(parentGroup) {
+      skyTaxis.forEach(t => {
+        if (t.mesh && t.mesh.parent) t.mesh.parent.remove(t.mesh);
+      });
+      skyTaxis = [];
+
+      const taxiColors = [0x38bdf8, 0xa855f7];
+      for (let i = 0; i < 2; i++) {
+        const group = new THREE.Group();
+        const mat = new THREE.MeshStandardMaterial({ color: taxiColors[i], roughness: 0.2, metalness: 0.85 });
+        const darkMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.4 });
+
+        const body = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 1.2, 5.0, 8).rotateX(Math.PI / 2), mat);
+        group.add(body);
+
+        const wings = new THREE.Mesh(new THREE.BoxGeometry(4.8, 0.08, 1.6), darkMat);
+        wings.position.set(0, 0.1, 0.3); group.add(wings);
+
+        const strobeL = new THREE.Mesh(new THREE.SphereGeometry(0.18, 6, 6), new THREE.MeshBasicMaterial({ color: 0xef4444 }));
+        strobeL.position.set(-2.4, 0.15, 0.3); group.add(strobeL);
+
+        const strobeR = new THREE.Mesh(new THREE.SphereGeometry(0.18, 6, 6), new THREE.MeshBasicMaterial({ color: 0x22c55e }));
+        strobeR.position.set(2.4, 0.15, 0.3); group.add(strobeR);
+
+        const repulsor = new THREE.Mesh(new THREE.CircleGeometry(0.9, 16).rotateX(Math.PI / 2), new THREE.MeshBasicMaterial({ color: 0x06b6d4, side: THREE.DoubleSide }));
+        repulsor.position.y = -0.7; group.add(repulsor);
+
+        parentGroup.add(group);
+        skyTaxis.push({
+          mesh: group,
+          strobes: [strobeL, strobeR],
+          angle: (i * Math.PI),
+          radius: 120 + i * 40,
+          altitude: 32 + i * 4,
+          speed: 0.0035 + i * 0.001
+        });
+      }
+    }
+
+    function updateSkyTaxis() {
+      const isStrobeOn = (Date.now() % 750) < 140;
+      skyTaxis.forEach(taxi => {
+        if (!taxi.mesh) return;
+        taxi.angle += taxi.speed;
+        const tx = Math.cos(taxi.angle) * taxi.radius;
+        const tz = Math.sin(taxi.angle) * taxi.radius;
+        const ty = taxi.altitude + Math.sin(Date.now() * 0.0015 + taxi.angle) * 1.5;
+
+        taxi.mesh.position.set(tx, ty, tz);
+        taxi.mesh.rotation.y = -taxi.angle - Math.PI / 2;
+        taxi.mesh.rotation.z = Math.sin(taxi.angle) * 0.12;
+
+        taxi.strobes.forEach(s => s.visible = isStrobeOn);
+      });
+    }
+
     // Roadway Zone Checker - keeps highways clear while placing obstacles as roadside & terrain hindrances!
     function isOnRoad(x, z, margin = 4.0) {
       // 1. Center roundabout plaza
@@ -2852,8 +3534,11 @@ if __name__ == "__main__":
       dirSunLight.shadow.camera.bottom = -200;
       scene.add(dirSunLight);
 
-      // Initialize crash particle pool
+      // Initialize particle pools & systems
       initSparkPool();
+      initSkidMarksPool();
+      initSmokePool();
+      initGPSRibbonPool();
 
       // Build Selected World Environment (defaults to 'island')
       rebuildWorldEnvironment(currentWorld);
@@ -2879,10 +3564,11 @@ if __name__ == "__main__":
       waypointMeshes.length = 0;
       boostPads.length = 0;
       worldObstacles.length = 0;
+      streetlightsList.length = 0;
 
       worldEnvironmentGroup = new THREE.Group();
 
-      // Atmospheric Lighting & Sky Colors per World
+      // Atmospheric Lighting & Sky Colors per World & Time of Day
       updateWorldAtmosphere();
 
       // Common Road Material
@@ -3094,32 +3780,74 @@ if __name__ == "__main__":
       // Build 4 Highway Stargate Warp Portals to other worlds!
       buildWarpPortals(worldEnvironmentGroup);
 
+      // Living World Civilian Traffic & Elevated Sky-Taxis
+      initCivilianTraffic(worldEnvironmentGroup);
+      initSkyTaxis(worldEnvironmentGroup);
+
+      // Dynamic Weather Particles per World
+      initWeatherParticles(worldId);
+
+      // Procedural 3D Audio Environmental Soundscape
+      startAmbientSoundscape(worldId, worldTimeMode);
+
       scene.add(worldEnvironmentGroup);
     }
 
     function updateWorldAtmosphere() {
       if (!scene || !dirSunLight || !ambientLight) return;
 
-      if (currentWorld === 'island') {
-        scene.background = new THREE.Color(0x7dd3fc); // Tropical sunny sky
-        scene.fog = new THREE.FogExp2(0xbae6fd, 0.001); // Crystal clear!
-        ambientLight.color.setHex(0xffffff); ambientLight.intensity = 0.95;
-        dirSunLight.color.setHex(0xfffae0); dirSunLight.intensity = 1.4;
-      } else if (currentWorld === 'city') {
-        scene.background = new THREE.Color(0x090c15); // Cyber night
-        scene.fog = new THREE.FogExp2(0x090c15, 0.0018);
-        ambientLight.color.setHex(0x38bdf8); ambientLight.intensity = 0.45;
-        dirSunLight.color.setHex(0x60a5fa); dirSunLight.intensity = 0.9;
-      } else if (currentWorld === 'mars') {
-        scene.background = new THREE.Color(0x450a0a); // Martian red sky
-        scene.fog = new THREE.FogExp2(0x7f1d1d, 0.0018);
-        ambientLight.color.setHex(0xfdba74); ambientLight.intensity = 0.6;
-        dirSunLight.color.setHex(0xf97316); dirSunLight.intensity = 1.25;
+      if (worldTimeMode === 'sunset') {
+        dirSunLight.position.set(150, 30, -100);
+        dirSunLight.color.setHex(0xf97316);
+        dirSunLight.intensity = 1.25;
+        ambientLight.color.setHex(0xfed7aa);
+        ambientLight.intensity = 0.55;
+
+        if (currentWorld === 'island') {
+          scene.background = new THREE.Color(0xf43f5e);
+          scene.fog = new THREE.FogExp2(0xfb7185, 0.0014);
+        } else if (currentWorld === 'city') {
+          scene.background = new THREE.Color(0x3b0764);
+          scene.fog = new THREE.FogExp2(0x581c87, 0.0016);
+        } else if (currentWorld === 'mars') {
+          scene.background = new THREE.Color(0x78350f);
+          scene.fog = new THREE.FogExp2(0x9a3412, 0.0016);
+        } else {
+          scene.background = new THREE.Color(0x831843);
+          scene.fog = new THREE.FogExp2(0x9d174d, 0.0014);
+        }
+      } else if (worldTimeMode === 'night') {
+        dirSunLight.position.set(60, 160, 40);
+        dirSunLight.color.setHex(0x60a5fa);
+        dirSunLight.intensity = 0.45;
+        ambientLight.color.setHex(0x1e1b4b);
+        ambientLight.intensity = 0.32;
+
+        scene.background = new THREE.Color(0x030712);
+        scene.fog = new THREE.FogExp2(0x030712, 0.002);
       } else {
-        scene.background = new THREE.Color(0xe0f2fe); // Crisp alpine air
-        scene.fog = new THREE.FogExp2(0xf1f5f9, 0.0012);
-        ambientLight.color.setHex(0xffffff); ambientLight.intensity = 0.9;
-        dirSunLight.color.setHex(0xffffff); dirSunLight.intensity = 1.35;
+        dirSunLight.position.set(80, 140, 60);
+        if (currentWorld === 'island') {
+          scene.background = new THREE.Color(0x7dd3fc);
+          scene.fog = new THREE.FogExp2(0xbae6fd, 0.001);
+          ambientLight.color.setHex(0xffffff); ambientLight.intensity = 0.95;
+          dirSunLight.color.setHex(0xfffae0); dirSunLight.intensity = 1.4;
+        } else if (currentWorld === 'city') {
+          scene.background = new THREE.Color(0x0f172a);
+          scene.fog = new THREE.FogExp2(0x1e293b, 0.0015);
+          ambientLight.color.setHex(0x38bdf8); ambientLight.intensity = 0.6;
+          dirSunLight.color.setHex(0x60a5fa); dirSunLight.intensity = 1.1;
+        } else if (currentWorld === 'mars') {
+          scene.background = new THREE.Color(0x450a0a);
+          scene.fog = new THREE.FogExp2(0x7f1d1d, 0.0018);
+          ambientLight.color.setHex(0xfdba74); ambientLight.intensity = 0.6;
+          dirSunLight.color.setHex(0xf97316); dirSunLight.intensity = 1.25;
+        } else {
+          scene.background = new THREE.Color(0xe0f2fe);
+          scene.fog = new THREE.FogExp2(0xf1f5f9, 0.0012);
+          ambientLight.color.setHex(0xffffff); ambientLight.intensity = 0.9;
+          dirSunLight.color.setHex(0xffffff); dirSunLight.intensity = 1.35;
+        }
       }
     }
 
@@ -3128,7 +3856,7 @@ if __name__ == "__main__":
       const ring = new THREE.Mesh(new THREE.RingGeometry(208, 222, 64).rotateX(-Math.PI / 2), asphaltMat);
       ring.receiveShadow = true; parentGroup.add(ring);
 
-      // Central Hub
+      // Central Hub Roundabout Plaza
       const plaza = new THREE.Mesh(new THREE.CircleGeometry(20, 36).rotateX(-Math.PI / 2), asphaltMat);
       plaza.receiveShadow = true; parentGroup.add(plaza);
 
@@ -3155,6 +3883,125 @@ if __name__ == "__main__":
         });
       });
 
+      // --- 1. HIGHWAY INFRASTRUCTURE: DASHED ROAD CENTERLINES ---
+      const dashGeo = new THREE.PlaneGeometry(0.35, 3.2).rotateX(-Math.PI / 2);
+      for (let z = -205; z <= 205; z += 6.5) {
+        if (Math.abs(z) > 22 && Math.abs(z) < 208) {
+          const dash = new THREE.Mesh(dashGeo, whiteLineMat);
+          dash.position.set(0, 0.02, z);
+          parentGroup.add(dash);
+        }
+      }
+      const dashHGeo = new THREE.PlaneGeometry(3.2, 0.35).rotateX(-Math.PI / 2);
+      for (let x = -205; x <= 205; x += 6.5) {
+        if (Math.abs(x) > 22 && Math.abs(x) < 208) {
+          const dash = new THREE.Mesh(dashHGeo, whiteLineMat);
+          dash.position.set(x, 0.02, 0);
+          parentGroup.add(dash);
+        }
+      }
+      for (let i = 0; i < 48; i++) {
+        const theta = (i / 48) * Math.PI * 2;
+        const dashR = new THREE.Mesh(new THREE.PlaneGeometry(0.35, 3.5).rotateX(-Math.PI / 2), whiteLineMat);
+        dashR.position.set(Math.cos(theta) * 215, 0.02, Math.sin(theta) * 215);
+        dashR.rotation.y = -theta;
+        parentGroup.add(dashR);
+      }
+
+      // --- 2. RED & WHITE RACING KERBS (RUMBLE STRIPS) ---
+      const kerbRedMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
+      const kerbWhiteMat = new THREE.MeshBasicMaterial({ color: 0xf8fafc });
+      const kerbGeo = new THREE.PlaneGeometry(0.7, 1.6).rotateX(-Math.PI / 2);
+      for (let i = 0; i < 36; i++) {
+        const theta = (i / 36) * Math.PI * 2;
+        const kerb = new THREE.Mesh(kerbGeo, (i % 2 === 0) ? kerbRedMat : kerbWhiteMat);
+        kerb.position.set(Math.cos(theta) * 20.3, 0.025, Math.sin(theta) * 20.3);
+        kerb.rotation.y = -theta;
+        parentGroup.add(kerb);
+      }
+
+      // --- 3. STEEL CRASH GUARDRAILS ON HIGHWAY PERIMETERS ---
+      const railMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.35, metalness: 0.8 });
+      for (let i = 0; i < 32; i++) {
+        const theta = (i / 32) * Math.PI * 2;
+        const gx = Math.cos(theta) * 222.8;
+        const gz = Math.sin(theta) * 222.8;
+        const rail = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.65, 4.2), railMat);
+        rail.position.set(gx, 0.45, gz);
+        rail.rotation.y = -theta;
+        parentGroup.add(rail);
+
+        const post = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.9), railMat);
+        post.position.set(gx, 0.45, gz);
+        parentGroup.add(post);
+      }
+
+      // --- 4. OVERHEAD HIGHWAY GANTRY TRUSS BRIDGES WITH DIRECTIONAL SIGNS ---
+      const gantryDefs = [
+        { x: 0, z: -75, rotY: 0, title: "↑ DOWNTOWN METROPOLIS & ORCHESTRATION" },
+        { x: 75, z: 0, rotY: Math.PI / 2, title: "→ MARS FRONTIER & RESEARCH QUAD" },
+        { x: 0, z: 75, rotY: 0, title: "↓ ALPINE PASS & PRODUCTION ROADMAPS" },
+        { x: -75, z: 0, rotY: Math.PI / 2, title: "← SWE HARBOR & CODERABBIT DRYDOCK" }
+      ];
+
+      gantryDefs.forEach(g => {
+        const gGroup = new THREE.Group();
+        gGroup.position.set(g.x, 0, g.z);
+        gGroup.rotation.y = g.rotY;
+
+        const trussMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.4, metalness: 0.7 });
+        const postL = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 6.8), trussMat); postL.position.set(-5.0, 3.4, 0); gGroup.add(postL);
+        const postR = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 6.8), trussMat); postR.position.set(5.0, 3.4, 0); gGroup.add(postR);
+        const beam = new THREE.Mesh(new THREE.BoxGeometry(10.6, 0.5, 0.5), trussMat); beam.position.set(0, 6.7, 0); gGroup.add(beam);
+
+        const canvas = document.createElement('canvas'); canvas.width = 512; canvas.height = 96;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#090d16'; ctx.fillRect(0, 0, 512, 96);
+        ctx.strokeStyle = '#0284c7'; ctx.lineWidth = 6; ctx.strokeRect(4, 4, 504, 88);
+        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 22px sans-serif'; ctx.textAlign = 'center';
+        ctx.fillText(g.title, 256, 42);
+        ctx.fillStyle = '#38bdf8'; ctx.font = 'bold 16px monospace';
+        ctx.fillText('SPEED LIMIT: 120 KM/H • AUTO-NAV ENABLED', 256, 74);
+
+        const tex = new THREE.CanvasTexture(canvas);
+        const sign = new THREE.Mesh(new THREE.PlaneGeometry(9.2, 1.7), new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide }));
+        sign.position.set(0, 6.7, 0.3); gGroup.add(sign);
+
+        parentGroup.add(gGroup);
+      });
+
+      // --- 5. HIGHWAY STREETLIGHT POLES WITH DYNAMIC NIGHTTIME LANTERNS ---
+      const poleMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.3, metalness: 0.8 });
+      const lampPositions = [-185, -140, -95, -50, 50, 95, 140, 185];
+
+      lampPositions.forEach(pos => {
+        [-5.2, 5.2].forEach(sideX => {
+          const poleGroup = new THREE.Group();
+          poleGroup.position.set(sideX, 0, pos);
+
+          const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.16, 6.5), poleMat);
+          mast.position.y = 3.25; poleGroup.add(mast);
+
+          const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 1.8), poleMat);
+          arm.position.set(sideX > 0 ? -0.8 : 0.8, 6.4, 0);
+          arm.rotation.z = sideX > 0 ? Math.PI / 3 : -Math.PI / 3;
+          poleGroup.add(arm);
+
+          const lanternMat = new THREE.MeshStandardMaterial({ color: 0xfef08a, emissive: 0xfef08a, emissiveIntensity: 0.3 });
+          const lantern = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.15, 0.6), lanternMat);
+          lantern.position.set(sideX > 0 ? -1.5 : 1.5, 6.2, 0);
+          poleGroup.add(lantern);
+
+          const poolMat = new THREE.MeshBasicMaterial({ color: 0xfef08a, transparent: true, opacity: 0.08 });
+          const lightPool = new THREE.Mesh(new THREE.CircleGeometry(4.0, 16).rotateX(-Math.PI / 2), poolMat);
+          lightPool.position.set(sideX > 0 ? -1.5 : 1.5, 0.02, 0);
+          poleGroup.add(lightPool);
+
+          parentGroup.add(poleGroup);
+          streetlightsList.push({ lantern: lantern, lightPool: lightPool });
+        });
+      });
+
       // Turbo Boost Pads
       const boostLocs = [[0, -45], [0, -125], [0, 45], [0, 140], [65, 0], [150, 0], [-65, 0], [-150, 0]];
       boostLocs.forEach(pos => {
@@ -3163,6 +4010,8 @@ if __name__ == "__main__":
         parentGroup.add(pad);
         boostPads.push(pad);
       });
+
+      updateStreetlightsAtmosphere();
     }
 
     const warpPortals = [];
@@ -3261,30 +4110,131 @@ if __name__ == "__main__":
         group.position.set(wp.x, 0, wp.z);
 
         // Ground Target Ring
-        const ring = new THREE.Mesh(new THREE.RingGeometry(3.5, 4.2, 32).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: wp.color, side: THREE.DoubleSide }));
+        const ring = new THREE.Mesh(new THREE.RingGeometry(3.8, 4.6, 32).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: wp.color, side: THREE.DoubleSide }));
         ring.position.y = 0.05; group.add(ring);
 
-        // Pedestal
-        const ped = new THREE.Mesh(new THREE.CylinderGeometry(3.2, 3.4, 1.2, 24), new THREE.MeshLambertMaterial({ color: 0xf1f5f9 }));
-        ped.position.y = 0.6; ped.castShadow = true; group.add(ped);
+        let customRotators = [];
+
+        if (wp.docId === 'frameworks-langgraph') {
+          // --- 1. LANGGRAPH HIGH-RISE GLASS SKYSCRAPER WITH STATEGRAPH NODE MATRIX ---
+          const towerPodium = new THREE.Mesh(new THREE.CylinderGeometry(5.2, 5.6, 1.8, 24), new THREE.MeshLambertMaterial({ color: 0x0f172a }));
+          towerPodium.position.y = 0.9; group.add(towerPodium);
+
+          const glassMat = new THREE.MeshPhysicalMaterial({ color: 0x0284c7, roughness: 0.1, transmission: 0.65, transparent: true, opacity: 0.85 });
+          const tier1 = new THREE.Mesh(new THREE.BoxGeometry(7.2, 22, 7.2), glassMat);
+          tier1.position.y = 12; group.add(tier1);
+
+          const tier2 = new THREE.Mesh(new THREE.BoxGeometry(5.2, 14, 5.2), glassMat);
+          tier2.position.y = 28; group.add(tier2);
+
+          const spire = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.6, 12, 8), new THREE.MeshBasicMaterial({ color: 0x38bdf8 }));
+          spire.position.y = 41; group.add(spire);
+
+          const matrixGroup = new THREE.Group();
+          matrixGroup.position.set(0, 14, 3.8);
+          const nodeMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0284c7, emissiveIntensity: 0.9 });
+          const nodePositions = [[-2, -4], [0, -4], [2, -4], [-1, 0], [1, 0], [-2, 4], [0, 4], [2, 4]];
+          nodePositions.forEach(([nx, ny]) => {
+            const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.4, 8, 8), nodeMat);
+            sphere.position.set(nx, ny, 0); matrixGroup.add(sphere);
+          });
+          group.add(matrixGroup);
+          customRotators.push({ type: 'matrix', mesh: matrixGroup });
+
+          worldObstacles.push({ type: 'circle', x: wp.x, z: wp.z, radius: 5.6, name: wp.label });
+
+        } else if (wp.docId === 'mcp-protocol') {
+          // --- 2. ANTHROPIC MCP PROTOCOL SPIRE WITH FLOATING RINGS ---
+          const baseMat = new THREE.MeshLambertMaterial({ color: 0x1e1b4b });
+          const mcpBase = new THREE.Mesh(new THREE.CylinderGeometry(4.8, 5.4, 1.6, 24), baseMat);
+          mcpBase.position.y = 0.8; group.add(mcpBase);
+
+          const spireMat = new THREE.MeshStandardMaterial({ color: 0x7c3aed, roughness: 0.2, metalness: 0.85, emissive: 0x4c1d95, emissiveIntensity: 0.4 });
+          const mcpSpire = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 2.4, 38, 8), spireMat);
+          mcpSpire.position.y = 20; group.add(mcpSpire);
+
+          const ringMat = new THREE.MeshStandardMaterial({ color: 0xc084fc, emissive: 0xa855f7, emissiveIntensity: 0.75, roughness: 0.1 });
+          const r1 = new THREE.Mesh(new THREE.TorusGeometry(3.8, 0.22, 12, 32).rotateX(Math.PI / 2), ringMat);
+          r1.position.y = 12; group.add(r1);
+
+          const r2 = new THREE.Mesh(new THREE.TorusGeometry(5.2, 0.2, 12, 32).rotateX(Math.PI / 2), ringMat);
+          r2.position.y = 22; group.add(r2);
+
+          const r3 = new THREE.Mesh(new THREE.TorusGeometry(6.6, 0.18, 12, 32).rotateX(Math.PI / 2), ringMat);
+          r3.position.y = 31; group.add(r3);
+
+          customRotators.push({ type: 'rings', rings: [r1, r2, r3] });
+          worldObstacles.push({ type: 'circle', x: wp.x, z: wp.z, radius: 5.4, name: wp.label });
+
+        } else if (wp.docId === 'coderabbit-review') {
+          // --- 3. CODERABBIT INDUSTRIAL SWE DRYDOCK & GANTRY CRANE ---
+          const hangarBase = new THREE.Mesh(new THREE.BoxGeometry(12, 0.8, 10), new THREE.MeshLambertMaterial({ color: 0x1e293b }));
+          hangarBase.position.y = 0.4; group.add(hangarBase);
+
+          const gantryMat = new THREE.MeshStandardMaterial({ color: 0xeab308, roughness: 0.4, metalness: 0.6 });
+          [-4.5, 4.5].forEach(gz => {
+            const pL = new THREE.Mesh(new THREE.BoxGeometry(0.7, 9.0, 0.7), gantryMat); pL.position.set(-5.2, 4.5, gz); group.add(pL);
+            const pR = new THREE.Mesh(new THREE.BoxGeometry(0.7, 9.0, 0.7), gantryMat); pR.position.set(5.2, 4.5, gz); group.add(pR);
+            const beam = new THREE.Mesh(new THREE.BoxGeometry(11.2, 0.8, 0.7), gantryMat); beam.position.set(0, 9.0, gz); group.add(beam);
+          });
+
+          const c1 = new THREE.Mesh(new THREE.BoxGeometry(4.2, 2.2, 2.2), new THREE.MeshLambertMaterial({ color: 0x059669 }));
+          c1.position.set(-2, 1.8, 0); group.add(c1);
+          const c2 = new THREE.Mesh(new THREE.BoxGeometry(3.6, 2.0, 2.0), new THREE.MeshLambertMaterial({ color: 0x2563eb }));
+          c2.position.set(2.4, 1.7, 0.5); group.add(c2);
+
+          const canvas = document.createElement('canvas'); canvas.width = 512; canvas.height = 128;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#0f172a'; ctx.fillRect(0, 0, 512, 128);
+          ctx.strokeStyle = '#22c55e'; ctx.lineWidth = 6; ctx.strokeRect(6, 6, 500, 116);
+          ctx.fillStyle = '#22c55e'; ctx.font = 'bold 24px monospace'; ctx.fillText('+248 -12 PR #402 APPROVED', 40, 52);
+          ctx.fillStyle = '#38bdf8'; ctx.font = '18px monospace'; ctx.fillText('AST VERIFIED & AUTO-FIX READY', 40, 92);
+          const diffTex = new THREE.CanvasTexture(canvas);
+          const diffBoard = new THREE.Mesh(new THREE.PlaneGeometry(8, 2.0), new THREE.MeshBasicMaterial({ map: diffTex, side: THREE.DoubleSide }));
+          diffBoard.position.set(0, 11.2, 0); group.add(diffBoard);
+
+          worldObstacles.push({ type: 'circle', x: wp.x, z: wp.z, radius: 6.2, name: wp.label });
+
+        } else if (wp.docId === 'paper-reflexion') {
+          // --- 4. REFLEXION SELF-CORRECTION GEODESIC OBSERVATORY DOME ---
+          const domeBase = new THREE.Mesh(new THREE.CylinderGeometry(5.8, 6.2, 1.5, 24), new THREE.MeshLambertMaterial({ color: 0x064e3b }));
+          domeBase.position.y = 0.75; group.add(domeBase);
+
+          const domeGeo = new THREE.IcosahedronGeometry(5.2, 2);
+          const domeMat = new THREE.MeshPhysicalMaterial({ color: 0x34d399, roughness: 0.1, transmission: 0.75, transparent: true, opacity: 0.65 });
+          const domeMesh = new THREE.Mesh(domeGeo, domeMat);
+          domeMesh.position.y = 3.5; group.add(domeMesh);
+
+          const gyroMat = new THREE.MeshStandardMaterial({ color: 0x10b981, emissive: 0x059669, emissiveIntensity: 0.8 });
+          const gRing1 = new THREE.Mesh(new THREE.TorusGeometry(3.2, 0.18, 12, 24), gyroMat);
+          gRing1.position.y = 3.5; group.add(gRing1);
+          const gRing2 = new THREE.Mesh(new THREE.TorusGeometry(2.0, 0.16, 12, 24).rotateX(Math.PI / 2), gyroMat);
+          gRing2.position.y = 3.5; group.add(gRing2);
+
+          customRotators.push({ type: 'gyro', rings: [gRing1, gRing2] });
+          worldObstacles.push({ type: 'circle', x: wp.x, z: wp.z, radius: 6.2, name: wp.label });
+
+        } else {
+          const ped = new THREE.Mesh(new THREE.CylinderGeometry(3.2, 3.4, 1.2, 24), new THREE.MeshLambertMaterial({ color: 0xf1f5f9 }));
+          ped.position.y = 0.6; ped.castShadow = true; group.add(ped);
+          worldObstacles.push({ type: 'circle', x: wp.x, z: wp.z, radius: 3.4, name: wp.label });
+        }
 
         // Floating Gemstone Crystal Core
         const coreMat = new THREE.MeshStandardMaterial({ color: wp.color, roughness: 0.1, metalness: 0.8, emissive: wp.color, emissiveIntensity: 0.55 });
         const core = new THREE.Mesh(new THREE.OctahedronGeometry(1.2), coreMat);
-        core.position.y = 3.2; core.castShadow = true; group.add(core);
+        core.position.y = (wp.docId === 'frameworks-langgraph' || wp.docId === 'mcp-protocol') ? 43 : 3.4;
+        core.castShadow = true; group.add(core);
 
-        // TALL VERTICAL SKY BEACON (120 units high! Visible from across the whole world!)
+        // TALL VERTICAL SKY BEACON (140 units high! Visible from across the whole world!)
         const beaconMat = new THREE.MeshBasicMaterial({ color: wp.color, transparent: true, opacity: 0.28 });
         const beacon = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 1.2, 140, 8), beaconMat);
         beacon.position.y = 70;
         group.add(beacon);
 
-        group.userData = { coreMesh: core, wpData: wp };
+        group.userData = { coreMesh: core, wpData: wp, customRotators: customRotators };
         parentGroup.add(group);
         waypointMeshes.push(group);
-
-        // Solid Pedestal Platform Hindrance (Cannot drive straight through!)
-        worldObstacles.push({ type: 'circle', x: wp.x, z: wp.z, radius: 3.4, name: wp.label });
       });
     }
 
@@ -3296,7 +4246,10 @@ if __name__ == "__main__":
         scene.remove(carGroup);
       }
       carGroup = new THREE.Group();
+      carChassisMeshGroup = new THREE.Group();
+      carGroup.add(carChassisMeshGroup);
       allWheels = [];
+      nitroFlames = [];
 
       const bodyPaintMat = new THREE.MeshStandardMaterial({ color: colorHex, roughness: 0.22, metalness: 0.78 });
       const carbonTrimMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.55, metalness: 0.25 });
@@ -3337,29 +4290,41 @@ if __name__ == "__main__":
         return wg;
       }
 
+      // Dual Exhaust Nozzles & Nitro Boost Flame Meshes
+      const exMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.3, metalness: 0.8 });
+      const exL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.4, 8).rotateX(Math.PI / 2), exMat);
+      exL.position.set(-0.55, 0.52, 2.22); carChassisMeshGroup.add(exL);
+      const exR = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.4, 8).rotateX(Math.PI / 2), exMat);
+      exR.position.set(0.55, 0.52, 2.22); carChassisMeshGroup.add(exR);
+
+      const flameMat = new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.85 });
+      const nitroFlameL = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.75, 8).rotateX(-Math.PI / 2), flameMat);
+      nitroFlameL.position.set(-0.55, 0.52, 2.65); nitroFlameL.visible = false; carChassisMeshGroup.add(nitroFlameL);
+      const nitroFlameR = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.75, 8).rotateX(-Math.PI / 2), flameMat);
+      nitroFlameR.position.set(0.55, 0.52, 2.65); nitroFlameR.visible = false; carChassisMeshGroup.add(nitroFlameR);
+      nitroFlames = [nitroFlameL, nitroFlameR];
+
       if (model === 'rover') {
         // --- TITAN 6-WHEEL EXPLORATION ROVER ---
         const chassis = new THREE.Mesh(new THREE.BoxGeometry(2.3, 0.75, 4.5), bodyPaintMat);
-        chassis.position.y = 0.95; chassis.castShadow = true; carGroup.add(chassis);
+        chassis.position.y = 0.95; chassis.castShadow = true; carChassisMeshGroup.add(chassis);
 
         const cab = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.7, 2.2), carbonTrimMat);
-        cab.position.set(0, 1.6, -0.4); carGroup.add(cab);
+        cab.position.set(0, 1.6, -0.4); carChassisMeshGroup.add(cab);
 
         const cabGlass = new THREE.Mesh(new THREE.BoxGeometry(1.82, 0.6, 1.1), glassMat);
-        cabGlass.position.set(0, 1.62, -1.0); cabGlass.rotation.x = -0.3; carGroup.add(cabGlass);
+        cabGlass.position.set(0, 1.62, -1.0); cabGlass.rotation.x = -0.3; carChassisMeshGroup.add(cabGlass);
 
-        // Rotating Satellite Radar Dish
         const dishPole = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.5), chromeMat);
-        dishPole.position.set(0, 2.15, 0.3); carGroup.add(dishPole);
+        dishPole.position.set(0, 2.15, 0.3); carChassisMeshGroup.add(dishPole);
         const radarDish = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.1, 0.2, 16), chromeMat);
-        radarDish.position.set(0, 2.45, 0.3); radarDish.rotation.x = 0.5; carGroup.add(radarDish);
+        radarDish.position.set(0, 2.45, 0.3); radarDish.rotation.x = 0.5; carChassisMeshGroup.add(radarDish);
 
-        // Headlights & Taillights
-        const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.2, 0.15), headlightGlowMat); hlL.position.set(-0.75, 1.05, -2.28); carGroup.add(hlL);
-        const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.2, 0.15), headlightGlowMat); hlR.position.set(0.75, 1.05, -2.28); carGroup.add(hlR);
-        taillightMesh.position.set(0, 1.05, 2.28); carGroup.add(taillightMesh);
+        const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.2, 0.15), headlightGlowMat); hlL.position.set(-0.75, 1.05, -2.28); carChassisMeshGroup.add(hlL);
+        const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.2, 0.15), headlightGlowMat); hlR.position.set(0.75, 1.05, -2.28); carChassisMeshGroup.add(hlR);
+        taillightMesh.position.set(0, 1.05, 2.28); carChassisMeshGroup.add(taillightMesh);
 
-        // 6 Rugged All-Terrain Wheels
+        // 6 Rugged All-Terrain Wheels on axle pivots
         frontLeftPivot = new THREE.Group(); frontLeftPivot.position.set(-1.3, 0.55, -1.4);
         const wFL = makeWheel(0.55, 0.42); frontLeftPivot.add(wFL); carGroup.add(frontLeftPivot);
 
@@ -3377,30 +4342,28 @@ if __name__ == "__main__":
       } else if (model === 'drone') {
         // --- NEXUS HOVER DRONE (ANTI-GRAVITY THRUSTERS) ---
         const coreFuselage = new THREE.Mesh(new THREE.CylinderGeometry(1.3, 1.5, 0.55, 8), bodyPaintMat);
-        coreFuselage.position.y = 0.95; coreFuselage.castShadow = true; carGroup.add(coreFuselage);
+        coreFuselage.position.y = 0.95; coreFuselage.castShadow = true; carChassisMeshGroup.add(coreFuselage);
 
         const energyCore = new THREE.Mesh(new THREE.SphereGeometry(0.55, 16, 16), new THREE.MeshStandardMaterial({ color: 0x06b6d4, emissive: 0x06b6d4, emissiveIntensity: 1.2 }));
-        energyCore.position.set(0, 1.35, 0); carGroup.add(energyCore);
+        energyCore.position.set(0, 1.35, 0); carChassisMeshGroup.add(energyCore);
 
-        // 4 Corner Ducted Thruster Pods
         const corners = [[-1.55, -1.55], [1.55, -1.55], [-1.55, 1.55], [1.55, 1.55]];
         corners.forEach(([cx, cz]) => {
           const arm = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.12, 1.2), carbonTrimMat);
           arm.position.set(cx * 0.5, 0.95, cz * 0.5);
           arm.rotation.y = Math.atan2(cx, cz);
-          carGroup.add(arm);
+          carChassisMeshGroup.add(arm);
 
           const duct = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.1, 8, 16).rotateX(Math.PI / 2), carbonTrimMat);
-          duct.position.set(cx, 0.95, cz); carGroup.add(duct);
+          duct.position.set(cx, 0.95, cz); carChassisMeshGroup.add(duct);
 
           const glowJet = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.1, 0.4, 12), new THREE.MeshBasicMaterial({ color: 0x00f5ff, transparent: true, opacity: 0.85 }));
-          glowJet.position.set(cx, 0.7, cz); carGroup.add(glowJet);
+          glowJet.position.set(cx, 0.7, cz); carChassisMeshGroup.add(glowJet);
         });
 
-        // Headlights & Taillights
-        const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.12, 0.15), headlightGlowMat); hlL.position.set(-0.5, 1.0, -1.55); carGroup.add(hlL);
-        const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.12, 0.15), headlightGlowMat); hlR.position.set(0.5, 1.0, -1.55); carGroup.add(hlR);
-        taillightMesh.position.set(0, 1.0, 1.55); carGroup.add(taillightMesh);
+        const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.12, 0.15), headlightGlowMat); hlL.position.set(-0.5, 1.0, -1.55); carChassisMeshGroup.add(hlL);
+        const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.12, 0.15), headlightGlowMat); hlR.position.set(0.5, 1.0, -1.55); carChassisMeshGroup.add(hlR);
+        taillightMesh.position.set(0, 1.0, 1.55); carChassisMeshGroup.add(taillightMesh);
 
         frontLeftPivot = new THREE.Group(); frontRightPivot = new THREE.Group();
         allWheels = [];
@@ -3408,40 +4371,40 @@ if __name__ == "__main__":
       } else {
         // --- CYBER SPORTS ROADSTER ---
         const lowerBody = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.45, 4.4), bodyPaintMat);
-        lowerBody.position.y = 0.6; lowerBody.castShadow = true; carGroup.add(lowerBody);
+        lowerBody.position.y = 0.6; lowerBody.castShadow = true; carChassisMeshGroup.add(lowerBody);
 
         const hood = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.3, 1.8), bodyPaintMat);
-        hood.position.set(0, 0.85, -1.0); hood.rotation.x = 0.08; hood.castShadow = true; carGroup.add(hood);
+        hood.position.set(0, 0.85, -1.0); hood.rotation.x = 0.08; hood.castShadow = true; carChassisMeshGroup.add(hood);
 
         const splitter = new THREE.Mesh(new THREE.BoxGeometry(2.08, 0.08, 0.6), carbonTrimMat);
-        splitter.position.set(0, 0.4, -2.15); carGroup.add(splitter);
+        splitter.position.set(0, 0.4, -2.15); carChassisMeshGroup.add(splitter);
 
         const trunk = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.35, 1.1), bodyPaintMat);
-        trunk.position.set(0, 0.85, 1.4); trunk.castShadow = true; carGroup.add(trunk);
+        trunk.position.set(0, 0.85, 1.4); trunk.castShadow = true; carChassisMeshGroup.add(trunk);
 
         const spoilerWing = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.08, 0.4), carbonTrimMat);
-        spoilerWing.position.set(0, 1.25, 2.05); carGroup.add(spoilerWing);
-        const strutL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat); strutL.position.set(-0.6, 1.1, 2.05); carGroup.add(strutL);
-        const strutR = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat); strutR.position.set(0.6, 1.1, 2.05); carGroup.add(strutR);
+        spoilerWing.position.set(0, 1.25, 2.05); carChassisMeshGroup.add(spoilerWing);
+        const strutL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat); strutL.position.set(-0.6, 1.1, 2.05); carChassisMeshGroup.add(strutL);
+        const strutR = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.25, 0.15), carbonTrimMat); strutR.position.set(0.6, 1.1, 2.05); carChassisMeshGroup.add(strutR);
 
         const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.65, 0.5, 1.9), bodyPaintMat);
-        cabin.position.set(0, 1.18, 0.15); carGroup.add(cabin);
+        cabin.position.set(0, 1.18, 0.15); carChassisMeshGroup.add(cabin);
 
         const frontGlass = new THREE.Mesh(new THREE.BoxGeometry(1.58, 0.48, 0.8), glassMat);
-        frontGlass.position.set(0, 1.18, -0.6); frontGlass.rotation.x = -0.55; carGroup.add(frontGlass);
+        frontGlass.position.set(0, 1.18, -0.6); frontGlass.rotation.x = -0.55; carChassisMeshGroup.add(frontGlass);
 
         const rearGlass = new THREE.Mesh(new THREE.BoxGeometry(1.58, 0.45, 0.75), glassMat);
-        rearGlass.position.set(0, 1.18, 0.85); rearGlass.rotation.x = 0.52; carGroup.add(rearGlass);
+        rearGlass.position.set(0, 1.18, 0.85); rearGlass.rotation.x = 0.52; carChassisMeshGroup.add(rearGlass);
 
-        const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.12, 0.15), headlightGlowMat); hlL.position.set(-0.65, 0.72, -2.18); carGroup.add(hlL);
-        const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.12, 0.15), headlightGlowMat); hlR.position.set(0.65, 0.72, -2.18); carGroup.add(hlR);
+        const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.12, 0.15), headlightGlowMat); hlL.position.set(-0.65, 0.72, -2.18); carChassisMeshGroup.add(hlL);
+        const hlR = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.12, 0.15), headlightGlowMat); hlR.position.set(0.65, 0.72, -2.18); carChassisMeshGroup.add(hlR);
 
         const beamL = new THREE.SpotLight(0xffffff, 2.5, 35, Math.PI / 7, 0.4);
-        beamL.position.set(-0.65, 0.75, -2.2); beamL.target.position.set(-0.65, 0, -20); carGroup.add(beamL); carGroup.add(beamL.target);
+        beamL.position.set(-0.65, 0.75, -2.2); beamL.target.position.set(-0.65, 0, -20); carChassisMeshGroup.add(beamL); carChassisMeshGroup.add(beamL.target);
         const beamR = new THREE.SpotLight(0xffffff, 2.5, 35, Math.PI / 7, 0.4);
-        beamR.position.set(0.65, 0.75, -2.2); beamR.target.position.set(0.65, 0, -20); carGroup.add(beamR); carGroup.add(beamR.target);
+        beamR.position.set(0.65, 0.75, -2.2); beamR.target.position.set(0.65, 0, -20); carChassisMeshGroup.add(beamR); carChassisMeshGroup.add(beamR.target);
 
-        taillightMesh.position.set(0, 0.8, 2.18); carGroup.add(taillightMesh);
+        taillightMesh.position.set(0, 0.8, 2.18); carChassisMeshGroup.add(taillightMesh);
 
         frontLeftPivot = new THREE.Group(); frontLeftPivot.position.set(-1.12, 0.45, -1.35);
         const wFL = makeWheel(); frontLeftPivot.add(wFL); carGroup.add(frontLeftPivot);
@@ -3549,9 +4512,14 @@ if __name__ == "__main__":
       const radar = document.getElementById('radar-container');
       waypoints.forEach(wp => {
         const blip = document.createElement('div');
-        blip.className = "w-2.5 h-2.5 rounded-full absolute -translate-x-1/2 -translate-y-1/2 shadow-sm border border-white/60";
+        blip.className = "w-2.5 h-2.5 rounded-full absolute -translate-x-1/2 -translate-y-1/2 shadow-sm border border-white/60 cursor-pointer hover:scale-150 transition-transform";
         blip.id = "blip-" + wp.docId;
+        blip.title = "Click to Navigate: " + wp.label;
         blip.style.backgroundColor = '#' + wp.color.toString(16).padStart(6, '0');
+        blip.onclick = (e) => {
+          e.stopPropagation();
+          setGPSTarget(wp.docId);
+        };
         radar.appendChild(blip);
       });
     }
@@ -3896,8 +4864,57 @@ if __name__ == "__main__":
       carGroup.position.set(carState.x, currentVehicleModel === 'drone' ? 0.75 + Math.sin(Date.now() * 0.005) * 0.12 : 0, carState.z);
       carGroup.rotation.y = carState.angle;
 
+      // --- SUSPENSION WEIGHT TRANSFER (PITCH SQUAT/DIVE & CORNERING BODY ROLL) ---
+      const speedDelta = carState.speed - prevCarSpeed;
+      prevCarSpeed = carState.speed;
+      const targetPitch = -speedDelta * 7.5;
+      const targetRoll = carState.steeringAngle * carState.speed * 0.38;
+      carChassisPitch += (targetPitch - carChassisPitch) * 0.14;
+      carChassisRoll += (targetRoll - carChassisRoll) * 0.14;
+      if (carChassisMeshGroup) {
+        carChassisMeshGroup.rotation.x = Math.max(-0.16, Math.min(0.16, carChassisPitch));
+        carChassisMeshGroup.rotation.z = Math.max(-0.14, Math.min(0.14, carChassisRoll));
+      }
+
+      // --- PERSISTENT TIRE SKID MARKS & DRIFT SMOKE PUFFS ---
+      const isDrifting = Math.abs(carState.speed) > 0.42 && Math.abs(carState.steeringAngle) > 0.14;
+      const isHardBraking = isBackward && carState.speed > 0.28;
+      if ((isDrifting || isHardBraking) && currentVehicleModel !== 'drone') {
+        const backX = carState.x + Math.sin(carState.angle) * 1.35;
+        const backZ = carState.z + Math.cos(carState.angle) * 1.35;
+        const perpX = Math.cos(carState.angle);
+        const perpZ = -Math.sin(carState.angle);
+        addTireSkidMark(backX - perpX * 1.05, backZ - perpZ * 1.05, carState.angle);
+        addTireSkidMark(backX + perpX * 1.05, backZ + perpZ * 1.05, carState.angle);
+        if (Math.random() < 0.45) {
+          spawnDriftSmoke(backX - perpX * 1.05, backZ - perpZ * 1.05);
+          spawnDriftSmoke(backX + perpX * 1.05, backZ + perpZ * 1.05);
+        }
+      }
+      updateSmokeParticles();
+
+      // --- NITRO BOOST EXHAUST FLAMES ---
+      if (carState.speed > 1.15 && nitroFlames.length > 0) {
+        nitroFlames.forEach(f => {
+          f.visible = true;
+          f.scale.set(0.9 + Math.random() * 0.35, 0.9 + Math.random() * 0.35, 1.2 + Math.random() * 0.8);
+        });
+      } else if (nitroFlames.length > 0) {
+        nitroFlames.forEach(f => { f.visible = false; });
+      }
+
       // Update Autonomous Patrolling NPC Agents
       updateNPCs();
+
+      // Update Living World Civilian Roadway Traffic & Elevated Sky-Taxis
+      updateCivilianTraffic();
+      updateSkyTaxis();
+
+      // Update World Weather Particles (Rain streaks, Mars dust, Snowflakes, Mist)
+      updateWeatherParticles();
+
+      // Update Holographic GPS Route Ribbon
+      updateGPSRibbon();
 
       // Dynamic Drift Skid Audio
       if (Math.abs(carState.speed) > 0.52 && (isLeft || isRight)) {
@@ -3948,16 +4965,65 @@ if __name__ == "__main__":
       // Update crash spark physics
       updateCrashSparks();
 
-      // Speedometer update
+      // Speedometer & FPV Cockpit Dashboard update
       const kmh = Math.round(Math.abs(carState.speed) * 85);
       document.getElementById('hud-speed').innerText = `${kmh} km/h`;
       document.getElementById('mini-speed').innerText = `${kmh} km/h`;
 
-      // Animate 28 Landmarks & Proximity Check
+      // Update In-Cockpit FPV Dashboard if in Hood Mode
+      const fpvEl = document.getElementById('fpv-dashboard');
+      if (cameraMode === 'hood') {
+        if (fpvEl) {
+          fpvEl.classList.remove('hidden');
+          fpvEl.classList.add('flex');
+          let gear = 'D1';
+          if (carState.speed < -0.02) gear = 'R';
+          else if (Math.abs(carState.speed) < 0.02) gear = 'P';
+          else if (kmh < 26) gear = 'D1';
+          else if (kmh < 52) gear = 'D2';
+          else if (kmh < 78) gear = 'D3';
+          else gear = 'D4';
+
+          const rpm = Math.abs(carState.speed) < 0.02 ? 0.9 : Math.min(7.8, 1.2 + (kmh % 26) / 26 * 5.2 + (kmh / 120) * 1.4);
+          const rpmPct = Math.min(100, Math.round((rpm / 8.0) * 100));
+
+          const gearEl = document.getElementById('fpv-gear');
+          const rpmValEl = document.getElementById('fpv-rpm-val');
+          const rpmBarEl = document.getElementById('fpv-rpm-bar');
+          const fpvSpeedEl = document.getElementById('fpv-speed');
+
+          if (gearEl) gearEl.innerText = gear;
+          if (rpmValEl) rpmValEl.innerText = rpm.toFixed(1);
+          if (rpmBarEl) rpmBarEl.style.width = rpmPct + '%';
+          if (fpvSpeedEl) fpvSpeedEl.innerHTML = `${kmh} <span class="text-xs font-normal text-slate-400">km/h</span>`;
+        }
+      } else {
+        if (fpvEl && !fpvEl.classList.contains('hidden')) {
+          fpvEl.classList.add('hidden');
+          fpvEl.classList.remove('flex');
+        }
+      }
+
+      // Animate 28 Landmarks, Custom 3D Monuments & Proximity Check
       let foundNearby = null;
       waypointMeshes.forEach(mesh => {
         mesh.userData.coreMesh.rotation.y += 0.02;
         mesh.userData.coreMesh.rotation.x += 0.01;
+
+        if (mesh.userData.customRotators) {
+          mesh.userData.customRotators.forEach(cr => {
+            if (cr.type === 'rings') {
+              cr.rings[0].rotation.z += 0.02;
+              cr.rings[1].rotation.z -= 0.015;
+              cr.rings[2].rotation.z += 0.01;
+            } else if (cr.type === 'gyro') {
+              cr.rings[0].rotation.y += 0.025;
+              cr.rings[1].rotation.x += 0.02;
+            } else if (cr.type === 'matrix') {
+              cr.mesh.rotation.y = Math.sin(Date.now() * 0.001) * 0.15;
+            }
+          });
+        }
 
         const dist = Math.hypot(carState.x - mesh.position.x, carState.z - mesh.position.z);
         if (dist < 7.5) foundNearby = mesh.userData.wpData;
