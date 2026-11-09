@@ -203,6 +203,7 @@ Week 9-12: Innovation
 - **[Temporal](https://temporal.io/)** - Durable execution engine for long-running, retryable agent workflows.
 - **[AgentOps](https://github.com/AgentOps-AI/agentops)** - Production monitoring and observability for AI agents.
 - **[Rivet](https://github.com/Ironclad/rivet)** - Visual programming environment for AI agents and chains.
+- **[/call-me](https://callmemcp.com)** - Phone app and remote MCP server that lets an agent ring a human, read a question aloud and get the spoken answer back as text, for human-in-the-loop approvals away from the keyboard.
 
 ### 🏢 **Enterprise Platforms**
 
