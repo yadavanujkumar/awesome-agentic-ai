@@ -1095,42 +1095,42 @@
           </div>
 
           <div class="grid grid-cols-9 gap-1.5 items-center">
-            <div class="font-bold text-rose-500 text-[11px] truncate flex items-center gap-1">
+            <button onclick="previewInstrument('kick')" title="Audition Kick Drum (Punchy 808 Sub + Transient)" class="font-bold text-rose-500 text-[11px] truncate flex items-center gap-1 hover:scale-105 active:scale-95 transition text-left cursor-pointer p-1 rounded hover:bg-rose-500/10" type="button">
               <span>🥁</span> <span>KICK</span>
-            </div>
+            </button>
             <div id="grid-row-kick" class="contents"></div>
           </div>
 
           <div class="grid grid-cols-9 gap-1.5 items-center">
-            <div class="font-bold text-amber-500 text-[11px] truncate flex items-center gap-1">
+            <button onclick="previewInstrument('snare')" title="Audition Snare Drum (Resonant Head + Noise Snap)" class="font-bold text-amber-500 text-[11px] truncate flex items-center gap-1 hover:scale-105 active:scale-95 transition text-left cursor-pointer p-1 rounded hover:bg-amber-500/10" type="button">
               <span>💥</span> <span>SNARE</span>
-            </div>
+            </button>
             <div id="grid-row-snare" class="contents"></div>
           </div>
 
           <div class="grid grid-cols-9 gap-1.5 items-center">
-            <div class="font-bold text-cyan-400 text-[11px] truncate flex items-center gap-1">
+            <button onclick="previewInstrument('hihat')" title="Audition Hi-Hat (Metallic Sizzle Cymbal)" class="font-bold text-cyan-400 text-[11px] truncate flex items-center gap-1 hover:scale-105 active:scale-95 transition text-left cursor-pointer p-1 rounded hover:bg-cyan-500/10" type="button">
               <span>⚡</span> <span>HI-HAT</span>
-            </div>
+            </button>
             <div id="grid-row-hihat" class="contents"></div>
           </div>
 
           <div class="grid grid-cols-9 gap-1.5 items-center">
-            <div class="font-bold text-purple-400 text-[11px] truncate flex items-center gap-1">
+            <button onclick="previewInstrument('bass')" title="Audition Synth Bass (Moog Resonant Filter Sweep)" class="font-bold text-purple-400 text-[11px] truncate flex items-center gap-1 hover:scale-105 active:scale-95 transition text-left cursor-pointer p-1 rounded hover:bg-purple-500/10" type="button">
               <span>🎸</span> <span>BASS</span>
-            </div>
+            </button>
             <div id="grid-row-bass" class="contents"></div>
           </div>
 
           <div class="grid grid-cols-9 gap-1.5 items-center">
-            <div class="font-bold text-emerald-400 text-[11px] truncate flex items-center gap-1">
+            <button onclick="previewInstrument('arp')" title="Audition Synth Lead (Juno Chorus Shimmer)" class="font-bold text-emerald-400 text-[11px] truncate flex items-center gap-1 hover:scale-105 active:scale-95 transition text-left cursor-pointer p-1 rounded hover:bg-emerald-500/10" type="button">
               <span>🎹</span> <span>SYNTH</span>
-            </div>
+            </button>
             <div id="grid-row-arp" class="contents"></div>
           </div>
         </div>
 
-        <p class="text-[10px] text-slate-500 text-center">💡 Tip: Beats loop seamlessly while you drive. Kick beats pulse your car's neon underglow and tachometer!</p>
+        <p class="text-[10px] text-slate-500 text-center">💡 Tip: Click instrument labels (🥁 💥 ⚡ 🎸 🎹) or step numbers to test distinct sounds! Kick beats pulse car neon underglow.</p>
       </div>
     </div>
   </div>
@@ -2054,8 +2054,22 @@
     function damageBoss(amount, weaponName) {
       bossState.hp = Math.max(0, bossState.hp - amount);
       cameraShake = 0.85;
-      playTone(880, 'square', 0.15);
-      setTimeout(() => playTone(440, 'triangle', 0.25), 90);
+      if (soundEnabled && audioCtx) {
+        try {
+          const t = audioCtx.currentTime;
+          // Resonant Plasma Blast zap
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(980, t);
+          osc.frequency.exponentialRampToValueAtTime(110, t + 0.18);
+          gain.gain.setValueAtTime(0.35, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(t); osc.stop(t + 0.2);
+        } catch (_) {}
+      }
       createCrashSparks(carState.x, carState.z);
 
       const hpBar = document.getElementById('boss-hud-hp-bar');
@@ -2098,11 +2112,15 @@
       codeIntegrity = 100;
       localStorage.setItem('agentic_boss_defeated', 'true');
 
-      // Celebration Fanfare
-      playTone(523, 'triangle', 0.2);
-      setTimeout(() => playTone(659, 'triangle', 0.2), 150);
-      setTimeout(() => playTone(784, 'triangle', 0.2), 300);
-      setTimeout(() => playTone(1046, 'square', 0.5), 450);
+      // Grand Synth Victory Fanfare
+      playTone(523.25, 'triangle', 0.18, 0.15);
+      setTimeout(() => playTone(659.25, 'triangle', 0.18, 0.16), 140);
+      setTimeout(() => playTone(783.99, 'triangle', 0.22, 0.18), 280);
+      setTimeout(() => playTone(1046.5, 'square', 0.35, 0.2), 420);
+      setTimeout(() => {
+        // Triumphant chord
+        [523.25, 659.25, 783.99, 1046.5].forEach(f => playTone(f, 'sawtooth', 0.6, 0.08));
+      }, 620);
 
       showSpeedcamAlert("🏆 THE HALLUCINATION TITAN DEFEATED! +500 XP & LEGENDARY PAINTS UNLOCKED!");
       if (typeof addWorldFeedMessage === 'function') {
@@ -2559,8 +2577,11 @@ print(result.data.decision)`
       if (title) title.innerText = p.title;
       if (badge) badge.classList.remove('opacity-0', 'pointer-events-none');
 
-      playTone(587, 'sine', 0.1);
-      setTimeout(() => playTone(880, 'triangle', 0.25), 100);
+      // Shimmering Arpeggio Chime
+      playTone(523.25, 'sine', 0.08, 0.12);
+      setTimeout(() => playTone(659.25, 'triangle', 0.08, 0.12), 70);
+      setTimeout(() => playTone(783.99, 'sine', 0.12, 0.14), 140);
+      setTimeout(() => playTone(1046.5, 'square', 0.25, 0.16), 210);
       showSpeedcamAlert(`${p.icon} POWER-UP: ${p.msg}`);
     }
 
@@ -2568,7 +2589,41 @@ print(result.data.decision)`
       initAudio();
       if (Math.abs(carState.speed) > 0.05) {
         carState.speed = Math.sign(carState.speed || 1) * 1.85;
-        playTone(980, 'sawtooth', 0.25);
+        if (soundEnabled && audioCtx) {
+          try {
+            const t = audioCtx.currentTime;
+            // Rocket Turbine Roar
+            const osc = audioCtx.createOscillator();
+            const oscGain = audioCtx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(90, t);
+            osc.frequency.exponentialRampToValueAtTime(420, t + 0.35);
+            oscGain.gain.setValueAtTime(0.32, t);
+            oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.38);
+            osc.connect(oscGain);
+            oscGain.connect(audioCtx.destination);
+            osc.start(t); osc.stop(t + 0.38);
+
+            const noise = getAudioNoiseBuffer();
+            if (noise) {
+              const src = audioCtx.createBufferSource();
+              src.buffer = noise;
+              const filter = audioCtx.createBiquadFilter();
+              filter.type = 'bandpass';
+              filter.frequency.setValueAtTime(1400, t);
+              filter.frequency.exponentialRampToValueAtTime(3600, t + 0.35);
+              filter.Q.setValueAtTime(2.2, t);
+
+              const gain = audioCtx.createGain();
+              gain.gain.setValueAtTime(0.36, t);
+              gain.gain.exponentialRampToValueAtTime(0.001, t + 0.38);
+              src.connect(filter);
+              filter.connect(gain);
+              gain.connect(audioCtx.destination);
+              src.start(t); src.stop(t + 0.38);
+            }
+          } catch (_) {}
+        }
         showSpeedcamAlert("⚡ NITRO BOOST ENGAGED!");
       }
     }
@@ -3334,25 +3389,60 @@ print(result.data.decision)`
       }
     };
 
-    function initAudio() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    let audioNoiseBuffer = null;
+
+    function getAudioNoiseBuffer() {
+      if (!audioCtx) return null;
+      if (!audioNoiseBuffer) {
+        try {
+          const bufferSize = audioCtx.sampleRate * 2; // 2 seconds of high-precision white noise
+          const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            data[i] = Math.random() * 2 - 1;
+          }
+          audioNoiseBuffer = buffer;
+        } catch (_) {}
+      }
+      return audioNoiseBuffer;
     }
 
-    function playTone(freq, type = 'sine', duration = 0.1) {
+    function initAudio() {
+      if (!audioCtx) {
+        try {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          getAudioNoiseBuffer();
+        } catch (_) {}
+      }
+    }
+
+    function playTone(freq, type = 'sine', duration = 0.1, vol = 0.08) {
       if (!soundEnabled) return;
       try {
         initAudio();
+        if (!audioCtx) return;
         if (audioCtx.state === 'suspended') audioCtx.resume();
+        const t = audioCtx.currentTime;
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
+        const filter = audioCtx.createBiquadFilter();
+
         osc.type = type;
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
-        osc.connect(gain);
+        osc.frequency.setValueAtTime(freq, t);
+
+        // Anti-click lowpass filtering for smoother musical tone
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(Math.min(4200, freq * 4), t);
+
+        gain.gain.setValueAtTime(0.0001, t);
+        gain.gain.linearRampToValueAtTime(vol, t + 0.006);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + duration);
+
+        osc.connect(filter);
+        filter.connect(gain);
         gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
+        osc.start(t);
+        osc.stop(t + duration);
       } catch (e) {}
     }
 
@@ -3429,9 +3519,37 @@ print(result.data.decision)`
 
     let lastSkidTime = 0;
     function playDriftSkid() {
-      if (!soundEnabled || Date.now() - lastSkidTime < 240) return;
+      if (!soundEnabled || Date.now() - lastSkidTime < 200) return;
       lastSkidTime = Date.now();
-      playTone(120, 'sawtooth', 0.14);
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      try {
+        const t = audioCtx.currentTime;
+        const noise = getAudioNoiseBuffer();
+        if (noise) {
+          // Friction rubber screech bandpass noise
+          const src = audioCtx.createBufferSource();
+          src.buffer = noise;
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.setValueAtTime(1600, t);
+          filter.frequency.linearRampToValueAtTime(2600, t + 0.16);
+          filter.Q.setValueAtTime(6.0, t);
+
+          const gain = audioCtx.createGain();
+          gain.gain.setValueAtTime(0.2, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+
+          src.connect(filter);
+          filter.connect(gain);
+          gain.connect(audioCtx.destination);
+          src.start(t);
+          src.stop(t + 0.18);
+        } else {
+          playTone(280, 'sawtooth', 0.14, 0.06);
+        }
+      } catch (_) {}
     }
 
     // --- PROCEDURAL 3D ENVIRONMENTAL AUDIO SOUNDSCAPES ---
@@ -4292,9 +4410,45 @@ if __name__ == "__main__":
     }
 
     function playCrashSound() {
+      if (!soundEnabled) return;
+      initAudio();
       if (!audioCtx) return;
-      playTone(110, 'sawtooth', 0.18);
-      setTimeout(() => playTone(75, 'square', 0.14), 45);
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      try {
+        const t = audioCtx.currentTime;
+        // 1. Heavy Metal Crunch impact oscillator
+        const osc = audioCtx.createOscillator();
+        const oscGain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(105, t);
+        osc.frequency.exponentialRampToValueAtTime(28, t + 0.22);
+        oscGain.gain.setValueAtTime(0.35, t);
+        oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.24);
+        osc.connect(oscGain);
+        oscGain.connect(audioCtx.destination);
+        osc.start(t); osc.stop(t + 0.24);
+
+        // 2. Visceral Noise Burst & Debris Shatter
+        const noise = getAudioNoiseBuffer();
+        if (noise) {
+          const src = audioCtx.createBufferSource();
+          src.buffer = noise;
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'bandpass';
+          filter.frequency.setValueAtTime(2600, t);
+          filter.frequency.exponentialRampToValueAtTime(280, t + 0.24);
+          filter.Q.setValueAtTime(1.4, t);
+
+          const gain = audioCtx.createGain();
+          gain.gain.setValueAtTime(0.38, t);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.26);
+
+          src.connect(filter);
+          filter.connect(gain);
+          gain.connect(audioCtx.destination);
+          src.start(t); src.stop(t + 0.26);
+        }
+      } catch (_) {}
     }
 
     // =========================================================================
@@ -4883,8 +5037,10 @@ if __name__ == "__main__":
         if (typeof updatePlayerHUD === 'function') updatePlayerHUD();
       }
 
-      playTone(1200, 'square', 0.04);
-      setTimeout(() => playTone(450, 'triangle', 0.14), 60);
+      // Shutter click + capacitor flash whine
+      playTone(1600, 'square', 0.02, 0.2);
+      setTimeout(() => playTone(1200, 'square', 0.03, 0.18), 35);
+      setTimeout(() => playTone(680, 'triangle', 0.15, 0.12), 80);
 
       if (typeof triggerPoliceScanner === 'function' && (currentRadioIdx === 3 || currentRadioIdx === 2 || Math.random() < 0.35)) {
         triggerPoliceScanner(speedKmh);
@@ -5215,12 +5371,14 @@ if __name__ == "__main__":
       const btn = document.getElementById(`btn-step-${track}-${step}`);
       if (btn) {
         if (beatGrid[track][step]) {
-          btn.className = 'h-9 rounded-lg border text-[10px] font-bold font-mono transition-all bg-pink-600 text-white border-pink-400 shadow-md shadow-pink-500/20';
+          btn.className = 'h-9 rounded-lg border text-[10px] font-bold font-mono transition-all bg-pink-600 text-white border-pink-400 shadow-md shadow-pink-500/20 scale-105';
+          setTimeout(() => { if (btn) btn.classList.remove('scale-105'); }, 120);
         } else {
           btn.className = 'h-9 rounded-lg border text-[10px] font-bold font-mono transition-all bg-slate-100 dark:bg-slate-900 border-slate-300 dark:border-slate-800 text-slate-400';
         }
       }
-      playTone(400 + step * 40, 'sine', 0.05);
+      // Audition the instrument with rich sound design
+      previewInstrument(track, step);
     }
 
     function openBeatStudio() {
@@ -5301,85 +5459,224 @@ if __name__ == "__main__":
       }
     }
 
+    // =========================================================================
+    // MASTER-GRADE PROCEDURAL WEB AUDIO SYNTHESIZERS (Zero External Assets)
+    // =========================================================================
+
+    // 1. KICK: 808 Mega-Sub Punch with Punchy Attack Transient Click
     function playSequencerKick() {
+      if (!soundEnabled) return;
+      initAudio();
       if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
       try {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.frequency.setValueAtTime(140, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(32, audioCtx.currentTime + 0.12);
-        gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.15);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start(); osc.stop(audioCtx.currentTime + 0.15);
+        const t = audioCtx.currentTime;
+
+        // Transient Click (Audible beater attack punch on laptop/mobile speakers)
+        const clickOsc = audioCtx.createOscillator();
+        const clickGain = audioCtx.createGain();
+        clickOsc.type = 'triangle';
+        clickOsc.frequency.setValueAtTime(360, t);
+        clickOsc.frequency.exponentialRampToValueAtTime(45, t + 0.02);
+        clickGain.gain.setValueAtTime(0.4, t);
+        clickGain.gain.exponentialRampToValueAtTime(0.001, t + 0.02);
+        clickOsc.connect(clickGain);
+        clickGain.connect(audioCtx.destination);
+        clickOsc.start(t); clickOsc.stop(t + 0.02);
+
+        // Deep 808 Sub-Bass Body (Sweeps from 170Hz down to deep 36Hz chest rumble)
+        const subOsc = audioCtx.createOscillator();
+        const subGain = audioCtx.createGain();
+        subOsc.type = 'sine';
+        subOsc.frequency.setValueAtTime(170, t);
+        subOsc.frequency.exponentialRampToValueAtTime(54, t + 0.05);
+        subOsc.frequency.exponentialRampToValueAtTime(36, t + 0.28);
+
+        subGain.gain.setValueAtTime(0.55, t);
+        subGain.gain.setValueAtTime(0.48, t + 0.05);
+        subGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.32);
+
+        subOsc.connect(subGain);
+        subGain.connect(audioCtx.destination);
+        subOsc.start(t); subOsc.stop(t + 0.32);
       } catch (_) {}
     }
 
+    // 2. SNARE: Cyber Synth Snare (Dual-Source: 220Hz Resonant Body + Snappy Noise Wire Burst)
     function playSequencerSnare() {
+      if (!soundEnabled) return;
+      initAudio();
       if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
       try {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(180, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.14);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start(); osc.stop(audioCtx.currentTime + 0.14);
+        const t = audioCtx.currentTime;
+
+        // Component A: Resonant Drumhead Tone (Triangle wave 220Hz -> 95Hz)
+        const bodyOsc = audioCtx.createOscillator();
+        const bodyGain = audioCtx.createGain();
+        bodyOsc.type = 'triangle';
+        bodyOsc.frequency.setValueAtTime(220, t);
+        bodyOsc.frequency.exponentialRampToValueAtTime(95, t + 0.08);
+        bodyGain.gain.setValueAtTime(0.35, t);
+        bodyGain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+        bodyOsc.connect(bodyGain);
+        bodyGain.connect(audioCtx.destination);
+        bodyOsc.start(t); bodyOsc.stop(t + 0.1);
+
+        // Component B: Crisp Snare Wires (Bandpass White Noise Snap)
+        const noise = getAudioNoiseBuffer();
+        if (noise) {
+          const noiseSource = audioCtx.createBufferSource();
+          noiseSource.buffer = noise;
+          const noiseFilter = audioCtx.createBiquadFilter();
+          noiseFilter.type = 'bandpass';
+          noiseFilter.frequency.setValueAtTime(2400, t);
+          noiseFilter.Q.setValueAtTime(1.8, t);
+
+          const noiseGain = audioCtx.createGain();
+          noiseGain.gain.setValueAtTime(0.45, t);
+          noiseGain.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+
+          noiseSource.connect(noiseFilter);
+          noiseFilter.connect(noiseGain);
+          noiseGain.connect(audioCtx.destination);
+          noiseSource.start(t);
+          noiseSource.stop(t + 0.22);
+        }
       } catch (_) {}
     }
 
-    function playSequencerHiHat() {
+    // 3. HI-HAT: Metallic Sizzle (7.8kHz High-Pass Noise + Resonant Sheen)
+    function playSequencerHiHat(open = false) {
+      if (!soundEnabled) return;
+      initAudio();
       if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
       try {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(8500, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.04);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start(); osc.stop(audioCtx.currentTime + 0.04);
+        const t = audioCtx.currentTime;
+        const dur = open ? 0.22 : 0.048;
+
+        const noise = getAudioNoiseBuffer();
+        if (noise) {
+          const noiseSource = audioCtx.createBufferSource();
+          noiseSource.buffer = noise;
+
+          // Steep highpass filter cuts out all low mud
+          const hpFilter = audioCtx.createBiquadFilter();
+          hpFilter.type = 'highpass';
+          hpFilter.frequency.setValueAtTime(7800, t);
+
+          // Resonant bandpass for realistic metallic cymbal shimmer
+          const peakFilter = audioCtx.createBiquadFilter();
+          peakFilter.type = 'bandpass';
+          peakFilter.frequency.setValueAtTime(10200, t);
+          peakFilter.Q.setValueAtTime(3.8, t);
+
+          const gain = audioCtx.createGain();
+          gain.gain.setValueAtTime(0.26, t);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+
+          noiseSource.connect(hpFilter);
+          hpFilter.connect(peakFilter);
+          peakFilter.connect(gain);
+          gain.connect(audioCtx.destination);
+          noiseSource.start(t);
+          noiseSource.stop(t + dur);
+        }
       } catch (_) {}
     }
 
-    function playSequencerBass(step) {
+    // 4. SYNTH BASS: Analog Moog / TB-303 Acid Pluck (Dual Detuned Saw + Dynamic Filter Sweep)
+    function playSequencerBass(step = 0) {
+      if (!soundEnabled) return;
+      initAudio();
       if (!audioCtx) return;
-      const notes = [110, 110, 130.8, 146.8, 110, 98, 110, 164.8];
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const bassNotes = [55.0, 55.0, 65.41, 73.42, 55.0, 48.99, 61.74, 82.41]; // A1, A1, C2, D2, A1, G1, B1, E2
+      const freq = bassNotes[step % bassNotes.length];
       try {
-        const osc = audioCtx.createOscillator();
+        const t = audioCtx.currentTime;
+        const dur = 0.24;
+
+        // Dual Oscillators (Sawtooth lead + Sub Square for rich analog bite)
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        osc1.type = 'sawtooth';
+        osc2.type = 'square';
+        osc1.frequency.setValueAtTime(freq, t);
+        osc2.frequency.setValueAtTime(freq / 2, t); // Sub-octave chest punch
+
+        // Dynamic Resonant Lowpass Filter (The juicy analog "BOWWW" pluck!)
         const filter = audioCtx.createBiquadFilter();
-        const gain = audioCtx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(notes[step % notes.length], audioCtx.currentTime);
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(360, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.09, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
-        osc.connect(filter);
+        filter.Q.setValueAtTime(6.5, t);
+        filter.frequency.setValueAtTime(1500, t);
+        filter.frequency.exponentialRampToValueAtTime(130, t + dur);
+
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0.3, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+
+        osc1.connect(filter);
+        osc2.connect(filter);
         filter.connect(gain);
         gain.connect(audioCtx.destination);
-        osc.start(); osc.stop(audioCtx.currentTime + 0.2);
+
+        osc1.start(t); osc1.stop(t + dur);
+        osc2.start(t); osc2.stop(t + dur);
       } catch (_) {}
     }
 
-    function playSequencerArp(step) {
+    // 5. SYNTH LEAD / ARP: Shimmering Juno Polyphonic Dual-Detuned Saw/Square
+    function playSequencerArp(step = 0) {
+      if (!soundEnabled) return;
+      initAudio();
       if (!audioCtx) return;
-      const notes = [440, 523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25];
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const arpNotes = [440.0, 523.25, 659.25, 783.99, 880.0, 783.99, 659.25, 523.25]; // A4, C5, E5, G5, A5, G5, E5, C5
+      const freq = arpNotes[step % arpNotes.length];
       try {
-        const osc = audioCtx.createOscillator();
+        const t = audioCtx.currentTime;
+        const dur = 0.16;
+
+        // Dual detuned oscillators for lush 80s chorus shimmer
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        osc1.type = 'sawtooth';
+        osc2.type = 'square';
+        osc1.frequency.setValueAtTime(freq, t);
+        osc2.frequency.setValueAtTime(freq * 1.008, t); // +14 cents detune chorus
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(2600, t);
+        filter.Q.setValueAtTime(1.6, t);
+
         const gain = audioCtx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(notes[step % notes.length], audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.12);
-        osc.connect(gain);
+        gain.gain.setValueAtTime(0.14, t);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+
+        osc1.connect(filter);
+        osc2.connect(filter);
+        filter.connect(gain);
         gain.connect(audioCtx.destination);
-        osc.start(); osc.stop(audioCtx.currentTime + 0.12);
+
+        osc1.start(t); osc1.stop(t + dur);
+        osc2.start(t); osc2.stop(t + dur);
       } catch (_) {}
+    }
+
+    // 1-Click Instrument Audition & Interactive Testing
+    function previewInstrument(track, step = 0) {
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      if (track === 'kick') playSequencerKick();
+      else if (track === 'snare') playSequencerSnare();
+      else if (track === 'hihat') playSequencerHiHat();
+      else if (track === 'bass') playSequencerBass(step);
+      else if (track === 'arp') playSequencerArp(step);
     }
 
     function stepBeatSequencer() {
