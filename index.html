@@ -265,6 +265,53 @@
         </div>
       </div>
 
+      <!-- Active Courier Bounty Mission Banner -->
+      <div id="hud-mission-banner" class="hidden p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/40 space-y-1.5 font-mono text-[10px] shadow-sm">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5 truncate font-bold text-amber-500 dark:text-amber-400">
+            <span class="animate-bounce">📦</span>
+            <span id="hud-mission-title" class="truncate">BOUNTY: Protocol Sync</span>
+          </div>
+          <button onclick="cancelMission()" class="text-slate-400 hover:text-rose-500 text-sm font-bold leading-none p-0.5">&times;</button>
+        </div>
+        <div class="flex items-center justify-between text-slate-600 dark:text-slate-300 text-[9px]">
+          <span class="truncate">Dest: <strong id="hud-mission-dest" class="text-slate-900 dark:text-white">LangGraph</strong></span>
+          <span id="hud-mission-timer" class="font-bold text-amber-400 shrink-0 ml-1">50.0s</span>
+        </div>
+        <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+          <div id="hud-mission-bar" class="h-full bg-gradient-to-r from-amber-500 to-yellow-400 w-full transition-all duration-100"></div>
+        </div>
+      </div>
+
+      <!-- Outer Ring Lap Timer & Ghost Racing Banner -->
+      <div id="hud-lap-banner" class="p-2 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-between font-mono text-[10px] shadow-sm">
+        <div>
+          <div class="text-[9px] text-slate-400">LAP TIME</div>
+          <div id="hud-lap-time" class="font-bold text-slate-900 dark:text-white text-xs">00:00.0</div>
+        </div>
+        <div class="text-center">
+          <div class="text-[9px] text-slate-400">BEST</div>
+          <div id="hud-lap-best" class="font-bold text-cyan-500 dark:text-cyan-400">--:--.-</div>
+        </div>
+        <div class="text-right">
+          <div class="text-[9px] text-slate-400">GHOST</div>
+          <div id="hud-lap-delta" class="font-bold text-emerald-500 dark:text-emerald-400">Δ --.-</div>
+        </div>
+      </div>
+
+      <!-- Quick Actions: Bounty Missions, Ghost Car, Beat Studio -->
+      <div class="pt-1.5 border-t border-slate-200 dark:border-white/10 grid grid-cols-3 gap-1 font-mono text-[9px]">
+        <button onclick="startRandomMission()" id="btn-hud-mission" class="p-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-700 dark:text-amber-300 font-semibold border border-amber-500/40 text-center transition active:scale-95">📦 Bounty</button>
+        <button onclick="toggleGhostVisibility()" id="btn-hud-ghost" class="p-1 rounded bg-purple-500/20 hover:bg-purple-500/30 text-purple-700 dark:text-purple-300 font-semibold border border-purple-500/40 text-center transition active:scale-95">👻 Ghost</button>
+        <button onclick="openBeatStudio()" class="p-1 rounded bg-pink-500/20 hover:bg-pink-500/30 text-pink-700 dark:text-pink-300 font-semibold border border-pink-500/40 text-center transition active:scale-95">🎵 Beats</button>
+      </div>
+
+      <!-- Code Integrity & Bug Hunt Gauge -->
+      <div class="pt-1 border-t border-slate-200 dark:border-white/10 flex items-center justify-between font-mono text-[10px]">
+        <span class="text-slate-500">🐛 Bugs: <strong id="hud-bugs-count" class="text-emerald-600 dark:text-emerald-400 font-bold">0</strong></span>
+        <span class="text-slate-500">Integrity: <strong id="hud-integrity-val" class="text-cyan-600 dark:text-cyan-400 font-bold">100%</strong></span>
+      </div>
+
       <!-- Active GPS Turn-by-Turn Route Banner -->
       <div id="hud-gps-banner" class="hidden p-2 rounded-xl bg-cyan-50/90 dark:bg-cyan-950/50 border border-cyan-300 dark:border-cyan-800 flex items-center justify-between font-mono text-[10px] shadow-sm">
         <div class="flex items-center gap-1.5 truncate min-w-0">
@@ -351,6 +398,14 @@
           <button id="btn-touch-radio" onclick="toggleRadio()" class="px-2.5 py-1 rounded-full bg-cyan-950/80 text-cyan-200 border border-cyan-500/30 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
             📻 <span id="mobile-radio-label">RADIO</span>
           </button>
+          <!-- Quick Bounty Mission -->
+          <button onclick="startRandomMission()" class="px-2.5 py-1 rounded-full bg-amber-950/80 text-amber-200 border border-amber-500/40 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
+            📦
+          </button>
+          <!-- Quick Beat Studio -->
+          <button onclick="openBeatStudio()" class="px-2.5 py-1 rounded-full bg-pink-950/80 text-pink-200 border border-pink-500/40 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
+            🎵
+          </button>
           <!-- Quick Garage -->
           <button onclick="openGarageModal()" class="px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-200 border border-purple-500/30 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
             🏎️
@@ -390,6 +445,13 @@
         <div class="text-[9px] text-slate-400">SPEED</div>
         <div id="fpv-speed" class="text-xl sm:text-2xl font-black text-white">0 <span class="text-xs font-normal text-slate-400">km/h</span></div>
       </div>
+    </div>
+
+    <!-- SPEED CAMERA TRAP FLASH & BANNER -->
+    <div id="speedcam-flash" class="absolute inset-0 bg-white pointer-events-none opacity-0 transition-opacity duration-150 z-50"></div>
+    <div id="speedcam-badge" class="absolute top-16 left-1/2 -translate-x-1/2 hud-glass px-6 py-2.5 border-amber-500 shadow-2xl font-mono text-center opacity-0 pointer-events-none transition-all duration-300 z-50">
+      <div class="text-[10px] text-amber-400 font-bold tracking-widest uppercase">📸 HIGHWAY RADAR SPEED TRAP FLASH!</div>
+      <div id="speedcam-text" class="text-sm font-black text-white">SPEED: 118 KM/H • +50 SPEED XP!</div>
     </div>
   </section>
 
@@ -762,6 +824,107 @@
       </div>
     </div>
   </section>
+
+  <!-- ========================================================================= -->
+  <!-- IN-GAME SYNTHWAVE BEAT STUDIO (8-Step Procedural Drum & Synth Sequencer) -->
+  <!-- ========================================================================= -->
+  <div id="beat-studio-modal" class="fixed inset-0 bg-slate-900/60 dark:bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-4 hidden transition-all">
+    <div class="card-surface w-full max-w-2xl max-h-[92vh] flex flex-col overflow-hidden shadow-2xl border-pink-500/40 rounded-3xl">
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2.5">
+          <span class="text-2xl animate-pulse">🎵</span>
+          <div>
+            <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">Cyber Synthwave Beat Studio</h3>
+            <p class="text-[10px] text-slate-500 font-mono">8-Step Procedural Drum Machine & Synthesizer • Sound-Reactive Underglow</p>
+          </div>
+        </div>
+        <button onclick="closeBeatStudio()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-2xl font-bold leading-none p-1.5">&times;</button>
+      </div>
+
+      <div class="p-4 sm:p-6 overflow-y-auto space-y-4 text-xs font-mono">
+        <div class="p-3 rounded-2xl bg-slate-100 dark:bg-[#131929] border border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <button onclick="toggleBeatSequencer()" id="btn-beat-play" class="px-4 py-2 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-bold font-mono shadow-md transition active:scale-95 flex items-center gap-1.5">
+              <span id="beat-play-icon">▶</span>
+              <span id="beat-play-text">PLAY BEAT</span>
+            </button>
+            <div class="flex items-center gap-1.5 ml-2">
+              <span class="text-slate-500 text-[10px]">BPM:</span>
+              <input type="range" id="beat-bpm" min="95" max="150" value="122" oninput="updateBeatBPM(this.value)" class="w-20 accent-pink-500">
+              <span id="beat-bpm-val" class="text-pink-500 dark:text-pink-400 font-bold w-7">122</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <label class="flex items-center gap-1.5 text-[10px] text-slate-600 dark:text-slate-300 cursor-pointer select-none">
+              <input type="checkbox" id="beat-underglow-sync" checked class="accent-pink-500">
+              <span>⚡ Neon Pulse Sync</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 overflow-x-auto pb-1">
+          <span class="text-slate-500 text-[10px] shrink-0">Presets:</span>
+          <button onclick="loadBeatPreset('drift')" class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-pink-600 hover:text-white text-slate-700 dark:text-slate-300 text-[10px] transition shrink-0">🏎️ Synth Drift</button>
+          <button onclick="loadBeatPreset('city')" class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-pink-600 hover:text-white text-slate-700 dark:text-slate-300 text-[10px] transition shrink-0">🏙️ Cyber Night</button>
+          <button onclick="loadBeatPreset('mars')" class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-pink-600 hover:text-white text-slate-700 dark:text-slate-300 text-[10px] transition shrink-0">🚀 Mars Bass</button>
+          <button onclick="loadBeatPreset('electro')" class="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-pink-600 hover:text-white text-slate-700 dark:text-slate-300 text-[10px] transition shrink-0">⚡ Electro Punch</button>
+          <button onclick="clearBeatGrid()" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white border border-rose-500/30 text-[10px] transition shrink-0 ml-auto">Clear</button>
+        </div>
+
+        <div class="space-y-2 p-3 rounded-2xl bg-white dark:bg-[#07090f] border border-slate-200 dark:border-slate-800 shadow-inner">
+          <div class="grid grid-cols-9 gap-1.5 items-center text-center font-mono text-[9px] text-slate-400">
+            <div class="text-left font-bold text-slate-500">TRACK</div>
+            <div id="step-led-0" class="py-0.5 rounded bg-slate-800/40 text-slate-400">1</div>
+            <div id="step-led-1" class="py-0.5 rounded bg-slate-800/40 text-slate-400">2</div>
+            <div id="step-led-2" class="py-0.5 rounded bg-slate-800/40 text-slate-400">3</div>
+            <div id="step-led-3" class="py-0.5 rounded bg-slate-800/40 text-slate-400">4</div>
+            <div id="step-led-4" class="py-0.5 rounded bg-slate-800/40 text-slate-400">5</div>
+            <div id="step-led-5" class="py-0.5 rounded bg-slate-800/40 text-slate-400">6</div>
+            <div id="step-led-6" class="py-0.5 rounded bg-slate-800/40 text-slate-400">7</div>
+            <div id="step-led-7" class="py-0.5 rounded bg-slate-800/40 text-slate-400">8</div>
+          </div>
+
+          <div class="grid grid-cols-9 gap-1.5 items-center">
+            <div class="font-bold text-rose-500 text-[11px] truncate flex items-center gap-1">
+              <span>🥁</span> <span>KICK</span>
+            </div>
+            <div id="grid-row-kick" class="contents"></div>
+          </div>
+
+          <div class="grid grid-cols-9 gap-1.5 items-center">
+            <div class="font-bold text-amber-500 text-[11px] truncate flex items-center gap-1">
+              <span>💥</span> <span>SNARE</span>
+            </div>
+            <div id="grid-row-snare" class="contents"></div>
+          </div>
+
+          <div class="grid grid-cols-9 gap-1.5 items-center">
+            <div class="font-bold text-cyan-400 text-[11px] truncate flex items-center gap-1">
+              <span>⚡</span> <span>HI-HAT</span>
+            </div>
+            <div id="grid-row-hihat" class="contents"></div>
+          </div>
+
+          <div class="grid grid-cols-9 gap-1.5 items-center">
+            <div class="font-bold text-purple-400 text-[11px] truncate flex items-center gap-1">
+              <span>🎸</span> <span>BASS</span>
+            </div>
+            <div id="grid-row-bass" class="contents"></div>
+          </div>
+
+          <div class="grid grid-cols-9 gap-1.5 items-center">
+            <div class="font-bold text-emerald-400 text-[11px] truncate flex items-center gap-1">
+              <span>🎹</span> <span>SYNTH</span>
+            </div>
+            <div id="grid-row-arp" class="contents"></div>
+          </div>
+        </div>
+
+        <p class="text-[10px] text-slate-500 text-center">💡 Tip: Beats loop seamlessly while you drive. Kick beats pulse your car's neon underglow and tachometer!</p>
+      </div>
+    </div>
+  </div>
 
   <!-- ========================================================================= -->
   <!-- GARAGE CUSTOMIZER & QUESTS MODAL (Vehicles, Paint, Neon Underglow, XP) -->
@@ -2847,10 +3010,13 @@ if __name__ == "__main__":
     const worldObstacles = [];
     let cameraShake = 0;
 
-    // Real Roadster Physics & Weight Transfer
+    // Real Roadster Physics, Weight Transfer & Stunt Airtime
     const carState = {
       x: 0,
+      y: 0,
       z: 14,
+      vy: 0,
+      isAirborne: false,
       angle: 0,
       speed: 0,
       maxSpeed: 1.05,
@@ -2890,6 +3056,59 @@ if __name__ == "__main__":
     let currentGPSTarget = null;
     let gpsRibbonGroup = null;
     const gpsRibbonSegments = [];
+
+    // --- GAMEPLAY 1: COURIER BOUNTY MISSIONS ---
+    const courierMissions = [
+      { id: 'm-1', title: 'MCP Schema Protocol Sync', dropoffId: 'frameworks-langgraph', timeLimit: 50, xp: 150 },
+      { id: 'm-2', title: 'StateGraph Checkpoint Transfer', dropoffId: 'frameworks-autogen', timeLimit: 45, xp: 140 },
+      { id: 'm-3', title: 'AST Zero-Eval Security Patch', dropoffId: 'mcp-protocol', timeLimit: 55, xp: 160 },
+      { id: 'm-4', title: 'arXiv Foundational Paper Dispatch', dropoffId: 'paper-reflexion', timeLimit: 45, xp: 140 },
+      { id: 'm-5', title: 'Docker Sandbox Security Token', dropoffId: 'frameworks-pydanticai', timeLimit: 50, xp: 130 }
+    ];
+    let activeMission = null;
+    let missionTimer = 0;
+
+    // --- GAMEPLAY 2: HIGHWAY SPEED TRAPS & STUNT RAMPS ---
+    const speedTraps = [
+      { x: 0, z: -42, rotY: 0, limit: 85, cooldown: 0 },
+      { x: 215, z: 0, rotY: Math.PI / 2, limit: 85, cooldown: 0 }
+    ];
+    const worldStuntRamps = [];
+
+    // --- GAMEPLAY 3: LAP TIMER & HOLOGRAPHIC GHOST RACER ---
+    let isLapRunning = false;
+    let lapStartTime = 0;
+    let lapCurrentTime = 0;
+    let bestLapTime = parseFloat(localStorage.getItem('agentic_best_lap')) || 0;
+    let activeLapRecording = [];
+    let savedGhostLap = JSON.parse(localStorage.getItem('agentic_ghost_lap') || 'null');
+    let ghostCarMesh = null;
+    let ghostVisible = true;
+    let ghostLastCrossTime = 0;
+
+    // --- GAMEPLAY 4: MULTI-AGENT SOCIETY DEBATES & CODE BUG HUNT ---
+    let activeAgentDebate = null;
+    let agentDebateTimer = 0;
+    let agentLaserLine = null;
+    let agentTokenPacket = null;
+    let lastDebateTime = 0;
+    let codeBugs = [];
+    let bugsSquashedCount = 0;
+    let codeIntegrity = 100;
+
+    // --- GAMEPLAY 5: IN-GAME SYNTHWAVE BEAT STUDIO ---
+    let isBeatPlaying = false;
+    let beatBPM = 122;
+    let beatStep = 0;
+    let beatInterval = null;
+    let beatSoundReactive = true;
+    const beatGrid = {
+      kick:  [1, 0, 0, 0, 1, 0, 0, 0],
+      snare: [0, 0, 1, 0, 0, 0, 1, 0],
+      hihat: [1, 1, 1, 1, 1, 1, 1, 1],
+      bass:  [1, 0, 1, 0, 1, 1, 0, 1],
+      arp:   [0, 1, 0, 1, 0, 1, 1, 0]
+    };
 
     // Camera Modes
     let cameraMode = 'chase';
@@ -3465,6 +3684,643 @@ if __name__ == "__main__":
       });
     }
 
+    // =========================================================================
+    // GAMEPLAY 1: COURIER BOUNTY MISSIONS & REWARDS
+    // =========================================================================
+    function startRandomMission() {
+      const idx = Math.floor(Math.random() * courierMissions.length);
+      startMission(courierMissions[idx].id);
+    }
+
+    function startMission(missionId) {
+      const m = courierMissions.find(x => x.id === missionId);
+      if (!m) return;
+      activeMission = m;
+      missionTimer = m.timeLimit;
+
+      const wp = waypoints.find(w => w.docId === m.dropoffId);
+      setGPSTarget(m.dropoffId);
+
+      const banner = document.getElementById('hud-mission-banner');
+      const titleEl = document.getElementById('hud-mission-title');
+      const destEl = document.getElementById('hud-mission-dest');
+      const timerEl = document.getElementById('hud-mission-timer');
+      const barEl = document.getElementById('hud-mission-bar');
+
+      if (banner) banner.classList.remove('hidden');
+      if (titleEl) titleEl.innerText = 'BOUNTY: ' + m.title;
+      if (destEl) destEl.innerText = wp ? wp.label : 'Destination';
+      if (timerEl) timerEl.innerText = m.timeLimit.toFixed(1) + 's';
+      if (barEl) barEl.style.width = '100%';
+
+      playTone(520, 'triangle', 0.18);
+      setTimeout(() => playTone(780, 'sine', 0.22), 120);
+    }
+
+    function cancelMission() {
+      activeMission = null;
+      const banner = document.getElementById('hud-mission-banner');
+      if (banner) banner.classList.add('hidden');
+      clearGPSTarget();
+    }
+
+    function updateMissionState(dt) {
+      if (!activeMission) return;
+      missionTimer -= dt;
+
+      const timerEl = document.getElementById('hud-mission-timer');
+      const barEl = document.getElementById('hud-mission-bar');
+      if (timerEl) timerEl.innerText = Math.max(0, missionTimer).toFixed(1) + 's';
+      if (barEl) {
+        const pct = Math.max(0, (missionTimer / activeMission.timeLimit) * 100);
+        barEl.style.width = pct + '%';
+      }
+
+      if (missionTimer <= 0) {
+        const banner = document.getElementById('hud-mission-banner');
+        if (banner) banner.classList.add('hidden');
+        playTone(180, 'sawtooth', 0.35);
+        activeMission = null;
+        clearGPSTarget();
+        return;
+      }
+
+      const wp = waypoints.find(w => w.docId === activeMission.dropoffId);
+      if (wp) {
+        const dist = Math.hypot(carState.x - wp.x, carState.z - wp.z);
+        if (dist < 8.5) {
+          if (typeof playerProfile !== 'undefined') {
+            playerProfile.xp += activeMission.xp;
+            if (typeof updatePlayerHUD === 'function') updatePlayerHUD();
+          }
+          playTone(523, 'sine', 0.1);
+          setTimeout(() => playTone(659, 'sine', 0.1), 100);
+          setTimeout(() => playTone(784, 'triangle', 0.3), 200);
+
+          createCrashSparks(carState.x, carState.z);
+
+          const banner = document.getElementById('hud-mission-banner');
+          if (banner) banner.classList.add('hidden');
+          const title = activeMission.title;
+          const xp = activeMission.xp;
+          activeMission = null;
+          clearGPSTarget();
+
+          showSpeedcamAlert(`🎉 BOUNTY DELIVERED: ${title}! +${xp} XP`);
+        }
+      }
+    }
+
+    // =========================================================================
+    // GAMEPLAY 2: HIGHWAY SPEED TRAP CAMERAS & STUNT JUMP RAMPS
+    // =========================================================================
+    function triggerSpeedCameraFlash(speedKmh) {
+      const flash = document.getElementById('speedcam-flash');
+      const badge = document.getElementById('speedcam-badge');
+      const text = document.getElementById('speedcam-text');
+
+      if (flash) {
+        flash.classList.remove('opacity-0');
+        setTimeout(() => flash.classList.add('opacity-0'), 150);
+      }
+      if (badge && text) {
+        text.innerText = `SPEED: ${speedKmh} KM/H • +50 SPEED XP!`;
+        badge.classList.remove('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          badge.classList.add('opacity-0', 'pointer-events-none');
+        }, 1800);
+      }
+
+      if (typeof playerProfile !== 'undefined') {
+        playerProfile.xp += 50;
+        if (typeof updatePlayerHUD === 'function') updatePlayerHUD();
+      }
+
+      playTone(1200, 'square', 0.04);
+      setTimeout(() => playTone(450, 'triangle', 0.14), 60);
+    }
+
+    function showSpeedcamAlert(msg) {
+      const badge = document.getElementById('speedcam-badge');
+      const text = document.getElementById('speedcam-text');
+      if (badge && text) {
+        text.innerText = msg;
+        badge.classList.remove('opacity-0', 'pointer-events-none');
+        setTimeout(() => badge.classList.add('opacity-0', 'pointer-events-none'), 2200);
+      }
+    }
+
+    function triggerLandingFeedback() {
+      cameraShake = 0.8;
+      createCrashSparks(carState.x, carState.z);
+      playTone(85, 'triangle', 0.14);
+      if (typeof playerProfile !== 'undefined') {
+        playerProfile.xp += 50;
+        if (typeof updatePlayerHUD === 'function') updatePlayerHUD();
+      }
+      showSpeedcamAlert("🚀 STUNT AIRTIME LANDING! +50 XP");
+    }
+
+    // =========================================================================
+    // GAMEPLAY 3: LAP TIMER & HOLOGRAPHIC GHOST RACER
+    // =========================================================================
+    function formatLapTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      const ms = Math.floor((sec % 1) * 10);
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.${ms}`;
+    }
+
+    function initGhostCar(parentGroup) {
+      if (ghostCarMesh && ghostCarMesh.parent) ghostCarMesh.parent.remove(ghostCarMesh);
+      ghostCarMesh = new THREE.Group();
+
+      const ghostMat = new THREE.MeshBasicMaterial({
+        color: 0x38bdf8,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.45
+      });
+      const body = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.45, 4.4), ghostMat);
+      body.position.y = 0.6; ghostCarMesh.add(body);
+      const cab = new THREE.Mesh(new THREE.BoxGeometry(1.65, 0.5, 1.9), ghostMat);
+      cab.position.set(0, 1.18, 0.15); ghostCarMesh.add(cab);
+
+      ghostCarMesh.visible = ghostVisible && savedGhostLap !== null;
+      parentGroup.add(ghostCarMesh);
+    }
+
+    function toggleGhostVisibility() {
+      ghostVisible = !ghostVisible;
+      if (ghostCarMesh) ghostCarMesh.visible = ghostVisible && savedGhostLap !== null;
+      const btn = document.getElementById('btn-hud-ghost');
+      if (btn) btn.innerText = ghostVisible ? '👻 Ghost' : '👻 Off';
+    }
+
+    function updateGhostCar(time) {
+      if (!ghostCarMesh || !savedGhostLap || !ghostVisible || savedGhostLap.length === 0) return;
+      const maxT = savedGhostLap[savedGhostLap.length - 1].t;
+      const loopT = time % maxT;
+
+      let idx = 0;
+      for (let i = 0; i < savedGhostLap.length - 1; i++) {
+        if (savedGhostLap[i].t <= loopT && savedGhostLap[i + 1].t >= loopT) {
+          idx = i; break;
+        }
+      }
+      const p1 = savedGhostLap[idx];
+      const p2 = savedGhostLap[Math.min(idx + 1, savedGhostLap.length - 1)];
+      const span = (p2.t - p1.t) || 0.001;
+      const alpha = (loopT - p1.t) / span;
+
+      const gx = p1.x + (p2.x - p1.x) * alpha;
+      const gz = p1.z + (p2.z - p1.z) * alpha;
+      const ga = p1.angle + (p2.angle - p1.angle) * alpha;
+
+      ghostCarMesh.position.set(gx, 0.05, gz);
+      ghostCarMesh.rotation.y = ga;
+    }
+
+    // =========================================================================
+    // GAMEPLAY 4: MULTI-AGENT INTERSECTION DEBATES & CODE BUG HUNT
+    // =========================================================================
+    const agentDebates = [
+      {
+        a: "LangGraph", msgA: "🤖 [ORCHESTRATOR] Routing StateGraph conditional edge...",
+        b: "CrewAI", msgB: "👥 [CREW] Parallel sub-agents initialized & executing!"
+      },
+      {
+        a: "CodeRabbit", msgA: "🐇 [REVIEWER] PR #402 AST verified: 0 lint errors!",
+        b: "AutoGen", msgB: "💬 [AUTOGEN] Conversational consensus reached!"
+      },
+      {
+        a: "ReAct", msgA: "🧠 [REACT] Thought: call search tool. Action: search.",
+        b: "PydanticAI", msgB: "🛡️ [VALIDATOR] Tool arguments validated against Pydantic schema!"
+      }
+    ];
+
+    function initAgentSocietyComms(parentGroup) {
+      const beamMat = new THREE.LineBasicMaterial({ color: 0x38bdf8, linewidth: 3 });
+      const beamGeo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 0)]);
+      agentLaserLine = new THREE.Line(beamGeo, beamMat);
+      agentLaserLine.visible = false;
+      parentGroup.add(agentLaserLine);
+
+      const tokenMat = new THREE.MeshStandardMaterial({ color: 0x06b6d4, emissive: 0x06b6d4, emissiveIntensity: 1.0 });
+      agentTokenPacket = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.5, 0.5), tokenMat);
+      agentTokenPacket.visible = false;
+      parentGroup.add(agentTokenPacket);
+    }
+
+    function updateAgentSociety(dt) {
+      if (activeAgentDebate) {
+        agentDebateTimer -= dt;
+
+        const posA = activeAgentDebate.npcA.mesh.position;
+        const posB = activeAgentDebate.npcB.mesh.position;
+
+        if (agentLaserLine) {
+          const positions = agentLaserLine.geometry.attributes.position.array;
+          positions[0] = posA.x; positions[1] = posA.y + 1.2; positions[2] = posA.z;
+          positions[3] = posB.x; positions[4] = posB.y + 1.2; positions[5] = posB.z;
+          agentLaserLine.geometry.attributes.position.needsUpdate = true;
+          agentLaserLine.visible = true;
+        }
+
+        if (agentTokenPacket) {
+          const t = (Math.sin(Date.now() * 0.008) + 1) * 0.5;
+          agentTokenPacket.position.set(
+            posA.x + (posB.x - posA.x) * t,
+            posA.y + 1.2 + Math.sin(t * Math.PI) * 0.8,
+            posA.z + (posB.z - posA.z) * t
+          );
+          agentTokenPacket.rotation.x += 0.04;
+          agentTokenPacket.rotation.y += 0.04;
+          agentTokenPacket.visible = true;
+        }
+
+        if (agentDebateTimer <= 0) {
+          activeAgentDebate.npcA.isDebating = false;
+          activeAgentDebate.npcB.isDebating = false;
+          activeAgentDebate = null;
+          if (agentLaserLine) agentLaserLine.visible = false;
+          if (agentTokenPacket) agentTokenPacket.visible = false;
+          lastDebateTime = Date.now();
+        }
+        return;
+      }
+
+      if (Date.now() - lastDebateTime < 10000 || npcAgents.length < 2) return;
+
+      for (let i = 0; i < npcAgents.length; i++) {
+        for (let j = i + 1; j < npcAgents.length; j++) {
+          const a = npcAgents[i];
+          const b = npcAgents[j];
+          if (!a.mesh || !b.mesh) continue;
+          const dist = Math.hypot(a.x - b.x, a.z - b.z);
+
+          if (dist < 12.0 && Math.hypot(a.x, a.z) < 85) {
+            activeAgentDebate = { npcA: a, npcB: b, debate: agentDebates[Math.floor(Math.random() * agentDebates.length)] };
+            agentDebateTimer = 5.0;
+            a.isDebating = true;
+            b.isDebating = true;
+            playTone(440, 'sine', 0.1);
+            showSpeedcamAlert(`💬 AGENT RENDEZVOUS: ${a.name} & ${b.name} exchanging knowledge!`);
+            return;
+          }
+        }
+      }
+    }
+
+    function initCodeBugs(parentGroup) {
+      codeBugs.forEach(b => {
+        if (b.mesh && b.mesh.parent) b.mesh.parent.remove(b.mesh);
+      });
+      codeBugs = [];
+
+      const bugMat = new THREE.MeshStandardMaterial({
+        color: 0xef4444,
+        emissive: 0xdc2626,
+        emissiveIntensity: 0.85,
+        roughness: 0.2
+      });
+      const legMat = new THREE.MeshBasicMaterial({ color: 0x991b1b });
+
+      for (let i = 0; i < 12; i++) {
+        const bugGroup = new THREE.Group();
+        const body = new THREE.Mesh(new THREE.IcosahedronGeometry(0.55, 1), bugMat);
+        body.position.y = 0.55; bugGroup.add(body);
+
+        for (let l = 0; l < 4; l++) {
+          const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.6).rotateZ(Math.PI / 4), legMat);
+          const la = (l / 4) * Math.PI * 2;
+          leg.position.set(Math.cos(la) * 0.45, 0.25, Math.sin(la) * 0.45);
+          bugGroup.add(leg);
+        }
+
+        const theta = (i / 12) * Math.PI * 2 + Math.random() * 0.2;
+        const rad = 35 + Math.random() * 165;
+        const bx = Math.cos(theta) * rad;
+        const bz = Math.sin(theta) * rad;
+
+        bugGroup.position.set(bx, 0, bz);
+        parentGroup.add(bugGroup);
+
+        codeBugs.push({
+          mesh: bugGroup,
+          x: bx,
+          z: bz,
+          squashed: false,
+          respawnTimer: 0
+        });
+      }
+    }
+
+    function updateCodeBugs(dt) {
+      codeBugs.forEach(bug => {
+        if (bug.squashed) {
+          bug.respawnTimer -= dt;
+          if (bug.respawnTimer <= 0) {
+            bug.squashed = false;
+            bug.mesh.visible = true;
+            const theta = Math.random() * Math.PI * 2;
+            const rad = 35 + Math.random() * 165;
+            bug.x = Math.cos(theta) * rad;
+            bug.z = Math.sin(theta) * rad;
+            bug.mesh.position.set(bug.x, 0, bug.z);
+          }
+          return;
+        }
+
+        bug.mesh.rotation.y += 0.03;
+        bug.mesh.position.y = Math.sin(Date.now() * 0.005 + bug.x) * 0.12;
+
+        const dist = Math.hypot(carState.x - bug.x, carState.z - bug.z);
+        if (dist < 2.0) {
+          bug.squashed = true;
+          bug.respawnTimer = 12.0;
+          bug.mesh.visible = false;
+          bugsSquashedCount++;
+
+          createCrashSparks(bug.x, bug.z);
+          playTone(180, 'sawtooth', 0.14);
+
+          const bugEl = document.getElementById('hud-bugs-count');
+          if (bugEl) bugEl.innerText = bugsSquashedCount;
+
+          if (typeof playerProfile !== 'undefined') {
+            playerProfile.xp += 35;
+            if (typeof updatePlayerHUD === 'function') updatePlayerHUD();
+          }
+          showSpeedcamAlert(`🐛 CODE BUG SQUASHED! +35 XP • CODE HEALTH BOOST!`);
+        }
+      });
+    }
+
+    // =========================================================================
+    // GAMEPLAY 5: IN-GAME SYNTHWAVE BEAT STUDIO SEQUENCER
+    // =========================================================================
+    const beatPresets = {
+      drift: {
+        bpm: 124,
+        kick:  [1, 0, 0, 0, 1, 0, 0, 0],
+        snare: [0, 0, 1, 0, 0, 0, 1, 0],
+        hihat: [1, 1, 1, 1, 1, 1, 1, 1],
+        bass:  [1, 0, 1, 0, 1, 1, 0, 1],
+        arp:   [0, 1, 0, 1, 0, 1, 1, 0]
+      },
+      city: {
+        bpm: 116,
+        kick:  [1, 0, 0, 1, 0, 0, 1, 0],
+        snare: [0, 0, 1, 0, 0, 1, 0, 0],
+        hihat: [1, 0, 1, 1, 0, 1, 1, 1],
+        bass:  [1, 1, 0, 1, 0, 1, 1, 0],
+        arp:   [1, 0, 1, 0, 1, 0, 1, 1]
+      },
+      mars: {
+        bpm: 104,
+        kick:  [1, 0, 0, 0, 0, 0, 1, 0],
+        snare: [0, 0, 0, 0, 1, 0, 0, 0],
+        hihat: [0, 1, 0, 1, 0, 1, 0, 1],
+        bass:  [1, 0, 0, 1, 1, 0, 0, 1],
+        arp:   [0, 0, 1, 0, 0, 1, 0, 1]
+      },
+      electro: {
+        bpm: 130,
+        kick:  [1, 0, 1, 0, 1, 0, 1, 0],
+        snare: [0, 0, 1, 0, 0, 0, 1, 0],
+        hihat: [1, 1, 1, 1, 1, 1, 1, 1],
+        bass:  [1, 1, 1, 0, 1, 1, 1, 0],
+        arp:   [1, 0, 1, 1, 0, 1, 0, 1]
+      }
+    };
+
+    function initBeatStudioUI() {
+      const rows = ['kick', 'snare', 'hihat', 'bass', 'arp'];
+      rows.forEach(track => {
+        const rowEl = document.getElementById('grid-row-' + track);
+        if (!rowEl) return;
+        rowEl.innerHTML = '';
+        for (let i = 0; i < 8; i++) {
+          const btn = document.createElement('button');
+          btn.id = `btn-step-${track}-${i}`;
+          btn.className = `h-9 rounded-lg border text-[10px] font-bold font-mono transition-all ${
+            beatGrid[track][i]
+              ? 'bg-pink-600 text-white border-pink-400 shadow-md shadow-pink-500/20'
+              : 'bg-slate-100 dark:bg-slate-900 border-slate-300 dark:border-slate-800 text-slate-400'
+          }`;
+          btn.innerText = i + 1;
+          btn.onclick = () => toggleBeatStep(track, i);
+          rowEl.appendChild(btn);
+        }
+      });
+    }
+
+    function toggleBeatStep(track, step) {
+      beatGrid[track][step] = beatGrid[track][step] ? 0 : 1;
+      const btn = document.getElementById(`btn-step-${track}-${step}`);
+      if (btn) {
+        if (beatGrid[track][step]) {
+          btn.className = 'h-9 rounded-lg border text-[10px] font-bold font-mono transition-all bg-pink-600 text-white border-pink-400 shadow-md shadow-pink-500/20';
+        } else {
+          btn.className = 'h-9 rounded-lg border text-[10px] font-bold font-mono transition-all bg-slate-100 dark:bg-slate-900 border-slate-300 dark:border-slate-800 text-slate-400';
+        }
+      }
+      playTone(400 + step * 40, 'sine', 0.05);
+    }
+
+    function openBeatStudio() {
+      initBeatStudioUI();
+      const modal = document.getElementById('beat-studio-modal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeBeatStudio() {
+      const modal = document.getElementById('beat-studio-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function updateBeatBPM(val) {
+      beatBPM = parseInt(val, 10);
+      const valEl = document.getElementById('beat-bpm-val');
+      if (valEl) valEl.innerText = beatBPM;
+      if (isBeatPlaying) {
+        clearInterval(beatInterval);
+        const msPerStep = (60 / beatBPM / 2) * 1000;
+        beatInterval = setInterval(stepBeatSequencer, msPerStep);
+      }
+    }
+
+    function loadBeatPreset(name) {
+      const p = beatPresets[name];
+      if (!p) return;
+      beatBPM = p.bpm;
+      const bpmSlider = document.getElementById('beat-bpm');
+      const bpmVal = document.getElementById('beat-bpm-val');
+      if (bpmSlider) bpmSlider.value = p.bpm;
+      if (bpmVal) bpmVal.innerText = p.bpm;
+
+      ['kick', 'snare', 'hihat', 'bass', 'arp'].forEach(t => {
+        beatGrid[t] = [...p[t]];
+      });
+      initBeatStudioUI();
+      if (isBeatPlaying) {
+        clearInterval(beatInterval);
+        const msPerStep = (60 / beatBPM / 2) * 1000;
+        beatInterval = setInterval(stepBeatSequencer, msPerStep);
+      }
+    }
+
+    function clearBeatGrid() {
+      ['kick', 'snare', 'hihat', 'bass', 'arp'].forEach(t => {
+        beatGrid[t] = [0, 0, 0, 0, 0, 0, 0, 0];
+      });
+      initBeatStudioUI();
+    }
+
+    function toggleBeatSequencer() {
+      initAudio();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      isBeatPlaying = !isBeatPlaying;
+      const btn = document.getElementById('btn-beat-play');
+      const icon = document.getElementById('beat-play-icon');
+      const text = document.getElementById('beat-play-text');
+
+      if (isBeatPlaying) {
+        if (icon) icon.innerText = '⏸';
+        if (text) text.innerText = 'PAUSE';
+        if (btn) btn.className = 'px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold font-mono shadow-md transition active:scale-95 flex items-center gap-1.5';
+        beatStep = 0;
+        const msPerStep = (60 / beatBPM / 2) * 1000;
+        beatInterval = setInterval(stepBeatSequencer, msPerStep);
+      } else {
+        if (icon) icon.innerText = '▶';
+        if (text) text.innerText = 'PLAY BEAT';
+        if (btn) btn.className = 'px-4 py-2 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-bold font-mono shadow-md transition active:scale-95 flex items-center gap-1.5';
+        if (beatInterval) clearInterval(beatInterval);
+        for (let i = 0; i < 8; i++) {
+          const led = document.getElementById('step-led-' + i);
+          if (led) led.className = 'py-0.5 rounded bg-slate-800/40 text-slate-400';
+        }
+      }
+    }
+
+    function playSequencerKick() {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.setValueAtTime(140, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(32, audioCtx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.15);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.15);
+      } catch (_) {}
+    }
+
+    function playSequencerSnare() {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.14);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.14);
+      } catch (_) {}
+    }
+
+    function playSequencerHiHat() {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(8500, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.04);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.04);
+      } catch (_) {}
+    }
+
+    function playSequencerBass(step) {
+      if (!audioCtx) return;
+      const notes = [110, 110, 130.8, 146.8, 110, 98, 110, 164.8];
+      try {
+        const osc = audioCtx.createOscillator();
+        const filter = audioCtx.createBiquadFilter();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(notes[step % notes.length], audioCtx.currentTime);
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(360, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.09, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.2);
+      } catch (_) {}
+    }
+
+    function playSequencerArp(step) {
+      if (!audioCtx) return;
+      const notes = [440, 523.25, 587.33, 659.25, 783.99, 659.25, 587.33, 523.25];
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(notes[step % notes.length], audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.12);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.12);
+      } catch (_) {}
+    }
+
+    function stepBeatSequencer() {
+      if (!isBeatPlaying) return;
+
+      for (let i = 0; i < 8; i++) {
+        const led = document.getElementById('step-led-' + i);
+        if (led) {
+          if (i === beatStep) {
+            led.className = 'py-0.5 rounded bg-pink-600 text-white font-bold shadow-md';
+          } else {
+            led.className = 'py-0.5 rounded bg-slate-800/40 text-slate-400';
+          }
+        }
+      }
+
+      let hadKick = false;
+      if (beatGrid.kick[beatStep]) { playSequencerKick(); hadKick = true; }
+      if (beatGrid.snare[beatStep]) playSequencerSnare();
+      if (beatGrid.hihat[beatStep]) playSequencerHiHat();
+      if (beatGrid.bass[beatStep]) playSequencerBass(beatStep);
+      if (beatGrid.arp[beatStep]) playSequencerArp(beatStep);
+
+      if (hadKick && beatSoundReactive && carGroup) {
+        carGroup.traverse(child => {
+          if (child.isPointLight) {
+            child.intensity = 3.6;
+            setTimeout(() => { if (child) child.intensity = 1.8; }, 90);
+          }
+        });
+      }
+
+      beatStep = (beatStep + 1) % 8;
+    }
+
     // Roadway Zone Checker - keeps highways clear while placing obstacles as roadside & terrain hindrances!
     function isOnRoad(x, z, margin = 4.0) {
       // 1. Center roundabout plaza
@@ -3784,6 +4640,11 @@ if __name__ == "__main__":
       initCivilianTraffic(worldEnvironmentGroup);
       initSkyTaxis(worldEnvironmentGroup);
 
+      // Multi-Agent Society Laser Comms & Code Bug Hunt
+      initAgentSocietyComms(worldEnvironmentGroup);
+      initCodeBugs(worldEnvironmentGroup);
+      initGhostCar(worldEnvironmentGroup);
+
       // Dynamic Weather Particles per World
       initWeatherParticles(worldId);
 
@@ -4010,6 +4871,88 @@ if __name__ == "__main__":
         parentGroup.add(pad);
         boostPads.push(pad);
       });
+
+      // --- 6. MEGA STUNT BOOSTER JUMP RAMPS ---
+      worldStuntRamps.length = 0;
+      const rampLocs = [
+        { x: 55, z: 55, rotY: -Math.PI / 4 },
+        { x: -55, z: -55, rotY: 3 * Math.PI / 4 }
+      ];
+      rampLocs.forEach(rl => {
+        const rampGroup = new THREE.Group();
+        rampGroup.position.set(rl.x, 0, rl.z);
+        rampGroup.rotation.y = rl.rotY;
+
+        const rampMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4 });
+        const wedge = new THREE.Mesh(new THREE.BoxGeometry(6.5, 0.4, 9), rampMat);
+        wedge.rotation.x = -0.22;
+        wedge.position.set(0, 1.0, 0);
+        rampGroup.add(wedge);
+
+        const chevMat = new THREE.MeshBasicMaterial({ color: 0xf97316 });
+        for (let c = -3; c <= 3; c += 2) {
+          const ch = new THREE.Mesh(new THREE.PlaneGeometry(3.5, 0.6).rotateX(-Math.PI / 2), chevMat);
+          ch.position.set(0, 1.05 - c * 0.22, c);
+          ch.rotation.x = -0.22;
+          rampGroup.add(ch);
+        }
+
+        parentGroup.add(rampGroup);
+        worldStuntRamps.push({ x: rl.x, z: rl.z, rotY: rl.rotY });
+      });
+
+      // --- 7. HIGHWAY RADAR SPEED CAMERA TRAP GANTRIES ---
+      speedTraps.forEach(st => {
+        const camGroup = new THREE.Group();
+        camGroup.position.set(st.x, 0, st.z);
+        camGroup.rotation.y = st.rotY;
+
+        const postMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.8 });
+        const post = new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.18, 7.5), postMat);
+        post.position.set(4.8, 3.75, 0); camGroup.add(post);
+
+        const camBox = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.7, 0.8), new THREE.MeshStandardMaterial({ color: 0x0f172a }));
+        camBox.position.set(4.8, 6.8, 0); camGroup.add(camBox);
+
+        const flashLens = new THREE.Mesh(new THREE.CircleGeometry(0.2, 16), new THREE.MeshBasicMaterial({ color: 0xfbbf24 }));
+        flashLens.position.set(4.8, 6.8, 0.41); camGroup.add(flashLens);
+
+        const recLed = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 8), new THREE.MeshBasicMaterial({ color: 0xef4444 }));
+        recLed.position.set(4.8, 7.1, 0.41); camGroup.add(recLed);
+
+        parentGroup.add(camGroup);
+      });
+
+      // --- 8. OUTER RING FINISH LINE & LAP CHECKPOINT GANTRY ---
+      const finishGantry = new THREE.Group();
+      finishGantry.position.set(215, 0, 0);
+      finishGantry.rotation.y = Math.PI / 2;
+
+      const fTrussMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.8 });
+      const fPostL = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 7.2), fTrussMat);
+      fPostL.position.set(-6.5, 3.6, 0); finishGantry.add(fPostL);
+      const fPostR = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 7.2), fTrussMat);
+      fPostR.position.set(6.5, 3.6, 0); finishGantry.add(fPostR);
+      const fBeam = new THREE.Mesh(new THREE.BoxGeometry(13.6, 0.6, 0.6), fTrussMat);
+      fBeam.position.set(0, 7.0, 0); finishGantry.add(fBeam);
+
+      const fCanvas = document.createElement('canvas'); fCanvas.width = 512; fCanvas.height = 96;
+      const fCtx = fCanvas.getContext('2d');
+      fCtx.fillStyle = '#0f172a'; fCtx.fillRect(0, 0, 512, 96);
+      fCtx.strokeStyle = '#38bdf8'; fCtx.lineWidth = 6; fCtx.strokeRect(4, 4, 504, 88);
+      fCtx.fillStyle = '#ffffff'; fCtx.font = 'bold 24px sans-serif'; fCtx.textAlign = 'center';
+      fCtx.fillText('🏁 FINISH LINE / LAP TIMER 🏁', 256, 42);
+      fCtx.fillStyle = '#38bdf8'; fCtx.font = 'bold 16px monospace';
+      fCtx.fillText('CROSS LINE TO START / RECORD LAP', 256, 74);
+
+      const fTex = new THREE.CanvasTexture(fCanvas);
+      const fSign = new THREE.Mesh(new THREE.PlaneGeometry(11.5, 2.1), new THREE.MeshBasicMaterial({ map: fTex, side: THREE.DoubleSide }));
+      fSign.position.set(0, 7.0, 0.35); finishGantry.add(fSign);
+
+      const strip = new THREE.Mesh(new THREE.PlaneGeometry(13.0, 2.0).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide }));
+      strip.position.set(0, 0.03, 0); finishGantry.add(strip);
+
+      parentGroup.add(finishGantry);
 
       updateStreetlightsAtmosphere();
     }
@@ -4579,6 +5522,14 @@ if __name__ == "__main__":
       if (k === 't' || c === 'keyt') {
         if (currentNearbyNPC) openNPCModal(currentNearbyNPC.id);
       }
+
+      if (k === 'b' || c === 'keyb') {
+        openBeatStudio();
+      }
+
+      if (k === 'm' || c === 'keym') {
+        startRandomMission();
+      }
     });
 
     window.addEventListener('keyup', e => {
@@ -4861,7 +5812,138 @@ if __name__ == "__main__":
         triggerCollisionFeedback(impactSpeed);
       }
 
-      carGroup.position.set(carState.x, currentVehicleModel === 'drone' ? 0.75 + Math.sin(Date.now() * 0.005) * 0.12 : 0, carState.z);
+      // --- AIRBORNE PHYSICS & STUNT JUMP SIMULATION (Option 2) ---
+      if (carState.isAirborne) {
+        carState.y += carState.vy;
+        carState.vy -= 0.024;
+        if (carState.y <= 0) {
+          carState.y = 0;
+          carState.vy = 0;
+          carState.isAirborne = false;
+          triggerLandingFeedback();
+        }
+      }
+
+      // Check Mega Stunt Jump Ramps Collision (Option 2)
+      if (!carState.isAirborne && Math.abs(carState.speed) > 0.35) {
+        for (let i = 0; i < worldStuntRamps.length; i++) {
+          const r = worldStuntRamps[i];
+          const dRamp = Math.hypot(carState.x - r.x, carState.z - r.z);
+          if (dRamp < 5.0) {
+            carState.isAirborne = true;
+            carState.vy = 0.52 + Math.abs(carState.speed) * 0.32;
+            playTone(480, 'sine', 0.2);
+            showSpeedcamAlert('🚀 MEGA STUNT LAUNCH! AIRBORNE!');
+            break;
+          }
+        }
+      }
+
+      // Check Highway Radar Speed Camera Traps (Option 2)
+      const currentSpeedKmh = Math.round(Math.abs(carState.speed) * 85);
+      speedTraps.forEach(trap => {
+        if (trap.cooldown > 0) trap.cooldown--;
+        const dTrap = Math.hypot(carState.x - trap.x, carState.z - trap.z);
+        if (dTrap < 6.0 && trap.cooldown <= 0) {
+          if (currentSpeedKmh > trap.limit) {
+            trap.cooldown = 180; // 3 sec cooldown
+            triggerSpeedCameraFlash(currentSpeedKmh);
+          }
+        }
+      });
+
+      // --- OUTER RING LAP RACER & HOLOGRAPHIC GHOST CAR (Option 3) ---
+      const distToFinish = Math.hypot(carState.x - 215, carState.z - 0);
+      const nowMs = performance.now();
+
+      if (distToFinish < 8.0 && Math.abs(carState.speed) > 0.15) {
+        if (!isLapRunning) {
+          if (Date.now() - ghostLastCrossTime > 8000) {
+            isLapRunning = true;
+            lapStartTime = nowMs;
+            activeLapRecording = [{ t: 0, x: carState.x, z: carState.z, angle: carState.angle }];
+            ghostLastCrossTime = Date.now();
+            showSpeedcamAlert('🏁 OUTER RING LAP STARTED! PUSH FOR SPEED!');
+            playTone(660, 'sine', 0.2);
+          }
+        } else {
+          const elapsedSec = (nowMs - lapStartTime) / 1000;
+          if (elapsedSec > 10.0) {
+            isLapRunning = false;
+            ghostLastCrossTime = Date.now();
+            const finalLapTime = elapsedSec;
+
+            if (bestLapTime === 0 || finalLapTime < bestLapTime) {
+              bestLapTime = finalLapTime;
+              localStorage.setItem('agentic_best_lap', bestLapTime.toString());
+              savedGhostLap = [...activeLapRecording];
+              localStorage.setItem('agentic_ghost_lap', JSON.stringify(savedGhostLap));
+              if (ghostCarMesh) ghostCarMesh.visible = ghostVisible;
+              showSpeedcamAlert(`🏆 NEW RECORD LAP: ${formatLapTime(finalLapTime)}! +150 XP`);
+              playTone(880, 'triangle', 0.4);
+              if (typeof playerProfile !== 'undefined') {
+                playerProfile.xp += 150;
+                if (typeof updatePlayerHUD === 'function') updatePlayerHUD();
+              }
+            } else {
+              showSpeedcamAlert(`🏁 LAP COMPLETED: ${formatLapTime(finalLapTime)}! +50 XP`);
+              playTone(520, 'sine', 0.25);
+              if (typeof playerProfile !== 'undefined') {
+                playerProfile.xp += 50;
+                if (typeof updatePlayerHUD === 'function') updatePlayerHUD();
+              }
+            }
+
+            const lapTimeEl = document.getElementById('hud-lap-time');
+            const lapBestEl = document.getElementById('hud-lap-best');
+            if (lapTimeEl) lapTimeEl.innerText = formatLapTime(finalLapTime);
+            if (lapBestEl) lapBestEl.innerText = formatLapTime(bestLapTime);
+          }
+        }
+      }
+
+      if (isLapRunning) {
+        lapCurrentTime = (nowMs - lapStartTime) / 1000;
+        const lapTimeEl = document.getElementById('hud-lap-time');
+        if (lapTimeEl) lapTimeEl.innerText = formatLapTime(lapCurrentTime);
+
+        // Record trajectory every ~100ms
+        const lastSample = activeLapRecording[activeLapRecording.length - 1];
+        if (!lastSample || (lapCurrentTime - lastSample.t >= 0.1)) {
+          activeLapRecording.push({
+            t: lapCurrentTime,
+            x: carState.x,
+            z: carState.z,
+            angle: carState.angle
+          });
+        }
+
+        // Live Ghost Delta calculation
+        if (savedGhostLap && savedGhostLap.length > 1) {
+          const maxGhostT = savedGhostLap[savedGhostLap.length - 1].t;
+          const deltaEl = document.getElementById('hud-lap-delta');
+          if (deltaEl) {
+            if (lapCurrentTime < bestLapTime) {
+              const diff = (lapCurrentTime - (lapCurrentTime * (maxGhostT / Math.max(1, lapCurrentTime)))).toFixed(2);
+              deltaEl.innerText = `Δ -${Math.abs(diff)}s`;
+              deltaEl.className = 'font-bold text-emerald-500 dark:text-emerald-400';
+            } else {
+              const diff = (lapCurrentTime - bestLapTime).toFixed(2);
+              deltaEl.innerText = `Δ +${diff}s`;
+              deltaEl.className = 'font-bold text-rose-500 dark:text-rose-400';
+            }
+          }
+        }
+      }
+
+      // Update Holographic Ghost Car Position
+      if (savedGhostLap && savedGhostLap.length > 0) {
+        const playbackTime = isLapRunning ? lapCurrentTime : (Date.now() * 0.001);
+        updateGhostCar(playbackTime);
+      }
+
+      const baseGroundY = currentVehicleModel === 'drone' ? 0.75 + Math.sin(Date.now() * 0.005) * 0.12 : 0;
+      carGroup.position.set(carState.x, baseGroundY + carState.y, carState.z);
       carGroup.rotation.y = carState.angle;
 
       // --- SUSPENSION WEIGHT TRANSFER (PITCH SQUAT/DIVE & CORNERING BODY ROLL) ---
@@ -4915,6 +5997,15 @@ if __name__ == "__main__":
 
       // Update Holographic GPS Route Ribbon
       updateGPSRibbon();
+
+      // Update Highway Courier Bounty Missions (Option 2)
+      updateMissionState(0.016);
+
+      // Update Multi-Agent Intersection Comms & Live Debates (Option 4)
+      updateAgentSociety(0.016);
+
+      // Update Code Bugs Squashing Physics & Respawn (Option 4)
+      updateCodeBugs(0.016);
 
       // Dynamic Drift Skid Audio
       if (Math.abs(carState.speed) > 0.52 && (isLeft || isRight)) {
@@ -5075,6 +6166,10 @@ if __name__ == "__main__":
       setupMobileTouchControls();
       updatePlayerHUD();
       updateQuestsProgress();
+      if (bestLapTime > 0) {
+        const lapBestEl = document.getElementById('hud-lap-best');
+        if (lapBestEl) lapBestEl.innerText = formatLapTime(bestLapTime);
+      }
       if (window.innerWidth < 768) {
         hudCollapsed = true;
         updateHUDDisplay();
