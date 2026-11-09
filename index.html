@@ -127,7 +127,10 @@
     <!-- Mode Selector Tabs -->
     <div class="flex items-center bg-slate-100 dark:bg-[#131929] p-0.5 sm:p-1 rounded-xl border border-slate-200 dark:border-slate-800 gap-0.5 sm:gap-1 text-[11px] sm:text-xs">
       <button onclick="switchView('game')" id="tab-game" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold bg-white dark:bg-blue-600 text-blue-600 dark:text-white shadow-sm flex items-center gap-1 transition-all" title="3D Open World">
-        <span>🌐</span><span class="hidden xs:inline">3D</span>
+        <span>🌐</span><span class="hidden xs:inline">3D World</span>
+      </button>
+      <button onclick="switchView('studio')" id="tab-studio" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 transition-all" title="Visual Build-An-Agent Studio">
+        <span>🧩</span><span class="hidden xs:inline">Studio</span>
       </button>
       <button onclick="switchView('sandbox')" id="tab-sandbox" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 transition-all" title="Live Agent Simulator & Sandbox">
         <span>🤖</span><span class="hidden xs:inline">Simulator</span>
@@ -145,8 +148,8 @@
 
     <!-- World Switcher & Actions -->
     <div class="flex items-center gap-1 sm:gap-2 shrink-0">
-      <!-- 4 Selectable Worlds Switcher (Always visible!) -->
-      <div class="flex items-center bg-slate-100 dark:bg-[#131929] p-0.5 rounded-lg border border-slate-200 dark:border-slate-800 text-[10px] sm:text-[11px] font-mono">
+      <!-- 4 Selectable Worlds Switcher -->
+      <div class="hidden sm:flex items-center bg-slate-100 dark:bg-[#131929] p-0.5 rounded-lg border border-slate-200 dark:border-slate-800 text-[10px] sm:text-[11px] font-mono">
         <button onclick="switchWorld('island')" id="wbtn-island" class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded bg-blue-600 text-white font-semibold transition" title="Silicon Island">🏝️<span class="hidden md:inline ml-0.5">Island</span></button>
         <button onclick="switchWorld('city')" id="wbtn-city" class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition" title="Cyber City">🏙️<span class="hidden md:inline ml-0.5">City</span></button>
         <button onclick="switchWorld('mars')" id="wbtn-mars" class="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition" title="Mars Colony">🚀<span class="hidden md:inline ml-0.5">Mars</span></button>
@@ -383,58 +386,116 @@
     </div>
 
     <!-- MOBILE ERGONOMIC DRIVING COCKPIT (Dual-Thumb Controls on Phones) -->
-    <div id="mobile-driving-cockpit" class="absolute inset-x-0 bottom-0 pointer-events-none z-30 pb-3 sm:pb-6 px-3 sm:px-6 flex items-end justify-between select-none touch-none sm:hidden">
+    <!-- BOSS ARENA BATTLE HUD CARD -->
+    <div id="boss-hud-card" class="absolute top-16 left-1/2 -translate-x-1/2 hud-glass px-4 sm:px-5 py-2.5 rounded-2xl border-rose-500/50 shadow-2xl flex flex-col items-center gap-1.5 z-30 opacity-0 pointer-events-none transition-all duration-300 w-80 max-w-[92vw]">
+      <div class="flex items-center justify-between w-full font-mono text-xs">
+        <span class="flex items-center gap-1.5 font-bold text-rose-500 animate-pulse">
+          <span>⚔️</span>
+          <span id="boss-hud-title">THE HALLUCINATION TITAN</span>
+        </span>
+        <span id="boss-hud-phase" class="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 font-bold">PHASE 1</span>
+      </div>
+      <div class="w-full bg-slate-800/80 h-2.5 rounded-full overflow-hidden border border-rose-900/60 relative">
+        <div id="boss-hud-hp-bar" class="h-full bg-gradient-to-r from-rose-600 via-amber-500 to-rose-400 w-full transition-all duration-200"></div>
+      </div>
+      <div class="flex items-center justify-between w-full font-mono text-[9px] text-slate-400">
+        <span id="boss-hud-hint">⚡ Drive over Green Guardrail Pads to Attack!</span>
+        <span id="boss-hud-hp-pct" class="font-bold text-rose-400">100%</span>
+      </div>
+    </div>
+
+    <!-- KART MYSTERY POWER-UP ACTIVE BADGE -->
+    <div id="kart-powerup-badge" class="absolute top-20 right-4 hud-glass px-3.5 py-2 rounded-xl border-cyan-500/50 shadow-xl flex items-center gap-2.5 font-mono text-xs z-20 opacity-0 pointer-events-none transition-all duration-200">
+      <span id="kart-powerup-icon" class="text-xl animate-bounce">⚡</span>
+      <div>
+        <div id="kart-powerup-title" class="font-bold text-cyan-400 text-[11px]">CONTEXT WARP</div>
+        <div class="w-20 bg-slate-800 h-1.5 rounded-full overflow-hidden mt-0.5">
+          <div id="kart-powerup-bar" class="h-full bg-cyan-400 w-full transition-all duration-75"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CYBERPUNK LIVE NETWORK WORLD FEED -->
+    <div id="world-chat-feed" class="absolute bottom-24 right-4 hud-glass p-2.5 rounded-xl border-slate-700/60 shadow-xl w-64 max-w-[85vw] font-mono text-[10px] space-y-1 z-10 pointer-events-none hidden md:block opacity-90 transition-all">
+      <div class="text-[9px] font-bold text-slate-400 flex items-center justify-between border-b border-slate-700/50 pb-1">
+        <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> AGENTIC NETWORK FEED</span>
+        <span class="text-slate-500">LIVE</span>
+      </div>
+      <div id="world-feed-list" class="space-y-1 text-slate-300">
+        <div><span class="text-cyan-400 font-semibold">[NET]</span> Swarm cluster synced state</div>
+        <div><span class="text-purple-400 font-semibold">[RACE]</span> GhostRacer logged 00:43.2 on Outer Ring</div>
+        <div><span class="text-amber-400 font-semibold">[BOUNTY]</span> Courier delivered MCP schema (+160 XP)</div>
+      </div>
+    </div>
+
+    <!-- MOBILE TIER 2: FLOATING QUICK ACTIONS RIBBON (Above pedals, perfectly reachable) -->
+    <div class="pointer-events-auto absolute bottom-[76px] left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1.5 sm:hidden select-none touch-none w-full px-3">
+      <!-- Floating Inspect Button (Shows when near landmark) -->
+      <button id="btn-touch-inspect" onclick="triggerCurrentChest()" class="hidden px-4 py-1.5 rounded-full bg-emerald-600 active:bg-emerald-500 text-white font-mono text-xs font-bold shadow-2xl border border-emerald-300 animate-pulse active:scale-95 transition-all">
+        🔍 INSPECT LANDMARK
+      </button>
+
+      <!-- Sleek Floating Action Ribbon -->
+      <div class="hud-glass px-2.5 py-1 rounded-full flex items-center gap-1 shadow-2xl border border-white/20 dark:border-white/10 max-w-[94vw] overflow-x-auto no-scrollbar">
+        <button onclick="cycleCameraMode()" class="px-2 py-1 rounded-full bg-slate-900/80 text-slate-200 border border-white/20 active:bg-slate-800 text-[9px] font-mono shadow-sm active:scale-95 whitespace-nowrap">
+          📷 <span id="mobile-cam-label">CHASE</span>
+        </button>
+        <button onclick="openPhotoMode()" class="px-2 py-1 rounded-full bg-indigo-950/80 text-indigo-200 border border-indigo-500/30 text-[9px] font-mono shadow-sm active:scale-95 whitespace-nowrap" title="Photo Mode">
+          📸 Photo
+        </button>
+        <button onclick="teleportToMarsColosseum()" class="px-2 py-1 rounded-full bg-rose-950/80 text-rose-200 border border-rose-500/40 text-[9px] font-mono shadow-sm active:scale-95 whitespace-nowrap" title="Mars Colosseum Boss">
+          ⚔️ Boss
+        </button>
+        <button onclick="startRandomMission()" class="px-2 py-1 rounded-full bg-amber-950/80 text-amber-200 border border-amber-500/40 text-[9px] font-mono shadow-sm active:scale-95 whitespace-nowrap" title="Courier Bounty">
+          📦 Bounty
+        </button>
+        <button onclick="openBeatStudio()" class="px-2 py-1 rounded-full bg-pink-950/80 text-pink-200 border border-pink-500/40 text-[9px] font-mono shadow-sm active:scale-95 whitespace-nowrap" title="Beat Studio">
+          🎵 Beats
+        </button>
+        <button onclick="cycleRadioStation()" id="btn-touch-radio" class="px-2 py-1 rounded-full bg-cyan-950/80 text-cyan-200 border border-cyan-500/30 text-[9px] font-mono shadow-sm active:scale-95 whitespace-nowrap" title="Radio Stations">
+          📻 <span id="mobile-radio-label">Radio</span>
+        </button>
+        <button onclick="openGarageModal()" class="px-2 py-1 rounded-full bg-purple-950/80 text-purple-200 border border-purple-500/30 text-[9px] font-mono shadow-sm active:scale-95 whitespace-nowrap" title="Garage">
+          🏎️ Garage
+        </button>
+        <button onclick="openLeaderboardModal()" class="px-2 py-1 rounded-full bg-yellow-950/80 text-yellow-200 border border-yellow-500/30 text-[9px] font-mono shadow-sm active:scale-95 whitespace-nowrap" title="Leaderboards">
+          🏆 Board
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE TIER 1: PRIMARY DRIVING COCKPIT (Left & Right Thumb Clusters Pinned To Corners) -->
+    <div id="mobile-driving-cockpit" class="absolute inset-x-0 bottom-0 pointer-events-none z-30 pb-3 px-3 flex items-end justify-between select-none touch-none sm:hidden">
       <!-- LEFT THUMB: Ergonomic Steering Pads -->
       <div class="pointer-events-auto flex items-center gap-2">
-        <button id="btn-touch-left" class="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-blue-600 text-white border border-white/20 active:border-white/80 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
+        <button id="btn-touch-left" class="w-14 h-14 rounded-2xl bg-slate-900/90 active:bg-blue-600 text-white border border-white/20 active:border-white/80 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
           <span class="text-xl font-bold leading-none">&#x25C0;</span>
           <span class="text-[8px] font-mono tracking-wider uppercase text-slate-300 mt-0.5 font-bold">LEFT</span>
         </button>
-        <button id="btn-touch-right" class="w-14 h-14 rounded-2xl bg-slate-900/80 active:bg-blue-600 text-white border border-white/20 active:border-white/80 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
+        <button id="btn-touch-right" class="w-14 h-14 rounded-2xl bg-slate-900/90 active:bg-blue-600 text-white border border-white/20 active:border-white/80 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
           <span class="text-xl font-bold leading-none">&#x25B6;</span>
           <span class="text-[8px] font-mono tracking-wider uppercase text-slate-300 mt-0.5 font-bold">RIGHT</span>
         </button>
       </div>
 
-      <!-- CENTER: Quick Landmark Interaction & Camera & Radio & Garage -->
-      <div class="pointer-events-auto flex flex-col items-center gap-1.5 mb-1">
-        <!-- Floating Inspect Button (Shows when near landmark) -->
-        <button id="btn-touch-inspect" onclick="triggerCurrentChest()" class="hidden px-3.5 py-1.5 rounded-full bg-emerald-600 active:bg-emerald-500 text-white font-mono text-[11px] font-bold shadow-xl border border-emerald-400 animate-pulse active:scale-95 transition-all">
-          &#x1F50D; INSPECT
+      <!-- RIGHT THUMB: Nitro Boost, Reverse, and Gas Pedals -->
+      <div class="pointer-events-auto flex items-end gap-1.5">
+        <!-- Nitro Boost Quick Trigger -->
+        <button id="btn-touch-nitro" onclick="triggerNitroBoost()" class="w-11 h-12 rounded-xl bg-gradient-to-t from-cyan-600 to-blue-500 active:from-cyan-400 active:to-blue-400 text-white border border-cyan-300/60 shadow-xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
+          <span class="text-sm font-black leading-none">⚡</span>
+          <span class="text-[7px] font-mono font-bold text-white mt-0.5">BOOST</span>
         </button>
-        <div class="flex items-center gap-1">
-          <!-- Camera Mode Quick Toggle -->
-          <button id="btn-touch-cam" onclick="cycleCameraMode()" class="px-2.5 py-1 rounded-full bg-slate-900/80 text-slate-200 border border-white/20 active:bg-slate-800 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
-            &#x1F4F7; <span id="mobile-cam-label">CHASE</span>
-          </button>
-          <!-- Quick Radio Toggle -->
-          <button id="btn-touch-radio" onclick="toggleRadio()" class="px-2.5 py-1 rounded-full bg-cyan-950/80 text-cyan-200 border border-cyan-500/30 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
-            📻 <span id="mobile-radio-label">RADIO</span>
-          </button>
-          <!-- Quick Bounty Mission -->
-          <button onclick="startRandomMission()" class="px-2.5 py-1 rounded-full bg-amber-950/80 text-amber-200 border border-amber-500/40 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
-            📦
-          </button>
-          <!-- Quick Beat Studio -->
-          <button onclick="openBeatStudio()" class="px-2.5 py-1 rounded-full bg-pink-950/80 text-pink-200 border border-pink-500/40 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
-            🎵
-          </button>
-          <!-- Quick Garage -->
-          <button onclick="openGarageModal()" class="px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-200 border border-purple-500/30 text-[9px] font-mono backdrop-blur-md shadow-md active:scale-95">
-            🏎️
-          </button>
-        </div>
-      </div>
 
-      <!-- RIGHT THUMB: Drive (Gas) & Brake (Reverse) Pedals -->
-      <div class="pointer-events-auto flex items-end gap-2">
-        <button id="btn-touch-brake" class="w-13 h-13 p-2.5 rounded-2xl bg-red-950/85 active:bg-red-600 text-white border border-red-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
+        <!-- Brake / Reverse Pedal -->
+        <button id="btn-touch-brake" class="w-12 h-14 rounded-2xl bg-red-950/85 active:bg-red-600 text-white border border-red-500/40 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
           <span class="text-base font-bold leading-none">&#x25BC;</span>
           <span class="text-[8px] font-mono tracking-wider uppercase text-red-200 mt-0.5 font-bold">REV</span>
         </button>
-        <button id="btn-touch-gas" class="w-16 h-16 p-3 rounded-2xl bg-gradient-to-t from-blue-700 to-cyan-500 active:from-blue-600 active:to-emerald-400 text-white border border-cyan-300/50 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
+
+        <!-- Drive / Gas Pedal -->
+        <button id="btn-touch-gas" class="w-15 h-16 rounded-2xl bg-gradient-to-t from-emerald-600 to-cyan-500 active:from-emerald-500 active:to-teal-300 text-white border border-emerald-300/60 shadow-2xl backdrop-blur-md flex flex-col items-center justify-center transition-transform active:scale-90 touch-none">
           <span class="text-2xl font-black leading-none">&#x25B2;</span>
-          <span class="text-[9px] font-mono font-bold tracking-wider uppercase text-white mt-0.5">GAS</span>
+          <span class="text-[9px] font-mono font-bold tracking-wider uppercase text-white mt-0.5">DRIVE</span>
         </button>
       </div>
     </div>
@@ -465,6 +526,141 @@
     <div id="speedcam-badge" class="absolute top-16 left-1/2 -translate-x-1/2 hud-glass px-6 py-2.5 border-amber-500 shadow-2xl font-mono text-center opacity-0 pointer-events-none transition-all duration-300 z-50">
       <div class="text-[10px] text-amber-400 font-bold tracking-widest uppercase">📸 HIGHWAY RADAR SPEED TRAP FLASH!</div>
       <div id="speedcam-text" class="text-sm font-black text-white">SPEED: 118 KM/H • +50 SPEED XP!</div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 5: VISUAL BUILD-AN-AGENT DAG FLOWCHART STUDIO -->
+  <!-- ========================================================================= -->
+  <section id="view-studio" class="flex-1 w-full h-full flex flex-col overflow-hidden hidden bg-slate-50 dark:bg-[#080a10]">
+    <!-- Studio Header & Action Bar -->
+    <div class="p-3 sm:p-4 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0c101c] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
+      <div>
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <span>🧩 Visual Build-An-Agent Studio</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 border border-blue-200 dark:border-blue-800 text-blue-600 dark:text-cyan-400 font-semibold">Interactive DAG Canvas</span>
+        </h2>
+        <p class="text-[11px] text-slate-500 font-mono mt-0.5">Design multi-agent workflows, simulate real-time token pulse execution, and export production Python code.</p>
+      </div>
+      <div class="flex items-center gap-2 font-mono text-xs">
+        <button onclick="runStudioSimulation()" id="btn-studio-run" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold shadow-md transition active:scale-95 flex items-center gap-1.5">
+          <span id="studio-run-icon">▶</span>
+          <span id="studio-run-text">Run Simulation</span>
+        </button>
+        <button onclick="openStudioCodeExport()" class="px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-md transition active:scale-95 flex items-center gap-1.5">
+          <span>💻</span>
+          <span>Export Python Code</span>
+        </button>
+        <button onclick="switchView('game')" class="px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 transition">
+          ✕ Back to 3D
+        </button>
+      </div>
+    </div>
+
+    <!-- Studio Main Workspace: Canvas + Live Inspector -->
+    <div class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+      <!-- DAG Flowchart Interactive Canvas -->
+      <div class="flex-1 h-full relative overflow-hidden bg-slate-100 dark:bg-[#07090f] p-4 sm:p-6" id="studio-canvas-wrapper">
+        <svg id="studio-dag-svg" class="w-full h-full min-h-[480px] rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#0a0e1a]/80 shadow-inner">
+          <defs>
+            <linearGradient id="cableGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#38bdf8" />
+              <stop offset="100%" stop-color="#818cf8" />
+            </linearGradient>
+            <linearGradient id="cableGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#818cf8" />
+              <stop offset="100%" stop-color="#34d399" />
+            </linearGradient>
+            <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <!-- Connecting Bezier Cables -->
+          <g id="studio-cables-group">
+            <path id="cable-0-1" d="M 160 110 C 230 110, 230 110, 300 110" stroke="url(#cableGrad1)" stroke-width="3" fill="none" stroke-linecap="round" />
+            <path id="cable-1-2" d="M 440 110 C 500 110, 500 70, 560 70" stroke="url(#cableGrad1)" stroke-width="3" fill="none" stroke-linecap="round" />
+            <path id="cable-1-3" d="M 440 110 C 500 110, 500 170, 560 170" stroke="url(#cableGrad1)" stroke-width="3" fill="none" stroke-linecap="round" />
+            <path id="cable-2-4" d="M 700 70 C 760 70, 760 110, 820 110" stroke="url(#cableGrad2)" stroke-width="3" fill="none" stroke-linecap="round" />
+            <path id="cable-3-4" d="M 700 170 C 760 170, 760 110, 820 110" stroke="url(#cableGrad2)" stroke-width="3" fill="none" stroke-linecap="round" />
+            <path id="cable-4-5" d="M 960 110 C 1010 110, 1010 110, 1060 110" stroke="url(#cableGrad2)" stroke-width="3" fill="none" stroke-linecap="round" />
+          </g>
+
+          <!-- Animated Token Simulation Pulse -->
+          <circle id="studio-pulse-token" r="7" fill="#38bdf8" filter="url(#glowEffect)" opacity="0" cx="160" cy="110" />
+        </svg>
+
+        <!-- Node HTML Overlays positioned over SVG -->
+        <div id="studio-nodes-container" class="absolute inset-0 p-4 sm:p-6 pointer-events-none">
+          <!-- Node 0: User Prompt -->
+          <div style="left: 32px; top: 70px;" class="absolute pointer-events-auto w-40 hud-glass p-3 rounded-2xl border-blue-500/60 shadow-xl space-y-1 font-mono text-xs cursor-pointer hover:border-blue-400 transition" id="snode-0">
+            <div class="flex items-center gap-1.5 text-blue-500 font-bold text-[11px]">
+              <span>📥</span><span>User Prompt</span>
+            </div>
+            <div class="text-[10px] text-slate-500 truncate">Input query task</div>
+            <div class="text-[9px] px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-950 text-blue-400 font-semibold">state.messages</div>
+          </div>
+
+          <!-- Node 1: StateGraph Router -->
+          <div style="left: 300px; top: 70px;" class="absolute pointer-events-auto w-44 hud-glass p-3 rounded-2xl border-purple-500/60 shadow-xl space-y-1 font-mono text-xs cursor-pointer hover:border-purple-400 transition" id="snode-1">
+            <div class="flex items-center gap-1.5 text-purple-400 font-bold text-[11px]">
+              <span>🔀</span><span>StateGraph Router</span>
+            </div>
+            <div class="text-[10px] text-slate-500 truncate">Conditional branch</div>
+            <div class="text-[9px] px-1.5 py-0.5 rounded bg-purple-50 dark:bg-purple-950 text-purple-400 font-semibold">check_tool_needed</div>
+          </div>
+
+          <!-- Node 2: Vector RAG Retriever -->
+          <div style="left: 560px; top: 30px;" class="absolute pointer-events-auto w-44 hud-glass p-3 rounded-2xl border-emerald-500/60 shadow-xl space-y-1 font-mono text-xs cursor-pointer hover:border-emerald-400 transition" id="snode-2">
+            <div class="flex items-center gap-1.5 text-emerald-400 font-bold text-[11px]">
+              <span>📚</span><span>Vector RAG (pgvector)</span>
+            </div>
+            <div class="text-[10px] text-slate-500 truncate">Semantic document top-k</div>
+            <div class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950 text-emerald-400 font-semibold">similarity_search()</div>
+          </div>
+
+          <!-- Node 3: MCP Tool Server -->
+          <div style="left: 560px; top: 130px;" class="absolute pointer-events-auto w-44 hud-glass p-3 rounded-2xl border-amber-500/60 shadow-xl space-y-1 font-mono text-xs cursor-pointer hover:border-amber-400 transition" id="snode-3">
+            <div class="flex items-center gap-1.5 text-amber-400 font-bold text-[11px]">
+              <span>🔧</span><span>Anthropic MCP Server</span>
+            </div>
+            <div class="text-[10px] text-slate-500 truncate">tools/call: git_diff</div>
+            <div class="text-[9px] px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-950 text-amber-400 font-semibold">mcp.execute()</div>
+          </div>
+
+          <!-- Node 4: LLM Reasoning Core -->
+          <div style="left: 820px; top: 70px;" class="absolute pointer-events-auto w-44 hud-glass p-3 rounded-2xl border-cyan-500/60 shadow-xl space-y-1 font-mono text-xs cursor-pointer hover:border-cyan-400 transition" id="snode-4">
+            <div class="flex items-center gap-1.5 text-cyan-400 font-bold text-[11px]">
+              <span>🧠</span><span>LLM (Claude / Gemini)</span>
+            </div>
+            <div class="text-[10px] text-slate-500 truncate">Extended thinking loop</div>
+            <div class="text-[9px] px-1.5 py-0.5 rounded bg-cyan-50 dark:bg-cyan-950 text-cyan-400 font-semibold">chat_model.bind_tools</div>
+          </div>
+
+          <!-- Node 5: Pydantic Guardrail -->
+          <div style="left: 1060px; top: 70px;" class="absolute pointer-events-auto w-40 hud-glass p-3 rounded-2xl border-pink-500/60 shadow-xl space-y-1 font-mono text-xs cursor-pointer hover:border-pink-400 transition" id="snode-5">
+            <div class="flex items-center gap-1.5 text-pink-400 font-bold text-[11px]">
+              <span>🛡️</span><span>Pydantic Guardrail</span>
+            </div>
+            <div class="text-[10px] text-slate-500 truncate">Deterministic schema</div>
+            <div class="text-[9px] px-1.5 py-0.5 rounded bg-pink-50 dark:bg-pink-950 text-pink-400 font-semibold">BaseModel.validate</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Execution Log & State Inspector Drawer -->
+      <div class="w-full lg:w-96 border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0a0d18] flex flex-col shrink-0">
+        <div class="p-3 border-b border-slate-200 dark:border-slate-800 font-mono text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center justify-between">
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> DAG EXECUTION TRACE</span>
+          <span id="studio-step-counter" class="text-slate-400 font-normal">Step: Idle</span>
+        </div>
+        <div id="studio-execution-log" class="flex-1 overflow-y-auto p-3.5 space-y-2.5 font-mono text-[11px] text-slate-600 dark:text-slate-300">
+          <div class="p-2 rounded-lg bg-slate-50 dark:bg-[#101424] border border-slate-200 dark:border-slate-800">
+            <strong class="text-blue-500">System Ready:</strong> Click <em>▶ Run Simulation</em> to watch token pulses route through the conditional DAG.
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -942,6 +1138,133 @@
   <!-- ========================================================================= -->
   <!-- GARAGE CUSTOMIZER & QUESTS MODAL (Vehicles, Paint, Neon Underglow, XP) -->
   <!-- ========================================================================= -->
+  
+  <!-- ========================================================================= -->
+  <!-- MODAL: CINEMATIC DRONE PHOTO MODE & WALLPAPER STUDIO -->
+  <!-- ========================================================================= -->
+  <div id="photo-studio-modal" class="fixed inset-0 z-50 pointer-events-none flex flex-col justify-between p-4 hidden transition-all">
+    <!-- Top Photo Bar -->
+    <div class="pointer-events-auto flex items-center justify-between hud-glass px-4 py-2.5 rounded-2xl max-w-xl w-full mx-auto shadow-2xl border-indigo-500/40">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">📸</span>
+        <span class="font-mono font-bold text-xs text-slate-900 dark:text-white">CINEMATIC PHOTO MODE</span>
+      </div>
+      <button onclick="closePhotoMode()" class="text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 text-slate-400 hover:text-white font-mono font-bold transition">
+        ✕ Exit ([P] key)
+      </button>
+    </div>
+
+    <!-- Watermark Overlay (Rendered into image) -->
+    <div id="photo-watermark" class="self-end mr-4 mb-20 hud-glass px-3 py-1.5 rounded-xl text-[10px] font-mono font-bold text-cyan-400 shadow-lg border border-cyan-500/30">
+      AWESOME AGENTIC AI • MULTIVERSE 2026
+    </div>
+
+    <!-- Bottom Filter & Snapshot Controls -->
+    <div class="pointer-events-auto max-w-2xl w-full mx-auto hud-glass p-3 rounded-2xl shadow-2xl border-indigo-500/40 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-xs">
+      <!-- Filter Buttons -->
+      <div class="flex items-center gap-1.5 flex-wrap justify-center">
+        <span class="text-[10px] text-slate-400">FILTER:</span>
+        <button onclick="setPhotoFilter('none')" id="pfilter-none" class="px-2 py-0.5 rounded bg-blue-600 text-white font-semibold">Real</button>
+        <button onclick="setPhotoFilter('cyberpunk')" id="pfilter-cyberpunk" class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Cyberpunk</button>
+        <button onclick="setPhotoFilter('matrix')" id="pfilter-matrix" class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Matrix</button>
+        <button onclick="setPhotoFilter('bladerunner')" id="pfilter-bladerunner" class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Amber</button>
+        <button onclick="setPhotoFilter('noir')" id="pfilter-noir" class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Noir</button>
+      </div>
+      <!-- Snap Button -->
+      <button onclick="downloadPhotoWallpaper()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold font-mono shadow-xl transition active:scale-95 flex items-center gap-1.5 whitespace-nowrap">
+        <span>💾</span>
+        <span>Download 4K Wallpaper</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: GLOBAL SIMULATED RACER LEADERBOARDS -->
+  <!-- ========================================================================= -->
+  <div id="leaderboard-modal" class="fixed inset-0 bg-slate-900/60 dark:bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-4 hidden transition-all">
+    <div class="card-surface w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden shadow-2xl border-yellow-500/40 rounded-3xl">
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl animate-bounce">🏆</span>
+          <div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white font-mono">GLOBAL RACER LEADERBOARDS</h3>
+            <p class="text-[10px] text-slate-500 font-mono">Outer Ring Lap Times & Bounty Masters</p>
+          </div>
+        </div>
+        <button onclick="closeLeaderboardModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg font-bold p-1">&times;</button>
+      </div>
+      <div class="p-4 overflow-y-auto space-y-4 font-mono text-xs">
+        <div class="space-y-1.5">
+          <div class="text-[11px] font-bold text-amber-500 uppercase tracking-wider flex items-center justify-between">
+            <span>🏁 OUTER RING LAP RECORDS</span>
+            <span>BEST LAP</span>
+          </div>
+          <div class="space-y-1">
+            <div class="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between font-bold">
+              <span class="flex items-center gap-2 text-amber-400"><span>🥇</span> <span>CyberDrifter_99</span></span>
+              <span>00:39.4</span>
+            </div>
+            <div class="p-2 rounded-xl bg-slate-800/40 border border-slate-700/40 flex items-center justify-between">
+              <span class="flex items-center gap-2 text-slate-300"><span>🥈</span> <span>LangGraph_Agent</span></span>
+              <span>00:41.2</span>
+            </div>
+            <div id="lboard-user-row" class="p-2 rounded-xl bg-cyan-500/15 border border-cyan-500/40 flex items-center justify-between font-bold text-cyan-300">
+              <span class="flex items-center gap-2"><span>🥉</span> <span>YOU (Personal Best)</span></span>
+              <span id="lboard-user-lap">--:--.-</span>
+            </div>
+            <div class="p-2 rounded-xl bg-slate-800/40 border border-slate-700/40 flex items-center justify-between text-slate-400">
+              <span class="flex items-center gap-2"><span>4.</span> <span>AutoGen_Swarm</span></span>
+              <span>00:44.8</span>
+            </div>
+            <div class="p-2 rounded-xl bg-slate-800/40 border border-slate-700/40 flex items-center justify-between text-slate-400">
+              <span class="flex items-center gap-2"><span>5.</span> <span>CodeRabbit_SWE</span></span>
+              <span>00:46.1</span>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-1.5 pt-2 border-t border-slate-800">
+          <div class="text-[11px] font-bold text-emerald-500 uppercase tracking-wider flex items-center justify-between">
+            <span>📦 BOUNTY COURIER HALL OF FAME</span>
+            <span>DELIVERIES</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-800/40 border border-slate-700/40 flex items-center justify-between text-slate-300">
+            <span>YOU (Current Session)</span>
+            <span class="font-bold text-emerald-400" id="lboard-user-bounties">0 Delivered</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: STUDIO CODE EXPORT MODAL -->
+  <!-- ========================================================================= -->
+  <div id="studio-code-modal" class="fixed inset-0 bg-slate-900/60 dark:bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-4 hidden transition-all">
+    <div class="card-surface w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl border-cyan-500/40 rounded-3xl">
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">💻</span>
+          <div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white font-mono">EXPORT PRODUCTION AGENT CODE</h3>
+            <p class="text-[10px] text-slate-500 font-mono">Generated from visual StateGraph DAG</p>
+          </div>
+        </div>
+        <button onclick="closeStudioCodeExport()" class="text-slate-400 hover:text-white text-lg font-bold p-1">&times;</button>
+      </div>
+      <div class="p-4 overflow-y-auto space-y-3 font-mono text-xs">
+        <div class="flex items-center gap-2">
+          <button onclick="setStudioExportTab('langgraph')" id="btn-export-langgraph" class="px-3 py-1 rounded-lg bg-blue-600 text-white font-bold">LangGraph</button>
+          <button onclick="setStudioExportTab('crewai')" id="btn-export-crewai" class="px-3 py-1 rounded-lg bg-slate-800 text-slate-400 font-bold">CrewAI</button>
+          <button onclick="setStudioExportTab('pydantic')" id="btn-export-pydantic" class="px-3 py-1 rounded-lg bg-slate-800 text-slate-400 font-bold">PydanticAI</button>
+        </div>
+        <div class="relative">
+          <pre id="studio-code-pre" class="p-4 rounded-xl bg-slate-950 border border-slate-800 overflow-x-auto text-emerald-400 text-[11px] font-mono max-h-80 select-all"></pre>
+          <button onclick="copyStudioCode()" id="btn-copy-studio-code" class="absolute top-2 right-2 px-2.5 py-1 rounded bg-blue-600 hover:bg-blue-500 text-white font-bold text-[10px] shadow">Copy Code</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="garage-modal" class="fixed inset-0 bg-slate-900/60 dark:bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-4 hidden transition-all">
     <div class="card-surface w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl border-purple-500/40 rounded-3xl">
       <div class="p-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0c101c] flex items-center justify-between shrink-0">
@@ -988,6 +1311,8 @@
             <button onclick="selectPaintColor(0x059669)" class="w-8 h-8 rounded-full bg-emerald-600 transition hover:scale-110" title="Emerald Racer"></button>
             <button onclick="selectPaintColor(0xdc2626)" class="w-8 h-8 rounded-full bg-red-600 transition hover:scale-110" title="Crimson"></button>
             <button onclick="selectPaintColor(0x1e293b)" class="w-8 h-8 rounded-full bg-slate-800 border border-slate-600 transition hover:scale-110" title="Stealth Carbon"></button>
+            <button onclick="selectPaintColor(0x06b6d4)" class="w-8 h-8 rounded-full bg-cyan-400 border-2 border-white shadow transition hover:scale-110" title="DeepSeek R1 Quantum (Boss Unlock)"></button>
+            <button onclick="selectPaintColor(0xf59e0b)" class="w-8 h-8 rounded-full bg-amber-400 border-2 border-white shadow transition hover:scale-110" title="Claude 3.7 Liquid Gold (Boss Unlock)"></button>
           </div>
         </div>
 
@@ -1559,6 +1884,743 @@
       }
     }
 
+    
+    // =========================================================================
+    // SYSTEM A: CYBER COLOSSEUM & THE HALLUCINATION TITAN (BOSS BATTLE)
+    // =========================================================================
+    let bossState = {
+      active: false,
+      hp: 100,
+      maxHp: 100,
+      phase: 1,
+      name: "The Hallucination Titan",
+      coreMesh: null,
+      rings: [],
+      shockwaveMesh: null,
+      shockwaveRadius: 0,
+      shockwaveActive: false,
+      shockwaveCooldown: 0,
+      counterPads: [],
+      defeated: false,
+      defeatedTimer: 0
+    };
+
+    function initBossArena(parentGroup) {
+      if (currentWorld !== 'mars') return;
+
+      const arenaCenter = { x: 0, z: -155 };
+      const arenaGroup = new THREE.Group();
+      arenaGroup.position.set(arenaCenter.x, 0, arenaCenter.z);
+
+      // Arena Floor Hexagonal Plate
+      const floorGeo = new THREE.CircleGeometry(26, 6).rotateX(-Math.PI / 2);
+      const floorMat = new THREE.MeshStandardMaterial({ color: 0x1a0f1e, roughness: 0.6, metalness: 0.7 });
+      const floor = new THREE.Mesh(floorGeo, floorMat);
+      floor.receiveShadow = true; arenaGroup.add(floor);
+
+      // Outer Glowing Barrier Pylons
+      for (let i = 0; i < 6; i++) {
+        const angle = (i * Math.PI) / 3;
+        const px = Math.cos(angle) * 26;
+        const pz = Math.sin(angle) * 26;
+        const pylon = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.9, 12, 6), new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.8 }));
+        pylon.position.set(px, 6, pz); arenaGroup.add(pylon);
+
+        const capGlow = new THREE.Mesh(new THREE.SphereGeometry(0.8, 12, 12), new THREE.MeshBasicMaterial({ color: 0xf43f5e }));
+        capGlow.position.set(px, 12.2, pz); arenaGroup.add(capGlow);
+      }
+
+      // --- THE TITAN BOSS CORE (FLOATING POLYHEDRON) ---
+      const coreGeo = new THREE.IcosahedronGeometry(3.6, 1);
+      const coreMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, emissive: 0xe11d48, emissiveIntensity: 0.8, roughness: 0.2, metalness: 0.8 });
+      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      coreMesh.position.set(0, 8.5, 0); coreMesh.castShadow = true;
+      arenaGroup.add(coreMesh);
+      bossState.coreMesh = coreMesh;
+
+      // 3 Concentric Glowing Firewall Rings
+      bossState.rings = [];
+      [4.8, 5.8, 6.8].forEach((r, idx) => {
+        const ringGeo = new THREE.TorusGeometry(r, 0.14, 8, 36);
+        const ringMat = new THREE.MeshBasicMaterial({ color: idx === 1 ? 0xf59e0b : 0xf43f5e, wireframe: true });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.position.set(0, 8.5, 0);
+        arenaGroup.add(ring);
+        bossState.rings.push(ring);
+      });
+
+      // Ground Shockwave Ring
+      const swGeo = new THREE.RingGeometry(1, 2.2, 36).rotateX(-Math.PI / 2);
+      const swMat = new THREE.MeshBasicMaterial({ color: 0xf43f5e, transparent: true, opacity: 0, side: THREE.DoubleSide });
+      bossState.shockwaveMesh = new THREE.Mesh(swGeo, swMat);
+      bossState.shockwaveMesh.position.y = 0.15;
+      arenaGroup.add(bossState.shockwaveMesh);
+
+      // 4 Interactive Counter-Measure Pads
+      bossState.counterPads = [];
+      const padDefs = [
+        { dx: 0, dz: 16, type: 'guardrail', label: '🛡️ Guardrail Shield', color: 0x10b981 },
+        { dx: 0, dz: -16, type: 'schema', label: '📋 Pydantic Validator', color: 0x06b6d4 },
+        { dx: 16, dz: 0, type: 'checkpoint', label: '💾 State Checkpoint', color: 0x8b5cf6 },
+        { dx: -16, dz: 0, type: 'tool', label: '🔧 MCP Deterministic Tool', color: 0xf59e0b }
+      ];
+
+      padDefs.forEach(pd => {
+        const padMesh = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.4, 0.35, 16), new THREE.MeshStandardMaterial({ color: pd.color, emissive: pd.color, emissiveIntensity: 0.6 }));
+        padMesh.position.set(pd.dx, 0.18, pd.dz);
+        arenaGroup.add(padMesh);
+        bossState.counterPads.push({
+          mesh: padMesh,
+          wx: arenaCenter.x + pd.dx,
+          wz: arenaCenter.z + pd.dz,
+          type: pd.type,
+          label: pd.label,
+          color: pd.color,
+          cooldown: 0
+        });
+      });
+
+      parentGroup.add(arenaGroup);
+      bossState.active = true;
+      bossState.defeated = false;
+      bossState.hp = 100;
+    }
+
+    function updateBossArena(dt) {
+      if (!bossState.active || currentWorld !== 'mars' || !bossState.coreMesh) return;
+
+      const dist = Math.hypot(carState.x - 0, carState.z - (-155));
+      const hudCard = document.getElementById('boss-hud-card');
+
+      if (dist < 32 && !bossState.defeated) {
+        if (hudCard) hudCard.classList.remove('opacity-0', 'pointer-events-none');
+
+        // Rotate Boss Core & Rings
+        bossState.coreMesh.rotation.y += 0.02 * (bossState.phase === 2 ? 2.2 : 1.0);
+        bossState.coreMesh.rotation.x = Math.sin(Date.now() * 0.002) * 0.2;
+        bossState.rings[0].rotation.z += 0.03;
+        bossState.rings[1].rotation.x -= 0.025;
+        bossState.rings[2].rotation.y += 0.02;
+
+        // Shockwave Attack Cycle
+        bossState.shockwaveCooldown -= dt;
+        if (bossState.shockwaveCooldown <= 0 && !bossState.shockwaveActive) {
+          bossState.shockwaveActive = true;
+          bossState.shockwaveRadius = 2.0;
+          bossState.shockwaveCooldown = bossState.phase === 2 ? 3.5 : 5.5;
+          playTone(180, 'sawtooth', 0.25);
+        }
+
+        if (bossState.shockwaveActive && bossState.shockwaveMesh) {
+          bossState.shockwaveRadius += dt * 14.0;
+          bossState.shockwaveMesh.scale.set(bossState.shockwaveRadius, 1, bossState.shockwaveRadius);
+          bossState.shockwaveMesh.material.opacity = Math.max(0, 0.85 - (bossState.shockwaveRadius / 25.0));
+
+          // Check if shockwave hits car
+          const arenaDist = Math.hypot(carState.x - 0, carState.z - (-155));
+          if (Math.abs(arenaDist - bossState.shockwaveRadius) < 1.4 && !carState.isAirborne) {
+            cameraShake = 0.65;
+            carState.speed *= -0.4;
+            createCrashSparks(carState.x, carState.z);
+            codeIntegrity = Math.max(10, codeIntegrity - 12);
+            updatePlayerHUD();
+            showSpeedcamAlert("⚠️ HIT BY TITAN HALLUCINATION SHOCKWAVE! -12% INTEGRITY");
+            playTone(95, 'sawtooth', 0.2);
+          }
+
+          if (bossState.shockwaveRadius >= 25.0) {
+            bossState.shockwaveActive = false;
+            bossState.shockwaveMesh.material.opacity = 0;
+          }
+        }
+
+        // Check Counter-Measure Pads Collision
+        bossState.counterPads.forEach(pad => {
+          if (pad.cooldown > 0) pad.cooldown -= dt;
+          const dPad = Math.hypot(carState.x - pad.wx, carState.z - pad.wz);
+          if (dPad < 3.2 && pad.cooldown <= 0) {
+            pad.cooldown = 4.0;
+            damageBoss(25, pad.label);
+          }
+        });
+
+      } else {
+        if (hudCard && !hudCard.classList.contains('opacity-0')) {
+          hudCard.classList.add('opacity-0', 'pointer-events-none');
+        }
+      }
+    }
+
+    function damageBoss(amount, weaponName) {
+      bossState.hp = Math.max(0, bossState.hp - amount);
+      cameraShake = 0.85;
+      playTone(880, 'square', 0.15);
+      setTimeout(() => playTone(440, 'triangle', 0.25), 90);
+      createCrashSparks(carState.x, carState.z);
+
+      const hpBar = document.getElementById('boss-hud-hp-bar');
+      const hpPct = document.getElementById('boss-hud-hp-pct');
+      if (hpBar) hpBar.style.width = bossState.hp + '%';
+      if (hpPct) hpPct.innerText = bossState.hp + '%';
+
+      showSpeedcamAlert(`💥 ${weaponName} STRIKES TITAN! -${amount} HP`);
+
+      if (bossState.hp <= 50 && bossState.phase === 1) {
+        bossState.phase = 2;
+        const phaseEl = document.getElementById('boss-hud-phase');
+        if (phaseEl) {
+          phaseEl.innerText = "PHASE 2: ENRAGED";
+          phaseEl.className = "text-[9px] px-1.5 py-0.5 rounded bg-rose-600 text-white font-bold animate-pulse";
+        }
+        if (bossState.coreMesh) bossState.coreMesh.material.emissive.setHex(0xff0055);
+        showSpeedcamAlert("🚨 TITAN ENRAGED! SHOCKWAVES ACCELERATING!");
+      }
+
+      if (bossState.hp <= 0 && !bossState.defeated) {
+        defeatBoss();
+      }
+    }
+
+    function defeatBoss() {
+      bossState.defeated = true;
+      if (bossState.coreMesh) bossState.coreMesh.visible = false;
+      bossState.rings.forEach(r => { r.visible = false; });
+      if (bossState.shockwaveMesh) bossState.shockwaveMesh.visible = false;
+
+      const hudCard = document.getElementById('boss-hud-card');
+      if (hudCard) hudCard.classList.add('opacity-0', 'pointer-events-none');
+
+      // Rewards
+      if (typeof playerProfile !== 'undefined') {
+        playerProfile.xp += 500;
+        if (typeof updatePlayerHUD === 'function') updatePlayerHUD();
+      }
+      codeIntegrity = 100;
+      localStorage.setItem('agentic_boss_defeated', 'true');
+
+      // Celebration Fanfare
+      playTone(523, 'triangle', 0.2);
+      setTimeout(() => playTone(659, 'triangle', 0.2), 150);
+      setTimeout(() => playTone(784, 'triangle', 0.2), 300);
+      setTimeout(() => playTone(1046, 'square', 0.5), 450);
+
+      showSpeedcamAlert("🏆 THE HALLUCINATION TITAN DEFEATED! +500 XP & LEGENDARY PAINTS UNLOCKED!");
+      if (typeof addWorldFeedMessage === 'function') {
+        addWorldFeedMessage('[BOSS]', 'Hallucination Titan defeated in Mars Colosseum!');
+      }
+    }
+
+    function teleportToMarsColosseum() {
+      switchWorld('mars');
+      setTimeout(() => {
+        carState.x = 0;
+        carState.z = -125;
+        carState.angle = Math.PI;
+        carState.speed = 0;
+        showSpeedcamAlert("⚔️ ENTERED MARS CYBER COLOSSEUM!");
+      }, 500);
+    }
+
+    // =========================================================================
+    // SYSTEM B: IN-CAR AI TALK RADIO & POLICE SCANNER DISPATCH
+    // =========================================================================
+    const radioStationsList = ['OFF', '104.2 Cyber-Synth', '98.5 Agentic FM', 'Police Scanner'];
+    let currentRadioIdx = 0;
+    let radioDJTimer = 18.0;
+
+    const radioDJSpeeches = [
+      "You're locked into 98.5 Agentic FM. Benchmark update: Multi-agent StateGraph consensus beats single-prompt systems by 42%. Stay fast, stay grounded.",
+      "DJ Cyber-Byte on the air. Developer tip of the hour: Always validate your tool arguments with Pydantic v2 schemas before giving agents execution rights.",
+      "98.5 Agentic FM. Notice from the SWE Docks: Anthropic MCP protocols are officially adopted across major enterprise architectures. Code clean, drift hard.",
+      "Cruising the multiverse with Agentic AI. Autonomous NPC swarms are actively patrolling the central roundabout. Watch your speed out there!"
+    ];
+    let radioDJSpeechIdx = 0;
+
+    function cycleRadioStation() {
+      currentRadioIdx = (currentRadioIdx + 1) % radioStationsList.length;
+      const st = radioStationsList[currentRadioIdx];
+
+      const btn1 = document.getElementById('btn-radio');
+      const btn2 = document.getElementById('mobile-radio-label');
+      const label = st === 'OFF' ? '📻 OFF' : `📻 ${st.slice(0, 10)}`;
+
+      if (btn1) btn1.innerText = label;
+      if (btn2) btn2.innerText = st === 'OFF' ? 'RADIO' : st.slice(0, 7);
+
+      playTone(520, 'sine', 0.08);
+
+      if (st === 'OFF') {
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        showSpeedcamAlert("📻 Radio Turned Off");
+      } else if (st === '98.5 Agentic FM') {
+        showSpeedcamAlert("📻 98.5 Agentic FM: AI Developer Talk Radio Live");
+        speakRadioDJ(radioDJSpeeches[0]);
+      } else if (st === 'Police Scanner') {
+        showSpeedcamAlert("📻 Tuned to Highway Patrol Scanner Dispatch");
+        triggerPoliceScanner(92);
+      } else {
+        showSpeedcamAlert(`📻 Tuned to ${st}`);
+      }
+    }
+
+    function speakRadioDJ(text) {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.rate = 1.05;
+      u.pitch = 0.95;
+      u.volume = 0.85;
+      window.speechSynthesis.speak(u);
+    }
+
+    function triggerPoliceScanner(speedKmh) {
+      if (!('speechSynthesis' in window)) return;
+      playTone(920, 'square', 0.1);
+      setTimeout(() => {
+        const u = new SpeechSynthesisUtterance(`Attention all units. Radar violation detected. Vehicle clocked at ${speedKmh} kilometers per hour on Outer Ring Expressway.`);
+        u.rate = 1.15;
+        u.pitch = 0.85;
+        u.volume = 0.9;
+        window.speechSynthesis.speak(u);
+      }, 120);
+    }
+
+    // =========================================================================
+    // SYSTEM C: CINEMATIC DRONE PHOTO MODE & 4K WALLPAPER STUDIO
+    // =========================================================================
+    let isPhotoMode = false;
+    let photoFilter = 'none';
+
+    function openPhotoMode() {
+      isPhotoMode = true;
+      const modal = document.getElementById('photo-studio-modal');
+      if (modal) modal.classList.remove('hidden');
+      setCameraMode('orbit');
+      showSpeedcamAlert("📸 PHOTO MODE ACTIVE: Drag to orbit & compose!");
+    }
+
+    function closePhotoMode() {
+      isPhotoMode = false;
+      const modal = document.getElementById('photo-studio-modal');
+      if (modal) modal.classList.add('hidden');
+      const canvas = document.getElementById('game-canvas');
+      if (canvas) canvas.style.filter = 'none';
+      setCameraMode('chase');
+    }
+
+    function setPhotoFilter(filter) {
+      photoFilter = filter;
+      const canvas = document.getElementById('game-canvas');
+      if (!canvas) return;
+
+      ['none', 'cyberpunk', 'matrix', 'bladerunner', 'noir'].forEach(f => {
+        const btn = document.getElementById('pfilter-' + f);
+        if (btn) btn.className = f === filter ? 'px-2 py-0.5 rounded bg-blue-600 text-white font-semibold' : 'px-2 py-0.5 rounded bg-slate-800 text-slate-300';
+      });
+
+      if (filter === 'cyberpunk') canvas.style.filter = 'contrast(1.3) saturate(1.6) hue-rotate(-15deg)';
+      else if (filter === 'matrix') canvas.style.filter = 'contrast(1.2) hue-rotate(90deg) saturate(1.4)';
+      else if (filter === 'bladerunner') canvas.style.filter = 'sepia(0.65) contrast(1.25) saturate(1.5)';
+      else if (filter === 'noir') canvas.style.filter = 'grayscale(1) contrast(1.4)';
+      else canvas.style.filter = 'none';
+    }
+
+    function downloadPhotoWallpaper() {
+      const canvas = document.getElementById('game-canvas');
+      if (!canvas || !renderer) return;
+
+      renderer.render(scene, camera);
+      const dataUrl = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.download = `awesome-agentic-ai-${Date.now()}.png`;
+      link.href = dataUrl;
+      link.click();
+      playTone(880, 'sine', 0.2);
+      showSpeedcamAlert("📸 4K Wallpaper Downloaded!");
+    }
+
+    // =========================================================================
+    // SYSTEM D: VISUAL BUILD-AN-AGENT DAG FLOWCHART STUDIO
+    // =========================================================================
+    let isStudioSimulating = false;
+    let studioExportTab = 'langgraph';
+
+    function runStudioSimulation() {
+      if (isStudioSimulating) return;
+      isStudioSimulating = true;
+
+      const log = document.getElementById('studio-execution-log');
+      const pulseToken = document.getElementById('studio-pulse-token');
+      const stepCounter = document.getElementById('studio-step-counter');
+      const runBtn = document.getElementById('btn-studio-run');
+      const runText = document.getElementById('studio-run-text');
+
+      if (runBtn) runBtn.classList.add('opacity-75');
+      if (runText) runText.innerText = "Simulating...";
+      if (log) log.innerHTML = "";
+
+      const steps = [
+        { node: 0, text: "📥 [INPUT] User prompt: 'Analyze git diff and generate type-safe schema'", cable: 'cable-0-1', cx: 160, cy: 110, delay: 0 },
+        { node: 1, text: "🔀 [ROUTER] StateGraph conditional edge: routing to Vector RAG & MCP tool", cable: 'cable-1-2', cx: 300, cy: 110, delay: 700 },
+        { node: 2, text: "📚 [RAG] Vector DB (pgvector): retrieved 3 top-k framework docs (score 0.94)", cable: 'cable-2-4', cx: 560, cy: 70, delay: 1400 },
+        { node: 3, text: "🔧 [TOOL] Anthropic MCP Server: executed tools/call 'git_diff' (exit code 0)", cable: 'cable-3-4', cx: 560, cy: 170, delay: 2100 },
+        { node: 4, text: "🧠 [LLM] Claude 3.7 / Gemini 2.5: generated structured AST patch & reasoning", cable: 'cable-4-5', cx: 820, cy: 110, delay: 2800 },
+        { node: 5, text: "🛡️ [GUARDRAIL] Pydantic BaseModel: Schema validated successfully! Complete.", cable: null, cx: 1060, cy: 110, delay: 3500 }
+      ];
+
+      steps.forEach(st => {
+        setTimeout(() => {
+          if (stepCounter) stepCounter.innerText = `Step ${st.node + 1} of 6`;
+          if (pulseToken) {
+            pulseToken.setAttribute('opacity', '1');
+            pulseToken.setAttribute('cx', st.cx);
+            pulseToken.setAttribute('cy', st.cy);
+          }
+
+          // Highlight node card
+          for (let i = 0; i < 6; i++) {
+            const el = document.getElementById('snode-' + i);
+            if (el) {
+              if (i === st.node) {
+                el.classList.add('ring-2', 'ring-emerald-400', 'scale-105');
+              } else {
+                el.classList.remove('ring-2', 'ring-emerald-400', 'scale-105');
+              }
+            }
+          }
+
+          if (log) {
+            const entry = document.createElement('div');
+            entry.className = "p-2 rounded-lg bg-slate-50 dark:bg-[#101424] border border-slate-200 dark:border-slate-800 text-[10px]";
+            entry.innerHTML = `<strong class="text-emerald-500">${st.text.slice(0, 10)}</strong> ${st.text.slice(10)}`;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+          }
+
+          playTone(440 + st.node * 75, 'sine', 0.08);
+
+          if (st.node === 5) {
+            setTimeout(() => {
+              isStudioSimulating = false;
+              if (runBtn) runBtn.classList.remove('opacity-75');
+              if (runText) runText.innerText = "Run Simulation";
+              if (pulseToken) pulseToken.setAttribute('opacity', '0');
+              playTone(880, 'triangle', 0.25);
+            }, 600);
+          }
+        }, st.delay);
+      });
+    }
+
+    const studioCodeTemplates = {
+      langgraph: `# Production Stateful Agent Pipeline with Checkpointer & MCP Tool
+from langgraph.graph import StateGraph, END
+from langgraph.checkpoint.memory import MemorySaver
+from typing import TypedDict, Annotated, List
+
+class AgentState(TypedDict):
+    messages: List[str]
+    tool_needed: bool
+    context: str
+
+def router_node(state: AgentState):
+    # Conditional edge routing based on input query
+    needs_tool = "diff" in state["messages"][-1].lower()
+    return {"tool_needed": needs_tool}
+
+def rag_retriever(state: AgentState):
+    # Semantic similarity search on vector database
+    return {"context": "Retrieved 3 framework chunks from pgvector"}
+
+def llm_reasoning_node(state: AgentState):
+    # Multi-turn thinking loop with bound tools
+    return {"messages": ["AST analysis verified and deterministic patch ready."]}
+
+# Construct StateGraph DAG
+workflow = StateGraph(AgentState)
+workflow.add_node("router", router_node)
+workflow.add_node("rag", rag_retriever)
+workflow.add_node("reasoner", llm_reasoning_node)
+
+workflow.set_entry_point("router")
+workflow.add_edge("router", "rag")
+workflow.add_edge("rag", "reasoner")
+workflow.add_edge("reasoner", END)
+
+app = workflow.compile(checkpointer=MemorySaver())`,
+
+      crewai: `# Hierarchical Multi-Agent Crew with Delegated Roles
+from crewai import Agent, Crew, Process, Task
+
+researcher = Agent(
+    role="Knowledge Researcher",
+    goal="Extract accurate agent design patterns from git repositories",
+    backstory="Senior AI systems architect specializing in distributed multi-agent state.",
+    verbose=True
+)
+
+engineer = Agent(
+    role="Code Generator",
+    goal="Produce verified type-safe Pydantic agent schemas",
+    backstory="Lead SWE ensuring zero runtime syntax errors with strict guardrails.",
+    verbose=True
+)
+
+task1 = Task(description="Research MCP protocol specs", agent=researcher, expected_output="Summary of tools")
+task2 = Task(description="Implement production code", agent=engineer, expected_output="Python script")
+
+crew = Crew(agents=[researcher, engineer], tasks=[task1, task2], process=Process.hierarchical)
+result = crew.kickoff()`,
+
+      pydantic: `# Type-Safe Agent with Strict Schema Guardrails
+from pydantic import BaseModel, Field
+from pydantic_ai import Agent
+
+class AgentOutputSchema(BaseModel):
+    decision: str = Field(description="Deterministic action taken by the agent")
+    confidence: float = Field(ge=0.0, le=1.0)
+    audit_trail: list[str]
+
+agent = Agent(
+    'gemini-2.0-flash',
+    result_type=AgentOutputSchema,
+    system_prompt="You are an enterprise AI agent. Always validate outputs against the schema."
+)
+
+result = agent.run_sync("Optimize cyclic graph routing")
+print(result.data.decision)`
+    };
+
+    function openStudioCodeExport() {
+      const modal = document.getElementById('studio-code-modal');
+      if (modal) modal.classList.remove('hidden');
+      setStudioExportTab('langgraph');
+    }
+
+    function closeStudioCodeExport() {
+      const modal = document.getElementById('studio-code-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function setStudioExportTab(tab) {
+      studioExportTab = tab;
+      ['langgraph', 'crewai', 'pydantic'].forEach(t => {
+        const btn = document.getElementById('btn-export-' + t);
+        if (btn) btn.className = t === tab ? 'px-3 py-1 rounded-lg bg-blue-600 text-white font-bold' : 'px-3 py-1 rounded-lg bg-slate-800 text-slate-400 font-bold';
+      });
+      const pre = document.getElementById('studio-code-pre');
+      if (pre) pre.innerText = studioCodeTemplates[tab];
+    }
+
+    function copyStudioCode() {
+      const pre = document.getElementById('studio-code-pre');
+      if (pre && navigator.clipboard) {
+        navigator.clipboard.writeText(pre.innerText);
+        const btn = document.getElementById('btn-copy-studio-code');
+        if (btn) {
+          btn.innerText = "✓ Copied!";
+          setTimeout(() => { btn.innerText = "Copy Code"; }, 1500);
+        }
+      }
+    }
+
+    // =========================================================================
+    // SYSTEM E: HIGHWAY KART MYSTERY POWER-UP CUBES
+    // =========================================================================
+    const kartPowerUps = [];
+    let activePowerUp = null;
+    let powerUpTimer = 0;
+    let guardrailShieldMesh = null;
+
+    function initKartPowerUps(parentGroup) {
+      kartPowerUps.length = 0;
+      const boxLocs = [
+        { x: 35, z: 0 }, { x: -35, z: 0 }, { x: 0, z: 35 }, { x: 0, z: -35 },
+        { x: 120, z: 120 }, { x: -120, z: -120 }
+      ];
+
+      boxLocs.forEach(loc => {
+        const boxGroup = new THREE.Group();
+        boxGroup.position.set(loc.x, 1.4, loc.z);
+
+        const cubeGeo = new THREE.BoxGeometry(1.6, 1.6, 1.6);
+        const cubeMat = new THREE.MeshStandardMaterial({
+          color: 0x06b6d4,
+          emissive: 0x06b6d4,
+          emissiveIntensity: 0.8,
+          transparent: true,
+          opacity: 0.85,
+          roughness: 0.1,
+          metalness: 0.9
+        });
+        const cube = new THREE.Mesh(cubeGeo, cubeMat);
+        boxGroup.add(cube);
+
+        const wireGeo = new THREE.BoxGeometry(1.8, 1.8, 1.8);
+        const wireMat = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.6 });
+        const wire = new THREE.Mesh(wireGeo, wireMat);
+        boxGroup.add(wire);
+
+        parentGroup.add(boxGroup);
+        kartPowerUps.push({ group: boxGroup, cube: cube, wire: wire, x: loc.x, z: loc.z, collected: false, respawn: 0 });
+      });
+
+      // Shimmering Forcefield Bubble Mesh for vehicle
+      const shieldGeo = new THREE.SphereGeometry(3.2, 24, 24);
+      const shieldMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0 });
+      guardrailShieldMesh = new THREE.Mesh(shieldGeo, shieldMat);
+      parentGroup.add(guardrailShieldMesh);
+    }
+
+    function updateKartPowerUps(dt) {
+      kartPowerUps.forEach(pu => {
+        if (pu.collected) {
+          pu.respawn -= dt;
+          if (pu.respawn <= 0) {
+            pu.collected = false;
+            pu.group.visible = true;
+          }
+          return;
+        }
+
+        pu.cube.rotation.y += 0.03;
+        pu.cube.rotation.x += 0.02;
+        pu.wire.rotation.y -= 0.02;
+        pu.group.position.y = 1.4 + Math.sin(Date.now() * 0.003 + pu.x) * 0.25;
+
+        const dist = Math.hypot(carState.x - pu.x, carState.z - pu.z);
+        if (dist < 3.2) {
+          pu.collected = true;
+          pu.group.visible = false;
+          pu.respawn = 18.0; // 18s respawn
+          activateRandomPowerUp();
+        }
+      });
+
+      // Update Active Power-Up Countdown
+      if (activePowerUp) {
+        powerUpTimer -= dt;
+        const badge = document.getElementById('kart-powerup-badge');
+        const bar = document.getElementById('kart-powerup-bar');
+        if (bar) bar.style.width = Math.max(0, (powerUpTimer / 10.0) * 100) + '%';
+
+        if (guardrailShieldMesh && carGroup) {
+          guardrailShieldMesh.position.copy(carGroup.position);
+          if (activePowerUp === 'shield') {
+            guardrailShieldMesh.material.opacity = 0.45 + Math.sin(Date.now() * 0.01) * 0.15;
+            guardrailShieldMesh.rotation.y += 0.02;
+          } else {
+            guardrailShieldMesh.material.opacity = 0;
+          }
+        }
+
+        // Magnet Power-up logic: Pull nearby bugs into car
+        if (activePowerUp === 'magnet' && typeof codeBugs !== 'undefined') {
+          codeBugs.forEach(b => {
+            if (!b.squashed) {
+              const d = Math.hypot(carState.x - b.x, carState.z - b.z);
+              if (d < 26.0) {
+                b.x += (carState.x - b.x) * 0.18;
+                b.z += (carState.z - b.z) * 0.18;
+                if (b.mesh) b.mesh.position.set(b.x, 0.4, b.z);
+              }
+            }
+          });
+        }
+
+        if (powerUpTimer <= 0) {
+          activePowerUp = null;
+          if (badge) badge.classList.add('opacity-0', 'pointer-events-none');
+          if (guardrailShieldMesh) guardrailShieldMesh.material.opacity = 0;
+        }
+      }
+    }
+
+    function activateRandomPowerUp() {
+      const types = [
+        { id: 'warp', title: 'CONTEXT WARP', icon: '🚀', msg: 'HYPER-WARP ACCELERATION ACTIVATED!' },
+        { id: 'shield', title: 'GUARDRAIL SHIELD', icon: '🛡️', msg: 'FORCEFIELD SHIELD: OBSTACLES DEFLECTED!' },
+        { id: 'magnet', title: 'VECTOR RAG MAGNET', icon: '🧲', msg: 'RAG MAGNET: ATTRACTING CODE BUGS & XP!' },
+        { id: 'timewarp', title: 'AST TIME WARP', icon: '⏱️', msg: 'BULLET-TIME: PRECISION STEERING ACTIVE!' }
+      ];
+
+      const p = types[Math.floor(Math.random() * types.length)];
+      activePowerUp = p.id;
+      powerUpTimer = 10.0;
+
+      if (p.id === 'warp') {
+        carState.speed = 1.95;
+      }
+
+      const badge = document.getElementById('kart-powerup-badge');
+      const icon = document.getElementById('kart-powerup-icon');
+      const title = document.getElementById('kart-powerup-title');
+      if (icon) icon.innerText = p.icon;
+      if (title) title.innerText = p.title;
+      if (badge) badge.classList.remove('opacity-0', 'pointer-events-none');
+
+      playTone(587, 'sine', 0.1);
+      setTimeout(() => playTone(880, 'triangle', 0.25), 100);
+      showSpeedcamAlert(`${p.icon} POWER-UP: ${p.msg}`);
+    }
+
+    function triggerNitroBoost() {
+      initAudio();
+      if (Math.abs(carState.speed) > 0.05) {
+        carState.speed = Math.sign(carState.speed || 1) * 1.85;
+        playTone(980, 'sawtooth', 0.25);
+        showSpeedcamAlert("⚡ NITRO BOOST ENGAGED!");
+      }
+    }
+
+    // =========================================================================
+    // SYSTEM F: SIMULATED GLOBAL LEADERBOARDS & WORLD FEED TICKER
+    // =========================================================================
+    const worldFeedMessages = [
+      { tag: '[NET]', color: 'text-cyan-400', msg: 'Swarm cluster #401 synced state to Postgres' },
+      { tag: '[RACE]', color: 'text-purple-400', msg: 'GhostRacer logged 00:39.4 on Outer Ring' },
+      { tag: '[BOUNTY]', color: 'text-amber-400', msg: 'Courier delivered MCP Schema (+180 XP)' },
+      { tag: '[SWE]', color: 'text-emerald-400', msg: 'CodeRabbit PR verified: 0 lint errors' },
+      { tag: '[BOSS]', color: 'text-rose-400', msg: 'The Hallucination Titan summoned in Mars crater' },
+      { tag: '[WARP]', color: 'text-blue-400', msg: 'Speedster broke sound barrier: 124 km/h' }
+    ];
+    let worldFeedTimer = 5.0;
+
+    function updateWorldFeedTicker(dt) {
+      worldFeedTimer -= dt;
+      if (worldFeedTimer <= 0) {
+        worldFeedTimer = 6.0;
+        const item = worldFeedMessages[Math.floor(Math.random() * worldFeedMessages.length)];
+        addWorldFeedMessage(item.tag, item.msg, item.color);
+      }
+    }
+
+    function addWorldFeedMessage(tag, msg, color = 'text-cyan-400') {
+      const feed = document.getElementById('world-feed-list');
+      if (!feed) return;
+      const el = document.createElement('div');
+      el.innerHTML = `<span class="${color} font-semibold">${tag}</span> ${msg}`;
+      feed.appendChild(el);
+      while (feed.children.length > 4) {
+        feed.removeChild(feed.children[0]);
+      }
+    }
+
+    function openLeaderboardModal() {
+      const modal = document.getElementById('leaderboard-modal');
+      if (modal) modal.classList.remove('hidden');
+
+      const userLapEl = document.getElementById('lboard-user-lap');
+      if (userLapEl && typeof bestLapTime !== 'undefined' && bestLapTime > 0) {
+        userLapEl.innerText = formatLapTime(bestLapTime);
+      }
+    }
+
+    function closeLeaderboardModal() {
+      const modal = document.getElementById('leaderboard-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
     // =========================================================================
     // 4. VIEW SWITCHER
     // =========================================================================
@@ -1566,7 +2628,7 @@
 
     function switchView(viewName) {
       currentActiveView = viewName;
-      ['game', 'sandbox', 'mindmap', 'docs', 'matrix'].forEach(v => {
+      ['game', 'studio', 'sandbox', 'mindmap', 'docs', 'matrix'].forEach(v => {
         const el = document.getElementById('view-' + v);
         const tab = document.getElementById('tab-' + v);
         if (el) el.classList.add('hidden');
@@ -2500,7 +3562,8 @@
     }
 
     // --- GARAGE & VEHICLE CUSTOMIZER ---
-    let currentVehicleModel = 'roadster'; // 'roadster', 'rover', 'drone'
+    let currentVehicleModel = 'roadster';
+    let dronePropellerBlades = []; // 'roadster', 'rover', 'drone'
     let currentVehicleColor = 0x2563eb;
     let currentUnderglowColor = 0x06b6d4;
 
@@ -3822,6 +4885,13 @@ if __name__ == "__main__":
 
       playTone(1200, 'square', 0.04);
       setTimeout(() => playTone(450, 'triangle', 0.14), 60);
+
+      if (typeof triggerPoliceScanner === 'function' && (currentRadioIdx === 3 || currentRadioIdx === 2 || Math.random() < 0.35)) {
+        triggerPoliceScanner(speedKmh);
+      }
+      if (typeof addWorldFeedMessage === 'function') {
+        addWorldFeedMessage('[RADAR]', `Vehicle clocked at ${speedKmh} km/h on Expressway!`, 'text-rose-400');
+      }
     }
 
     function showSpeedcamAlert(msg) {
@@ -4669,6 +5739,12 @@ if __name__ == "__main__":
       initCodeBugs(worldEnvironmentGroup);
       initGhostCar(worldEnvironmentGroup);
 
+      // System A: Init Mars Cyber Colosseum Boss Arena
+      initBossArena(worldEnvironmentGroup);
+
+      // System E: Init Highway Kart Mystery Power-Up Cubes
+      initKartPowerUps(worldEnvironmentGroup);
+
       // Dynamic Weather Particles per World
       initWeatherParticles(worldId);
 
@@ -5228,14 +6304,23 @@ if __name__ == "__main__":
 
       taillightMesh = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.12, 0.15), new THREE.MeshStandardMaterial({ color: 0xef4444, emissive: 0xdc2626, emissiveIntensity: 0.6 }));
 
-      // Underglow Neon Ground Illumination
+      // Underglow Neon Ground Illumination (Soft Circular Halo for Drone, Rounded Plate for Cars)
       if (underglowHex !== null) {
-        const underglowGeo = new THREE.PlaneGeometry(2.4, 4.4);
-        underglowGeo.rotateX(-Math.PI / 2);
-        const underglowMat = new THREE.MeshBasicMaterial({ color: underglowHex, transparent: true, opacity: 0.65, side: THREE.DoubleSide });
-        const underglowMesh = new THREE.Mesh(underglowGeo, underglowMat);
-        underglowMesh.position.y = 0.08;
-        carGroup.add(underglowMesh);
+        if (model === 'drone') {
+          // Circular plasma projection halo for Hover Drone
+          const underglowGeo = new THREE.RingGeometry(0.6, 2.2, 32).rotateX(-Math.PI / 2);
+          const underglowMat = new THREE.MeshBasicMaterial({ color: underglowHex, transparent: true, opacity: 0.35, side: THREE.DoubleSide });
+          const underglowMesh = new THREE.Mesh(underglowGeo, underglowMat);
+          underglowMesh.position.y = 0.08;
+          carGroup.add(underglowMesh);
+        } else {
+          const underglowGeo = new THREE.PlaneGeometry(2.4, 4.4);
+          underglowGeo.rotateX(-Math.PI / 2);
+          const underglowMat = new THREE.MeshBasicMaterial({ color: underglowHex, transparent: true, opacity: 0.45, side: THREE.DoubleSide });
+          const underglowMesh = new THREE.Mesh(underglowGeo, underglowMat);
+          underglowMesh.position.y = 0.08;
+          carGroup.add(underglowMesh);
+        }
 
         const underLight = new THREE.PointLight(underglowHex, 1.8, 6.0);
         underLight.position.y = 0.25;
@@ -5257,19 +6342,23 @@ if __name__ == "__main__":
         return wg;
       }
 
-      // Dual Exhaust Nozzles & Nitro Boost Flame Meshes
-      const exMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.3, metalness: 0.8 });
-      const exL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.4, 8).rotateX(Math.PI / 2), exMat);
-      exL.position.set(-0.55, 0.52, 2.22); carChassisMeshGroup.add(exL);
-      const exR = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.4, 8).rotateX(Math.PI / 2), exMat);
-      exR.position.set(0.55, 0.52, 2.22); carChassisMeshGroup.add(exR);
+      // Dual Exhaust Nozzles & Nitro Boost Flame Meshes (Ground vehicles only, NEVER for drone!)
+      if (model !== 'drone') {
+        const exMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.3, metalness: 0.8 });
+        const exL = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.4, 8).rotateX(Math.PI / 2), exMat);
+        exL.position.set(-0.55, 0.52, 2.22); carChassisMeshGroup.add(exL);
+        const exR = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.4, 8).rotateX(Math.PI / 2), exMat);
+        exR.position.set(0.55, 0.52, 2.22); carChassisMeshGroup.add(exR);
 
-      const flameMat = new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.85 });
-      const nitroFlameL = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.75, 8).rotateX(-Math.PI / 2), flameMat);
-      nitroFlameL.position.set(-0.55, 0.52, 2.65); nitroFlameL.visible = false; carChassisMeshGroup.add(nitroFlameL);
-      const nitroFlameR = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.75, 8).rotateX(-Math.PI / 2), flameMat);
-      nitroFlameR.position.set(0.55, 0.52, 2.65); nitroFlameR.visible = false; carChassisMeshGroup.add(nitroFlameR);
-      nitroFlames = [nitroFlameL, nitroFlameR];
+        const flameMat = new THREE.MeshBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.85 });
+        const nitroFlameL = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.75, 8).rotateX(-Math.PI / 2), flameMat);
+        nitroFlameL.position.set(-0.55, 0.52, 2.65); nitroFlameL.visible = false; carChassisMeshGroup.add(nitroFlameL);
+        const nitroFlameR = new THREE.Mesh(new THREE.ConeGeometry(0.16, 0.75, 8).rotateX(-Math.PI / 2), flameMat);
+        nitroFlameR.position.set(0.55, 0.52, 2.65); nitroFlameR.visible = false; carChassisMeshGroup.add(nitroFlameR);
+        nitroFlames = [nitroFlameL, nitroFlameR];
+      } else {
+        nitroFlames = [];
+      }
 
       if (model === 'rover') {
         // --- TITAN 6-WHEEL EXPLORATION ROVER ---
@@ -5326,6 +6415,12 @@ if __name__ == "__main__":
 
           const glowJet = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.1, 0.4, 12), new THREE.MeshBasicMaterial({ color: 0x00f5ff, transparent: true, opacity: 0.85 }));
           glowJet.position.set(cx, 0.7, cz); carChassisMeshGroup.add(glowJet);
+
+          // Spinning Ducted Propeller Fan Blade
+          const fanBlade = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.02, 0.08), chromeMat);
+          fanBlade.position.set(cx, 0.95, cz);
+          carChassisMeshGroup.add(fanBlade);
+          dronePropellerBlades.push(fanBlade);
         });
 
         const hlL = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.12, 0.15), headlightGlowMat); hlL.position.set(-0.5, 1.0, -1.55); carChassisMeshGroup.add(hlL);
@@ -5551,6 +6646,11 @@ if __name__ == "__main__":
         openBeatStudio();
       }
 
+      if (k === 'p' || c === 'keyp') {
+        if (isPhotoMode) closePhotoMode();
+        else openPhotoMode();
+      }
+
       if (k === 'm' || c === 'keym') {
         startRandomMission();
       }
@@ -5599,6 +6699,15 @@ if __name__ == "__main__":
       bind('btn-touch-right', 'd');
       bind('btn-touch-gas', 'w');
       bind('btn-touch-brake', 's');
+
+      const nitroBtn = document.getElementById('btn-touch-nitro');
+      if (nitroBtn) {
+        nitroBtn.addEventListener('touchstart', (e) => {
+          if (e.cancelable) e.preventDefault();
+          triggerNitroBoost();
+          if (navigator.vibrate) { try { navigator.vibrate(25); } catch (_) {} }
+        }, { passive: false });
+      }
 
       // Legacy fallback bindings
       bind('ctrl-up', 'w');
@@ -5688,6 +6797,19 @@ if __name__ == "__main__":
     function animateGameLoop() {
       requestAnimationFrame(animateGameLoop);
       if (currentActiveView !== 'game') return;
+
+      if (isPhotoMode) {
+        const horizDist = orbitDistance * Math.cos(orbitPitch);
+        const tx = carGroup.position.x + Math.sin(orbitYaw) * horizDist;
+        const ty = carGroup.position.y + 1.2 + Math.sin(orbitPitch) * orbitDistance;
+        const tz = carGroup.position.z + Math.cos(orbitYaw) * horizDist;
+        camera.position.x += (tx - camera.position.x) * 0.14;
+        camera.position.y += (ty - camera.position.y) * 0.14;
+        camera.position.z += (tz - camera.position.z) * 0.14;
+        camera.lookAt(carGroup.position.x, carGroup.position.y + 1.0, carGroup.position.z);
+        renderer.render(scene, camera);
+        return;
+      }
 
       const isForward = activeKeys['arrowup'] || activeKeys['w'] || activeKeys['keyw'];
       const isBackward = activeKeys['arrowdown'] || activeKeys['s'] || activeKeys['keys'];
@@ -6030,6 +7152,22 @@ if __name__ == "__main__":
 
       // Update Code Bugs Squashing Physics & Respawn (Option 4)
       updateCodeBugs(0.016);
+
+      // System A: Update Mars Colosseum Titan Boss
+      updateBossArena(0.016);
+
+      // System E: Update Highway Kart Mystery Power-Up Cubes
+      updateKartPowerUps(0.016);
+
+      // System F: Update Cyberpunk Live Network Feed
+      updateWorldFeedTicker(0.016);
+
+      // Animate Hover-Drone Ducted Propeller Blades
+      if (currentVehicleModel === 'drone' && dronePropellerBlades.length > 0) {
+        dronePropellerBlades.forEach((b, idx) => {
+          b.rotation.y += (idx % 2 === 0 ? 0.45 : -0.45);
+        });
+      }
 
       // Dynamic Drift Skid Audio
       if (Math.abs(carState.speed) > 0.52 && (isLeft || isRight)) {

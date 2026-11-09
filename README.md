@@ -35,6 +35,13 @@ Drive a customizable high-performance cyber roadster across **4 procedural multi
 | 🎵 **Synthwave Beat Studio** | 8-step procedural Web Audio sequencer (<kbd>B</kbd> key) with 5 tracks (Kick, Snare, Hi-Hat, Bass, Arp Lead), tempo control (95–150 BPM), 4 presets, and sound-reactive underglow sync pulsing car lights on kick beats. |
 | 📱 **Mobile Touch Cockpit** | Full on-screen ergonomic dual-thumb controls with haptic vibration, auto-hiding HUD, and responsive portrait/landscape support. |
 | 🧠 **Mindmap Graph & ReAct Sim** | Interactive SVG knowledge mindmap graph, 40+ framework comparison matrix with live filtering, and interactive ReAct loop simulator. |
+| ⚔️ **Cyber Colosseum Boss Battle** | Sunken Mars arena featuring **The Hallucination Titan** boss. Dodge expanding shockwaves and drive through Guardrail & Schema counter-pads to defeat the boss, earn +500 XP, and unlock Legendary paint finishes. |
+| 📻 **AI Talk Radio & Police Scanner** | In-car procedural radio with **DJ Cyber-Byte** broadcasting real arXiv research drops and news via Web Speech API, plus automated police scanner radar alerts when triggering speed traps. |
+| 📸 **Cinematic Drone Photo Studio** | Freeze-frame photo mode (<kbd>P</kbd> key) with 360 free-orbit camera, 5 color grading LUT filters (Cyberpunk, Matrix, Blade Runner, Noir), DoF blur, and 1-click 4K wallpaper download. |
+| 🧩 **Visual "Build-An-Agent" Studio** | Interactive DAG node flowchart canvas. Connect Input &rarr; Router &rarr; Vector RAG &rarr; MCP Tool &rarr; LLM &rarr; Guardrail, watch live animated token pulses, and export production Python code for LangGraph, CrewAI, or PydanticAI. |
+| ⚡ **Highway Kart Power-Up Boxes** | Rotating mystery `?` cubes granting **Context Window Warp** (300% hyper-speed), **Guardrail Bubble** (forcefield shield), **Vector RAG Magnet** (suctions bugs/XP from 25m), and **AST Time Warp** (bullet-time slow motion). |
+| 🏆 **Global Leaderboards & Live Feed** | Persistent Outer Ring Lap Records, Bounty Courier Hall of Fame, and a live cyberpunk network ticker streaming community agent events. |
+| 📱 **Console-Grade Mobile Ergonomics** | Two-tier layout: bottom-corner pinned thumb steering & gas/brake/boost pedals that never get cut off, plus a floating action ribbon and fixed drone hovering aerodynamics. |
 
 ### 🕹️ Driving & Exploration Controls
 
